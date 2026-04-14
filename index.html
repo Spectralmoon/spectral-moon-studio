@@ -93,6 +93,121 @@ body { background: #FAF6EE; font-family: Georgia, serif; }
   color: rgba(250,246,238,0.65); line-height: 1.8; font-weight: 300;
 }
 
+/* FEATURED FILM */
+.featured-section {
+  background: #0D0A08;
+  padding: 80px 48px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.featured-eyebrow {
+  font-family: 'Jost', sans-serif;
+  font-size: 10px;
+  letter-spacing: 0.36em;
+  text-transform: uppercase;
+  color: #C8933A;
+  margin-bottom: 12px;
+  font-weight: 400;
+  text-align: center;
+}
+.featured-rule {
+  width: 36px; height: 0.5px;
+  background: #C8933A;
+  margin: 0 auto 40px;
+  opacity: 0.5;
+}
+.featured-film-wrap {
+  position: relative;
+  width: 100%;
+  max-width: 1000px;
+  aspect-ratio: 16/9;
+  background: #0D0A08;
+  overflow: hidden;
+  cursor: pointer;
+}
+.featured-film-wrap video {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  opacity: 0.75;
+  transition: opacity 0.4s ease;
+}
+.featured-film-wrap:hover video { opacity: 1; }
+.featured-film-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(13,10,8,0.88) 0%, transparent 60%);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 40px 48px;
+}
+.featured-play-btn {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 64px; height: 64px;
+  border: 1px solid rgba(200,147,58,0.6);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  background: rgba(13,10,8,0.4);
+}
+.featured-film-wrap:hover .featured-play-btn {
+  border-color: #C8933A;
+  background: rgba(200,147,58,0.15);
+}
+.featured-play-btn svg { margin-left: 4px; }
+.featured-label {
+  font-family: 'Jost', sans-serif;
+  font-size: 9px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: #C8933A;
+  margin-bottom: 10px;
+}
+.featured-film-title {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 42px;
+  color: #FAF6EE;
+  font-style: italic;
+  font-weight: 300;
+  line-height: 1.2;
+  margin-bottom: 12px;
+}
+.featured-film-desc {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 15px;
+  color: rgba(250,246,238,0.6);
+  line-height: 1.8;
+  font-weight: 300;
+  max-width: 560px;
+}
+.featured-film-tags {
+  margin-top: 14px;
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.featured-film-tag {
+  font-family: 'Jost', sans-serif;
+  font-size: 8px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(200,147,58,0.65);
+  border: 0.5px solid rgba(200,147,58,0.25);
+  padding: 4px 10px;
+}
+@media (max-width: 768px) {
+  .featured-section { padding: 48px 20px; }
+  .featured-film-title { font-size: 28px; }
+  .featured-film-overlay { padding: 24px 20px; }
+  .featured-film-desc { font-size: 13px; }
+}
+
+
 /* GALLERY */
 .gallery-section { background: #F5F0E8; padding: 72px 24px 100px; }
 .gallery-header { text-align: center; margin-bottom: 40px; }
@@ -201,6 +316,149 @@ body { background: #FAF6EE; font-family: Georgia, serif; }
   color: rgba(200,147,58,0.65); border: 0.5px solid rgba(200,147,58,0.25); padding: 4px 10px;
 }
 
+
+
+/* ── CONTACT ── */
+.contact-section {
+  background: #FAF6EE;
+  padding: 100px 40px;
+  border-top: 1px solid #E8E0D0;
+}
+.contact-inner {
+  max-width: 560px;
+  margin: 0 auto;
+  text-align: center;
+}
+.contact-eyebrow {
+  font-family: 'Jost', sans-serif;
+  font-size: 10px;
+  letter-spacing: 0.36em;
+  text-transform: uppercase;
+  color: #C8933A;
+  margin-bottom: 10px;
+  font-weight: 400;
+}
+.contact-rule {
+  width: 36px;
+  height: 0.5px;
+  background: #C8933A;
+  margin: 0 auto 28px;
+  opacity: 0.5;
+}
+.contact-headline {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 34px;
+  font-style: italic;
+  font-weight: 300;
+  color: #1C1812;
+  line-height: 1.4;
+  margin-bottom: 16px;
+}
+.contact-sub {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 16px;
+  color: #7A6040;
+  font-style: italic;
+  line-height: 1.8;
+  margin-bottom: 48px;
+  font-weight: 300;
+}
+.contact-links {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+.contact-link {
+  font-family: 'Jost', sans-serif;
+  font-size: 10.5px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #1C1812;
+  text-decoration: none;
+  border-bottom: 0.5px solid rgba(200,147,58,0.5);
+  padding-bottom: 4px;
+  transition: color 0.2s, border-color 0.2s;
+  font-weight: 300;
+}
+.contact-link:hover {
+  color: #C8933A;
+  border-color: #C8933A;
+}
+.contact-footer {
+  margin-top: 64px;
+  font-family: 'Jost', sans-serif;
+  font-size: 9px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(58,42,24,0.35);
+}
+/* ── ABOUT ── */
+.about-section {
+  background: #1C1812;
+  padding: 100px 40px;
+  border-top: 1px solid rgba(200,147,58,0.2);
+}
+.about-inner {
+  max-width: 720px;
+  margin: 0 auto;
+  text-align: center;
+}
+.about-eyebrow {
+  font-family: 'Jost', sans-serif;
+  font-size: 10px;
+  letter-spacing: 0.36em;
+  text-transform: uppercase;
+  color: #C8933A;
+  margin-bottom: 10px;
+  font-weight: 400;
+}
+.about-rule {
+  width: 36px;
+  height: 0.5px;
+  background: #C8933A;
+  margin: 0 auto 44px;
+  opacity: 0.5;
+}
+.about-headline {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 38px;
+  font-weight: 300;
+  font-style: italic;
+  color: #FAF6EE;
+  line-height: 1.5;
+  margin-bottom: 36px;
+  letter-spacing: 0.02em;
+}
+.about-headline em {
+  color: #C8933A;
+  font-style: italic;
+}
+.about-body {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 17px;
+  color: rgba(250,246,238,0.6);
+  line-height: 2;
+  font-weight: 300;
+  margin-bottom: 24px;
+}
+.about-body + .about-body {
+  margin-top: 0;
+}
+.about-divider {
+  width: 24px;
+  height: 0.5px;
+  background: rgba(200,147,58,0.4);
+  margin: 36px auto;
+}
+.about-sign {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 15px;
+  font-style: italic;
+  color: rgba(200,147,58,0.7);
+  letter-spacing: 0.08em;
+}
+
 /* RESPONSIVE */
 @media (max-width: 768px) {
   .nav-brand { font-size: 13px; letter-spacing: 0.18em; }
@@ -277,7 +535,7 @@ body { background: #FAF6EE; font-family: Georgia, serif; }
 <div class="hero" id="hero">
   <div class="hero-bg">
     <video autoplay muted loop playsinline id="heroVideo" oncanplay="this.playbackRate=0.3;">
-      <source src="hero_loop.mp4" type="video/mp4">
+      <source src="https://res.cloudinary.com/dbet91fsr/video/upload/v1776135417/hero_loop.mp4_yupt9g.mp4" type="video/mp4">
     </video>
   </div>
   <div class="hero-card">
@@ -302,6 +560,32 @@ body { background: #FAF6EE; font-family: Georgia, serif; }
     <div class="pillar-title">Technology</div>
     <div class="pillar-rule"></div>
     <div class="pillar-text">Where AI, code and human craft come together.</div>
+  </div>
+</div>
+
+<!-- FEATURED FILM -->
+<div class="featured-section">
+  <div class="featured-eyebrow">Featured Film</div>
+  <div class="featured-rule"></div>
+  <div class="featured-film-wrap" id="featuredFilm">
+    <video id="featuredVideo" loop muted playsinline>
+      <source src="Where_the_Stars_Remember.mov" type="video/mp4">
+    </video>
+    <div class="featured-film-overlay">
+      <div class="featured-play-btn" id="featuredPlayBtn">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="#C8933A">
+          <polygon points="5,3 19,12 5,21"/>
+        </svg>
+      </div>
+      <div class="featured-label">Film · AI Short Film / Narrative Fantasy</div>
+      <div class="featured-film-title">Where the Stars Align</div>
+      <div class="featured-film-desc">A short mythic film rooted in the heroine's journey — the feminine arc of descent, remembering, and return. Drawing on Bolivian sacred sites, celestial symbolism, and the wonder of The NeverEnding Story.</div>
+      <div class="featured-film-tags">
+        <span class="featured-film-tag">Narrative Fantasy</span>
+        <span class="featured-film-tag">Heroine's Journey</span>
+        <span class="featured-film-tag">Mythic Cinema</span>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -451,6 +735,23 @@ body { background: #FAF6EE; font-family: Georgia, serif; }
 </div>
 
 <script>
+
+// Featured film play/pause
+var featuredVideo = document.getElementById('featuredVideo');
+var featuredPlayBtn = document.getElementById('featuredPlayBtn');
+var isPlaying = false;
+document.getElementById('featuredFilm').addEventListener('click', function() {
+  if (isPlaying) {
+    featuredVideo.pause();
+    featuredPlayBtn.style.opacity = '1';
+    isPlaying = false;
+  } else {
+    featuredVideo.play();
+    featuredPlayBtn.style.opacity = '0';
+    isPlaying = true;
+  }
+});
+
 document.querySelectorAll('a[href^="#"]').forEach(function(a) {
   a.addEventListener('click', function(e) {
     e.preventDefault();
