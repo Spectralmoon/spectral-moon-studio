@@ -2,11 +2,20 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<title>Spectralmoon Studio</title>
+<meta property="og:title" content="Spectralmoon Studio">
+<meta property="og:description" content="Films, visual stories and storytelling for the conscious digital age.">
+<meta property="og:image" content="https://res.cloudinary.com/dbet91fsr/video/upload/fl_sprite/v1776135417/hero_loop.mp4_yupt9g.jpg">
+<meta property="og:url" content="https://spectralmoonstudio.com">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://res.cloudinary.com/dbet91fsr/video/upload/fl_sprite/v1776135417/hero_loop.mp4_yupt9g.jpg">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Jost:wght@300;400&display=swap" rel="stylesheet">
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body { background: #FAF6EE; font-family: Georgia, serif; }
 
+/* ── NAV ── */
 .nav-top {
   background: #FAF6EE;
   display: flex;
@@ -31,6 +40,9 @@ body { background: #FAF6EE; font-family: Georgia, serif; }
   gap: 56px;
   padding: 10px 48px 14px;
   border-bottom: 1px solid #D8D0BE;
+  position: sticky;
+  top: 0;
+  z-index: 100;
 }
 .nav-link {
   font-family: 'Jost', sans-serif;
@@ -43,6 +55,7 @@ body { background: #FAF6EE; font-family: Georgia, serif; }
   text-decoration: none;
 }
 
+/* ── HERO ── */
 .hero {
   position: relative;
   height: 480px;
@@ -78,7 +91,7 @@ body { background: #FAF6EE; font-family: Georgia, serif; }
 .hero-card {
   position: relative;
   z-index: 2;
-  background: rgba(250,246,238,0.55);
+  background: rgba(250,246,238,0.78);
   border: 1px solid rgba(200,147,58,0.40);
   padding: 44px 60px;
   text-align: center;
@@ -88,7 +101,7 @@ body { background: #FAF6EE; font-family: Georgia, serif; }
 }
 .hero-title {
   font-family: 'Cormorant Garamond', Georgia, serif;
-  font-size: 28px;
+  font-size: 36px;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: #C8933A;
@@ -104,13 +117,14 @@ body { background: #FAF6EE; font-family: Georgia, serif; }
 }
 .hero-sub {
   font-family: 'Cormorant Garamond', Georgia, serif;
-  font-size: 14px;
+  font-size: 18px;
   font-style: italic;
   color: #6A4820;
   line-height: 1.8;
   font-weight: 300;
 }
 
+/* ── PILLARS ── */
 .pillars {
   background: #1C1812;
   display: grid;
@@ -147,13 +161,266 @@ body { background: #FAF6EE; font-family: Georgia, serif; }
   line-height: 1.8;
   font-weight: 300;
 }
+
+/* ── WORK GALLERY ── */
+.work-section {
+  background: #FAF6EE;
+  padding: 80px 48px 100px;
+}
+.work-header {
+  text-align: center;
+  margin-bottom: 48px;
+}
+.work-title {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 11px;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: #C8933A;
+  font-weight: 400;
+  margin-bottom: 12px;
+}
+.work-heading {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 38px;
+  letter-spacing: 0.08em;
+  color: #1C1812;
+  font-weight: 300;
+  font-style: italic;
+}
+.work-rule {
+  width: 40px;
+  height: 0.5px;
+  background: #C8933A;
+  margin: 20px auto 32px;
+  opacity: 0.55;
+}
+
+/* filters */
+.filters {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 48px;
+}
+.filter-btn {
+  font-family: 'Jost', sans-serif;
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #6A5030;
+  background: transparent;
+  border: 0.5px solid #C8B08A;
+  padding: 8px 22px;
+  cursor: pointer;
+  font-weight: 300;
+  transition: all 0.2s;
+}
+.filter-btn:hover {
+  background: rgba(200,147,58,0.08);
+  border-color: #C8933A;
+  color: #1C1812;
+}
+.filter-btn.active {
+  background: #1C1812;
+  border-color: #1C1812;
+  color: #C8933A;
+}
+
+/* grid */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  max-width: 1080px;
+  margin: 0 auto;
+}
+.gallery-card {
+  position: relative;
+  aspect-ratio: 4/3;
+  overflow: hidden;
+  cursor: pointer;
+  background: #1C1812;
+}
+.gallery-card.hidden { display: none; }
+
+/* placeholder visual */
+.card-placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #1C1812;
+}
+.card-placeholder-inner {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+/* decorative background pattern per card */
+.card-placeholder-inner::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0.12;
+}
+.card-placeholder-inner svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* overlay on hover */
+.card-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(28, 24, 18, 0.82);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  opacity: 0;
+  transition: opacity 0.28s ease;
+  text-align: center;
+}
+.gallery-card:hover .card-overlay { opacity: 1; }
+.card-category {
+  font-family: 'Jost', sans-serif;
+  font-size: 9px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: #C8933A;
+  font-weight: 400;
+  margin-bottom: 10px;
+}
+.card-title {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 20px;
+  font-weight: 400;
+  color: #FAF6EE;
+  line-height: 1.3;
+  margin-bottom: 10px;
+}
+.card-tags {
+  font-family: 'Jost', sans-serif;
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  color: rgba(250,246,238,0.45);
+  font-weight: 300;
+  line-height: 1.8;
+}
+.card-view {
+  margin-top: 16px;
+  font-family: 'Jost', sans-serif;
+  font-size: 9px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #C8933A;
+  border-bottom: 0.5px solid rgba(200,147,58,0.5);
+  padding-bottom: 2px;
+}
+
+/* ── LIGHTBOX ── */
+.lightbox {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 8, 4, 0.94);
+  z-index: 999;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+}
+.lightbox.open { display: flex; }
+.lightbox-inner {
+  max-width: 800px;
+  width: 100%;
+  position: relative;
+}
+.lightbox-close {
+  position: absolute;
+  top: -36px;
+  right: 0;
+  font-family: 'Jost', sans-serif;
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(250,246,238,0.5);
+  cursor: pointer;
+  background: none;
+  border: none;
+  font-weight: 300;
+}
+.lightbox-close:hover { color: #C8933A; }
+.lightbox-media {
+  width: 100%;
+  aspect-ratio: 16/9;
+  background: #1C1812;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 0.5px solid rgba(200,147,58,0.2);
+  margin-bottom: 24px;
+  overflow: hidden;
+}
+.lightbox-media svg {
+  width: 60px;
+  height: 60px;
+  opacity: 0.3;
+}
+.lightbox-info {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 16px;
+  align-items: start;
+}
+.lightbox-cat {
+  font-family: 'Jost', sans-serif;
+  font-size: 9px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: #C8933A;
+  font-weight: 400;
+  margin-bottom: 8px;
+}
+.lightbox-title {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 28px;
+  color: #FAF6EE;
+  font-weight: 300;
+  line-height: 1.2;
+  margin-bottom: 12px;
+}
+.lightbox-desc {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 15px;
+  font-style: italic;
+  color: rgba(250,246,238,0.55);
+  line-height: 1.8;
+  font-weight: 300;
+}
+.lightbox-tools {
+  font-family: 'Jost', sans-serif;
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(200,147,58,0.6);
+  font-weight: 300;
+  text-align: right;
+  line-height: 2;
+  white-space: nowrap;
+}
 </style>
 </head>
 <body>
 
+<!-- NAV -->
 <div class="nav-top">
-  <span class="nav-brand">ANCIENT</span>
-  <svg width="44" height="44" viewBox="0 0 680 660">
+  <svg width="90" height="90" viewBox="0 0 680 660">
     <g transform="translate(340, 280)">
       <g fill="none" stroke="#C8933A" stroke-width="5" opacity="0.35">
         <circle cx="0" cy="0" r="82"/><circle cx="0" cy="-82" r="82"/>
@@ -174,49 +441,452 @@ body { background: #FAF6EE; font-family: Georgia, serif; }
       <circle cx="0" cy="-116" r="10" fill="#C8933A" opacity="0.85"/>
     </g>
   </svg>
-  <span class="nav-brand">WISDOM</span>
+  <span class="nav-brand">SPECTRALMOON STUDIO</span>
 </div>
 
 <div class="nav-bottom">
-  <span class="nav-link">Home</span>
-  <span class="nav-link">Work</span>
-  <span class="nav-link">About</span>
-  <span class="nav-link">Contact</span>
+  <a class="nav-link" href="#hero">Home</a>
+  <a class="nav-link" href="#work">Work</a>
+  <a class="nav-link" href="#about">About</a>
+  <a class="nav-link" href="#contact">Contact</a>
 </div>
 
+<!-- HERO -->
 <div class="hero" id="hero">
   <div class="hero-bg" id="heroBg">
     <video autoplay muted loop playsinline id="heroVideo" oncanplay="this.playbackRate=0.3;">
-      <source src="https://res.cloudinary.com/dbet91fsr/video/upload/hero_loop.mp4_yupt9g" type="video/mp4">
+      <source src="hero_loop.mp4" type="video/mp4">
     </video>
   </div>
   <div class="hero-card">
-    <div class="hero-title">Welcome to<br>Spectral Moon Studio</div>
+    <div class="hero-title">Welcome to<br>Spectralmoon Studio</div>
     <div class="hero-rule"></div>
     <div class="hero-sub">Films, visual stories and storytelling<br>for the conscious digital age.</div>
   </div>
 </div>
 
+<!-- PILLARS -->
 <div class="pillars">
   <div class="pillar">
-    <div class="pillar-title">Nature</div>
+    <div class="pillar-title">Sanctuary</div>
     <div class="pillar-rule"></div>
-    <div class="pillar-text">Rooted in sacred land, ancient forests and the living world.</div>
+    <div class="pillar-text">For the spaces where healing, land and conscious living meet.</div>
   </div>
   <div class="pillar">
     <div class="pillar-title">Consciousness</div>
     <div class="pillar-rule"></div>
-    <div class="pillar-text">Stories that awaken, inspire and expand the human spirit.</div>
+    <div class="pillar-text">Visual stories crafted for depth, meaning and brands with soul.</div>
   </div>
   <div class="pillar">
     <div class="pillar-title">Technology</div>
     <div class="pillar-rule"></div>
-    <div class="pillar-text">AI-powered filmmaking and craft for the conscious age.</div>
+    <div class="pillar-text">Where AI, code and human craft come together.</div>
+  </div>
+</div>
+
+<!-- WORK GALLERY -->
+<section class="work-section" id="work">
+  <div class="work-header">
+    <div class="work-title">Selected Work</div>
+    <div class="work-heading">Films, Stories &amp; Visions</div>
+    <div class="work-rule"></div>
+  </div>
+
+  <div class="filters">
+    <button class="filter-btn active" data-filter="all">All</button>
+    <button class="filter-btn" data-filter="storytelling">Storytelling</button>
+    <button class="filter-btn" data-filter="film">Film</button>
+    <button class="filter-btn" data-filter="commercial">Commercial</button>
+  </div>
+
+  <div class="gallery-grid">
+
+    <!-- 1. Grime & Glow -->
+    <div class="gallery-card" data-filter="film" data-index="0">
+      <div class="card-placeholder">
+        <div class="card-placeholder-inner">
+          <svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice">
+            <rect width="400" height="300" fill="#1C1812"/>
+            <rect x="0" y="0" width="400" height="300" fill="url(#p0)"/>
+            <defs>
+              <linearGradient id="p0" x1="0" y1="1" x2="1" y2="0">
+                <stop offset="0%" stop-color="#C8933A" stop-opacity="0.25"/>
+                <stop offset="100%" stop-color="#1C1812" stop-opacity="0"/>
+              </linearGradient>
+            </defs>
+            <line x1="0" y1="300" x2="400" y2="0" stroke="#C8933A" stroke-width="0.5" opacity="0.15"/>
+            <line x1="0" y1="200" x2="400" y2="0" stroke="#C8933A" stroke-width="0.5" opacity="0.1"/>
+            <line x1="0" y1="100" x2="400" y2="300" stroke="#C8933A" stroke-width="0.5" opacity="0.1"/>
+            <text x="200" y="145" text-anchor="middle" font-family="Georgia,serif" font-size="11" fill="#C8933A" opacity="0.4" letter-spacing="4">FILM</text>
+          </svg>
+        </div>
+      </div>
+      <div class="card-overlay">
+        <div class="card-category">Film · Fashion</div>
+        <div class="card-title">Grime &amp; Glow</div>
+        <div class="card-tags">Decay Aesthetic · Temporal Remix<br>Kling AI 3.0 · Nano Banana</div>
+        <div class="card-view">View</div>
+      </div>
+    </div>
+
+    <!-- 2. Where the Stars Align -->
+    <div class="gallery-card" data-filter="film" data-index="1">
+      <div class="card-placeholder">
+        <div class="card-placeholder-inner">
+          <svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice">
+            <rect width="400" height="300" fill="#0E0C08"/>
+            <circle cx="200" cy="140" r="90" fill="none" stroke="#C8933A" stroke-width="0.5" opacity="0.2"/>
+            <circle cx="200" cy="140" r="60" fill="none" stroke="#C8933A" stroke-width="0.5" opacity="0.15"/>
+            <circle cx="200" cy="140" r="30" fill="none" stroke="#C8933A" stroke-width="0.5" opacity="0.12"/>
+            <circle cx="200" cy="140" r="4" fill="#C8933A" opacity="0.5"/>
+            <circle cx="120" cy="80" r="1.5" fill="#C8933A" opacity="0.6"/>
+            <circle cx="280" cy="60" r="1" fill="#C8933A" opacity="0.5"/>
+            <circle cx="60" cy="160" r="1" fill="#C8933A" opacity="0.4"/>
+            <circle cx="340" cy="200" r="1.5" fill="#C8933A" opacity="0.5"/>
+            <circle cx="160" cy="220" r="1" fill="#C8933A" opacity="0.4"/>
+            <circle cx="310" cy="110" r="1" fill="#C8933A" opacity="0.35"/>
+            <text x="200" y="145" text-anchor="middle" font-family="Georgia,serif" font-size="11" fill="#C8933A" opacity="0.35" letter-spacing="4">FILM</text>
+          </svg>
+        </div>
+      </div>
+      <div class="card-overlay">
+        <div class="card-category">Film · Narrative Fantasy</div>
+        <div class="card-title">Where the Stars Align</div>
+        <div class="card-tags">Heroine's Journey · Mythic Cinema<br>Seedance · CapCut · GenHQ</div>
+        <div class="card-view">View</div>
+      </div>
+    </div>
+
+    <!-- 3. Feline Oracles -->
+    <div class="gallery-card" data-filter="film" data-index="2">
+      <div class="card-placeholder">
+        <div class="card-placeholder-inner">
+          <svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice">
+            <rect width="400" height="300" fill="#080C14"/>
+            <rect x="0" y="0" width="400" height="300" fill="url(#p2)"/>
+            <defs>
+              <linearGradient id="p2" x1="0.5" y1="0" x2="0.5" y2="1">
+                <stop offset="0%" stop-color="#1A3A6A" stop-opacity="0.4"/>
+                <stop offset="100%" stop-color="#080C14" stop-opacity="0"/>
+              </linearGradient>
+            </defs>
+            <!-- two pillars -->
+            <rect x="100" y="40" width="28" height="220" fill="#0E1828" stroke="#2A4A7A" stroke-width="0.5" opacity="0.7"/>
+            <rect x="272" y="40" width="28" height="220" fill="#0E1828" stroke="#2A4A7A" stroke-width="0.5" opacity="0.7"/>
+            <!-- tiny figure -->
+            <rect x="194" y="210" width="12" height="30" fill="#C8933A" opacity="0.25"/>
+            <circle cx="200" cy="205" r="5" fill="#C8933A" opacity="0.25"/>
+            <text x="200" y="145" text-anchor="middle" font-family="Georgia,serif" font-size="11" fill="#4A7AB5" opacity="0.5" letter-spacing="4">FILM</text>
+          </svg>
+        </div>
+      </div>
+      <div class="card-overlay">
+        <div class="card-category">Film · World-Building</div>
+        <div class="card-title">Feline Oracles</div>
+        <div class="card-tags">Sacred Architecture · Scale Study<br>Kling AI · GenHQ</div>
+        <div class="card-view">View</div>
+      </div>
+    </div>
+
+    <!-- 4. Lyran-Draco Confrontation -->
+    <div class="gallery-card" data-filter="film" data-index="3">
+      <div class="card-placeholder">
+        <div class="card-placeholder-inner">
+          <svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice">
+            <rect width="400" height="300" fill="#0A0808"/>
+            <rect x="0" y="0" width="400" height="300" fill="url(#p3)"/>
+            <defs>
+              <linearGradient id="p3" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#3A0A0A" stop-opacity="0.5"/>
+                <stop offset="50%" stop-color="#0A0808" stop-opacity="0"/>
+                <stop offset="100%" stop-color="#0A1A3A" stop-opacity="0.5"/>
+              </linearGradient>
+            </defs>
+            <line x1="200" y1="0" x2="200" y2="300" stroke="#C8933A" stroke-width="0.5" opacity="0.1"/>
+            <polygon points="200,60 230,200 170,200" fill="none" stroke="#C8933A" stroke-width="0.5" opacity="0.2"/>
+            <circle cx="200" cy="150" r="2" fill="#C8933A" opacity="0.5"/>
+            <text x="200" y="145" text-anchor="middle" font-family="Georgia,serif" font-size="11" fill="#C8933A" opacity="0.35" letter-spacing="4">FILM</text>
+          </svg>
+        </div>
+      </div>
+      <div class="card-overlay">
+        <div class="card-category">Film · Speculative Fiction</div>
+        <div class="card-title">Lyran-Draco Confrontation</div>
+        <div class="card-tags">Cosmic Mythology · Dream Reconstruction<br>Kling AI · GenHQ</div>
+        <div class="card-view">View</div>
+      </div>
+    </div>
+
+    <!-- 5. Syntropya -->
+    <div class="gallery-card" data-filter="commercial" data-index="4">
+      <div class="card-placeholder">
+        <div class="card-placeholder-inner">
+          <svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice">
+            <rect width="400" height="300" fill="#0A140A"/>
+            <rect x="0" y="0" width="400" height="300" fill="url(#p4)"/>
+            <defs>
+              <radialGradient id="p4" cx="50%" cy="60%">
+                <stop offset="0%" stop-color="#2A5A1A" stop-opacity="0.5"/>
+                <stop offset="100%" stop-color="#0A140A" stop-opacity="0"/>
+              </radialGradient>
+            </defs>
+            <!-- organic circle -->
+            <circle cx="200" cy="150" r="70" fill="none" stroke="#4A8A3A" stroke-width="0.5" opacity="0.3"/>
+            <circle cx="200" cy="150" r="45" fill="none" stroke="#4A8A3A" stroke-width="0.5" opacity="0.2"/>
+            <circle cx="200" cy="150" r="5" fill="#4A8A3A" opacity="0.4"/>
+            <text x="200" y="145" text-anchor="middle" font-family="Georgia,serif" font-size="11" fill="#6AAA5A" opacity="0.4" letter-spacing="4">COMMERCIAL</text>
+          </svg>
+        </div>
+      </div>
+      <div class="card-overlay">
+        <div class="card-category">Commercial · Wellness</div>
+        <div class="card-title">Syntropya</div>
+        <div class="card-tags">Concept Film · Visionary Architecture<br>Kling AI · GenHQ</div>
+        <div class="card-view">View</div>
+      </div>
+    </div>
+
+    <!-- 6. The Worst Commercial -->
+    <div class="gallery-card" data-filter="commercial" data-index="5">
+      <div class="card-placeholder">
+        <div class="card-placeholder-inner">
+          <svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice">
+            <rect width="400" height="300" fill="#1A1210"/>
+            <!-- scan lines retro feel -->
+            <line x1="0" y1="50" x2="400" y2="50" stroke="#C8933A" stroke-width="0.3" opacity="0.08"/>
+            <line x1="0" y1="100" x2="400" y2="100" stroke="#C8933A" stroke-width="0.3" opacity="0.08"/>
+            <line x1="0" y1="150" x2="400" y2="150" stroke="#C8933A" stroke-width="0.3" opacity="0.08"/>
+            <line x1="0" y1="200" x2="400" y2="200" stroke="#C8933A" stroke-width="0.3" opacity="0.08"/>
+            <line x1="0" y1="250" x2="400" y2="250" stroke="#C8933A" stroke-width="0.3" opacity="0.08"/>
+            <rect x="120" y="80" width="160" height="120" fill="none" stroke="#C8933A" stroke-width="0.5" opacity="0.2"/>
+            <text x="200" y="140" text-anchor="middle" font-family="Georgia,serif" font-size="11" fill="#C8933A" opacity="0.4" letter-spacing="4">COMMERCIAL</text>
+            <text x="200" y="165" text-anchor="middle" font-family="Georgia,serif" font-size="9" fill="#C8933A" opacity="0.25" letter-spacing="2">90s</text>
+          </svg>
+        </div>
+      </div>
+      <div class="card-overlay">
+        <div class="card-category">Commercial · Experimental</div>
+        <div class="card-title">The Worst Commercial</div>
+        <div class="card-tags">Parody · Retro Camp · GenHQ Challenge<br>GenHQ · Kling AI</div>
+        <div class="card-view">View</div>
+      </div>
+    </div>
+
+    <!-- 7. The Stag -->
+    <div class="gallery-card" data-filter="storytelling" data-index="6">
+      <div class="card-placeholder">
+        <div class="card-placeholder-inner">
+          <svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice">
+            <rect width="400" height="300" fill="#080E10"/>
+            <rect x="0" y="0" width="400" height="300" fill="url(#p6)"/>
+            <defs>
+              <radialGradient id="p6" cx="50%" cy="50%">
+                <stop offset="0%" stop-color="#0A4A3A" stop-opacity="0.5"/>
+                <stop offset="100%" stop-color="#080E10" stop-opacity="0"/>
+              </radialGradient>
+            </defs>
+            <!-- antler suggestion -->
+            <path d="M 195,200 L 195,130 L 170,80 M 195,130 L 220,80 M 170,80 L 155,55 M 170,80 L 185,60 M 220,80 L 210,55 M 220,80 L 235,60" fill="none" stroke="#C8933A" stroke-width="1" opacity="0.3"/>
+            <circle cx="195" cy="210" r="6" fill="#C8933A" opacity="0.2"/>
+            <text x="200" y="260" text-anchor="middle" font-family="Georgia,serif" font-size="11" fill="#2ABAAA" opacity="0.4" letter-spacing="4">STORY</text>
+          </svg>
+        </div>
+      </div>
+      <div class="card-overlay">
+        <div class="card-category">Story · Sacred Mythology</div>
+        <div class="card-title">The Stag</div>
+        <div class="card-tags">Art Nouveau · Symbolic Visual Poetry<br>Kling AI · Freepik</div>
+        <div class="card-view">View</div>
+      </div>
+    </div>
+
+    <!-- 8. Mucha Inspired -->
+    <div class="gallery-card" data-filter="storytelling" data-index="7">
+      <div class="card-placeholder">
+        <div class="card-placeholder-inner">
+          <svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice">
+            <rect width="400" height="300" fill="#120C10"/>
+            <rect x="0" y="0" width="400" height="300" fill="url(#p7)"/>
+            <defs>
+              <radialGradient id="p7" cx="50%" cy="40%">
+                <stop offset="0%" stop-color="#4A1A3A" stop-opacity="0.5"/>
+                <stop offset="100%" stop-color="#120C10" stop-opacity="0"/>
+              </radialGradient>
+            </defs>
+            <!-- mucha-style halo -->
+            <circle cx="200" cy="130" r="70" fill="none" stroke="#C8933A" stroke-width="1" opacity="0.2"/>
+            <circle cx="200" cy="130" r="55" fill="none" stroke="#C8933A" stroke-width="0.5" opacity="0.15"/>
+            <!-- geometric segments -->
+            <line x1="200" y1="60" x2="200" y2="200" stroke="#C8933A" stroke-width="0.3" opacity="0.1"/>
+            <line x1="130" y1="130" x2="270" y2="130" stroke="#C8933A" stroke-width="0.3" opacity="0.1"/>
+            <text x="200" y="260" text-anchor="middle" font-family="Georgia,serif" font-size="11" fill="#C8933A" opacity="0.4" letter-spacing="4">STORY</text>
+          </svg>
+        </div>
+      </div>
+      <div class="card-overlay">
+        <div class="card-category">Story · Art Nouveau</div>
+        <div class="card-title">Mucha Inspired</div>
+        <div class="card-tags">Botanical Mythology · Ukiyo-e Fusion<br>Kling AI</div>
+        <div class="card-view">View</div>
+      </div>
+    </div>
+
+    <!-- 9. Red Panda Daemon -->
+    <div class="gallery-card" data-filter="storytelling" data-index="8">
+      <div class="card-placeholder">
+        <div class="card-placeholder-inner">
+          <svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice">
+            <rect width="400" height="300" fill="#100A08"/>
+            <rect x="0" y="0" width="400" height="300" fill="url(#p8)"/>
+            <defs>
+              <radialGradient id="p8" cx="50%" cy="55%">
+                <stop offset="0%" stop-color="#4A1A08" stop-opacity="0.6"/>
+                <stop offset="100%" stop-color="#100A08" stop-opacity="0"/>
+              </radialGradient>
+            </defs>
+            <!-- simple tail curve -->
+            <path d="M 240,220 Q 280,160 260,100 Q 240,60 200,80 Q 160,100 170,150" fill="none" stroke="#C8933A" stroke-width="1.5" opacity="0.25"/>
+            <circle cx="185" cy="155" r="18" fill="none" stroke="#C8933A" stroke-width="0.5" opacity="0.2"/>
+            <text x="200" y="260" text-anchor="middle" font-family="Georgia,serif" font-size="11" fill="#C8933A" opacity="0.4" letter-spacing="4">STORY</text>
+          </svg>
+        </div>
+      </div>
+      <div class="card-overlay">
+        <div class="card-category">Story · Symbolic Portrait</div>
+        <div class="card-title">Red Panda Daemon</div>
+        <div class="card-tags">Spirit Animal · Literary Inspiration<br>Nano Banana</div>
+        <div class="card-view">View</div>
+      </div>
+    </div>
+
+  </div><!-- /gallery-grid -->
+</section>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox">
+  <div class="lightbox-inner">
+    <button class="lightbox-close" id="lightboxClose">✕ Close</button>
+    <div class="lightbox-media" id="lightboxMedia">
+      <svg viewBox="0 0 60 60" fill="none">
+        <circle cx="30" cy="30" r="28" stroke="#C8933A" stroke-width="1"/>
+        <polygon points="24,20 44,30 24,40" fill="#C8933A"/>
+      </svg>
+    </div>
+    <div class="lightbox-info">
+      <div>
+        <div class="lightbox-cat" id="lbCat"></div>
+        <div class="lightbox-title" id="lbTitle"></div>
+        <div class="lightbox-desc" id="lbDesc"></div>
+      </div>
+      <div class="lightbox-tools" id="lbTools"></div>
+    </div>
   </div>
 </div>
 
 <script>
-// smooth scroll for nav links
+var pieces = [
+  {
+    title: "Grime & Glow",
+    cat: "Film · AI Fashion Film / Conceptual",
+    desc: "Take something ugly and make it look like high fashion. Three chapters: a forgotten desert gas station at golden hour, an abandoned motel corridor, and a future designer who watches the original footage and recreates it. Beauty was never about the object.",
+    tools: "Kling AI 3.0\nNano Banana\nFreepik\nGenHQ",
+    file: "grime_glow_v3.mp4"
+  },
+  {
+    title: "Where the Stars Align",
+    cat: "Film · AI Short Film / Narrative Fantasy",
+    desc: "A short mythic film rooted in the heroine's journey — not conquest, but the feminine arc of descent, remembering, and return. Bolivian sacred sites, celestial symbolism, portal transitions, and a chakra alignment finale.",
+    tools: "Seedance\nCapCut\nGenHQ",
+    file: "Where_the_Stars_Remember.mov"
+  },
+  {
+    title: "Feline Oracles",
+    cat: "Film · AI Cinematic / World-Building",
+    desc: "A technical study in scale through prompting: how wide-angle optics and size contrast can make a single human figure feel impossibly small — and in that smallness, sacred. Two monumental statues in blue light. A tiny woman standing between worlds.",
+    tools: "Kling AI\nGenHQ",
+    file: "hf_20260412 (Feline Oracles).mp4"
+  },
+  {
+    title: "Lyran-Draco Confrontation",
+    cat: "Film · AI Cinematic / Speculative Fiction",
+    desc: "A practice in character continuity and speculative world-building. A recurring Lyran warrior woman avatar stands on scarred terrain. Cosmic mythology meets battlefield cinema: not fantasy, but memory-cinema.",
+    tools: "Kling AI\nGenHQ",
+    file: "Lyran_draco_confrontation_war.mp4"
+  },
+  {
+    title: "Syntropya",
+    cat: "Commercial · AI Concept Film / Wellness",
+    desc: "A wellness commercial concept for a retreat in Bahia, Brazil. Syntropy is the opposite of entropy — the force that moves toward life, coherence, and flowering. A dream rendered visible, frame by frame.",
+    tools: "Kling AI\nGenHQ",
+    file: "syntropya_v5.mp4"
+  },
+  {
+    title: "The Worst Commercial",
+    cat: "Commercial · AI Experimental / Comedic",
+    desc: "Born from a GenHQ challenge: make an ad so bad it's genius. 90s infomercial camp — washed-out colour grading, awkward pacing, crystal healing claims delivered with complete sincerity. Part parody, part love letter to terrible television.",
+    tools: "GenHQ\nKling AI",
+    file: null
+  },
+  {
+    title: "The Stag — Ethereal Beings Series",
+    cat: "Story · AI Visual Art / Sacred Mythology",
+    desc: "A porcelain stag in a bioluminescent forest, antlers branching like living star maps and root systems. Mucha-inspired golden halos, sacred geometry, fireflies and moss. The stag as threshold guardian across mythologies.",
+    tools: "Kling AI\nFreepik",
+    file: "Stag_ethereal.mp4"
+  },
+  {
+    title: "Mucha Inspired — Magical Being Series",
+    cat: "Story · AI Visual Art / Art Nouveau",
+    desc: "At the intersection of Mucha's Art Nouveau golden halos, Japanese ukiyo-e botanical woodblock printing, and oversized blooming flowers as spiritual presence. She emerged from a late-night creative drift — not designed so much as discovered.",
+    tools: "Kling AI",
+    file: "Mucha_inspired_ehtereal.png"
+  },
+  {
+    title: "Red Panda Daemon",
+    cat: "Story · AI Visual Art / Symbolic Portrait",
+    desc: "Inspired by Philip Pullman's concept of the dæmon — the animal soul-companion that reflects your innermost nature. An experiment in translating interior worlds into visual form. Not 'what does it look like?' but 'what does it feel like to be accompanied by one?'",
+    tools: "Nano Banana",
+    file: "v2_red_panda_su_beach.mp4"
+  }
+];
+
+// filter buttons
+document.querySelectorAll('.filter-btn').forEach(function(btn) {
+  btn.addEventListener('click', function() {
+    document.querySelectorAll('.filter-btn').forEach(function(b) { b.classList.remove('active'); });
+    this.classList.add('active');
+    var f = this.dataset.filter;
+    document.querySelectorAll('.gallery-card').forEach(function(card) {
+      if (f === 'all' || card.dataset.filter === f) {
+        card.classList.remove('hidden');
+      } else {
+        card.classList.add('hidden');
+      }
+    });
+  });
+});
+
+// lightbox
+var lightbox = document.getElementById('lightbox');
+document.querySelectorAll('.gallery-card').forEach(function(card) {
+  card.addEventListener('click', function() {
+    var idx = parseInt(this.dataset.index);
+    var p = pieces[idx];
+    document.getElementById('lbCat').textContent = p.cat;
+    document.getElementById('lbTitle').textContent = p.title;
+    document.getElementById('lbDesc').textContent = p.desc;
+    document.getElementById('lbTools').innerHTML = p.tools.replace(/\n/g, '<br>');
+    lightbox.classList.add('open');
+  });
+});
+document.getElementById('lightboxClose').addEventListener('click', function() {
+  lightbox.classList.remove('open');
+});
+lightbox.addEventListener('click', function(e) {
+  if (e.target === lightbox) lightbox.classList.remove('open');
+});
+
+// smooth scroll
 document.querySelectorAll('a[href^="#"]').forEach(function(a) {
   a.addEventListener('click', function(e) {
     e.preventDefault();
