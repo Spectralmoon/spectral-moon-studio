@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Jost:wght@300;400&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: #FAF6EE; font-family: Georgia, serif; }
+
+.nav-top {
+  background: #FAF6EE;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 22px 48px 12px;
+  gap: 14px;
+  border-bottom: 0.5px solid #E8E0D0;
+}
+.nav-brand {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 16px;
+  letter-spacing: 0.28em;
+  color: #1A1208;
+  font-weight: 300;
+}
+.nav-bottom {
+  background: #FAF6EE;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 56px;
+  padding: 10px 48px 14px;
+  border-bottom: 1px solid #D8D0BE;
+}
+.nav-link {
+  font-family: 'Jost', sans-serif;
+  font-size: 10.5px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #3A2A18;
+  font-weight: 300;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.hero {
+  position: relative;
+  height: 480px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  z-index: 0;
+}
+.hero-bg video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  transform: translate(-50%, -50%);
+  object-fit: cover;
+}
+.hero-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(28, 24, 18, 0.45);
+  z-index: 1;
+}
+.hero-card {
+  position: relative;
+  z-index: 2;
+  background: rgba(250,246,238,0.55);
+  border: 1px solid rgba(200,147,58,0.40);
+  padding: 44px 60px;
+  text-align: center;
+  min-width: 360px;
+  max-width: 480px;
+  backdrop-filter: blur(2px);
+}
+.hero-title {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 28px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #C8933A;
+  line-height: 1.4;
+  font-weight: 700;
+}
+.hero-rule {
+  width: 50px;
+  height: 0.5px;
+  background: #C8933A;
+  margin: 16px auto;
+  opacity: 0.55;
+}
+.hero-sub {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 14px;
+  font-style: italic;
+  color: #6A4820;
+  line-height: 1.8;
+  font-weight: 300;
+}
+
+.pillars {
+  background: #1C1812;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  border-top: 1px solid rgba(200,147,58,0.3);
+}
+.pillar {
+  padding: 48px 36px;
+  text-align: center;
+  border-right: 1px solid rgba(200,147,58,0.2);
+}
+.pillar:last-child { border-right: none; }
+.pillar-title {
+  font-family: 'Jost', sans-serif;
+  font-size: 13px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: #C8933A;
+  margin-bottom: 16px;
+  font-weight: 400;
+}
+.pillar-rule {
+  width: 32px;
+  height: 1px;
+  background: #C8933A;
+  margin: 0 auto 16px;
+  opacity: 0.6;
+}
+.pillar-text {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 16px;
+  font-style: italic;
+  color: rgba(250,246,238,0.65);
+  line-height: 1.8;
+  font-weight: 300;
+}
+</style>
+</head>
+<body>
+
+<div class="nav-top">
+  <span class="nav-brand">ANCIENT</span>
+  <svg width="44" height="44" viewBox="0 0 680 660">
+    <g transform="translate(340, 280)">
+      <g fill="none" stroke="#C8933A" stroke-width="5" opacity="0.35">
+        <circle cx="0" cy="0" r="82"/><circle cx="0" cy="-82" r="82"/>
+        <circle cx="71" cy="-41" r="82"/><circle cx="71" cy="41" r="82"/>
+        <circle cx="0" cy="82" r="82"/><circle cx="-71" cy="41" r="82"/>
+        <circle cx="-71" cy="-41" r="82"/>
+      </g>
+      <circle cx="0" cy="0" r="151" fill="none" stroke="#C8933A" stroke-width="13"
+        stroke-dasharray="8,2,16,1,10,3,22,1,7,2,14,2" stroke-linecap="round" opacity="0.90"/>
+      <path d="M 0,-144 L 125,72 L -125,72 Z" fill="none" stroke="#C8933A" stroke-width="11"
+        stroke-linecap="round" stroke-linejoin="round" opacity="0.85"/>
+      <path d="M -125,72 L -60,-2 Q -48,-22 -36,-4 L -16,26 Q -10,12 -5,2 C -3,-8 -2,-22 -1,-36 C 0,-54 0,-64 0,-64 C 0,-64 0,-54 1,-36 C 2,-22 3,-8 5,2 Q 10,12 16,26 L 36,-4 Q 48,-22 60,-2 L 125,72 Z"
+        fill="#3D2208" opacity="0.88"/>
+      <path d="M 0,-64 C -7,-72 -16,-82 -12,-97 C -9,-106 -4,-110 0,-112 C 4,-110 9,-106 12,-97 C 16,-82 7,-72 0,-64 Z"
+        fill="#5A3415" opacity="0.95"/>
+      <path d="M -3,-74 C -10,-78 -20,-80 -22,-91 C -23,-99 -17,-103 -11,-100 C -7,-92 -5,-82 -3,-74 Z" fill="#4A2A0A" opacity="0.85"/>
+      <path d="M 3,-74 C 10,-78 20,-80 22,-91 C 23,-99 17,-103 11,-100 C 7,-92 5,-82 3,-74 Z" fill="#4A2A0A" opacity="0.85"/>
+      <circle cx="0" cy="-116" r="10" fill="#C8933A" opacity="0.85"/>
+    </g>
+  </svg>
+  <span class="nav-brand">WISDOM</span>
+</div>
+
+<div class="nav-bottom">
+  <span class="nav-link">Home</span>
+  <span class="nav-link">Work</span>
+  <span class="nav-link">About</span>
+  <span class="nav-link">Contact</span>
+</div>
+
+<div class="hero" id="hero">
+  <div class="hero-bg" id="heroBg">
+    <video autoplay muted loop playsinline id="heroVideo" oncanplay="this.playbackRate=0.3;">
+      <source src="https://res.cloudinary.com/dbet91fsr/video/upload/hero_loop.mp4_yupt9g" type="video/mp4">
+    </video>
+  </div>
+  <div class="hero-card">
+    <div class="hero-title">Welcome to<br>Spectral Moon Studio</div>
+    <div class="hero-rule"></div>
+    <div class="hero-sub">Films, visual stories and storytelling<br>for the conscious digital age.</div>
+  </div>
+</div>
+
+<div class="pillars">
+  <div class="pillar">
+    <div class="pillar-title">Nature</div>
+    <div class="pillar-rule"></div>
+    <div class="pillar-text">Rooted in sacred land, ancient forests and the living world.</div>
+  </div>
+  <div class="pillar">
+    <div class="pillar-title">Consciousness</div>
+    <div class="pillar-rule"></div>
+    <div class="pillar-text">Stories that awaken, inspire and expand the human spirit.</div>
+  </div>
+  <div class="pillar">
+    <div class="pillar-title">Technology</div>
+    <div class="pillar-rule"></div>
+    <div class="pillar-text">AI-powered filmmaking and craft for the conscious age.</div>
+  </div>
+</div>
+
+<script>
+// smooth scroll for nav links
+document.querySelectorAll('a[href^="#"]').forEach(function(a) {
+  a.addEventListener('click', function(e) {
+    e.preventDefault();
+    document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+  });
+});
+</script>
+</body>
+</html>
