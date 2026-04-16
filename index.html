@@ -11,14 +11,14 @@
     />
     <meta
       property="og:image"
-      content="https://res.cloudinary.com/dbet91fsr/video/upload/fl_sprite/v1776135417/hero_loop.mp4_yupt9g.jpg"
+      content="https://res.cloudinary.com/dbet91fsr/video/upload/fl_sprite/f_auto,q_auto/v1776135417/hero_loop.mp4_yupt9g.jpg"
     />
     <meta property="og:url" content="https://spectralmoonstudio.com" />
     <meta property="og:type" content="website" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta
       name="twitter:image"
-      content="https://res.cloudinary.com/dbet91fsr/video/upload/fl_sprite/v1776135417/hero_loop.mp4_yupt9g.jpg"
+      content="https://res.cloudinary.com/dbet91fsr/video/upload/fl_sprite/f_auto,q_auto/v1776135417/hero_loop.mp4_yupt9g.jpg"
     />
     <link
       href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Jost:wght@300;400&display=swap"
@@ -99,11 +99,11 @@
           muted
           loop
           playsinline
+          preload="metadata"
           id="heroVideo"
-          oncanplay="this.playbackRate = 0.3"
         >
           <source
-            src="https://res.cloudinary.com/dbet91fsr/video/upload/v1776135417/hero_loop.mp4_yupt9g.mp4"
+            src="https://res.cloudinary.com/dbet91fsr/video/upload/f_auto,q_auto:low,w_1600,br_800k/v1776135417/hero_loop.mp4_yupt9g.mp4"
             type="video/mp4"
           />
         </video>
@@ -147,8 +147,8 @@
       <div class="featured-eyebrow">Featured Film</div>
       <div class="featured-rule"></div>
       <div class="featured-film-wrap" id="featuredFilm">
-        <video id="featuredVideo" loop muted playsinline>
-          <source src="https://res.cloudinary.com/dbet91fsr/video/upload/v1776299173/Where_the_Stars_Remember_web_zbm207.mp4" type="video/mp4" />
+        <video id="featuredVideo" loop muted playsinline preload="none" poster="thumbnails/thumb_when_the_stars_align.webp">
+          <source src="https://res.cloudinary.com/dbet91fsr/video/upload/f_auto,q_auto:good/v1776299173/Where_the_Stars_Remember_web_zbm207.mp4" type="video/mp4" />
         </video>
         <div class="featured-film-overlay">
           <div class="featured-play-btn" id="featuredPlayBtn">
@@ -161,9 +161,10 @@
           </div>
           <div class="featured-film-title">Where the Stars Align</div>
           <div class="featured-film-desc">
-            A short mythic film rooted in the heroine's journey — the feminine
-            arc of descent, remembering, and return. Drawing on Bolivian sacred
-            sites, celestial symbolism, and the wonder of The NeverEnding Story.
+            A woman walks a path of ancient trials — not battles to win, but
+            layers to shed. The studio's first fully structured AI short film,
+            built scene by scene: sacred geometry, celestial symbolism, and the
+            quiet return that feels less like arrival and more like remembering.
           </div>
           <div class="featured-film-tags">
             <span class="featured-film-tag">Narrative Fantasy</span>
@@ -177,6 +178,7 @@
     <div class="gallery-section" id="work">
       <div class="gallery-header">
         <div class="gallery-eyebrow">Selected Work</div>
+        <div class="gallery-headline">A growing body of work</div>
         <div class="gallery-rule"></div>
         <div class="gallery-filters">
           <button class="filter-btn active" data-filter="all">All</button>
@@ -191,69 +193,18 @@
       <div class="masonry-grid">
         <div
           class="masonry-item"
-          data-cat="commercial"
-          data-title="Syntropya"
-          data-category="Commercial · AI Concept Film / Wellness"
-          data-tags="Wellness Commercial,Concept Film,Visionary Architecture"
-          data-desc="A wellness commercial concept for a retreat space in the lush heart of Bahia, Brazil. Syntropy — the opposite of entropy — the force that moves toward life, coherence, and flowering. A place where creativity and healing are not separate, where technology serves stillness, and where the land itself is the medicine."
-          data-file="https://res.cloudinary.com/dbet91fsr/video/upload/v1776296879/syntropya_oyxnjo.mp4"
-          data-type="video"
-        >
-          <img src="thumbnails/thumb_syntropia.png" alt="Syntropya">
-          <div class="masonry-overlay">
-            <div class="masonry-cat">Commercial</div>
-            <div class="masonry-title">Syntropya</div>
-          </div>
-        </div>
-
-        <div
-          class="masonry-item"
           data-cat="film"
-          data-title="Grime &amp; Glow"
-          data-category="Film · AI Fashion Film / Conceptual"
-          data-tags="Fashion Film,Decay Aesthetic,Temporal Remix"
-          data-desc="A three-part fashion film built around one provocation: take something ugly and make it look like high fashion. Rust, cracked asphalt and peeling paint treated like haute couture. A forgotten gas station, a neon motel corridor, and a future designer who steals it all and remixes it. Beauty was never about the object."
-          data-file="https://res.cloudinary.com/dbet91fsr/video/upload/v1776295388/grime_glow_v1_njp63i.mp4"
+          data-title="Feline Oracles"
+          data-category="Film · AI Cinematic / World-Building"
+          data-tags="Fantasy World-Building,Sacred Architecture,Scale Study"
+          data-desc="Born from a childhood obsession with the ancient oracle statues in The NeverEnding Story. A technical study in scale through prompting — wide-angle optics, compositional framing, and deliberate size contrast. Two monumental feline statues in blue light. A tiny woman standing between worlds."
+          data-file="https://res.cloudinary.com/dbet91fsr/video/upload/f_auto,q_auto:good,w_1280/v1776296099/oracle_ylasna.mp4"
           data-type="video"
         >
-          <img src="thumbnails/thumb.._grime_glow.png" alt="Grime &amp; Glow">
+          <img class="masonry-thumb" src="thumbnails/thumb_oracles.webp" alt="Feline Oracles">
           <div class="masonry-overlay">
             <div class="masonry-cat">Film</div>
-            <div class="masonry-title">Grime &amp; Glow</div>
-          </div>
-        </div>
-
-        <div
-          class="masonry-item"
-          data-cat="film"
-          data-title="Grime &amp; Glow — Part 2"
-          data-category="Film · AI Fashion Film / Conceptual"
-          data-tags="Fashion Film,Decay Aesthetic,Temporal Remix"
-          data-desc="Part two of the Grime &amp; Glow series. Beauty was never about the object."
-          data-file="https://res.cloudinary.com/dbet91fsr/video/upload/v1776295337/grime_glow_v2_feqfqh.mp4"
-          data-type="video"
-        >
-          <img src="thumbnails/thumb_grim_glow_2.webp" alt="Grime &amp; Glow — Part 2">
-          <div class="masonry-overlay">
-            <div class="masonry-cat">Film</div>
-            <div class="masonry-title">Grime &amp; Glow — Part 2</div>
-          </div>
-        </div>
-
-        <div
-          class="masonry-item"
-          data-cat="film"
-          data-title="Grime &amp; Glow — Futuristic"
-          data-category="Film · AI Fashion Film / Conceptual"
-          data-tags="Fashion Film,Futuristic,High Tech"
-          data-desc="Part three of the Grime &amp; Glow series — the futuristic chapter."
-          data-file="https://res.cloudinary.com/dbet91fsr/video/upload/v1776296712/grime_glow_v3_u122qu.mp4"
-          data-type="video"
-        >
-          <img src="thumbnails/thumb_grime_glow_futuristic.webp" alt="Grime &amp; Glow — Futuristic">
-          <div class="masonry-overlay">
-            <div class="masonry-cat">Film</div>
-            <div class="masonry-title">Grime &amp; Glow — Futuristic</div>
+            <div class="masonry-title">Feline Oracles</div>
           </div>
         </div>
 
@@ -264,30 +215,13 @@
           data-category="Story · AI Visual Art / Art Nouveau"
           data-tags="Art Nouveau,Botanical Mythology,Ukiyo-e Fusion"
           data-desc="At the intersection of Mucha's Art Nouveau golden halos, Japanese ukiyo-e botanical woodblock, and oversized blooming flowers as spiritual presence. She emerged from a late-night creative drift — not designed so much as discovered. Part of an ongoing series of magical, mythological feminine archetypes."
-          data-file="https://res.cloudinary.com/dbet91fsr/video/upload/v1776297344/Zodiac_hhgo4k.mp4"
+          data-file="https://res.cloudinary.com/dbet91fsr/video/upload/f_auto,q_auto:good,w_1280/v1776297344/Zodiac_hhgo4k.mp4"
           data-type="video"
         >
-          <img src="thumbnails/thumb_zodiac_mucha_inspired.png" alt="Mucha Inspired">
+          <img class="masonry-thumb masonry-thumb--medium" src="thumbnails/thumb_zodiac_mucha_inspired.webp" alt="Mucha Inspired">
           <div class="masonry-overlay">
             <div class="masonry-cat">Story</div>
             <div class="masonry-title">Mucha Inspired</div>
-          </div>
-        </div>
-
-        <div
-          class="masonry-item"
-          data-cat="story"
-          data-title="The Stag — Ethereal Beings Series"
-          data-category="Story · AI Visual Art / Sacred Mythology"
-          data-tags="Sacred Mythology,Art Nouveau,Symbolic Visual Poetry"
-          data-desc="A porcelain stag in a bioluminescent forest, antlers branching like living star maps and root systems. Mucha-inspired golden halos, sacred geometry, fireflies and moss. The stag as threshold guardian — moving between the seen and unseen, antlers cycling through growth, fall, and return like the seasons themselves."
-          data-file="https://res.cloudinary.com/dbet91fsr/video/upload/v1776297347/stag_ethereal_zxjpek.mov"
-          data-type="video"
-        >
-          <img src="thumbnails/thumb_stag_ethereal.png" alt="The Stag">
-          <div class="masonry-overlay">
-            <div class="masonry-cat">Story</div>
-            <div class="masonry-title">The Stag — Ethereal Beings Series</div>
           </div>
         </div>
 
@@ -298,10 +232,10 @@
           data-category="Commercial · AI Experimental / Comedic"
           data-tags="Experimental,Parody,Retro Camp"
           data-desc="Born from a GenHQ challenge — make an ad so bad it's genius. Washed-out colour grading, awkward pacing, crystal healing claims delivered with complete sincerity. You can only make something this precisely bad if you know exactly what good looks like. Part parody, part love letter to terrible television."
-          data-file="https://res.cloudinary.com/dbet91fsr/video/upload/v1776297123/the-worst_commercial_sutx72.mov"
+          data-file="https://res.cloudinary.com/dbet91fsr/video/upload/f_auto,q_auto:good,w_1280/v1776297123/the-worst_commercial_sutx72.mov"
           data-type="video"
         >
-          <img src="thumbnails/thumb_the_worst_commercial.png" alt="The Worst Commercial">
+          <img class="masonry-thumb" src="thumbnails/thumb_the_worst_commercial.webp" alt="The Worst Commercial">
           <div class="masonry-overlay">
             <div class="masonry-cat">Commercial</div>
             <div class="masonry-title">The Worst Commercial</div>
@@ -315,13 +249,81 @@
           data-category="Film · AI Cinematic / Speculative Fiction"
           data-tags="Cosmic Mythology,Character Continuity,Dream Reconstruction"
           data-desc="Practice in character continuity and speculative world-building. A recurring Lyran warrior woman, standing on the scarred terrain of a world once lush and alive. Dream-reconstructed Lyran civilisation versus Draco forces. Cosmic mythology meets battlefield cinema — not fantasy, but memory-cinema."
-          data-file="https://res.cloudinary.com/dbet91fsr/video/upload/v1776295726/Lyran_draco_confrontation_war_nldzr8.mp4"
+          data-file="https://res.cloudinary.com/dbet91fsr/video/upload/f_auto,q_auto:good,w_1280/v1776295726/Lyran_draco_confrontation_war_nldzr8.mp4"
           data-type="video"
         >
-          <img src="thumbnails/thumb_lyra_draco.png" alt="Lyran-Draco Confrontation">
+          <img class="masonry-thumb" src="thumbnails/thumb_lyra_draco.webp" alt="Lyran-Draco Confrontation">
           <div class="masonry-overlay">
             <div class="masonry-cat">Film</div>
             <div class="masonry-title">Lyran-Draco Confrontation</div>
+          </div>
+        </div>
+
+        <div
+          class="masonry-item"
+          data-cat="story"
+          data-title="The Stag — Ethereal Beings Series"
+          data-category="Story · AI Visual Art / Sacred Mythology"
+          data-tags="Sacred Mythology,Art Nouveau,Symbolic Visual Poetry"
+          data-desc="A porcelain stag in a bioluminescent forest, antlers branching like living star maps and root systems. Mucha-inspired golden halos, sacred geometry, fireflies and moss. The stag as threshold guardian — moving between the seen and unseen, antlers cycling through growth, fall, and return like the seasons themselves."
+          data-file="https://res.cloudinary.com/dbet91fsr/video/upload/f_auto,q_auto:good,w_1280/v1776297347/stag_ethereal_zxjpek.mov"
+          data-type="video"
+        >
+          <img class="masonry-thumb" src="thumbnails/thumb_stag_ethereal.webp" alt="The Stag">
+          <div class="masonry-overlay">
+            <div class="masonry-cat">Story</div>
+            <div class="masonry-title">The Stag — Ethereal Beings Series</div>
+          </div>
+        </div>
+
+        <div
+          class="masonry-item"
+          data-cat="film"
+          data-title="Grime &amp; Glow"
+          data-category="Film · AI Fashion Film / Conceptual"
+          data-tags="Fashion Film,Decay Aesthetic,Haute Couture"
+          data-desc="Grime and glow. Two words that shouldn't sit together, but do. A forgotten gas station at golden hour — rust, cracked asphalt, peeling paint — framed like haute couture. Where worn things catch the light, beauty finds its way back in."
+          data-file="https://res.cloudinary.com/dbet91fsr/video/upload/f_auto,q_auto:good,w_1280/v1776295388/grime_glow_v1_njp63i.mp4"
+          data-type="video"
+        >
+          <img class="masonry-thumb" src="thumbnails/thumb.._grime_glow.webp" alt="Grime &amp; Glow">
+          <div class="masonry-overlay">
+            <div class="masonry-cat">Film</div>
+            <div class="masonry-title">Grime &amp; Glow</div>
+          </div>
+        </div>
+
+        <div
+          class="masonry-item"
+          data-cat="commercial"
+          data-title="Syntropya"
+          data-category="Commercial · AI Concept Film / Wellness"
+          data-tags="Wellness Commercial,Concept Film,Visionary Architecture"
+          data-desc="A wellness commercial concept for a retreat space in the lush heart of Bahia, Brazil. Syntropy — the opposite of entropy — the force that moves toward life, coherence, and flowering. A place where creativity and healing are not separate, where technology serves stillness, and where the land itself is the medicine."
+          data-file="https://res.cloudinary.com/dbet91fsr/video/upload/f_auto,q_auto:good,w_1280/v1776296879/syntropya_oyxnjo.mp4"
+          data-type="video"
+        >
+          <img class="masonry-thumb" src="thumbnails/thumb_syntropia.webp" alt="Syntropya">
+          <div class="masonry-overlay">
+            <div class="masonry-cat">Commercial</div>
+            <div class="masonry-title">Syntropya</div>
+          </div>
+        </div>
+
+        <div
+          class="masonry-item"
+          data-cat="film"
+          data-title="Grime &amp; Glow: Vactiancy"
+          data-category="Film · AI Fashion Film / Conceptual"
+          data-tags="Fashion Film,Vacancy,Intimate Decay"
+          data-desc="Vactiancy — a word that doesn't exist, for a feeling that does. The strange intimacy of vacancy. An abandoned motel corridor, peeling walls, neon fading into nothing. The quiet emotional space inside empty places, where beauty and presence still show up uninvited."
+          data-file="https://res.cloudinary.com/dbet91fsr/video/upload/f_auto,q_auto:good,w_1280/v1776295337/grime_glow_v2_feqfqh.mp4"
+          data-type="video"
+        >
+          <img class="masonry-thumb" src="thumbnails/thumb_grim_glow_2.webp" alt="Grime &amp; Glow: Vactiancy">
+          <div class="masonry-overlay">
+            <div class="masonry-cat">Film</div>
+            <div class="masonry-title">Grime &amp; Glow: Vactiancy</div>
           </div>
         </div>
 
@@ -332,10 +334,10 @@
           data-category="Story · AI Visual Art / Symbolic Portrait"
           data-tags="Symbolic Portrait,Spirit Animal,Literary Inspiration"
           data-desc="Inspired by Philip Pullman's concept of the daemon — the animal soul-companion that walks beside you, reflecting your innermost nature. The red panda as spirit animal: curious, quietly fierce, gentle but untameable. An experiment in translating interior worlds into visual form."
-          data-file="https://res.cloudinary.com/dbet91fsr/video/upload/v1776295411/animal_spirit_rp6rlo.mp4"
+          data-file="https://res.cloudinary.com/dbet91fsr/video/upload/f_auto,q_auto:good,w_1280/v1776295411/animal_spirit_rp6rlo.mp4"
           data-type="video"
         >
-          <img src="thumbnails/thumb_animal_spirit.png" alt="Red Panda Daemon">
+          <img class="masonry-thumb" src="thumbnails/thumb_animal_spirit.webp" alt="Red Panda Daemon">
           <div class="masonry-overlay">
             <div class="masonry-cat">Story</div>
             <div class="masonry-title">Red Panda Daemon</div>
@@ -345,17 +347,17 @@
         <div
           class="masonry-item"
           data-cat="film"
-          data-title="Feline Oracles"
-          data-category="Film · AI Cinematic / World-Building"
-          data-tags="Fantasy World-Building,Sacred Architecture,Scale Study"
-          data-desc="Born from a childhood obsession with the ancient oracle statues in The NeverEnding Story. A technical study in scale through prompting — wide-angle optics, compositional framing, and deliberate size contrast. Two monumental feline statues in blue light. A tiny woman standing between worlds."
-          data-file="https://res.cloudinary.com/dbet91fsr/video/upload/v1776296099/oracle_ylasna.mp4"
+          data-title="Grime &amp; Glow: Echovogue"
+          data-category="Film · AI Fashion Film / Conceptual"
+          data-tags="Fashion Film,Temporal Remix,Neon Future"
+          data-desc="Echovogue — style as reverberation. A designer in the future watches the original and makes it theirs. Fashion is cyclical: grime gets stolen, remixed, made neon. A copy-paste across eras where beauty was never about the object — only the eye that finds it, again and again."
+          data-file="https://res.cloudinary.com/dbet91fsr/video/upload/f_auto,q_auto:good,w_1280/v1776296712/grime_glow_v3_u122qu.mp4"
           data-type="video"
         >
-          <img src="thumbnails/thumb_oracles.png" alt="Feline Oracles">
+          <img class="masonry-thumb" src="thumbnails/thumb_grime_glow_futuristic.webp" alt="Grime &amp; Glow: Echovogue">
           <div class="masonry-overlay">
             <div class="masonry-cat">Film</div>
-            <div class="masonry-title">Feline Oracles</div>
+            <div class="masonry-title">Grime &amp; Glow: Echovogue</div>
           </div>
         </div>
       </div>
@@ -383,6 +385,21 @@
         <div class="about-body">AI didn't give us the vision. It gave us the tools to finally reach it.</div>
         <div class="about-divider"></div>
         <div class="about-body">We craft films, visual stories and experiences for the conscious digital age — where <em>ancient wisdom is the code the future runs on.</em></div>
+      </div>
+    </div>
+
+    <div class="contact-section" id="contact">
+      <div class="contact-inner">
+        <div class="contact-eyebrow">Contact</div>
+        <div class="contact-rule"></div>
+        <div class="contact-headline">Let's tell a story together</div>
+        <div class="contact-sub">For commissions, collaborations, or conversations about the work.</div>
+        <div class="contact-links">
+          <a class="contact-link" href="mailto:muluc33@gmail.com">muluc33@gmail.com</a>
+          <a class="contact-link" href="https://instagram.com/spectralmoon.studio" target="_blank" rel="noopener">Instagram — studio</a>
+          <a class="contact-link" href="https://instagram.com/spectralmoon.creates" target="_blank" rel="noopener">Instagram — personal</a>
+        </div>
+        <div class="contact-footer">Spectralmoon Studio · Santa Cruz, Bolivia</div>
       </div>
     </div>
 
