@@ -1,6 +1,14 @@
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body { background: #FAF6EE; font-family: Georgia, serif; }
 
+/* Accessibility — visible focus indicator for keyboard users (WCAG 2.4.7) */
+*:focus { outline: none; }
+*:focus-visible {
+  outline: 2px solid #C8933A;
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
 .nav-top {
   background: #FAF6EE;
   display: flex; align-items: center; justify-content: center;
@@ -53,7 +61,7 @@ body { background: #FAF6EE; font-family: Georgia, serif; }
 .hero-rule { width: 50px; height: 0.5px; background: #C8933A; margin: 16px auto; opacity: 0.55; }
 .hero-sub {
   font-family: 'Cormorant Garamond', Georgia, serif;
-  font-size: 18px; font-style: italic; color: #6A4820; line-height: 1.8; font-weight: 300;
+  font-size: 22px; font-style: italic; color: #4A3218; line-height: 1.65; font-weight: 300;
 }
 
 .pillars {
@@ -74,8 +82,8 @@ body { background: #FAF6EE; font-family: Georgia, serif; }
 .pillar-rule { width: 32px; height: 1px; background: #C8933A; margin: 0 auto 14px; opacity: 0.6; }
 .pillar-text {
   font-family: 'Cormorant Garamond', Georgia, serif;
-  font-size: 15px; font-style: italic;
-  color: rgba(250,246,238,0.65); line-height: 1.8; font-weight: 300;
+  font-size: 19px;
+  color: #CDC3AF; line-height: 1.65; font-weight: 300;
 }
 
 /* FEATURED FILM */
@@ -164,9 +172,9 @@ body { background: #FAF6EE; font-family: Georgia, serif; }
 }
 .featured-film-desc {
   font-family: 'Cormorant Garamond', Georgia, serif;
-  font-size: 15px;
-  color: rgba(250,246,238,0.6);
-  line-height: 1.8;
+  font-size: 19px;
+  color: #C5BCA8;
+  line-height: 1.65;
   font-weight: 300;
   max-width: 560px;
 }
@@ -181,7 +189,7 @@ body { background: #FAF6EE; font-family: Georgia, serif; }
   font-size: 8px;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: rgba(200,147,58,0.65);
+  color: rgba(200,147,58,0.9);
   border: 0.5px solid rgba(200,147,58,0.25);
   padding: 4px 10px;
 }
@@ -189,7 +197,7 @@ body { background: #FAF6EE; font-family: Georgia, serif; }
   .featured-section { padding: 48px 20px; }
   .featured-film-title { font-size: 28px; }
   .featured-film-overlay { padding: 24px 20px; }
-  .featured-film-desc { font-size: 13px; }
+  .featured-film-desc { font-size: 17px; }
 }
 
 
@@ -238,7 +246,7 @@ body { background: #FAF6EE; font-family: Georgia, serif; }
   text-transform: uppercase;
   color: #7A6040;
   background: transparent;
-  border: 0.5px solid rgba(200,147,58,0.5);
+  border: 1px solid rgba(200,147,58,0.85);
   padding: 11px 26px;
   cursor: pointer;
   transition: all 0.25s ease;
@@ -386,7 +394,7 @@ body { background: #FAF6EE; font-family: Georgia, serif; }
   padding: 50px 32px;
   font-family: 'Cormorant Garamond', Georgia, serif;
   font-style: italic;
-  color: rgba(250,246,238,0.25);
+  color: rgba(250,246,238,0.55);
   font-size: 18px;
   text-align: center;
 }
@@ -401,13 +409,13 @@ body { background: #FAF6EE; font-family: Georgia, serif; }
 }
 .lightbox-desc {
   font-family: 'Cormorant Garamond', Georgia, serif;
-  font-size: 14px; color: rgba(250,246,238,0.55); line-height: 1.85; font-weight: 300;
+  font-size: 18px; color: #B8AE9A; line-height: 1.65; font-weight: 300;
 }
 .lightbox-tags { margin-top: 14px; display: flex; flex-wrap: wrap; gap: 5px; }
 .lightbox-tag {
   font-family: 'Jost', sans-serif; font-size: 8px;
   letter-spacing: 0.18em; text-transform: uppercase;
-  color: rgba(200,147,58,0.65); border: 0.5px solid rgba(200,147,58,0.25); padding: 4px 10px;
+  color: rgba(200,147,58,0.9); border: 0.5px solid rgba(200,147,58,0.25); padding: 4px 10px;
 }
 
 
@@ -450,10 +458,9 @@ body { background: #FAF6EE; font-family: Georgia, serif; }
 }
 .contact-sub {
   font-family: 'Cormorant Garamond', Georgia, serif;
-  font-size: 16px;
-  color: #7A6040;
-  font-style: italic;
-  line-height: 1.8;
+  font-size: 19px;
+  color: #5A3F22;
+  line-height: 1.65;
   margin-bottom: 48px;
   font-weight: 300;
 }
@@ -485,7 +492,7 @@ body { background: #FAF6EE; font-family: Georgia, serif; }
   font-size: 9px;
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: rgba(58,42,24,0.35);
+  color: #6A5A40;
 }
 /* ── ABOUT ── */
 .about-section {
@@ -530,9 +537,9 @@ body { background: #FAF6EE; font-family: Georgia, serif; }
 }
 .about-body {
   font-family: 'Cormorant Garamond', Georgia, serif;
-  font-size: 17px;
-  color: rgba(250,246,238,0.6);
-  line-height: 2;
+  font-size: 20px;
+  color: #C5BCA8;
+  line-height: 1.65;
   font-weight: 300;
   margin-bottom: 24px;
 }
@@ -559,7 +566,7 @@ body { background: #FAF6EE; font-family: Georgia, serif; }
   .nav-bottom { gap: 24px; }
   .hero { height: 500px; }
   .hero-title { font-size: 26px; }
-  .hero-sub { font-size: 15px; }
+  .hero-sub { font-size: 18px; }
   .hero-card { padding: 32px 28px; }
   .pillars { grid-template-columns: 1fr; }
   .pillar { border-right: none; border-bottom: 1px solid rgba(200,147,58,0.2); padding: 32px 24px; }
@@ -574,7 +581,7 @@ body { background: #FAF6EE; font-family: Georgia, serif; }
   .nav-brand { font-size: 11px; letter-spacing: 0.16em; }
   .hero { height: 85vh; }
   .hero-title { font-size: 20px; letter-spacing: 0.08em; }
-  .hero-sub { font-size: 13px; }
+  .hero-sub { font-size: 17px; }
   .hero-card { padding: 22px 18px; min-width: unset; width: 90%; }
   .masonry-grid { column-count: 1; }
   .gallery-section { padding: 48px 14px 64px; }
@@ -590,5 +597,17 @@ body { background: #FAF6EE; font-family: Georgia, serif; }
   .lightbox-media img { max-height: 60vh; }
   .lightbox-info { padding: 18px 20px 32px; }
   .lightbox-title { font-size: 20px; }
-  .lightbox-desc { font-size: 13.5px; }
+  .lightbox-desc { font-size: 16px; }
+}
+
+/* Accessibility — respect user's motion preference (WCAG 2.3.3) */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .hero-bg video { display: none; }
 }

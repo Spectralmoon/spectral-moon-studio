@@ -1,5 +1,5 @@
 <!doctype html>
-<html>
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -28,7 +28,7 @@
   </head>
   <body>
     <div class="nav-top">
-      <svg width="90" height="90" viewBox="0 0 680 660">
+      <svg width="90" height="90" viewBox="0 0 680 660" aria-hidden="true">
         <g transform="translate(340, 280)">
           <g fill="none" stroke="#C8933A" stroke-width="5" opacity="0.35">
             <circle cx="0" cy="0" r="82" />
@@ -85,13 +85,14 @@
       <span class="nav-brand">SPECTRALMOON STUDIO</span>
     </div>
 
-    <div class="nav-bottom">
+    <nav class="nav-bottom" aria-label="Main navigation">
       <a class="nav-link" href="#hero">Home</a>
       <a class="nav-link" href="#work">Work</a>
       <a class="nav-link" href="#about">About</a>
       <a class="nav-link" href="#contact">Contact</a>
-    </div>
+    </nav>
 
+    <main>
     <div class="hero" id="hero">
       <div class="hero-bg">
         <video
@@ -101,6 +102,7 @@
           playsinline
           preload="metadata"
           id="heroVideo"
+          aria-hidden="true"
         >
           <source
             src="https://res.cloudinary.com/dbet91fsr/video/upload/f_auto,q_auto:low,w_1600,br_800k/v1776135417/hero_loop.mp4_yupt9g.mp4"
@@ -109,7 +111,7 @@
         </video>
       </div>
       <div class="hero-card">
-        <div class="hero-title">Welcome to<br />Spectralmoon Studio</div>
+        <h1 class="hero-title">Welcome to<br />Spectralmoon Studio</h1>
         <div class="hero-rule"></div>
         <div class="hero-sub">
           Films, visual stories and storytelling<br />for the conscious digital
@@ -118,35 +120,35 @@
       </div>
     </div>
 
-    <div class="pillars">
+    <section class="pillars" aria-label="What we do">
       <div class="pillar">
-        <div class="pillar-title">Storytelling</div>
+        <h3 class="pillar-title">Storytelling</h3>
         <div class="pillar-rule"></div>
         <div class="pillar-text">
           Films and visual narratives that move, inspire and endure.
         </div>
       </div>
       <div class="pillar">
-        <div class="pillar-title">Consciousness</div>
+        <h3 class="pillar-title">Consciousness</h3>
         <div class="pillar-rule"></div>
         <div class="pillar-text">
           Visual stories crafted for depth, meaning and brands with soul.
         </div>
       </div>
       <div class="pillar">
-        <div class="pillar-title">Technology</div>
+        <h3 class="pillar-title">Technology</h3>
         <div class="pillar-rule"></div>
         <div class="pillar-text">
           Where AI, code and human craft come together.
         </div>
       </div>
-    </div>
+    </section>
 
     <!-- FEATURED FILM -->
-    <div class="featured-section">
+    <section class="featured-section" aria-label="Featured film">
       <div class="featured-eyebrow">Featured Film</div>
       <div class="featured-rule"></div>
-      <div class="featured-film-wrap" id="featuredFilm">
+      <div class="featured-film-wrap" id="featuredFilm" role="button" tabindex="0" aria-label="Play featured film: Where the Stars Align">
         <video id="featuredVideo" loop muted playsinline preload="none" poster="thumbnails/thumb_when_the_stars_align.webp">
           <source src="https://res.cloudinary.com/dbet91fsr/video/upload/f_auto,q_auto:good/v1776299173/Where_the_Stars_Remember_web_zbm207.mp4" type="video/mp4" />
         </video>
@@ -159,7 +161,7 @@
           <div class="featured-label">
             Film · AI Short Film / Narrative Fantasy
           </div>
-          <div class="featured-film-title">Where the Stars Align</div>
+          <h3 class="featured-film-title">Where the Stars Align</h3>
           <div class="featured-film-desc">
             A woman walks a path of ancient trials — not battles to win, but
             layers to shed. The studio's first fully structured AI short film,
@@ -173,26 +175,28 @@
           </div>
         </div>
       </div>
-    </div>
+    </section>
 
-    <div class="gallery-section" id="work">
+    <section class="gallery-section" id="work">
       <div class="gallery-header">
         <div class="gallery-eyebrow">Selected Work</div>
-        <div class="gallery-headline">A growing body of work</div>
+        <h2 class="gallery-headline">A growing body of work</h2>
         <div class="gallery-rule"></div>
         <div class="gallery-filters">
-          <button class="filter-btn active" data-filter="all">All</button>
-          <button class="filter-btn" data-filter="film">Film</button>
-          <button class="filter-btn" data-filter="commercial">
+          <button class="filter-btn active" data-filter="all" aria-pressed="true">All</button>
+          <button class="filter-btn" data-filter="film" aria-pressed="false">Film</button>
+          <button class="filter-btn" data-filter="commercial" aria-pressed="false">
             Commercial
           </button>
-          <button class="filter-btn" data-filter="story">Story</button>
+          <button class="filter-btn" data-filter="story" aria-pressed="false">Story</button>
         </div>
       </div>
 
       <div class="masonry-grid">
         <div
           class="masonry-item"
+          role="button"
+          tabindex="0"
           data-cat="film"
           data-title="Feline Oracles"
           data-category="Film · AI Cinematic / World-Building"
@@ -204,12 +208,14 @@
           <img class="masonry-thumb" src="thumbnails/thumb_oracles.webp" alt="Feline Oracles">
           <div class="masonry-overlay">
             <div class="masonry-cat">Film</div>
-            <div class="masonry-title">Feline Oracles</div>
+            <h3 class="masonry-title">Feline Oracles</h3>
           </div>
         </div>
 
         <div
           class="masonry-item"
+          role="button"
+          tabindex="0"
           data-cat="story"
           data-title="Mucha Inspired — Magical Being Series"
           data-category="Story · AI Visual Art / Art Nouveau"
@@ -221,12 +227,14 @@
           <img class="masonry-thumb masonry-thumb--medium" src="thumbnails/thumb_zodiac_mucha_inspired.webp" alt="Mucha Inspired">
           <div class="masonry-overlay">
             <div class="masonry-cat">Story</div>
-            <div class="masonry-title">Mucha Inspired</div>
+            <h3 class="masonry-title">Mucha Inspired</h3>
           </div>
         </div>
 
         <div
           class="masonry-item"
+          role="button"
+          tabindex="0"
           data-cat="commercial"
           data-title="The Worst Commercial"
           data-category="Commercial · AI Experimental / Comedic"
@@ -238,12 +246,14 @@
           <img class="masonry-thumb" src="thumbnails/thumb_the_worst_commercial.webp" alt="The Worst Commercial">
           <div class="masonry-overlay">
             <div class="masonry-cat">Commercial</div>
-            <div class="masonry-title">The Worst Commercial</div>
+            <h3 class="masonry-title">The Worst Commercial</h3>
           </div>
         </div>
 
         <div
           class="masonry-item"
+          role="button"
+          tabindex="0"
           data-cat="film"
           data-title="Lyran-Draco Confrontation"
           data-category="Film · AI Cinematic / Speculative Fiction"
@@ -255,12 +265,14 @@
           <img class="masonry-thumb" src="thumbnails/thumb_lyra_draco.webp" alt="Lyran-Draco Confrontation">
           <div class="masonry-overlay">
             <div class="masonry-cat">Film</div>
-            <div class="masonry-title">Lyran-Draco Confrontation</div>
+            <h3 class="masonry-title">Lyran-Draco Confrontation</h3>
           </div>
         </div>
 
         <div
           class="masonry-item"
+          role="button"
+          tabindex="0"
           data-cat="story"
           data-title="The Stag — Ethereal Beings Series"
           data-category="Story · AI Visual Art / Sacred Mythology"
@@ -272,12 +284,14 @@
           <img class="masonry-thumb" src="thumbnails/thumb_stag_ethereal.webp" alt="The Stag">
           <div class="masonry-overlay">
             <div class="masonry-cat">Story</div>
-            <div class="masonry-title">The Stag — Ethereal Beings Series</div>
+            <h3 class="masonry-title">The Stag — Ethereal Beings Series</h3>
           </div>
         </div>
 
         <div
           class="masonry-item"
+          role="button"
+          tabindex="0"
           data-cat="film"
           data-title="Grime &amp; Glow"
           data-category="Film · AI Fashion Film / Conceptual"
@@ -289,12 +303,14 @@
           <img class="masonry-thumb" src="thumbnails/thumb.._grime_glow.webp" alt="Grime &amp; Glow">
           <div class="masonry-overlay">
             <div class="masonry-cat">Film</div>
-            <div class="masonry-title">Grime &amp; Glow</div>
+            <h3 class="masonry-title">Grime &amp; Glow</h3>
           </div>
         </div>
 
         <div
           class="masonry-item"
+          role="button"
+          tabindex="0"
           data-cat="commercial"
           data-title="Syntropya"
           data-category="Commercial · AI Concept Film / Wellness"
@@ -306,12 +322,14 @@
           <img class="masonry-thumb" src="thumbnails/thumb_syntropia.webp" alt="Syntropya">
           <div class="masonry-overlay">
             <div class="masonry-cat">Commercial</div>
-            <div class="masonry-title">Syntropya</div>
+            <h3 class="masonry-title">Syntropya</h3>
           </div>
         </div>
 
         <div
           class="masonry-item"
+          role="button"
+          tabindex="0"
           data-cat="film"
           data-title="Grime &amp; Glow: Vactiancy"
           data-category="Film · AI Fashion Film / Conceptual"
@@ -323,12 +341,14 @@
           <img class="masonry-thumb" src="thumbnails/thumb_grim_glow_2.webp" alt="Grime &amp; Glow: Vactiancy">
           <div class="masonry-overlay">
             <div class="masonry-cat">Film</div>
-            <div class="masonry-title">Grime &amp; Glow: Vactiancy</div>
+            <h3 class="masonry-title">Grime &amp; Glow: Vactiancy</h3>
           </div>
         </div>
 
         <div
           class="masonry-item"
+          role="button"
+          tabindex="0"
           data-cat="story"
           data-title="Red Panda Daemon"
           data-category="Story · AI Visual Art / Symbolic Portrait"
@@ -340,12 +360,14 @@
           <img class="masonry-thumb" src="thumbnails/thumb_animal_spirit.webp" alt="Red Panda Daemon">
           <div class="masonry-overlay">
             <div class="masonry-cat">Story</div>
-            <div class="masonry-title">Red Panda Daemon</div>
+            <h3 class="masonry-title">Red Panda Daemon</h3>
           </div>
         </div>
 
         <div
           class="masonry-item"
+          role="button"
+          tabindex="0"
           data-cat="film"
           data-title="Grime &amp; Glow: Echovogue"
           data-category="Film · AI Fashion Film / Conceptual"
@@ -357,13 +379,13 @@
           <img class="masonry-thumb" src="thumbnails/thumb_grime_glow_futuristic.webp" alt="Grime &amp; Glow: Echovogue">
           <div class="masonry-overlay">
             <div class="masonry-cat">Film</div>
-            <div class="masonry-title">Grime &amp; Glow: Echovogue</div>
+            <h3 class="masonry-title">Grime &amp; Glow: Echovogue</h3>
           </div>
         </div>
       </div>
-    </div>
+    </section>
 
-    <div class="lightbox" id="lightbox">
+    <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-labelledby="lightboxTitle" aria-hidden="true">
       <div class="lightbox-inner">
         <button class="lightbox-close" id="lightboxClose">✕ Close</button>
         <div class="lightbox-media" id="lightboxMedia"></div>
@@ -376,30 +398,31 @@
       </div>
     </div>
 
-    <div class="about-section" id="about">
+    <section class="about-section" id="about" aria-labelledby="aboutHeadline">
       <div class="about-inner">
         <div class="about-eyebrow">About</div>
         <div class="about-rule"></div>
-        <div class="about-headline">The stories were always there.<br>Living inside — waiting.</div>
+        <h2 class="about-headline" id="aboutHeadline">The stories were always there.<br>Living inside — waiting.</h2>
         <div class="about-body">Spectralmoon Studio was born from the belief that imagination is the most powerful technology we have.</div>
         <div class="about-body">AI didn't give us the vision. It gave us the tools to finally reach it.</div>
         <div class="about-divider"></div>
         <div class="about-body">We craft films, visual stories and experiences for the conscious digital age — where <em>ancient wisdom is the code the future runs on.</em></div>
       </div>
-    </div>
+    </section>
+    </main>
 
-    <div class="contact-section" id="contact">
+    <footer class="contact-section" id="contact">
       <div class="contact-inner">
         <div class="contact-eyebrow">Contact</div>
         <div class="contact-rule"></div>
-        <div class="contact-headline">Let's tell a story together</div>
+        <h2 class="contact-headline">Let's tell a story together</h2>
         <div class="contact-sub">For commissions, collaborations, or conversations about the work.</div>
         <div class="contact-links">
           <a class="contact-link" href="mailto:muluc33@gmail.com">muluc33@gmail.com</a>
           <a class="contact-link" href="https://instagram.com/spectralmoon.creates" target="_blank" rel="noopener">Instagram</a>
         </div>
       </div>
-    </div>
+    </footer>
 
     <script src="script.js"></script>
   </body>

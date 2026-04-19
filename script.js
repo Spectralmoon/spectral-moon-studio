@@ -1,7 +1,12 @@
-
 var featuredVideo = document.getElementById('featuredVideo');
+var lightboxEl = document.getElementById('lightbox');
+var lightboxClose = document.getElementById('lightboxClose');
+var lastFocusedBeforeLightbox = null;
 
 function openLightbox(opts) {
+  // Remember what had focus so we can return focus on close (WCAG 2.4.3)
+  lastFocusedBeforeLightbox = document.activeElement;
+
   var mutedAttr = opts.muted ? ' muted' : '';
   var posterAttr = opts.poster ? ' poster="' + opts.poster + '"' : '';
   var mediaEl = opts.file
@@ -25,12 +30,35 @@ function openLightbox(opts) {
   document.getElementById('lightboxTags').innerHTML = opts.tags.split(',').map(function(t) {
     return '<span class="lightbox-tag">' + t.trim() + '</span>';
   }).join('');
-  document.getElementById('lightbox').classList.add('open');
+  lightboxEl.classList.add('open');
+  lightboxEl.setAttribute('aria-hidden', 'false');
   document.body.style.overflow = 'hidden';
   if (featuredVideo && !featuredVideo.paused) featuredVideo.pause();
+
+  // Move focus into the dialog so keyboard users land inside
+  setTimeout(function() {
+    if (lightboxClose) lightboxClose.focus();
+  }, 0);
 }
 
-document.getElementById('featuredFilm').addEventListener('click', function() {
+function closeLightbox() {
+  lightboxEl.classList.remove('open');
+  lightboxEl.setAttribute('aria-hidden', 'true');
+  document.getElementById('lightboxMedia').innerHTML = '';
+  document.body.style.overflow = '';
+  if (featuredVideo) {
+    featuredVideo.pause();
+    featuredVideo.currentTime = 0;
+  }
+  // Return focus to whatever opened the dialog
+  if (lastFocusedBeforeLightbox && typeof lastFocusedBeforeLightbox.focus === 'function') {
+    lastFocusedBeforeLightbox.focus();
+  }
+}
+
+// ── Featured film (click + keyboard) ──
+var featuredFilmEl = document.getElementById('featuredFilm');
+function openFeaturedFilm() {
   openLightbox({
     file: document.querySelector('#featuredVideo source').src,
     poster: featuredVideo ? featuredVideo.poster : '',
@@ -41,8 +69,18 @@ document.getElementById('featuredFilm').addEventListener('click', function() {
     desc: "A woman walks a path of ancient trials — not battles to win, but layers to shed. The studio's first fully structured AI short film, built scene by scene: sacred geometry, celestial symbolism, and the quiet return that feels less like arrival and more like remembering.",
     tags: "Narrative Fantasy, Heroine's Journey, Mythic Cinema"
   });
-});
+}
+if (featuredFilmEl) {
+  featuredFilmEl.addEventListener('click', openFeaturedFilm);
+  featuredFilmEl.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      openFeaturedFilm();
+    }
+  });
+}
 
+// ── Smooth scroll nav links (unchanged) ──
 document.querySelectorAll('a[href^="#"]').forEach(function(a) {
   a.addEventListener('click', function(e) {
     e.preventDefault();
@@ -51,10 +89,15 @@ document.querySelectorAll('a[href^="#"]').forEach(function(a) {
   });
 });
 
+// ── Filter buttons (click + aria-pressed toggle) ──
 document.querySelectorAll('.filter-btn').forEach(function(btn) {
   btn.addEventListener('click', function() {
-    document.querySelectorAll('.filter-btn').forEach(function(b) { b.classList.remove('active'); });
+    document.querySelectorAll('.filter-btn').forEach(function(b) {
+      b.classList.remove('active');
+      b.setAttribute('aria-pressed', 'false');
+    });
     this.classList.add('active');
+    this.setAttribute('aria-pressed', 'true');
     var f = this.dataset.filter;
     document.querySelectorAll('.masonry-item').forEach(function(item) {
       if (f === 'all' || item.dataset.cat === f) {
@@ -72,41 +115,69 @@ document.querySelectorAll('.filter-btn').forEach(function(btn) {
   });
 });
 
-function closeLightbox() {
-  document.getElementById('lightbox').classList.remove('open');
-  document.getElementById('lightboxMedia').innerHTML = '';
-  document.body.style.overflow = '';
-  if (featuredVideo) {
-    featuredVideo.pause();
-    featuredVideo.currentTime = 0;
-  }
-}
-
+// ── Masonry items (click + keyboard) ──
 document.querySelectorAll('.masonry-item').forEach(function(item) {
-  item.addEventListener('click', function() {
-    var thumb = this.querySelector('.masonry-thumb');
+  function openItem() {
+    var thumb = item.querySelector('.masonry-thumb');
     openLightbox({
-      file: this.dataset.file,
+      file: item.dataset.file,
       poster: thumb ? thumb.src : '',
-      type: this.dataset.type,
+      type: item.dataset.type,
       muted: false,
-      category: this.dataset.category,
-      title: this.dataset.title,
-      desc: this.dataset.desc,
-      tags: this.dataset.tags
+      category: item.dataset.category,
+      title: item.dataset.title,
+      desc: item.dataset.desc,
+      tags: item.dataset.tags
     });
+  }
+  item.addEventListener('click', openItem);
+  item.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      openItem();
+    }
   });
 });
 
-document.getElementById('lightboxClose').addEventListener('click', closeLightbox);
-document.getElementById('lightbox').addEventListener('click', function(e) {
+// ── Close button + backdrop click ──
+lightboxClose.addEventListener('click', closeLightbox);
+lightboxEl.addEventListener('click', function(e) {
   if (e.target === this) closeLightbox();
 });
 
-// Hero video playback rate — set immediately, not on canplay
+// ── Escape to close + trap Tab inside dialog when open (WCAG 2.1.2) ──
+document.addEventListener('keydown', function(e) {
+  if (!lightboxEl.classList.contains('open')) return;
+  if (e.key === 'Escape') {
+    closeLightbox();
+    return;
+  }
+  if (e.key !== 'Tab') return;
+  var focusables = lightboxEl.querySelectorAll('button, a[href], video, [tabindex]:not([tabindex="-1"])');
+  if (!focusables.length) return;
+  var first = focusables[0];
+  var last = focusables[focusables.length - 1];
+  if (e.shiftKey && document.activeElement === first) {
+    e.preventDefault();
+    last.focus();
+  } else if (!e.shiftKey && document.activeElement === last) {
+    e.preventDefault();
+    first.focus();
+  }
+});
+
+// ── Hero video playback rate (unchanged) ──
 const heroVid = document.getElementById('heroVideo');
 if (heroVid) {
   heroVid.playbackRate = 0.3;
   heroVid.addEventListener('loadedmetadata', () => { heroVid.playbackRate = 0.3; });
   heroVid.addEventListener('play', () => { heroVid.playbackRate = 0.3; });
+}
+
+// ── Respect prefers-reduced-motion: stop autoplay videos (WCAG 2.3.3) ──
+if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  document.querySelectorAll('video[autoplay]').forEach(function(v) {
+    v.removeAttribute('autoplay');
+    v.pause();
+  });
 }
