@@ -1,0 +1,2912 @@
+/* =============================================
+   SPECTRALMOON STUDIO — V3 PROTOTYPE
+   Live experiment build · May 21, 2026
+   ============================================= */
+
+/* ----- Atlas palette + tokens ----- */
+:root {
+  --paper:      #FFFFFF;        /* primary background — luxury whitespace */
+  --paper-warm: #FAFAF7;        /* tiny warm bias if needed */
+  --ink:        #0E0E10;        /* hero overlay / dark dramatic surround */
+  --pearl:      #E8D9B0;        /* warm champagne — luminous accent that
+                                   harmonizes with Lyra kimono cream,
+                                   gold lion mane, gallery walls */
+  --cream:      #F2EBDC;        /* accent surface only (kept for select sections) */
+  --cream-soft: #EFE5D2;
+  --rose-pink:  #E68FA8;
+  --rose-deep:  #C76A89;
+  --cochineal:  #A8302C;
+  --indigo:     #26415C;
+  --teal:       #1F4E5C;
+  --ochre:      #9B6B3D;
+  --sage-teal:  #6B8E7E;
+  --espresso:   #2A201A;
+  --sun-gold:   #F2C94C;
+  --radiant:    #A85539;        /* Radiant Earth — WGSN/Coloro 2028 Colour of the Year */
+
+  --font-display: "Anton", Impact, sans-serif;               /* condensed editorial display */
+  --font-display-alt: "Bodoni Moda", Georgia, serif;         /* high-contrast serif accent */
+  --font-ui:      "Inter Tight", -apple-system, BlinkMacSystemFont, sans-serif;
+
+  --sidebar-w: 84px;
+  --topbar-h:  60px;
+
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+/* ----- Reset ----- */
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+html { scroll-behavior: auto; } /* Lenis takes over */
+body {
+  font-family: var(--font-ui);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--espresso);
+  background: var(--paper);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+img, video { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; }
+button { font: inherit; cursor: pointer; }
+
+/* Lenis required */
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+.lenis.lenis-stopped { overflow: hidden; }
+
+/* ----- Topbar ----- */
+.topbar {
+  position: fixed;
+  top: 0; left: 0; right: var(--sidebar-w);
+  height: var(--topbar-h);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 32px;
+  z-index: 50;
+  color: var(--espresso);                  /* dark on all light-bg sections */
+  pointer-events: none;
+}
+.topbar a { pointer-events: auto; color: inherit; }
+/* White text when floating over the dark hero section */
+.topbar.topbar--over-dark {
+  color: var(--paper);
+}
+.topbar.topbar--over-dark .topbar__brand-name,
+.topbar.topbar--over-dark .topbar__brand-sub {
+  color: var(--paper);
+}
+.topbar__brand {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1px;
+  line-height: 1;
+  color: var(--espresso);
+  transform: translateY(0);
+  transition: transform 0.4s var(--ease-out), color 0.3s var(--ease-out), opacity 0.18s ease;
+}
+.topbar.topbar--over-dark .topbar__brand {
+  color: var(--paper);
+}
+.topbar__brand:hover {
+  transform: translateY(-2px);
+}
+.topbar__brand-name {
+  font-family: var(--font-display-alt);
+  font-style: italic;
+  font-weight: 500;
+  font-size: 16px;
+  letter-spacing: -0.015em;
+  color: var(--espresso);                  /* explicit — never inherit browser link blue */
+  transition: letter-spacing 0.4s var(--ease-out), color 0.3s var(--ease-out);
+}
+.topbar__brand:hover .topbar__brand-name {
+  letter-spacing: 0.02em;   /* italic name gently opens up */
+}
+.topbar__brand-sub {
+  font-family: var(--font-ui);
+  font-weight: 600;
+  font-size: 8.5px;
+  letter-spacing: 0;
+  text-transform: uppercase;
+  margin-top: 1px;
+  color: var(--rose-deep);                 /* mauve rose — matches the brand accent */
+  transition: letter-spacing 0.45s var(--ease-out), color 0.3s var(--ease-out);
+  -webkit-tap-highlight-color: transparent; /* kill iOS red tap flash */
+}
+.topbar__brand:hover .topbar__brand-sub {
+  letter-spacing: 0.36em;   /* S T U D I O breathes wide */
+}
+/* Prevent browser :active / :visited from flashing wrong color on tap */
+.topbar a:active,
+.topbar a:visited {
+  color: inherit;
+  -webkit-tap-highlight-color: transparent;
+}
+/* Brand tap — sonar rings expand from centre, inherit brand colour */
+.topbar__brand {
+  position: relative;
+}
+.topbar__brand::before,
+.topbar__brand::after {
+  content: '';
+  position: absolute;
+  width: 44px;
+  height: 44px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.6);
+  border-radius: 50%;
+  border: 1.5px solid currentColor;
+  opacity: 0;
+  pointer-events: none;
+}
+.topbar__brand.is-pulsing::after {
+  animation: brand-sonar 1.0s cubic-bezier(0.2, 0, 0.5, 1) forwards;
+}
+.topbar__brand.is-pulsing::before {
+  animation: brand-sonar 1.0s cubic-bezier(0.2, 0, 0.5, 1) 0.28s forwards;
+}
+@keyframes brand-sonar {
+  0%   { transform: translate(-50%, -50%) scale(0.6); opacity: 0.7; }
+  100% { transform: translate(-50%, -50%) scale(5.0); opacity: 0; }
+}
+
+/* Sigil mark — fish PNG, mobile only */
+.topbar__sigil {
+  display: none;
+  height: 36px;
+  width: auto;
+  object-fit: contain;
+}
+
+
+.topbar__status {
+  font-family: var(--font-ui);
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  opacity: 0.45;
+}
+
+/* ----- Sidebar (persistent right edge) ----- */
+.sidebar {
+  position: fixed;
+  top: 0; right: 0; bottom: 0;
+  width: var(--sidebar-w);
+  background: var(--paper);
+  border-left: 1px solid rgba(42, 32, 26, 0.06);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;             /* nav anchored to upper portion */
+  padding-top: calc(var(--topbar-h) + 32px); /* clears topbar + breathing room */
+  padding-bottom: 32px;
+  z-index: 60;
+}
+.sidebar__nav {
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+  margin-top: 32px;
+  margin-bottom: 16px;
+}
+.sidebar__link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  font-family: var(--font-ui);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--espresso);
+  opacity: 1;                              /* full opacity at all times */
+  transition: transform 0.3s var(--ease-out), opacity 0.3s var(--ease-out);
+}
+.sidebar__link:hover {
+  transform: translateY(-2px) scale(1.05);
+  opacity: 1;
+}
+.sidebar__link.is-active {
+  opacity: 1;
+}
+
+/* num circle — anchor for pulse rings */
+.sidebar__link .num {
+  font-family: "Caprasimo", Georgia, serif; /* Caprasimo italic — exact match to older build */
+  font-style: italic;
+  font-weight: 400;
+  font-size: 16px;
+  letter-spacing: 0;
+  letter-spacing: 0.02em;
+  color: var(--rose-deep);               /* always rose — the signature accent */
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  position: relative;                      /* ring pseudo-elements position off this */
+  transition: background 0.3s var(--ease-out);
+}
+.sidebar__link.is-active .num {
+  color: var(--radiant);
+  animation: num-breathe-radiant 3.2s ease-in-out infinite;
+}
+@keyframes num-breathe {
+  0%, 100% {
+    background: rgba(199, 106, 137, 0.10);
+    box-shadow: 0 0 0 5px rgba(199, 106, 137, 0.08),
+                0 0 0 10px rgba(199, 106, 137, 0.04);
+  }
+  50% {
+    background: rgba(199, 106, 137, 0.24);
+    box-shadow: 0 0 0 9px rgba(199, 106, 137, 0.16),
+                0 0 0 18px rgba(199, 106, 137, 0.06);
+  }
+}
+/* Active menu item = Radiant Earth (2028) — clay-red glow, contrast vs the mauve default */
+@keyframes num-breathe-radiant {
+  0%, 100% {
+    background: rgba(168, 85, 57, 0.10);
+    box-shadow: 0 0 0 5px rgba(168, 85, 57, 0.08),
+                0 0 0 10px rgba(168, 85, 57, 0.04);
+  }
+  50% {
+    background: rgba(168, 85, 57, 0.24);
+    box-shadow: 0 0 0 9px rgba(168, 85, 57, 0.16),
+                0 0 0 18px rgba(168, 85, 57, 0.06);
+  }
+}
+
+/* Pulse ring pseudo-elements */
+.sidebar__link .num::before,
+.sidebar__link .num::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 1.5px solid var(--rose-deep);
+  opacity: 0;
+  pointer-events: none;
+}
+/* Two staggered rings on hover */
+.sidebar__link:hover .num::before {
+  animation: pulseRing 1.4s ease-out infinite;
+}
+.sidebar__link:hover .num::after {
+  animation: pulseRing 1.4s ease-out 0.55s infinite;
+}
+/* Single sharp burst on click */
+.sidebar__link.is-clicking .num::before {
+  animation: pulseRingClick 0.55s ease-out forwards !important;
+}
+.sidebar__link.is-clicking .num::after {
+  animation: pulseRingClick 0.55s ease-out 0.1s forwards !important;
+}
+/* Click burst flashes Radiant Earth */
+.sidebar__link.is-clicking .num::before,
+.sidebar__link.is-clicking .num::after { border-color: var(--radiant) !important; }
+
+@keyframes pulseRing {
+  0%   { transform: scale(1);   opacity: 0.65; }
+  100% { transform: scale(2.5); opacity: 0; }
+}
+@keyframes pulseRingClick {
+  0%   { transform: scale(1);   opacity: 0.9; }
+  100% { transform: scale(3);   opacity: 0; }
+}
+
+.sidebar__link .label {
+  font-size: 9px;
+  white-space: nowrap;
+  color: var(--rose-deep);              /* always rose — matches the num accent */
+  transition: letter-spacing 0.3s var(--ease-out), color 0.3s;
+}
+.sidebar__link.is-active .label {
+  letter-spacing: 0.24em;
+  color: var(--radiant);
+}
+
+/* CTA at the bottom of sidebar — vertical text */
+.sidebar__cta {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  font-family: var(--font-ui);
+  font-weight: 600;
+  font-size: 11px;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--rose-deep);
+  padding: 8px;
+  transition: color 0.3s var(--ease-out);
+}
+.sidebar__cta:hover { color: var(--rose-deep); }
+/* Moon glyph — pin-reel position indicator, sits above numeral I */
+.sidebar__moon {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center;
+  width: 100%;
+  gap: 4px;
+  opacity: 1;                              /* full opacity at all times */
+  transition: transform 0.3s var(--ease-out), opacity 0.3s var(--ease-out);
+}
+.sidebar__moon:hover {
+  transform: translateY(-2px) scale(1.05);
+  opacity: 1;
+}
+/* Icon wrapper — anchors pulse rings, same pattern as .num */
+.sidebar__moon .moon__icon {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  position: relative;
+}
+.sidebar__moon svg {
+  transform: rotate(-42deg);               /* tilted crescent — natural sky position */
+  display: block;
+}
+/* Pulse rings — mirrors .sidebar__link .num rings */
+.sidebar__moon .moon__icon::before,
+.sidebar__moon .moon__icon::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 1.5px solid var(--rose-deep);
+  opacity: 0;
+  pointer-events: none;
+}
+.sidebar__moon:hover .moon__icon::before {
+  animation: pulseRing 1.4s ease-out infinite;
+}
+.sidebar__moon:hover .moon__icon::after {
+  animation: pulseRing 1.4s ease-out 0.55s infinite;
+}
+.sidebar__moon.is-clicking .moon__icon::before {
+  animation: pulseRingClick 0.55s ease-out forwards !important;
+}
+.sidebar__moon.is-clicking .moon__icon::after {
+  animation: pulseRingClick 0.55s ease-out 0.1s forwards !important;
+}
+.sidebar__moon.is-active .label {
+  color: var(--rose-deep);
+  letter-spacing: 0.24em;
+}
+.sidebar__moon .label {
+  font-family: var(--font-ui);
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--rose-deep);
+  white-space: nowrap;
+  transition: letter-spacing 0.3s var(--ease-out);
+}
+
+
+/* ----- The reel — single horizontal pin from page top -----
+   Every screen (hero, lyra-mask) and panel (worlds/cinema/brand/real-estate)
+   lives as a flex child of .pin-section__track. */
+.screen {
+  flex: 0 0 calc(100vw - var(--sidebar-w));
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+/* Hero (now Screen 3 — SpMo) — solid espresso, letters on left, flowers immediately adjacent */
+.screen--hero { background: var(--espresso); }
+.screen--lyra            { background: var(--espresso); }   /* warm dark, not pure black */
+/* Botanicals screen — 1.6× normal width so user scrolls through "the whole length" */
+.screen--botanicals-full {
+  flex: 0 0 calc(1.6 * (100vw - var(--sidebar-w)));
+  background: var(--paper-warm);
+  overflow: hidden;
+}
+.screen--breath {
+  background: var(--paper-warm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ----- MANIFESTO — Screen 2 editorial statement ----- */
+.screen--manifesto {
+  background: var(--paper-warm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(60px, 8vh, 120px) clamp(80px, 10vw, 200px);
+}
+
+/* ----- BOTANICAL STATEMENT — Screen 3 (full-bleed botanicals + brand promise) ----- */
+.screen--botanical-statement {
+  position: relative;
+  background: var(--cream);   /* warm fallback if video hasn't buffered */
+  overflow: hidden;
+}
+.botanical-statement__video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+}
+.botanical-statement__overlay {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(60px, 8vh, 120px) clamp(80px, 10vw, 200px);
+  background: rgba(26, 18, 12, 0.52);      /* dark cinematic scrim — botanicals still breathe */
+}
+.botanical-statement__line {
+  margin: 0;
+  max-width: 800px;
+  text-align: center;
+  font-family: "Bodoni Moda", Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+  font-variation-settings: 'opsz' 96;
+  font-size: clamp(28px, 3.6vw, 72px);
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  color: var(--cream);                     /* cream on dark scrim — always legible */
+  transform: translateY(-30px);
+}
+.manifesto__content {
+  max-width: 1280px;
+  width: 100%;
+}
+.manifesto__line {
+  margin: 0;
+  padding-bottom: 0.22em;      /* Bodoni Moda has tighter descenders than Fraunces */
+  font-family: "Bodoni Moda", Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+  font-variation-settings: 'opsz' 96;   /* max optical size → razor-thin thins, bold thicks */
+  font-size: clamp(32px, 4vw, 72px);    /* bumped — cycling phrase has more presence */
+  line-height: 1.18;            /* tighter — Bodoni's tall ascenders need less vertical air */
+  letter-spacing: -0.02em;
+  color: #6B3D1E;               /* warm chestnut brown — matches staircase */
+}
+/* Cycling phrase sits LEFT of stair--1, leading the descent visually */
+.manifesto__line--1 {
+  margin-left: -120px;
+}
+.manifesto__line--2 {
+  margin-top: 0.04em;
+  padding-left: 0;
+  font-family: "Bodoni Moda", Georgia, serif;
+  font-style: normal;
+  font-weight: 700;
+  font-variation-settings: 'opsz' 6;   /* small opsz = chunky, slab-like — maximum contrast with hairline italic above */
+  font-size: clamp(48px, 6vw, 120px);  /* staircase — slightly reduced, still dominant */
+  line-height: 1.2;             /* more breathing room between each stair step */
+  letter-spacing: -0.01em;
+  color: #6B3D1E;               /* warm chestnut brown — clearly brown, not black */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+/* Desktop staircase — progressive indent */
+.manifesto__stair--1 { padding-left: 0;   }
+.manifesto__stair--2 { padding-left: 22%; }
+.manifesto__stair--3 {
+  padding-left: 44%;
+  display: flex;
+  align-items: baseline;     /* "worlds." and "— Susana" share the same baseline */
+}
+.manifesto__signature { margin-left: auto; font-size: 0.38em; } /* push Susana to the right edge of stair--3, kept small */
+
+/* Layered Screen 2 — substance via supporting elements (kept whitespace-luxe) */
+.screen--manifesto { position: relative; overflow: hidden; }
+.manifesto__content { position: relative; z-index: 2; max-width: 1100px; }
+
+.manifesto__offerings {
+  position: absolute;
+  bottom: clamp(28px, 4vh, 52px);
+  left: clamp(80px, 10vw, 200px);
+  right: clamp(80px, 10vw, 200px);  /* stretches edge to edge with screen padding */
+  display: flex;
+  justify-content: space-between;   /* spreads the three pieces across the full width */
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-ui);
+  font-weight: 500;
+  font-size: clamp(13px, 1.4vw, 18px);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--espresso);
+  opacity: 0.55;
+}
+/* Desktop: spans are flex children — each becomes its own column */
+.offerings-l1, .offerings-sep, .offerings-l2 { display: inline; }
+
+/* Hero entrance handled by GSAP in script.js — see heroEntrance() */
+
+.manifesto__figure {
+  position: absolute;
+  top: clamp(60px, 8vh, 140px);
+  right: clamp(20px, 3vw, 80px);
+  width: clamp(300px, 30vw, 520px);
+  aspect-ratio: 4 / 3;                         /* fish image is ~4:3 landscape */
+  margin: 0;
+  z-index: 1;
+}
+
+/* Fish variant — slight tilt + a touch warmer blending */
+.manifesto__figure--fish {
+  top: clamp(40px, 6vh, 120px);
+  width: clamp(340px, 34vw, 600px);
+  transform: rotate(-3deg);
+}
+.manifesto__figure--fish img {
+  mix-blend-mode: normal;  /* fish PNG now has real alpha — no blending needed */
+}
+.manifesto__figure img {
+  width: 100%; height: 100%;
+  object-fit: contain;
+  display: block;
+  mix-blend-mode: multiply;
+}
+
+.manifesto__signature {
+  display: inline;
+  padding-left: 0.35em;           /* small breathing room after "worlds." */
+  font-family: "Caveat", "Snell Roundhand", cursive;
+  font-size: 0.6em;               /* relative to stair--3 — feels like a soft whisper */
+  font-weight: 500;
+  color: var(--rose-deep);
+  vertical-align: baseline;
+}
+
+/* Full-bleed botanicals video for the breath screen */
+.full-bleed-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Tiny center mark on the breath screen — barely-there indicator that you're still in the reel */
+.breath-mark {
+  font-family: var(--font-display-alt);
+  font-style: italic;
+  font-size: clamp(40px, 5vw, 80px);
+  color: var(--espresso);
+  opacity: 0.1;
+  user-select: none;
+}
+
+/* ----- Section 0 — HERO v5 (Won-style stacked type + botanicals peek) -----
+   Espresso background. Huge cochineal-red text SPEC/TRAL/MOON/STU/DIO stacked
+   on the left, botanicals video peeks on the right edge. */
+.hero-v2 {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: var(--espresso);
+  overflow: hidden;
+}
+
+.hero-v2__type {
+  position: absolute;
+  top: 50%;
+  left: 0;                   /* letters flush to the left edge */
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  z-index: 3;
+  pointer-events: none;
+  max-width: 62vw;
+}
+.stack-line {
+  display: block;
+  overflow: hidden;
+}
+.stack-line__inner {
+  display: block;
+  font-family: "Anton", Impact, sans-serif;
+  font-weight: 400;
+  font-size: clamp(85px, 13vw, 260px);     /* all 5 lines + comfortable dark padding top/bottom */
+  line-height: 0.78;
+  letter-spacing: -0.035em;
+  color: var(--sun-gold);
+  text-transform: uppercase;
+  will-change: transform;
+}
+
+.hero-v2__media {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: clamp(440px, 64vw, 1180px);   /* flowers adjacent to the letter column — no white space in between */
+  z-index: 1;
+  overflow: hidden;
+}
+.hero-v2__video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.hero-v2__tagline {
+  position: absolute;
+  bottom: clamp(80px, 12vh, 140px);
+  left: clamp(40px, 5vw, 96px);
+  margin: 0;
+  max-width: 320px;
+  font-family: var(--font-display-alt);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(15px, 1.1vw, 19px);
+  line-height: 1.45;
+  color: var(--paper);
+  opacity: 0.78;
+  z-index: 4;
+}
+
+.hero-v2__scroll-cue {
+  position: absolute;
+  bottom: clamp(24px, 4vh, 40px);
+  left: clamp(40px, 5vw, 96px);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-family: var(--font-ui);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--paper);
+  opacity: 0.55;
+  z-index: 4;
+  transition: opacity 0.3s var(--ease-out);
+}
+.hero-v2__scroll-cue:hover { opacity: 1; }
+.hero-v2__scroll-line {
+  display: block;
+  width: 40px;
+  height: 1px;
+  background: currentColor;
+  animation: scrollNudge 2.4s var(--ease-in-out) infinite;
+}
+
+/* ----- Section I — HERO (text-as-window, dark dramatic) -----
+   Lyra animation is the back layer. A dark overlay (SVG rect) covers it,
+   with the giant wordmark "SPECTRALMOON STUDIO" cut out via SVG mask.
+   The video shows ONLY through the letter shapes. */
+.hero {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: var(--espresso);
+  overflow: hidden;
+}
+
+.hero__video {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  z-index: 1;
+}
+
+.hero__mask-svg {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  z-index: 2;
+  pointer-events: none;
+}
+.hero__svg-text {
+  /* Anton intentionally removed from this stack: it's the MOBILE mask's font, and
+     when it won the Google-Fonts load race it briefly painted desktop STUDIO in the
+     mobile face before Archivo Black arrived (the "mobile letters flash" on load).
+     With only Archivo Black here, the worst case is letters staying hidden for a
+     beat (hidden anyway under the 1.3s hero fade-in), then snapping to the right face. */
+  font-family: "Archivo Black", Impact, sans-serif;
+  font-weight: 900;
+  letter-spacing: -0.13em;     /* tighter — keeps U visible at right edge */
+  fill: black;
+  /* font-size set inline on the SVG <text> so it stays in viewBox units
+     (1200 in our 11000x900 viewBox = letters fill viewport height).
+     In an SVG mask, BLACK = transparent cutout, WHITE = solid overlay.
+     So the letters become the "window" — video shows through. */
+}
+
+/* Mobile hero SVG hidden by default; desktop SVG hidden on mobile */
+.hero__mask-svg--mobile { display: none; }
+
+/* Visually hidden — semantic h1 for screen readers */
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  margin: -1px; padding: 0;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  border: 0;
+}
+
+.hero__tagline {
+  position: absolute;
+  left: clamp(32px, 5vw, 80px);
+  bottom: clamp(24px, 3.5vh, 44px);
+  margin: 0;
+  max-width: 320px;
+  font-family: var(--font-display-alt);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(15px, 1.1vw, 19px);
+  line-height: 1.45;
+  color: var(--paper);
+  opacity: 0.78;
+  text-align: left;
+  z-index: 3;
+}
+
+.hero__scroll-cue {
+  position: absolute;
+  bottom: clamp(32px, 5vh, 60px);
+  left: calc(var(--sidebar-w) + 20px);   /* clears sidebar on desktop */
+  right: auto;
+  display: flex;
+  flex-direction: column-reverse;        /* line at bottom, text stacks above */
+  align-items: center;
+  gap: 16px;
+  font-family: var(--font-ui);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--paper);
+  opacity: 0.6;
+  z-index: 3;
+  transition: opacity 0.3s var(--ease-out);
+}
+.hero__scroll-cue:hover { opacity: 1; }
+.hero__scroll-cue-text {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);             /* reads bottom to top */
+}
+.hero__scroll-cue-line {
+  display: block;
+  width: 1px;
+  height: 48px;
+  background: currentColor;
+  transform-origin: bottom center;
+  animation: scrollBlink 2.6s ease-in-out infinite;
+}
+@keyframes scrollBlink {
+  0%, 100% { opacity: 0.3; transform: scaleY(0.6); }
+  50%      { opacity: 1;   transform: scaleY(1); }
+}
+
+/* Helper class — split words for the data-split paragraphs */
+.split-word {
+  display: inline-block;
+  overflow: hidden;
+}
+.split-word > span {
+  display: inline-block;
+  transform: translateY(110%);
+  will-change: transform;
+}
+
+/* ----- Section II — HORIZONTAL PIN ----- */
+.pin-section {
+  position: relative;
+  height: 100vh;
+  width: 100vw;
+  padding-right: var(--sidebar-w);
+  overflow: hidden;
+  background: var(--espresso);
+}
+
+/* ----- Vertical panels (after the pin ends, scrolling resumes downward) ----- */
+.vertical-panels {
+  position: relative;
+  padding-right: var(--sidebar-w);
+  background: var(--paper-warm);
+}
+.vertical-panels .panel {
+  flex: initial;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-top: clamp(32px, 3.5vh, 56px);
+  padding-bottom: clamp(32px, 3.5vh, 56px);
+}
+.vertical-panels .panel + .panel {
+  margin-top: 0;
+  border-top: 1px solid rgba(42, 32, 26, 0.08);
+}
+
+/* =============================================================================
+   CONTACT — fish video through letter cutouts (bookend to hero STUDIO mask)
+   White page background. SVG white overlay with CONTACT cut out → fish show through.
+   ============================================================================= */
+
+/* ─── About → Contact chapter divider ───────────────────────────────────── */
+.section-divider {
+  display: flex;
+  align-items: center;
+  gap: 1.2em;
+  padding: 0;                          /* full bleed — line cuts edge to edge */
+  height: 48px;
+  background: var(--paper);
+}
+.section-divider__rule {
+  flex: 1;
+  height: 2px;
+  background: var(--espresso);
+  opacity: 0.28;
+}
+.section-divider__label {
+  font-family: var(--font-ui);
+  font-size: 9px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--espresso);
+  opacity: 0.3;
+  white-space: nowrap;
+}
+
+/* ─── Contact section ────────────────────────────────────────────────────── */
+.contact-mask {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+  background: var(--paper);          /* fallback — SVG panels handle split coloring */
+}
+
+/* Single video layer — full screen, fish play freely across the right panel.
+   No crescent mask, no multi-layer complexity.
+   object-position: right side of footage (loose elegant fish), vertically centred. */
+.contact-mask__video {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 46%;                        /* occupy only the visible band below the wave */
+  object-fit: cover;
+  object-position: 50% 0%;           /* show TOP of video frame in this band */
+  z-index: 0;
+}
+
+/* Extra video layers no longer needed */
+.contact-mask__video--lower,
+.contact-mask__video--tip {
+  display: none;
+}
+
+/* SVG overlay — white rect masked by letter shapes */
+.contact-mask__svg {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  z-index: 4;                         /* must sit ABOVE all video layers (0, 1, 2) */
+  pointer-events: none;
+}
+.contact-mask__svg--mobile { display: none; }
+
+/* Text shape inside the SVG mask — fill:black = transparent = fish shows through */
+.contact__svg-text {
+  font-family: 'Archivo Black', 'Anton', Impact, sans-serif;
+  font-weight: 900;
+  letter-spacing: -0.06em;
+  fill: black;
+}
+
+/* Contact content wrapper — full-width upper zone (above wave), dark text */
+.contact-mask__content {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 56%;                         /* sits within the white wave panel */
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.2em;
+  padding: 0 clamp(20px, 5vw, 80px);
+  padding-bottom: 4vh;                 /* nudge content up from the wave edge */
+  pointer-events: none;
+}
+
+/* CONTACT heading — Anton, dark on white panel */
+.contact-mask__heading {
+  font-family: "Anton", "Oswald", Impact, sans-serif;
+  font-weight: 400;
+  font-size: clamp(44px, 4.8vw, 76px);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--espresso);
+  opacity: 1;
+  white-space: nowrap;
+  line-height: 1;
+}
+
+/* Contact info — stacked directly below heading */
+.contact-mask__meta {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35em;
+  pointer-events: auto;
+  text-align: center;
+}
+.contact-mask__num {
+  font-family: var(--font-ui);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--espresso);
+  opacity: 0.35;
+  white-space: nowrap;
+}
+.contact-mask__address {
+  font-style: normal;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3em;
+}
+.contact-mask__email {
+  font-family: var(--font-ui);
+  font-size: clamp(10px, 1.1vw, 13px);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--espresso);
+  opacity: 0.55;
+  text-decoration: none;
+  transition: opacity 0.25s ease;
+  pointer-events: auto;
+}
+.contact-mask__email:hover { opacity: 1; }
+.contact-mask__tagline {
+  font-family: var(--font-ui);
+  font-size: clamp(9px, 0.9vw, 11px);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--espresso);
+  opacity: 0.28;
+}
+
+/* Mobile — wave covers top ~58%, fish band visible at base */
+@media (max-width: 768px) {
+  .contact-mask__svg--desktop { display: none; }
+  .contact-mask__svg--mobile  { display: block; }
+  .contact-mask__content {
+    left: 0;
+    width: 100%;
+    height: 56%;
+    padding: 0 clamp(20px, 6vw, 40px);
+    padding-bottom: 3vh;
+    justify-content: center;
+    align-items: center;
+  }
+  .contact-mask__heading { font-size: clamp(28px, 7vw, 48px); letter-spacing: 0.02em; }
+  .contact-mask__meta { align-items: center; }
+}
+
+/* ---- Contact — letter reveal mask ---- */
+.contact-reveal {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+  background: var(--paper);
+}
+.contact-reveal__video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 50%;             /* fish-only crop — no position tricks needed */
+  z-index: 0;
+}
+.contact-reveal__mask {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  z-index: 2;
+  pointer-events: none;
+}
+.contact-reveal__mask text {
+  font-family: 'Anton', Impact, sans-serif;
+}
+.contact-reveal__mask--mobile { display: none; }
+
+.contact-reveal__stroke {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  z-index: 3;
+  pointer-events: none;
+}
+.contact-reveal__stroke text {
+  font-family: 'Anton', Impact, sans-serif;
+}
+.contact-reveal__stroke--mobile { display: none; }
+@media (max-width: 768px) {
+  .contact-reveal__stroke--desktop { display: none; }
+  .contact-reveal__stroke--mobile  { display: block; }
+}
+
+.contact-reveal__info {
+  position: absolute;
+  top: 57%;                            /* just below the letter baseline */
+  width: 100%;
+  text-align: center;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.45em;
+  pointer-events: none;
+}
+.contact-reveal__num {
+  font-family: var(--font-ui);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--espresso);
+  opacity: 0.35;
+}
+.contact-reveal__address {
+  font-style: normal;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3em;
+  align-items: center;
+}
+.contact-reveal__email {
+  font-family: var(--font-ui);
+  font-size: clamp(10px, 1.1vw, 13px);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--espresso);
+  opacity: 0.55;
+  text-decoration: none;
+  transition: opacity 0.25s ease;
+  pointer-events: auto;
+}
+.contact-reveal__email:hover { opacity: 1; }
+.contact-reveal__tagline {
+  font-family: var(--font-ui);
+  font-size: clamp(9px, 0.9vw, 11px);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--espresso);
+  opacity: 0.28;
+}
+@media (max-width: 768px) {
+  .contact-reveal__mask--desktop { display: none; }
+  .contact-reveal__mask--mobile  { display: block; }
+  .contact-reveal__email { font-size: 11px; }
+}
+
+/* ----- Section intro chapters — centered, moderate scale, clear breaks ----- */
+.section-intro {
+  position: relative;
+  background: var(--paper);          /* unified white — no warm-tint vs white discontinuity */
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(60px, 10vh, 120px) clamp(40px, 6vw, 120px);
+  padding-right: calc(var(--sidebar-w) + clamp(40px, 6vw, 120px));
+  text-align: center;
+}
+/* Auto hairline removed — explicit .section-divider elements handle all chapter breaks */
+.section-intro__inner {
+  max-width: 760px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(16px, 2.5vh, 28px);
+}
+.section-intro__num {
+  font-family: var(--font-ui);
+  font-weight: 500;
+  font-size: clamp(11px, 0.95vw, 14px);
+  color: var(--rose-deep);
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+}
+.section-intro__title {
+  margin: 0;
+  font-family: "Anton", "Oswald", Impact, sans-serif;    /* tall condensed editorial display */
+  font-weight: 400;
+  font-size: clamp(72px, 9vw, 180px);
+  line-height: 1.0;
+  letter-spacing: 0.005em;
+  text-transform: uppercase;
+  color: var(--espresso);
+}
+.section-intro__desc {
+  margin: 0;
+  max-width: 540px;
+  font-family: var(--font-display-alt);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(16px, 1.2vw, 20px);
+  line-height: 1.5;
+  color: var(--espresso);
+  opacity: 0.62;
+}
+/* ============================================================
+   ABOUT BODY — typographic two-column section
+   ============================================================ */
+.about-body {
+  background: var(--paper);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: clamp(60px, 8vh, 100px) clamp(60px, 8vw, 160px) clamp(60px, 8vh, 100px) calc(var(--sidebar-w) + clamp(40px, 6vw, 120px));
+  position: relative;
+  overflow: hidden;
+}
+/* Subtle grain overlay */
+.about-body::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+  opacity: 0.035;
+  pointer-events: none;
+  z-index: 0;
+}
+.about-body__inner {
+  position: relative;
+  z-index: 1;
+  max-width: 1200px;
+  width: 100%;
+}
+/* Section label — Anton title, mid-size (between tiny label and full-screen intro) */
+.about-body__label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: clamp(32px, 5vh, 56px);
+}
+.about-body__num {
+  font-family: var(--font-ui);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--rose-deep);
+}
+.about-body__heading {
+  font-family: "Anton", "Oswald", Impact, sans-serif;
+  font-weight: 400;
+  font-size: clamp(48px, 6vw, 96px);
+  line-height: 1.0;
+  letter-spacing: 0.005em;
+  text-transform: uppercase;
+  color: var(--espresso);
+}
+.about-body__columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(48px, 7vw, 120px);
+  align-items: start;
+  margin-bottom: clamp(72px, 12vh, 140px);
+}
+/* Left — large italic pull quotes */
+.about-body__pull {
+  margin: 0 0 clamp(28px, 4vh, 56px);
+  font-family: "Bodoni Moda", Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(26px, 3.2vw, 52px);
+  line-height: 1.15;
+  color: var(--espresso);
+}
+.about-body__pull--accent {
+  font-size: clamp(20px, 2.4vw, 38px);
+  color: var(--ochre);
+  font-weight: 700;
+  margin-bottom: 0;
+}
+/* Right — body copy */
+.about-body__text {
+  padding-top: clamp(8px, 1.5vh, 20px);
+}
+.about-body__text p {
+  margin: 0 0 1.5em;
+  font-family: var(--font-ui);
+  font-size: clamp(15px, 1.1vw, 18px);
+  line-height: 1.75;
+  color: var(--espresso);
+  opacity: 0.8;
+}
+.about-body__text p em {
+  font-style: italic;
+  opacity: 1;
+}
+/* Handwritten annotation */
+.about-body__annotation {
+  display: inline-block;
+  margin-top: clamp(20px, 3vh, 36px);
+  font-family: "Caveat", cursive;
+  font-size: clamp(20px, 1.8vw, 28px);
+  font-weight: 500;
+  color: var(--ochre);
+  opacity: 0.85;
+  transform: rotate(-1.5deg);
+  letter-spacing: 0.02em;
+}
+
+/* Mobile — stack columns */
+@media (max-width: 768px) {
+  .about-body {
+    padding: clamp(60px, 10vh, 100px) 28px clamp(60px, 10vh, 100px);
+  }
+  .about-body__columns {
+    grid-template-columns: 1fr;
+    gap: clamp(32px, 5vh, 56px);
+  }
+  .about-body__pull {
+    font-size: clamp(28px, 8vw, 42px);
+  }
+  .about-body__pull--accent {
+    font-size: clamp(22px, 6vw, 32px);
+  }
+  .about-body__tagline {
+    font-size: clamp(28px, 8vw, 48px);
+  }
+}
+
+.pin-section__track {
+  display: flex;
+  flex-wrap: nowrap;
+  width: max-content;
+  height: 100%;
+  will-change: transform;
+}
+
+.panel {
+  flex: 0 0 calc(100vw - var(--sidebar-w));
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: center;
+  background: var(--paper-warm);
+  position: relative;
+  padding: clamp(32px, 3.5vh, 56px) clamp(60px, 7vw, 140px);
+  gap: clamp(16px, 2vh, 32px);
+}
+
+.panel__media {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 16 / 9;       /* landscape — like a film frame */
+  width: 100%;
+  max-width: 1500px;
+  max-height: 72vh;
+  margin: 0 auto;
+  background: var(--cream-soft);
+  border-radius: clamp(20px, 1.8vw, 32px);   /* modern soft corners (Gemini-style) */
+  align-self: center;
+  box-shadow: 0 24px 60px -30px rgba(42, 32, 26, 0.18);
+}
+.panel__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: opacity 0.6s var(--ease-out), transform 1.2s var(--ease-out);
+}
+.panel__video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 0.6s var(--ease-out);
+}
+.panel:hover .panel__video { opacity: 1; }
+.panel:hover .panel__img { opacity: 0; transform: scale(1.04); }
+
+/* Placeholder panels (Cinema / Brand / Real Estate until real assets land) */
+.panel__media--placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--tint, var(--indigo));
+  color: var(--cream);
+}
+.placeholder-label {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 38px;
+  letter-spacing: -0.01em;
+  opacity: 0.7;
+}
+
+/* Centered header above the card, centered credit below */
+.panel__header {
+  text-align: center;
+  max-width: 720px;
+  margin: 0 auto;
+  order: 1;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(8px, 1.2vh, 16px);
+}
+.panel__media { order: 2; }
+.panel__credit {
+  text-align: center;
+  max-width: 640px;
+  margin: 0 auto;
+  order: 3;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.panel__num {
+  font-family: var(--font-ui);
+  font-weight: 500;
+  font-size: clamp(10px, 0.85vw, 13px);
+  color: var(--rose-deep);
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+}
+.panel__title {
+  font-family: "Anton", "Oswald", Impact, sans-serif;    /* match Selected Worlds — tall condensed display */
+  font-style: normal;
+  font-weight: 400;
+  font-size: clamp(64px, 7.2vw, 140px);
+  line-height: 0.95;
+  letter-spacing: 0;
+  text-transform: uppercase;
+  margin: 0;
+  color: var(--espresso);
+}
+.panel__lede {
+  margin: 0;
+  font-family: var(--font-display-alt);
+  font-style: italic;
+  font-weight: 700;
+  font-size: clamp(16px, 1.3vw, 22px);
+  line-height: 1.45;
+  color: var(--espresso);
+  opacity: 0.7;
+}
+.panel__credit-label {
+  font-family: var(--font-ui);
+  font-weight: 500;
+  font-size: clamp(9px, 0.75vw, 11px);
+  color: var(--rose-deep);
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+}
+.panel__credit-text {
+  margin: 0;
+  font-family: var(--font-display-alt);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(13px, 1vw, 16px);
+  line-height: 1.55;
+  color: var(--espresso);
+  opacity: 0.65;
+}
+
+/* Spacer below pin so we know there's runway */
+.spacer {
+  height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--cream);
+  padding-right: var(--sidebar-w);
+}
+.spacer__text {
+  font-family: var(--font-ui);
+  font-size: 12px;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--espresso);
+  opacity: 0.4;
+}
+
+/* ============================================================
+   INSIGHTS — two-part experience
+   Part 1: story intro (full page, two-column)
+   Part 2: library grid (separate section below)
+   ============================================================ */
+
+/* Part 1 — Story intro */
+.insights-intro {
+  min-height: 100vh;
+  background: var(--paper-warm);
+  border-top: 1px solid rgba(42, 32, 26, 0.10);
+  padding: clamp(80px, 10vh, 130px) clamp(60px, 7vw, 140px);
+  padding-right: calc(var(--sidebar-w) + clamp(60px, 7vw, 140px));
+  display: flex;
+  align-items: center;
+}
+.insights-intro__inner {
+  display: flex;
+  align-items: flex-start;
+  gap: clamp(48px, 8vw, 130px);
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+}
+.insights-intro__left {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.insights-intro__num {
+  font-family: var(--font-ui);
+  font-weight: 500;
+  font-size: clamp(11px, 0.9vw, 13px);
+  color: var(--rose-deep);
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+}
+.insights-intro__title {
+  margin: 0;
+  font-family: "Anton", Impact, sans-serif;
+  font-weight: 400;
+  font-size: clamp(80px, 9.5vw, 168px);
+  line-height: 0.92;
+  letter-spacing: 0.005em;
+  text-transform: uppercase;
+  color: var(--espresso);
+}
+.insights-intro__right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: clamp(36px, 5vh, 64px);
+  padding-top: clamp(8px, 1.5vh, 20px);
+}
+.insights-intro__story {
+  margin: 0;
+  max-width: 480px;
+  font-family: var(--font-display-alt);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(17px, 1.4vw, 23px);
+  line-height: 1.65;
+  color: var(--espresso);
+  opacity: 0.75;
+}
+/* Fish portal button — Zera-style micro-interactions */
+@keyframes fishFloat {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  40%       { transform: translateY(-7px) rotate(1.5deg); }
+  70%       { transform: translateY(-3px) rotate(-1deg); }
+}
+@keyframes fishRingA {
+  0%, 100% { transform: scale(0.94); opacity: 0.65; }
+  50%       { transform: scale(1.16); opacity: 0.12; }
+}
+@keyframes fishRingB {
+  0%, 100% { transform: scale(0.94); opacity: 0.65; }
+  50%       { transform: scale(1.16); opacity: 0.12; }
+}
+
+.insights-intro__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 20px;
+  color: var(--espresso);
+  text-decoration: none;
+}
+.insights-cta__fish-wrap {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+/* Double ring offset — inner ring */
+.insights-cta__fish-wrap::before {
+  content: '';
+  position: absolute;
+  inset: -10px;
+  border-radius: 50%;
+  border: 2px solid var(--rose-pink);
+  animation: fishRingA 2.8s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+/* Double ring offset — outer ring, offset phase */
+.insights-cta__fish-wrap::after {
+  content: '';
+  position: absolute;
+  inset: -22px;
+  border-radius: 50%;
+  border: 1.5px solid var(--rose-pink);
+  animation: fishRingB 2.8s ease-in-out infinite;
+  animation-delay: 1.4s;
+  pointer-events: none;
+  z-index: 0;
+}
+.insights-cta__fish {
+  display: block;
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  position: relative;
+  z-index: 1;
+  animation: fishFloat 4s ease-in-out infinite;
+  transform-origin: center 55%;
+  will-change: transform;
+  transition: transform 0.3s var(--ease-out), filter 0.3s;
+  filter: none;
+}
+
+/* Hover: pause float, scale up, ring brightens */
+.insights-intro__cta:hover .insights-cta__fish {
+  animation-play-state: paused;
+  transform: scale(1.1) translateY(-3px);
+  filter: drop-shadow(0 10px 22px rgba(230, 143, 168, 0.55));
+}
+.insights-intro__cta:hover .insights-cta__fish-wrap::before,
+.insights-intro__cta:hover .insights-cta__fish-wrap::after {
+  animation-play-state: paused;
+  border-color: var(--rose-deep);
+  opacity: 0.75;
+}
+/* Label slides right on hover */
+.insights-intro__cta-text {
+  font-family: var(--font-ui);
+  font-weight: 500;
+  font-size: clamp(10px, 0.85vw, 12px);
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  transition: letter-spacing 0.35s var(--ease-out), opacity 0.35s;
+  opacity: 0.7;
+}
+.insights-intro__cta:hover .insights-intro__cta-text {
+  letter-spacing: 0.44em;
+  opacity: 1;
+}
+
+/* Part 2 — Library grid */
+.insights-library {
+  background: var(--paper-warm);
+  border-top: 1px solid rgba(42, 32, 26, 0.08);
+  padding: clamp(60px, 8vh, 100px) clamp(60px, 7vw, 140px) clamp(80px, 10vh, 130px);
+  padding-right: calc(var(--sidebar-w) + clamp(60px, 7vw, 140px));
+}
+.insights-grid__inner {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(16px, 1.8vw, 28px);
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.insight-card {
+  background: var(--paper);
+  border-radius: clamp(12px, 1.2vw, 18px);
+  overflow: hidden;
+  box-shadow: 0 6px 24px -6px rgba(42, 32, 26, 0.10);
+  transition: transform 0.35s var(--ease-out), box-shadow 0.35s var(--ease-out);
+}
+.insight-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 48px -10px rgba(42, 32, 26, 0.18);
+}
+.insight-card__link {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  color: inherit;
+}
+.insight-card__cover {
+  background: var(--cover-color, var(--espresso));
+  aspect-ratio: 4 / 3;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: clamp(14px, 1.3vw, 22px);
+  position: relative;
+}
+.insight-card__cover-num {
+  font-family: var(--font-ui);
+  font-weight: 500;
+  font-size: clamp(10px, 0.8vw, 12px);
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--cream);
+  opacity: 0.55;
+}
+.insight-card__cover-title {
+  font-family: "Anton", Impact, sans-serif;
+  font-size: clamp(20px, 1.9vw, 32px);
+  line-height: 1.0;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--cream);
+  margin-top: auto;
+}
+.insight-card__body {
+  padding: clamp(16px, 1.6vw, 22px);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
+}
+.insight-card__desc {
+  margin: 0;
+  font-family: var(--font-display-alt);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(13px, 0.95vw, 15px);
+  line-height: 1.5;
+  color: var(--espresso);
+  opacity: 0.68;
+  flex: 1;
+}
+.insight-card__read {
+  display: block;
+  font-family: var(--font-ui);
+  font-weight: 600;
+  font-size: clamp(9px, 0.8vw, 11px);
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--rose-deep);
+  margin-top: 8px;
+  transition: letter-spacing 0.3s var(--ease-out);
+}
+.insight-card:hover .insight-card__read {
+  letter-spacing: 0.38em;
+}
+
+/* ----- Mobile fallback (deliberately minimal — desktop-first prototype) ----- */
+/* ============================================================
+   MOBILE — ≤ 768px
+   Strategy: sidebar gone, topbar visible, GSAP horizontal pin
+   is bypassed in JS so pin-section stacks vertically.
+   ============================================================ */
+@media (max-width: 768px) {
+
+  /* --- Tokens --- */
+  :root {
+    --sidebar-w: 0px;
+    --topbar-h: 56px;
+  }
+
+  /* --- Nav chrome --- */
+  .sidebar { display: none; }
+  .topbar {
+    display: flex;
+    right: 0;
+    padding: 0 20px;
+    mix-blend-mode: normal;   /* kill desktop's difference blend */
+    background: transparent;
+    color: var(--espresso);   /* dark on cream/light screens — default */
+    transition: color 0.35s ease, background 0.35s ease;
+    pointer-events: auto;     /* make whole topbar interactive on mobile */
+  }
+  .topbar.topbar--over-dark {
+    background: transparent;  /* stay transparent over dark hero */
+    color: var(--paper);      /* light text on dark hero screen */
+  }
+  /* Frosted glass state — kicks in after first scroll on mobile */
+  .topbar.topbar--scrolled {
+    background: rgba(250, 250, 247, 0.88);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(42, 32, 26, 0.07);
+    color: var(--espresso);
+  }
+  .topbar.topbar--scrolled.topbar--over-dark {
+    background: rgba(26, 18, 12, 0.72);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(250, 250, 247, 0.08);
+    color: var(--paper);
+  }
+  .topbar__status { display: none; }
+  /* Mobile logo swap: typographic on hero, sigil everywhere else */
+  /* Default on hero (page load) — show wordmark */
+  .topbar__sigil { display: none; }
+  .topbar__brand-name,
+  .topbar__brand-sub { display: block; }
+  /* Once user scrolls past hero — switch to sigil, tilted */
+  .topbar.past-hero .topbar__sigil {
+    display: block;
+    transform: rotate(-30deg);
+    transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  .topbar.past-hero .topbar__sigil:hover {
+    transform: rotate(-40deg) scale(1.08);
+  }
+  .topbar.past-hero .topbar__brand-name,
+  .topbar.past-hero .topbar__brand-sub { display: none; }
+
+  /* --- Hero SVG swap — portrait version takes over --- */
+  .hero__mask-svg--desktop { display: none; }
+  .hero__mask-svg--mobile  { display: block; }
+
+  /* --- Screen 1: Hero — anchor video top so Lyra's figure stays visible --- */
+  .hero__video {
+    object-position: center 20%;   /* shift crop upward — less torso, more figure */
+  }
+  .hero__tagline { font-size: 13px; max-width: 240px; }
+  .hero__scroll-cue { display: none; }
+
+  /* --- Hero v2 stacked type --- */
+  .stack-line__inner {
+    font-size: clamp(54px, 17vw, 82px);
+  }
+  .hero-v2__media {
+    width: 100%;
+    left: 0;
+    top: 38%;
+    height: 62%;
+  }
+  .hero-v2__tagline {
+    bottom: clamp(100px, 18vw, 130px);
+    left: 20px;
+    font-size: 13px;
+    max-width: 220px;
+  }
+  .hero-v2__scroll-cue { left: 20px; }
+
+  /* --- Pin section — JS disables GSAP, CSS stacks panels --- */
+  .pin-section {
+    height: auto;
+    overflow: visible;
+    padding-right: 0;
+    background: transparent;
+  }
+  .pin-section__track {
+    flex-direction: column;
+    width: 100%;
+    height: auto;
+    transform: none !important; /* override any GSAP transform */
+  }
+  /* No CSS scroll-snap on mobile.
+     Sections are 100dvh so iOS momentum naturally lands near boundaries.
+     Every snap implementation caused fighting or oscillation — native scroll is smoother. */
+
+  .screen {
+    flex: none;
+    width: 100vw;
+    height: 100svh;   /* svh = stable small viewport — no reflow when address bar shows/hides */
+  }
+
+  /* --- Topbar logo — dark on light screens, light on dark screens (JS toggles .topbar--over-dark) --- */
+  /* --- Manifesto screen (screen 2) — typography-first, top-to-bottom ---
+       Cycling phrase at top. Staircase pushed to lower third.
+       Sigil centered in the background. Offerings spread full width at bottom. */
+  .screen--manifesto {
+    padding: clamp(60px, 10svh, 80px) 28px 84px;
+    align-items: flex-start;
+    justify-content: flex-start;     /* cycling text anchors to top */
+    flex-direction: column;
+    overflow: hidden;
+  }
+  .manifesto__content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;  /* pushes staircase toward bottom */
+    flex: 1;                         /* fills all available screen height */
+    width: 100%;
+    position: relative;
+    z-index: 2;
+    gap: 0;
+    padding-bottom: 52px;            /* clears the offerings line */
+  }
+
+  /* 1. Cycling phrase — sized for all 4 phrases (longest: "Conjured slowly." = 16 chars) */
+  .manifesto__line {
+    font-size: clamp(38px, 11vw, 56px);
+    line-height: 1.08;
+    padding-bottom: 0;
+    text-align: left;
+    width: 100%;
+    white-space: nowrap;            /* hard guard — never wraps */
+    overflow: hidden;
+    color: #6B3D1E;                 /* warm chestnut brown — matches desktop */
+  }
+  /* Push cycling text ~20% down — sits LEFT of stair--1, leading the descent */
+  .manifesto__line--1 {
+    margin-top: 12svh;
+    margin-left: -12px;             /* pulls past content edge — still 16px from screen edge (screen has 28px padding) */
+  }
+  /* 2. "Studio of imagined worlds." — staircase, bigger + more air between steps */
+  .manifesto__line--2 {
+    font-family: "Bodoni Moda", Georgia, serif;
+    font-style: normal;
+    font-weight: 700;
+    font-variation-settings: 'opsz' 6;
+    font-size: clamp(44px, 12vw, 62px);   /* bumped up from 36px/9.5vw/50px */
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start;
+    margin-top: 0;
+    padding-left: 0;
+    letter-spacing: -0.01em;
+    line-height: 1.75;              /* more breathing room between stair steps */
+    color: #6B3D1E;                 /* warm chestnut brown — matches desktop */
+  }
+  .manifesto__stair   { display: block !important; }
+  .manifesto__stair--1 { padding-left: 0;   }
+  .manifesto__stair--2 { padding-left: 28%; }
+  .manifesto__stair--3 { padding-left: 52%; }
+
+  /* 3. "— Susana" */
+  .manifesto__signature {
+    display: block;
+    font-size: 18px;
+    padding-left: 0;
+    margin-top: 2px;
+  }
+
+  /* 4. Offerings — 3 items spread evenly across full width */
+  .manifesto__offerings {
+    position: absolute;
+    bottom: 20px;
+    left: 28px;
+    right: 28px;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: var(--font-ui);
+    font-size: 9px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--espresso);
+    opacity: 0.38;
+    z-index: 3;
+  }
+  .offerings-l1,
+  .offerings-sep,
+  .offerings-l2 { display: inline-block; }
+
+  /* 5. Sigil — centered, facing upward with a 3/4 tilt, larger ghost presence */
+  .manifesto__figure {
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%) rotate(-45deg); /* 3/4 tilt — matches contact crescent orientation */
+    width: 150vw;                   /* bigger — fills the screen as a background element */
+    z-index: 0;
+    opacity: 0.15;
+  }
+
+  /* --- Botanical screen (screen 3) — full-bleed cover, centered crop --- */
+  .botanical-statement__overlay {
+    padding: 32px 24px;
+    /* Dark cinematic scrim — same as desktop so cream text reads on bright flowers */
+    background: rgba(26, 18, 12, 0.52);
+  }
+  .botanical-statement__line {
+    font-size: clamp(20px, 6.2vw, 32px);
+    transform: none; /* reset the desktop translateY(-30px) — not needed on stacked mobile */
+  }
+  /* Contact video — contain so fish scene appears at natural scale, not huge.
+     Espresso background fills the letterbox bars (matches the mask overhang). */
+  .contact-reveal {
+    background: var(--espresso);
+  }
+  .contact-reveal__video {
+    object-fit: contain;
+    object-position: center center;
+  }
+
+  /* Cover on mobile — landscape video crops top/bottom to fill portrait screen.
+     Botanical footage is wide enough that cover looks natural at any crop. */
+  .botanical-statement__video {
+    object-fit: cover;
+    object-position: center center;
+  }
+
+  /* --- Section intro chapter marker --- */
+  .section-intro {
+    min-height: 100svh;
+    padding: 80px 28px 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .section-intro__inner {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(20px, 4vh, 36px);   /* more breathing room between num/title/desc/cta */
+  }
+  /* Push the CTA (pulsing sigil) away from the description text */
+  .section-intro .insights-intro__cta {
+    margin-top: clamp(16px, 3vh, 28px);
+  }
+  .section-intro__title {
+    font-size: clamp(56px, 16vw, 96px);
+  }
+  .section-intro__desc { font-size: 15px; }
+
+  /* --- Vertical panels --- */
+  .vertical-panels { padding-right: 0; }
+  .vertical-panels .panel {
+    height: 100svh;           /* stable — no reflow when iOS address bar shows/hides */
+    padding: 40px 20px 32px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;  /* header top, carousel middle, footer bottom */
+    overflow: hidden;
+  }
+  /* Carousel grows to fill whatever height remains between header and footer */
+  .vertical-panels .carousel {
+    flex: 1 1 auto;
+    min-height: 0;            /* critical: lets flex child shrink below content size */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .vertical-panels .carousel__track {
+    flex: 1 1 auto;
+    min-height: 0;
+  }
+  .vertical-panels .carousel__item {
+    max-height: 100%;         /* fill the track height rather than capping at 44vh */
+  }
+  .panel__title {
+    font-size: clamp(38px, 11.5vw, 68px);
+  }
+  .panel__lede { font-size: 15px; }
+  .panel__credit-text { font-size: 12px; }
+
+  /* No touch-action overrides needed — native iOS handles swipe direction correctly
+     once Lenis is no longer intercepting touch events on mobile. */
+
+  /* --- Carousel (non-panel) --- */
+  .carousel__item {
+    max-height: 44vh;
+  }
+  .carousel__title {
+    font-size: 11px;
+    letter-spacing: 0.04em;
+  }
+  .carousel__num { font-size: 10px; }
+
+  /* --- Reel scrubber — hide on mobile (no GSAP reel) --- */
+  .reel-scrubber { display: none; }
+
+  /* --- Insights intro (two-col → single col) --- */
+  .insights-intro {
+    padding: 64px 24px;
+    padding-right: 24px;
+    min-height: auto;
+  }
+  .insights-intro__inner {
+    flex-direction: column;
+    gap: 28px;
+  }
+  .insights-intro__title {
+    font-size: clamp(64px, 19vw, 100px);
+  }
+  .insights-intro__story { font-size: 15px; max-width: 100%; }
+
+  /* --- Insights grid → 2 cols --- */
+  .insights-library {
+    padding: 40px 20px 60px;
+    padding-right: 20px;
+  }
+  .insights-grid__inner {
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  .insight-card__cover-title { font-size: 16px; }
+  .insight-card__desc { font-size: 12px; }
+
+  /* --- Spacer --- */
+  .spacer { padding-right: 0; }
+
+  /* ── Burger button ── */
+  .burger {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 22px;
+    height: 14px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    pointer-events: auto;
+    z-index: 301; /* above mobile-nav overlay */
+  }
+  .burger span {
+    display: block;
+    width: 100%;
+    height: 1.5px;
+    background: #C8933A; /* brand gold — hardcoded so mix-blend-mode doesn't invert it */
+    transform-origin: center;
+    transition: transform 0.3s ease, opacity 0.2s ease;
+  }
+  /* Animate to ✕ when open */
+  .burger.is-open span:nth-child(1) { transform: translateY(6.25px) rotate(45deg); }
+  .burger.is-open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+  .burger.is-open span:nth-child(3) { transform: translateY(-6.25px) rotate(-45deg); }
+
+  /* ── Mobile nav overlay ── */
+  .mobile-nav {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: fixed;
+    inset: 0;
+    background: var(--cream);
+    z-index: 300;
+    padding: 72px 36px 48px;
+    pointer-events: none;
+    /* Circular reveal — expands from the burger button (top-right) */
+    clip-path: circle(0% at calc(100% - 36px) 28px);
+    transition: clip-path 0.65s cubic-bezier(0.77, 0, 0.175, 1);
+  }
+  .mobile-nav.is-open {
+    clip-path: circle(150% at calc(100% - 36px) 28px);
+    pointer-events: auto;
+  }
+
+  /* Staggered link entrance */
+  .mobile-nav__list li {
+    opacity: 0;
+    transform: translateY(14px);
+    transition: opacity 0.15s ease, transform 0.15s ease;
+  }
+  .mobile-nav.is-open .mobile-nav__list li {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.35s ease, transform 0.35s ease;
+  }
+  .mobile-nav.is-open .mobile-nav__list li:nth-child(1) { transition-delay: 0.22s; }
+  .mobile-nav.is-open .mobile-nav__list li:nth-child(2) { transition-delay: 0.30s; }
+  .mobile-nav.is-open .mobile-nav__list li:nth-child(3) { transition-delay: 0.38s; }
+  .mobile-nav.is-open .mobile-nav__list li:nth-child(4) { transition-delay: 0.46s; }
+  .mobile-nav.is-open .mobile-nav__list li:nth-child(5) { transition-delay: 0.54s; }
+  .mobile-nav.is-open .mobile-nav__list li:nth-child(6) { transition-delay: 0.62s; }
+
+  .mobile-nav__close {
+    position: absolute;
+    top: 18px;
+    right: 24px;
+    background: none;
+    border: none;
+    font-size: 20px;
+    line-height: 1;
+    cursor: pointer;
+    color: var(--espresso);
+    opacity: 0.45;
+    padding: 8px;
+    pointer-events: auto;
+  }
+  .mobile-nav__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    /* Left accent bar — same colour as sidebar */
+    border-left: 2px solid var(--rose-pink);
+    padding-left: 24px;
+  }
+  .mobile-nav__link {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    padding: 16px 0;
+    border-bottom: 1px solid rgba(42, 32, 26, 0.07);
+    text-decoration: none;
+    color: var(--espresso);
+    transition: color 0.18s ease, opacity 0.18s ease, transform 0.18s ease;
+    -webkit-tap-highlight-color: transparent;
+  }
+  /* Tap microinteraction — shifts right on press like the desktop sidebar hover */
+  .mobile-nav__link:active {
+    opacity: 0.6;
+    transform: translateX(4px);
+  }
+  .mobile-nav__num {
+    font-family: "Caprasimo", Georgia, serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: 18px;
+    letter-spacing: 0;
+    color: var(--rose-deep);
+    min-width: 28px;
+    flex-shrink: 0;
+  }
+  .mobile-nav__label {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: clamp(28px, 8vw, 40px);
+    line-height: 1;
+  }
+}
+
+/* Burger hidden on desktop — base rule outside media query */
+.burger { display: none; }
+.mobile-nav { display: none; }
+
+@media (max-width: 768px) {
+  .burger { display: flex; } /* re-enable inside mobile block */
+  .mobile-nav { display: flex; }
+}
+
+
+/* ============================================================
+   CAROUSEL — multi-item gallery inside each work panel
+   Scroll-snap horizontal track with dot progress.
+   ============================================================ */
+.carousel {
+  width: 100%;
+  max-width: 1500px;
+  margin: 0 auto;
+  align-self: center;
+  order: 2;
+}
+.carousel__track {
+  display: flex;
+  gap: clamp(20px, 2.4vw, 44px);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain; /* stop page jumping when swiping past last card */
+  padding-bottom: 4px;
+}
+.carousel__track::-webkit-scrollbar { display: none; }
+
+.carousel__item {
+  flex: 0 0 100%;
+  scroll-snap-align: center;
+  margin: 0;
+  position: relative;
+  aspect-ratio: 16 / 9;
+  max-height: 72vh;
+  overflow: hidden;
+  border-radius: clamp(20px, 1.8vw, 32px);
+  background: var(--cream-soft);
+  box-shadow: 0 24px 60px -30px rgba(42, 32, 26, 0.18);
+}
+
+.carousel__video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+/* Cinema panel — 3:2 frame, edge-to-edge fill (artlist.io editorial style) */
+.panel--cinema .carousel__item {
+  background: var(--espresso);
+  cursor: pointer;
+  aspect-ratio: 3 / 2;
+}
+.panel--cinema .carousel__video {
+  object-fit: cover;
+  transition: filter 0.35s ease;
+}
+/* Portrait card (Monastery) — same 3:2 frame as landscape cards for visual consistency */
+.panel--cinema .carousel__item--portrait {
+  flex: 0 0 100%;
+  aspect-ratio: 3 / 2;
+  width: auto;
+}
+
+/* Expand-hint overlay — JS-driven via mouseenter/mouseleave on desktop.
+   Hidden by default; desktop shows on hover (JS overrides opacity inline).
+   Mobile shows only on the active card via CSS below. */
+.cinema-item__hint {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+  opacity: 0;
+  padding: clamp(10px, 1.2vw, 16px);
+  background: rgba(42, 32, 26, 0);
+  opacity: 0;
+  pointer-events: none;
+  border-radius: inherit;
+  z-index: 2;
+  transition: opacity 0.35s ease, background 0.35s ease;
+}
+.cinema-item__hint svg {
+  filter: drop-shadow(0 2px 12px rgba(0, 0, 0, 0.7));
+  transition: transform 0.35s ease;
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+.carousel__caption {
+  position: absolute;
+  right: clamp(20px, 2vw, 36px);
+  bottom: clamp(20px, 2.4vh, 36px);
+  display: flex;
+  align-items: baseline;
+  flex-direction: row-reverse;
+  text-align: right;
+  gap: clamp(14px, 1.4vw, 22px);
+  color: var(--paper);
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.45);
+  pointer-events: none;
+}
+.carousel__num {
+  font-family: var(--font-ui);
+  font-weight: 500;
+  font-size: clamp(11px, 0.9vw, 14px);
+  letter-spacing: 0.32em;
+  opacity: 0.85;
+}
+.carousel__title {
+  font-family: "Anton", sans-serif;
+  font-size: clamp(13px, 1.05vw, 17px);
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+/* Portrait carousel card — for vertical-format videos */
+.carousel__item--portrait {
+  aspect-ratio: 3 / 4;
+  max-height: 58vh;
+  width: auto;
+  flex: 0 0 auto;
+}
+
+.carousel__progress {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: clamp(18px, 2.2vh, 32px);
+}
+.carousel__dot {
+  width: 28px;
+  height: 2px;
+  background: var(--espresso);
+  opacity: 0.22;
+  transition: opacity 0.35s var(--ease-out), background 0.35s var(--ease-out), width 0.35s var(--ease-out);
+  border-radius: 2px;
+}
+.carousel__dot.is-active {
+  opacity: 1;
+  background: var(--rose-deep);
+  width: 44px;
+}
+
+
+/* Carousel images (same fit as video) */
+.carousel__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Portrait illustrations (e.g. Atlas Cholita) — show full figure, no crop */
+.carousel__img--contain {
+  object-fit: contain;
+  background: var(--cream);
+}
+
+/* Diptych card — two portrait illustrations side by side */
+.carousel__item--diptych {
+  display: flex;
+  gap: 0;
+  overflow: hidden;
+  aspect-ratio: 4 / 3;   /* taller than 16:9 — gives portrait figures room */
+}
+.carousel__item--diptych .carousel__img {
+  width: 50%;
+  height: 100%;
+  flex: 0 0 50%;
+}
+.carousel__item--diptych .carousel__img + .carousel__img {
+  border-left: 1px solid rgba(42, 32, 26, 0.10);
+}
+
+/* ── Horizontal reel scrubber — pill on a track ── */
+.reel-scrubber {
+  position: fixed;
+  bottom: 22px;
+  left: 50%;
+  transform: translateX(calc(-50% - var(--sidebar-w) / 2));  /* center in content area */
+  width: 120px;
+  height: 6px;
+  background: rgba(42, 32, 26, 0.12);
+  border-radius: 99px;
+  z-index: 300;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  pointer-events: none;
+}
+.reel-scrubber.is-visible {
+  opacity: 1;
+}
+.reel-scrubber__pill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 36px;     /* ~30% of track — feels like "one screen" of three */
+  height: 6px;
+  background: var(--radiant);   /* Radiant Earth reel pill */
+  border-radius: 99px;
+  will-change: transform;
+  transition: transform 0.12s linear;
+}
+
+/* ── Continue hint — appears on last horizontal panel to signal exit ── */
+.continue-hint {
+  position: fixed;
+  bottom: clamp(32px, 5vh, 60px);
+  right: calc(var(--sidebar-w) + 28px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  font-family: var(--font-ui);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--paper);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.7s var(--ease-out);
+  z-index: 20;
+}
+.continue-hint__text {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+}
+.continue-hint__line {
+  display: block;
+  width: 1px;
+  height: 40px;
+  background: currentColor;
+  transform-origin: bottom center;
+  animation: scrollBlink 2.6s ease-in-out infinite;
+}
+
+/* ── Image lightbox — modern redesign ── */
+.img-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(10, 7, 6, 0.97);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  pointer-events: none;
+  visibility: hidden;
+}
+.img-lightbox.is-open {
+  opacity: 1;
+  pointer-events: all;
+  visibility: visible;
+}
+
+/* Close — minimal, top right */
+.img-lightbox__close {
+  position: absolute;
+  top: 24px;
+  right: 28px;
+  background: none;
+  border: none;
+  color: rgba(255,255,255,0.45);
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+  z-index: 1005;
+  padding: 10px;
+  font-family: var(--font-ui);
+  font-weight: 300;
+  transition: color 0.2s;
+  -webkit-tap-highlight-color: transparent;
+}
+.img-lightbox__close:hover { color: rgba(255,255,255,0.95); }
+
+/* Nav zones — large invisible areas, full height */
+.img-lightbox__zone {
+  position: absolute;
+  top: 0; bottom: 0;
+  width: 30%;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.img-lightbox__zone--prev { left: 0; justify-content: flex-start; padding-left: 32px; }
+.img-lightbox__zone--next { right: 0; justify-content: flex-end;  padding-right: 32px; }
+
+/* Arrow — slides in on zone hover */
+.img-lightbox__arrow {
+  opacity: 0;
+  color: rgba(255,255,255,0.7);
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.25s var(--ease-out);
+  display: flex;
+  align-items: center;
+}
+.img-lightbox__zone--prev .img-lightbox__arrow { transform: translateX(10px); }
+.img-lightbox__zone--next .img-lightbox__arrow { transform: translateX(-10px); }
+.img-lightbox__zone--prev:hover .img-lightbox__arrow {
+  opacity: 1;
+  transform: translateX(0);
+}
+.img-lightbox__zone--next:hover .img-lightbox__arrow {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Image stage — sits above zones */
+.img-lightbox__stage {
+  position: relative;
+  z-index: 3;
+  cursor: zoom-in;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.img-lightbox.is-zoomed .img-lightbox__stage { cursor: zoom-out; }
+
+.img-lightbox__img {
+  max-width: 82vw;
+  max-height: 78vh;
+  object-fit: contain;
+  border-radius: 3px;
+  display: block;
+  user-select: none;
+  transition: max-width 0.45s var(--ease-out), max-height 0.45s var(--ease-out), border-radius 0.45s;
+}
+.img-lightbox.is-zoomed .img-lightbox__img {
+  max-width: 99vw;
+  max-height: 99vh;
+  border-radius: 0;
+}
+
+/* Zoom hint — appears on stage hover, hides when zoomed */
+.img-lightbox__zoom-hint {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s;
+  font-family: var(--font-ui);
+  font-size: 9px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.65);
+  background: rgba(0,0,0,0.45);
+  padding: 4px 9px;
+  border-radius: 2px;
+}
+.img-lightbox__stage:hover .img-lightbox__zoom-hint { opacity: 1; }
+.img-lightbox.is-zoomed .img-lightbox__zoom-hint { display: none; }
+
+/* Footer — caption + pagination dots */
+.img-lightbox__footer {
+  position: absolute;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  z-index: 4;
+  transition: opacity 0.3s;
+  pointer-events: auto;
+}
+.img-lightbox.is-zoomed .img-lightbox__footer {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.img-lightbox__caption {
+  margin: 0;
+  font-family: var(--font-ui);
+  font-size: 10px;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.35);
+  white-space: nowrap;
+}
+
+/* Pagination dots */
+.img-lightbox__dots {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.img-lightbox__dot {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: rgba(255,255,255,0.22);
+  border-radius: 2px;
+  cursor: pointer;
+  transition: background 0.25s ease, width 0.25s var(--ease-out);
+  -webkit-tap-highlight-color: transparent;
+}
+.img-lightbox__dot.is-active {
+  width: 36px;
+  background: var(--rose-deep);
+}
+
+/* ── Cinema fullscreen modal ── */
+.cinema-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(18, 12, 10, 0.96);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding: 40px;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  pointer-events: none;
+  /* visibility:hidden releases ALL iOS touch tracking immediately.
+     pointer-events:none alone is not enough — iOS can still route
+     touch gestures through a position:fixed overlay. */
+  visibility: hidden;
+}
+.cinema-modal.is-open {
+  opacity: 1;
+  pointer-events: all;
+  visibility: visible;
+  /* touch-action:none set via JS so it's only active while open */
+}
+.cinema-modal__video-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 90vw;
+  max-height: 85vh;
+}
+.cinema-modal__video {
+  /* Size by the modal box, not the video's native resolution.
+     height:85vh forces every clip to fill the same vertical space —
+     low-res brand videos (1080-wide) scale UP to match the 1920 cinema films
+     instead of rendering tiny. width:auto keeps aspect ratio; object-fit:contain
+     letterboxes any odd ratios (e.g. the 1080x1440 portrait brand video). */
+  height: 85vh;
+  width: auto;
+  max-width: 90vw;
+  max-height: 85vh;
+  object-fit: contain;
+  border-radius: 12px;
+  background: #000;
+  display: block;
+  cursor: pointer; /* hint: tap to play/pause */
+}
+.cinema-modal__play-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 72px;
+  height: 72px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+.cinema-modal__play-icon svg {
+  width: 100%;
+  height: 100%;
+}
+.cinema-modal__play-icon svg polygon { fill: var(--radiant); }   /* Radiant Earth play triangle */
+/* Control bar */
+.cinema-modal__controls {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px 12px;
+  background: linear-gradient(to top, rgba(0,0,0,0.72) 0%, transparent 100%);
+  border-radius: 0 0 12px 12px;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+.cinema-modal__video-wrap:hover .cinema-modal__controls,
+.cinema-modal__video-wrap:focus-within .cinema-modal__controls {
+  opacity: 1;
+}
+/* Always visible on touch devices (no hover) */
+@media (hover: none) {
+  .cinema-modal__controls { opacity: 1; }
+}
+.cinema-modal__ctrl-btn {
+  flex-shrink: 0;
+  background: none;
+  border: none;
+  color: rgba(255,255,255,0.85);
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  transition: color 0.15s;
+}
+.cinema-modal__ctrl-btn:hover { color: #fff; }
+.ctrl-icon { width: 16px; height: 16px; display: none; }
+/* Show play icon when paused, pause icon when playing */
+.cinema-modal__ctrl-btn.is-paused .ctrl-icon--play  { display: block; }
+.cinema-modal__ctrl-btn.is-playing .ctrl-icon--pause { display: block; }
+.cinema-modal__scrub {
+  flex: 1;
+  -webkit-appearance: none;
+  appearance: none;
+  height: 3px;
+  border-radius: 2px;
+  background: rgba(255,255,255,0.25);
+  accent-color: var(--radiant);
+  outline: none;
+  cursor: pointer;
+}
+.cinema-modal__scrub::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--radiant);
+  cursor: pointer;
+}
+.cinema-modal__scrub::-moz-range-thumb {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--radiant);
+  border: none;
+  cursor: pointer;
+}
+.cinema-modal__time {
+  flex-shrink: 0;
+  font-family: var(--font-ui);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  color: rgba(255,255,255,0.6);
+  white-space: nowrap;
+  min-width: 4ch;
+}
+.cinema-modal__title {
+  margin: 0;
+  font-family: var(--font-ui);
+  font-size: 11px;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.45);
+}
+.cinema-modal__close {
+  position: absolute;
+  top: 24px;
+  right: 32px;
+  background: none;
+  border: none;
+  color: rgba(255,255,255,0.55);
+  font-size: 22px;
+  cursor: pointer;
+  padding: 8px;
+  line-height: 1;
+  transition: color 0.2s;
+}
+.cinema-modal__close:hover { color: #fff; }
+
+/* Volume control */
+.cinema-modal__volume { display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
+.cinema-modal__vol-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 64px;
+  height: 3px;
+  border-radius: 2px;
+  background: rgba(255,255,255,0.25);
+  outline: none;
+  cursor: pointer;
+}
+.cinema-modal__vol-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 11px; height: 11px; border-radius: 50%; background: #fff; cursor: pointer;
+}
+.cinema-modal__vol-slider::-moz-range-thumb {
+  width: 11px; height: 11px; border-radius: 50%; background: #fff; border: none; cursor: pointer;
+}
+/* Volume + fullscreen icon visibility */
+.ctrl-icon--fs { display: block; }
+#cinema-modal-vol-btn .ctrl-icon--vol-on  { display: block; }
+#cinema-modal-vol-btn .ctrl-icon--vol-off { display: none; }
+#cinema-modal-vol-btn.is-muted .ctrl-icon--vol-on  { display: none; }
+#cinema-modal-vol-btn.is-muted .ctrl-icon--vol-off { display: block; }
+
+/* True fullscreen — biggest possible viewing experience */
+.cinema-modal__video-wrap:fullscreen,
+.cinema-modal__video-wrap:-webkit-full-screen {
+  width: 100vw; height: 100vh; max-width: none; max-height: none; background: #000;
+}
+.cinema-modal__video-wrap:fullscreen .cinema-modal__video,
+.cinema-modal__video-wrap:-webkit-full-screen .cinema-modal__video {
+  width: 100%; height: 100%; max-width: none; max-height: none; border-radius: 0; object-fit: contain;
+}
+
+/* On phones, hide the volume slider to save room — mute button + fullscreen stay */
+@media (max-width: 768px) {
+  .cinema-modal__vol-slider { display: none; }
+}
+
+/* ── Cinema modal — mobile override (must come AFTER base styles to win the cascade) ── */
+@media (max-width: 768px) {
+  .cinema-modal {
+    padding: 0;
+    gap: 0;
+    background: #000;
+    overscroll-behavior: none;
+    /* touch-action set via JS — see script.js openModal/closeModal */
+  }
+  /* Wrap fills the entire fixed viewport on mobile */
+  .cinema-modal__video-wrap {
+    position: absolute;
+    inset: 0;
+    max-width: none;
+    max-height: none;
+  }
+  /* Video fills the wrap */
+  .cinema-modal__video {
+    position: absolute;
+    inset: 0;
+    width: 100% !important;
+    height: 100% !important;
+    max-width: none !important;
+    max-height: none !important;
+    border-radius: 0;
+    object-fit: contain;
+  }
+  /* Play icon stays centered — its absolute positioning is relative to the wrap */
+  .cinema-modal__play-icon { width: 64px; height: 64px; }
+  /* Control bar: no border-radius on mobile (video fills edge-to-edge) */
+  .cinema-modal__controls { border-radius: 0; padding-bottom: env(safe-area-inset-bottom, 12px); }
+  .cinema-modal__title { display: none; }
+  .cinema-modal__close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    z-index: 1002;
+    background: rgba(0,0,0,0.6);
+    border-radius: 50%;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    line-height: 1;
+    color: #fff;
+    padding: 0;
+  }
+
+  /* Expand icon — visible only on the active (centered) card on mobile.
+     On inactive cards it stays hidden so each card doesn't look like
+     its own separate lightbox; the icon appears as you scroll to a card. */
+  .carousel__item .cinema-item__hint { opacity: 0; }
+  .carousel__item.is-active .cinema-item__hint { opacity: 0.75; }
+
+  /* ── Full-width video cards with peek — artlist.io editorial style ──
+     Pull the carousel out of the panel's 20px side padding so the track
+     bleeds to both screen edges. Cards are slightly narrower than the track
+     so ~18px of the adjacent card peeks in — a visual cue that there's more
+     to scroll. No rounded corners, no shadow. */
+  .vertical-panels [data-carousel] {
+    margin-left: -20px;
+    margin-right: -20px;
+    width: calc(100% + 40px);
+  }
+  .vertical-panels .carousel__track {
+    gap: 12px;
+    /* Padding lets the first and last cards snap to center (without it,
+       card 1 is flush to the left edge because the track can't scroll left
+       of 0 to center it). Value = half the non-card width: (100% - card_width)/2 = 30px */
+    padding-left: 30px;
+    padding-right: 30px;
+    /* pan-x pan-y: browser decides axis from initial swipe direction.
+       pan-x alone was blocking vertical page scroll when the swipe started
+       on a large thumbnail — user couldn't scroll the page at all. */
+    touch-action: pan-x pan-y;
+  }
+  .vertical-panels .carousel__item {
+    /* 100% here = track content-box = viewport_width - 60px (track padding).
+       That gives ~330px cards on a 390px phone — exactly the peek width we want.
+       Using calc(100% - 60px) would double-subtract the padding → cards too narrow. */
+    flex: 0 0 100%;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  /* Dots sit inside the expanded carousel (width: calc(100% + 40px) / -20px margins).
+     Counter-act the bleed so dots are sized to the original panel content box,
+     otherwise the group overflows and the last dot gets half-clipped. */
+  .vertical-panels .carousel__progress {
+    width: calc(100% - 40px);
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* Prevent accidental carousel-advance when tapping near (but not on) the
+     expand icon. The hint overlay is normally pointer-events:none; making it
+     auto on the active card means any tap on the card that misses the icon
+     hits the overlay instead of the item click handler (which would wrap
+     the carousel and cause a page jump). The overlay's stopPropagation in JS
+     then blocks the item click. The icon SVG still fires openModal as before. */
+  .carousel__item.is-active .cinema-item__hint {
+    pointer-events: auto;
+  }
+  .vertical-panels .carousel__caption {
+    left: 16px;
+    bottom: 14px;
+  }
+
+  /* Cinema card sizing (3:2, object-fit:cover) is now set in base styles above —
+     applies to both desktop and mobile. No overrides needed here. */
+}

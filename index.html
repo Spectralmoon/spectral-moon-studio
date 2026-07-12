@@ -1,429 +1,573 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Spectralmoon Studio</title>
-    <meta property="og:title" content="Spectralmoon Studio" />
-    <meta
-      property="og:description"
-      content="Films, visual stories and storytelling for the conscious digital age."
-    />
-    <meta
-      property="og:image"
-      content="https://res.cloudinary.com/dbet91fsr/video/upload/fl_sprite/f_auto,q_auto/v1776135417/hero_loop.mp4_yupt9g.jpg"
-    />
-    <meta property="og:url" content="https://spectralmoonstudio.com" />
-    <meta property="og:type" content="website" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta
-      name="twitter:image"
-      content="https://res.cloudinary.com/dbet91fsr/video/upload/fl_sprite/f_auto,q_auto/v1776135417/hero_loop.mp4_yupt9g.jpg"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Jost:wght@300;400&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="style.css" />
-  </head>
-  <body>
-    <div class="nav-top">
-      <svg width="90" height="90" viewBox="0 0 680 660" aria-hidden="true">
-        <g transform="translate(340, 280)">
-          <g fill="none" stroke="#C8933A" stroke-width="5" opacity="0.35">
-            <circle cx="0" cy="0" r="82" />
-            <circle cx="0" cy="-82" r="82" />
-            <circle cx="71" cy="-41" r="82" />
-            <circle cx="71" cy="41" r="82" />
-            <circle cx="0" cy="82" r="82" />
-            <circle cx="-71" cy="41" r="82" />
-            <circle cx="-71" cy="-41" r="82" />
-          </g>
-          <circle
-            cx="0"
-            cy="0"
-            r="151"
-            fill="none"
-            stroke="#C8933A"
-            stroke-width="13"
-            stroke-dasharray="8,2,16,1,10,3,22,1,7,2,14,2"
-            stroke-linecap="round"
-            opacity="0.90"
-          />
-          <path
-            d="M 0,-144 L 125,72 L -125,72 Z"
-            fill="none"
-            stroke="#C8933A"
-            stroke-width="11"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            opacity="0.85"
-          />
-          <path
-            d="M -125,72 L -60,-2 Q -48,-22 -36,-4 L -16,26 Q -10,12 -5,2 C -3,-8 -2,-22 -1,-36 C 0,-54 0,-64 0,-64 C 0,-64 0,-54 1,-36 C 2,-22 3,-8 5,2 Q 10,12 16,26 L 36,-4 Q 48,-22 60,-2 L 125,72 Z"
-            fill="#3D2208"
-            opacity="0.88"
-          />
-          <path
-            d="M 0,-64 C -7,-72 -16,-82 -12,-97 C -9,-106 -4,-110 0,-112 C 4,-110 9,-106 12,-97 C 16,-82 7,-72 0,-64 Z"
-            fill="#5A3415"
-            opacity="0.95"
-          />
-          <path
-            d="M -3,-74 C -10,-78 -20,-80 -22,-91 C -23,-99 -17,-103 -11,-100 C -7,-92 -5,-82 -3,-74 Z"
-            fill="#4A2A0A"
-            opacity="0.85"
-          />
-          <path
-            d="M 3,-74 C 10,-78 20,-80 22,-91 C 23,-99 17,-103 11,-100 C 7,-92 5,-82 3,-74 Z"
-            fill="#4A2A0A"
-            opacity="0.85"
-          />
-          <circle cx="0" cy="-116" r="10" fill="#C8933A" opacity="0.85" />
-        </g>
-      </svg>
-      <span class="nav-brand">SPECTRALMOON STUDIO</span>
-    </div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Spectralmoon Studio</title>
+  <meta name="description" content="Imagination is the technology. Brand worlds made cinematic." />
 
-    <nav class="nav-bottom" aria-label="Main navigation">
-      <a class="nav-link" href="#hero">Home</a>
-      <a class="nav-link" href="#work">Work</a>
-      <a class="nav-link" href="#about">About</a>
-      <a class="nav-link" href="#contact">Contact</a>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <!-- Display fonts: block = brief invisible rather than flash of wrong font -->
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo+Black&family=Caprasimo&display=block" rel="stylesheet" />
+  <!-- UI/body fonts: swap is fine — fallbacks are close enough at small sizes -->
+  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,700;1,6..96,400;1,6..96,700&family=Caveat:wght@500;600&family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Inter+Tight:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="style.v2.css?v=1786100000" />
+</head>
+<body>
+
+  <!-- Persistent sidebar (right edge) -->
+  <aside class="sidebar" aria-label="Section navigation">
+    <nav class="sidebar__nav">
+      <a class="sidebar__moon" href="#" aria-label="Go to top">
+        <span class="moon__icon">
+          <svg viewBox="0 0 28 28" width="18" height="18" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <circle cx="14" cy="14" r="11" fill="var(--rose-deep)"/>
+            <circle cx="18.5" cy="14" r="8.8" fill="var(--paper)"/>
+          </svg>
+        </span>
+        <span class="label">Home</span>
+      </a>
+      <a class="sidebar__link" href="#screen-cinema"><span class="num">I</span><span class="label">Cinema</span></a>
+      <a class="sidebar__link" href="#screen-identity"><span class="num">II</span><span class="label">Identity</span></a>
+      <a class="sidebar__link" href="#screen-dwellings"><span class="num">III</span><span class="label">Dwellings</span></a>
+      <a class="sidebar__link" href="#section-insights"><span class="num">IV</span><span class="label">Insights</span></a>
+      <a class="sidebar__link" href="#section-about"><span class="num">V</span><span class="label">About</span></a>
+      <a class="sidebar__link" href="#section-contact"><span class="num">VI</span><span class="label">Contact</span></a>
     </nav>
+  </aside>
 
-    <main>
-    <div class="hero" id="hero">
-      <div class="hero-bg">
-        <video
-          autoplay
-          muted
-          loop
-          playsinline
-          preload="metadata"
-          id="heroVideo"
-          aria-hidden="true"
-        >
-          <source
-            src="https://res.cloudinary.com/dbet91fsr/video/upload/f_auto,q_auto:low,w_1600,br_800k/v1776135417/hero_loop.mp4_yupt9g.mp4"
-            type="video/mp4"
-          />
-        </video>
-      </div>
-      <div class="hero-card">
-        <h1 class="hero-title">Welcome to<br />Spectralmoon Studio</h1>
-        <div class="hero-rule"></div>
-        <div class="hero-sub">
-          Films, visual stories and storytelling<br />for the conscious digital
-          age.
+  <!-- Topbar — stacked editorial wordmark on left, status on right -->
+  <header class="topbar">
+    <a href="#" class="topbar__brand" style="color:#5C3D2E">
+      <!-- Mobile sigil mark — fish crescent PNG, hidden on desktop -->
+      <img src="assets/fish.png" alt="Spectralmoon Studio" class="topbar__sigil" />
+      <!-- Desktop text wordmark -->
+      <span class="topbar__brand-name" style="color:#5C3D2E">Spectralmoon</span>
+      <span class="topbar__brand-sub" style="color:#5C3D2E">S T U D I O</span>
+    </a>
+    <!-- Burger button — mobile only (hidden on desktop via CSS) -->
+    <button class="burger" id="burger-btn" aria-label="Open navigation" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+
+  <!-- Mobile nav overlay — full-screen, same links as sidebar -->
+  <nav class="mobile-nav" id="mobile-nav" aria-hidden="true">
+    <button class="mobile-nav__close" id="mobile-nav-close" aria-label="Close navigation">✕</button>
+    <ul class="mobile-nav__list">
+      <li><a href="#screen-cinema"    class="mobile-nav__link"><span class="mobile-nav__num">I</span><span class="mobile-nav__label">Cinema</span></a></li>
+      <li><a href="#screen-identity"  class="mobile-nav__link"><span class="mobile-nav__num">II</span><span class="mobile-nav__label">Identity</span></a></li>
+      <li><a href="#screen-dwellings" class="mobile-nav__link"><span class="mobile-nav__num">III</span><span class="mobile-nav__label">Dwellings</span></a></li>
+      <li><a href="#section-insights" class="mobile-nav__link"><span class="mobile-nav__num">IV</span><span class="mobile-nav__label">Insights</span></a></li>
+      <li><a href="#section-about"    class="mobile-nav__link"><span class="mobile-nav__num">V</span><span class="mobile-nav__label">About</span></a></li>
+      <li><a href="#section-contact"  class="mobile-nav__link"><span class="mobile-nav__num">VI</span><span class="mobile-nav__label">Contact</span></a></li>
+    </ul>
+  </nav>
+
+
+  <!-- ========== THE REEL — one horizontal pinned experience from page top ==========
+       Scroll DOWN → track translates LEFT.
+       Screen 1: Hero (botanicals + stacked Pearl type)
+       Screen 2: Lyra-mask (SPECTRALMOON window onto Lyra walking)
+       Screens 3-6: existing 4 panels (Worlds / Cinema / Brand / Real Estate) -->
+  <section class="pin-section" id="reel">
+    <div class="pin-section__track">
+
+      <!-- ===== HERO — Lyra-mask (STUDIO with Lyra walking through letter cutouts) ===== -->
+      <article class="screen screen--lyra" id="screen-lyra">
+    <video class="hero__video" autoplay muted loop playsinline preload="auto">
+      <source src="assets/lyra_hero_animation.mp4" type="video/mp4" />
+    </video>
+
+    <!-- Desktop hero mask (landscape 1600×900) -->
+    <svg class="hero__mask-svg hero__mask-svg--desktop" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <defs>
+        <mask id="hero-text-mask" maskUnits="userSpaceOnUse">
+          <rect width="1600" height="900" fill="white" />
+          <!-- Spectralmoon crescent ☾ — no rotation, arc flows into STUDIO letters -->
+          <circle cx="360" cy="450" r="360" fill="black" />
+          <circle cx="510" cy="450" r="305" fill="white" />
+          <!-- STUDIO stacked — overlaps moon bite area, very tight letter-spacing -->
+          <text class="hero__svg-text" x="520" y="265" font-size="590" text-anchor="start" dominant-baseline="central">STU</text>
+          <text class="hero__svg-text" x="520" y="635" font-size="590" text-anchor="start" dominant-baseline="central">DIO</text>
+        </mask>
+      </defs>
+      <rect width="1600" height="900" fill="#2A201A" mask="url(#hero-text-mask)" />
+    </svg>
+
+    <!-- Mobile hero mask (portrait 430×932) — STU DIO fills the screen -->
+    <svg class="hero__mask-svg hero__mask-svg--mobile" viewBox="0 0 430 932" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <defs>
+        <mask id="hero-text-mask-mobile" maskUnits="userSpaceOnUse">
+          <rect width="430" height="932" fill="white" />
+          <!-- Anton condensed — misaligned: STU right, DIO left, letters stay readable -->
+          <text style="font-family:'Anton',sans-serif;letter-spacing:-0.02em;" x="225" y="340" font-size="380" text-anchor="middle" dominant-baseline="central" fill="black" textLength="415" lengthAdjust="spacing">STU</text>
+          <text style="font-family:'Anton',sans-serif;letter-spacing:-0.02em;" x="200" y="640" font-size="380" text-anchor="middle" dominant-baseline="central" fill="black" textLength="415" lengthAdjust="spacing">DIO</text>
+        </mask>
+      </defs>
+      <rect width="430" height="932" fill="#2A201A" mask="url(#hero-text-mask-mobile)" />
+    </svg>
+
+    <h1 class="sr-only">Spectralmoon Studio</h1>
+
+    <a class="hero__scroll-cue" href="#screen-manifesto" aria-label="Scroll to next screen">
+      <span class="hero__scroll-cue-text">Scroll to discover</span>
+      <span class="hero__scroll-cue-line" aria-hidden="true"></span>
+    </a>
+      </article>
+
+      <!-- ===== SCREEN 2 — MANIFESTO (layered: tagline + offerings + image + signature) ===== -->
+      <article class="screen screen--manifesto" id="screen-manifesto">
+        <div class="manifesto__content">
+          <p class="manifesto__line manifesto__line--1" data-split>Made by hand.</p>
+          <p class="manifesto__line manifesto__line--2">
+            <span class="manifesto__stair manifesto__stair--1">Studio of</span>
+            <span class="manifesto__stair manifesto__stair--2">imagined</span>
+            <span class="manifesto__stair manifesto__stair--3">worlds<span class="manifesto__signature" aria-hidden="true"> — Susana</span></span>
+          </p>
         </div>
+        <figure class="manifesto__figure manifesto__figure--fish" aria-hidden="true">
+          <img src="assets/fish.png?v=1779427906" alt="Spectralmoon pink fish" />
+        </figure>
+        <!-- Offerings — single line, two-line on mobile at natural break point -->
+        <p class="manifesto__offerings">
+          <span class="offerings-l1">Cinematic Films</span><span class="offerings-sep">Brand Identity</span><span class="offerings-l2">Dwellings</span>
+        </p>
+      </article>
+
+      <!-- ===== SCREEN 3 — BOTANICAL + brand tagline (promise) ===== -->
+      <article class="screen screen--botanical-statement" id="screen-tagline">
+        <video class="botanical-statement__video" autoplay muted loop playsinline preload="auto">
+          <source src="assets/botanical_loop.mp4" type="video/mp4" />
+        </video>
+        <div class="botanical-statement__overlay">
+          <p class="botanical-statement__line" data-split>Imagination is the technology.</p>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+       VERTICAL SECTIONS (resume normal down-scroll after the pin reel)
+       ============================================================ -->
+
+  <!-- Section intro — chapter marker before the work begins -->
+  <section class="section-intro section-intro--work">
+    <div class="section-intro__inner">
+      <span class="section-intro__num">I.</span>
+      <h2 class="section-intro__title">Selected Worlds</h2>
+      <p class="section-intro__desc">Cinematic worlds, brand identities, films, and properties — built for stories worth telling.</p>
+    </div>
+  </section>
+
+  <section class="vertical-panels" id="vertical-panels">
+
+      <article class="panel panel--cinema" id="screen-cinema" data-panel="1">
+        <header class="panel__header">
+          <span class="panel__num">I · Cinema</span>
+          <h2 class="panel__title">Cinema</h2>
+          <p class="panel__lede">Films and stories. Cinematic worlds. Magical realism. Sci-fi narratives.</p>
+        </header>
+        <div class="carousel" data-carousel>
+          <div class="carousel__track">
+            <figure class="carousel__item" data-full-src="assets/cinema_01_chronicles_v2.mp4">
+              <video class="carousel__video" autoplay muted loop playsinline>
+                <source src="assets/cinema_01_chronicles_v2.mp4" type="video/mp4" />
+              </video>
+              <figcaption class="carousel__caption">
+                <span class="carousel__num">01</span>
+                <span class="carousel__title">Chronicles of Lyra · Adimara</span>
+              </figcaption>
+            </figure>
+            <figure class="carousel__item" data-full-src="assets/cinema_02_aurora_full.mp4">
+              <video class="carousel__video" autoplay muted loop playsinline>
+                <source src="assets/cinema_02_aurora.mp4" type="video/mp4" />
+              </video>
+              <figcaption class="carousel__caption">
+                <span class="carousel__num">02</span>
+                <span class="carousel__title">Andean Aurora Borealis</span>
+              </figcaption>
+            </figure>
+            <figure class="carousel__item" data-full-src="assets/cinema_03_stars_full.mp4">
+              <video class="carousel__video" autoplay muted loop playsinline>
+                <source src="assets/cinema_03_stars.mp4" type="video/mp4" />
+              </video>
+              <figcaption class="carousel__caption">
+                <span class="carousel__num">03</span>
+                <span class="carousel__title">Where the Stars Align</span>
+              </figcaption>
+            </figure>
+            <figure class="carousel__item carousel__item--portrait" data-full-src="assets/cinema_04_monastery.mp4">
+              <video class="carousel__video" autoplay muted loop playsinline>
+                <source src="assets/cinema_04_monastery.mp4" type="video/mp4" />
+              </video>
+              <figcaption class="carousel__caption">
+                <span class="carousel__num">04</span>
+                <span class="carousel__title">Monastery · Animal Spirit</span>
+              </figcaption>
+            </figure>
+            <figure class="carousel__item" data-full-src="assets/left_behind_full.mp4">
+              <video class="carousel__video" autoplay muted loop playsinline>
+                <source src="assets/left_behind_preview.mp4" type="video/mp4" />
+              </video>
+              <figcaption class="carousel__caption">
+                <span class="carousel__num">05</span>
+                <span class="carousel__title">Left Behind</span>
+              </figcaption>
+            </figure>
+          </div>
+          <div class="carousel__progress" aria-hidden="true">
+            <span class="carousel__dot is-active"></span>
+            <span class="carousel__dot"></span>
+            <span class="carousel__dot"></span>
+            <span class="carousel__dot"></span>
+            <span class="carousel__dot"></span>
+          </div>
+        </div>
+      </article>
+
+      <article class="panel panel--identity" id="screen-identity" data-panel="2">
+        <header class="panel__header">
+          <span class="panel__num">II · Brand Identity</span>
+          <h2 class="panel__title">Brand Identity</h2>
+          <p class="panel__lede">Visual systems for brands. Crafted, not templated.</p>
+        </header>
+        <div class="carousel" data-carousel>
+          <div class="carousel__track">
+            <figure class="carousel__item" data-full-src="assets/brand_limitless.mp4">
+              <video class="carousel__video" autoplay muted loop playsinline>
+                <source src="assets/brand_limitless.mp4" type="video/mp4" />
+              </video>
+              <figcaption class="carousel__caption">
+                <span class="carousel__num">01</span>
+                <span class="carousel__title">Limitless · Brand Film</span>
+              </figcaption>
+            </figure>
+            <figure class="carousel__item" data-full-src="assets/frostrand_full.mp4">
+              <video class="carousel__video" autoplay muted loop playsinline>
+                <source src="assets/frostrand.mp4" type="video/mp4" />
+              </video>
+              <figcaption class="carousel__caption">
+                <span class="carousel__num">02</span>
+                <span class="carousel__title">Frostrand · Brand Film</span>
+              </figcaption>
+            </figure>
+            <figure class="carousel__item" data-full-src="assets/brand.mp4">
+              <video class="carousel__video" autoplay muted loop playsinline>
+                <source src="assets/brand.mp4" type="video/mp4" />
+              </video>
+              <figcaption class="carousel__caption">
+                <span class="carousel__num">03</span>
+                <span class="carousel__title">Sepal · Brand Film</span>
+              </figcaption>
+            </figure>
+            <figure class="carousel__item" data-full-src="assets/brand_grime.mp4">
+              <video class="carousel__video" autoplay muted loop playsinline>
+                <source src="assets/brand_grime.mp4" type="video/mp4" />
+              </video>
+              <figcaption class="carousel__caption">
+                <span class="carousel__num">04</span>
+                <span class="carousel__title">Grime · Fashion Film</span>
+              </figcaption>
+            </figure>
+            <figure class="carousel__item" data-full-src="assets/grime_glow_final.mp4">
+              <video class="carousel__video" autoplay muted loop playsinline>
+                <source src="assets/grime_glow_final.mp4" type="video/mp4" />
+              </video>
+              <figcaption class="carousel__caption">
+                <span class="carousel__num">05</span>
+                <span class="carousel__title">Grime Glow · Fashion Film</span>
+              </figcaption>
+            </figure>
+          </div>
+          <div class="carousel__progress" aria-hidden="true">
+            <span class="carousel__dot is-active"></span>
+            <span class="carousel__dot"></span>
+            <span class="carousel__dot"></span>
+            <span class="carousel__dot"></span>
+            <span class="carousel__dot"></span>
+          </div>
+        </div>
+      </article>
+
+      <article class="panel panel--dwellings" id="screen-dwellings" data-panel="3">
+        <header class="panel__header">
+          <span class="panel__num">III · Dwellings</span>
+          <h2 class="panel__title">Dwellings</h2>
+          <p class="panel__lede">Listings that feel like the place. AI-rendered, human-directed.</p>
+        </header>
+        <div class="carousel" data-carousel>
+          <div class="carousel__track">
+            <figure class="carousel__item" data-lightbox-src="assets/dwell_06.jpg" data-lightbox-caption="Villa Cala Cala · Bolivia">
+              <img class="carousel__img" src="assets/dwell_06.jpg" alt="Villa Cala Cala — golden hour exterior, Bolivia" loading="lazy" />
+              <figcaption class="carousel__caption">
+                <span class="carousel__num">01</span>
+                <span class="carousel__title">Villa Cala Cala · Bolivia</span>
+              </figcaption>
+            </figure>
+            <figure class="carousel__item" data-lightbox-src="assets/dwell_07.jpg" data-lightbox-caption="Villa Cala Cala · Interior · Japandi">
+              <img class="carousel__img" src="assets/dwell_07.jpg" alt="Villa Cala Cala — Japandi interior, Bolivia" loading="lazy" />
+              <figcaption class="carousel__caption">
+                <span class="carousel__num">02</span>
+                <span class="carousel__title">Villa Cala Cala · Interior · Japandi</span>
+              </figcaption>
+            </figure>
+            <figure class="carousel__item" data-full-src="assets/dwell_full.mp4">
+              <video class="carousel__video" autoplay muted loop playsinline>
+                <source src="assets/dwell_preview.mp4" type="video/mp4" />
+              </video>
+              <figcaption class="carousel__caption">
+                <span class="carousel__num">03</span>
+                <span class="carousel__title">Gran Cosón · Film</span>
+              </figcaption>
+            </figure>
+          </div>
+          <div class="carousel__progress" aria-hidden="true">
+            <span class="carousel__dot is-active"></span>
+            <span class="carousel__dot"></span>
+            <span class="carousel__dot"></span>
+          </div>
+        </div>
+      </article>
+
+  </section>
+
+  <!-- Divider — Reel → Insights chapter break -->
+  <div class="section-divider" aria-hidden="true">
+    <span class="section-divider__rule"></span>
+    <span class="section-divider__label">IV</span>
+    <span class="section-divider__rule"></span>
+  </div>
+
+  <!-- Section IV — Insights -->
+  <section class="section-intro section-intro--insights" id="section-insights">
+    <div class="section-intro__inner">
+      <span class="section-intro__num">IV.</span>
+      <h2 class="section-intro__title">Insights</h2>
+      <p class="section-intro__desc">Field guides, thinking tools, and prompt systems from the studio.</p>
+      <a href="insights.html" class="insights-intro__cta">
+        <span class="insights-cta__fish-wrap">
+          <img src="assets/fish.png" alt="" class="insights-cta__fish" aria-hidden="true" />
+        </span>
+        <span class="insights-intro__cta-text">Enter the library</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- Divider — Insights → About chapter break -->
+  <div class="section-divider" aria-hidden="true">
+    <span class="section-divider__rule"></span>
+    <span class="section-divider__label">V</span>
+    <span class="section-divider__rule"></span>
+  </div>
+
+  <!-- Section V — About -->
+  <section class="about-body" id="section-about">
+    <div class="about-body__inner">
+
+      <!-- Small section label -->
+      <div class="about-body__label">
+        <span class="about-body__num">V.</span>
+        <span class="about-body__heading">About</span>
       </div>
+
+      <div class="about-body__columns">
+
+        <!-- Left — pull quotes -->
+        <div class="about-body__quotes">
+          <p class="about-body__pull">A life lived across continents does something to the way you see the world.</p>
+          <p class="about-body__pull about-body__pull--accent">The stories were always there. Now they have somewhere to go.</p>
+        </div>
+
+        <!-- Right — body -->
+        <div class="about-body__text">
+          <p>Living across continents and languages teaches you to read the world differently — to find what’s authentic in a culture, what a brand could become, what a story is really about before anyone says it out loud.</p>
+          <p>That instinct deepened at MediaMonks — a global marketing and technology powerhouse — working on campaigns for brands that define culture. It’s where a passion for storytelling met the discipline of production: understanding what makes a campaign land, what gives a visual world its internal logic, what turns a vision into something people feel long after they’ve seen it.</p>
+          <p>Spectralmoon Studio exists at that intersection. We build cinematic films, brand identities, and visual narratives for founders and brands who believe their story deserves to be told with real craft. Every project begins the same way — with imagination. The campaign that hasn’t been made yet. The world the brand could inhabit. The feeling the film should leave behind. Then we build it.</p>
+          <span class="about-body__annotation">still imagining · still building</span>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Divider — About → Contact chapter break -->
+  <div class="section-divider" aria-hidden="true">
+    <span class="section-divider__rule"></span>
+    <span class="section-divider__label">VI</span>
+    <span class="section-divider__rule"></span>
+  </div>
+
+  <!-- Section VI — Contact -->
+  <section class="contact-reveal" id="section-contact">
+    <h2 class="sr-only">Contact Spectralmoon Studio</h2>
+
+    <!-- Video — Seedance fish version, all screen sizes -->
+    <video class="contact-reveal__video" autoplay muted loop playsinline preload="auto">
+      <source src="assets/fish_seedance_version.mp4?v=1786000000" type="video/mp4" />
+    </video>
+
+    <!-- Letter stroke overlay — espresso outline gives the transparent letters presence -->
+    <svg class="contact-reveal__stroke contact-reveal__stroke--desktop"
+         viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice"
+         xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <text x="800" y="500"
+            text-anchor="middle"
+            font-family="Anton, Impact, sans-serif"
+            font-size="310"
+            fill="none"
+            stroke="#9B6B3D"
+            stroke-width="4"
+            paint-order="stroke">CONTACT</text>
+    </svg>
+    <svg class="contact-reveal__stroke contact-reveal__stroke--mobile"
+         viewBox="0 0 430 932" preserveAspectRatio="xMidYMid slice"
+         xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <text x="215" y="500"
+            text-anchor="middle"
+            font-family="Anton, Impact, sans-serif"
+            font-size="86"
+            textLength="410"
+            lengthAdjust="spacingAndGlyphs"
+            fill="none"
+            stroke="#9B6B3D"
+            stroke-width="2"
+            paint-order="stroke">CONTACT</text>
+    </svg>
+
+    <!-- Desktop: white mask with CONTACT letters cut out — video shows through letters -->
+    <svg class="contact-reveal__mask contact-reveal__mask--desktop"
+         viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice"
+         xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <defs>
+        <mask id="letter-mask-desktop">
+          <rect width="1600" height="900" fill="white"/>
+          <text x="800" y="500"
+                text-anchor="middle"
+                font-family="Anton, Impact, sans-serif"
+                font-size="310"
+                fill="black">CONTACT</text>
+        </mask>
+      </defs>
+      <rect width="1600" height="900" fill="white" mask="url(#letter-mask-desktop)"/>
+    </svg>
+
+    <!-- Mobile mask -->
+    <svg class="contact-reveal__mask contact-reveal__mask--mobile"
+         viewBox="0 0 430 932" preserveAspectRatio="xMidYMid slice"
+         xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <defs>
+        <mask id="letter-mask-mobile">
+          <rect width="430" height="932" fill="white"/>
+          <text x="215" y="500"
+                text-anchor="middle"
+                font-family="Anton, Impact, sans-serif"
+                font-size="86"
+                textLength="410"
+                lengthAdjust="spacingAndGlyphs"
+                fill="black">CONTACT</text>
+        </mask>
+      </defs>
+      <rect width="430" height="932" fill="white" mask="url(#letter-mask-mobile)"/>
+    </svg>
+
+    <!-- Info — sits in white zone below the letters -->
+    <div class="contact-reveal__info">
+      <span class="contact-reveal__num">VI.</span>
+      <address class="contact-reveal__address">
+        <a href="mailto:muluc33@gmail.com" class="contact-reveal__email">muluc33@gmail.com</a>
+        <span class="contact-reveal__tagline">Let's build a world together.</span>
+      </address>
     </div>
 
-    <section class="pillars" aria-label="What we do">
-      <div class="pillar">
-        <h3 class="pillar-title">Storytelling</h3>
-        <div class="pillar-rule"></div>
-        <div class="pillar-text">
-          Films and visual narratives that move, inspire and endure.
-        </div>
-      </div>
-      <div class="pillar">
-        <h3 class="pillar-title">Consciousness</h3>
-        <div class="pillar-rule"></div>
-        <div class="pillar-text">
-          Visual stories crafted for depth, meaning and brands with soul.
-        </div>
-      </div>
-      <div class="pillar">
-        <h3 class="pillar-title">Technology</h3>
-        <div class="pillar-rule"></div>
-        <div class="pillar-text">
-          Where AI, code and human craft come together.
-        </div>
-      </div>
-    </section>
+  </section>
 
-    <!-- FEATURED FILM -->
-    <section class="featured-section" aria-label="Featured film">
-      <div class="featured-eyebrow">Featured Film</div>
-      <div class="featured-rule"></div>
-      <div class="featured-film-wrap" id="featuredFilm" role="button" tabindex="0" aria-label="Play featured film: Where the Stars Align">
-        <video id="featuredVideo" loop muted playsinline preload="none" poster="thumbnails/thumb_when_the_stars_align.webp">
-          <source src="https://res.cloudinary.com/dbet91fsr/video/upload/f_auto,q_auto:good/v1776299173/Where_the_Stars_Remember_web_zbm207.mp4" type="video/mp4" />
-        </video>
-        <div class="featured-film-overlay">
-          <div class="featured-play-btn" id="featuredPlayBtn">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="#C8933A">
-              <polygon points="5,3 19,12 5,21" />
+  <!-- Fullscreen cinema modal -->
+  <div class="cinema-modal" id="cinema-modal" aria-modal="true" role="dialog" aria-label="Film player">
+    <button class="cinema-modal__close" id="cinema-modal-close" aria-label="Close">✕</button>
+    <div class="cinema-modal__video-wrap">
+      <video class="cinema-modal__video" id="cinema-modal-video" playsinline></video>
+      <div class="cinema-modal__play-icon" id="cinema-modal-play-icon" aria-hidden="true">
+        <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="32" cy="32" r="30" fill="rgba(0,0,0,0.45)" stroke="rgba(255,255,255,0.6)" stroke-width="1.5"/>
+          <polygon points="26,20 26,44 46,32" fill="rgba(255,255,255,0.9)"/>
+        </svg>
+      </div>
+      <div class="cinema-modal__controls" id="cinema-modal-controls">
+        <button class="cinema-modal__ctrl-btn" id="cinema-modal-play-btn" aria-label="Play / Pause">
+          <!-- play icon (shown when paused) -->
+          <svg class="ctrl-icon ctrl-icon--play" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <polygon points="6,4 20,12 6,20" fill="currentColor"/>
+          </svg>
+          <!-- pause icon (shown when playing) -->
+          <svg class="ctrl-icon ctrl-icon--pause" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="5" y="4" width="4" height="16" fill="currentColor"/>
+            <rect x="15" y="4" width="4" height="16" fill="currentColor"/>
+          </svg>
+        </button>
+        <input class="cinema-modal__scrub" id="cinema-modal-scrub" type="range" min="0" max="100" value="0" step="0.1" aria-label="Seek">
+        <span class="cinema-modal__time" id="cinema-modal-time">0:00</span>
+        <!-- Volume -->
+        <div class="cinema-modal__volume">
+          <button class="cinema-modal__ctrl-btn" id="cinema-modal-vol-btn" aria-label="Mute / Unmute">
+            <!-- volume-on icon -->
+            <svg class="ctrl-icon ctrl-icon--vol-on" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <polygon points="4,9 8,9 13,5 13,19 8,15 4,15" fill="currentColor"/>
+              <path d="M16 8.5a4 4 0 0 1 0 7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+              <path d="M18.5 6a7 7 0 0 1 0 12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
             </svg>
-          </div>
-          <div class="featured-label">
-            Film · AI Short Film / Narrative Fantasy
-          </div>
-          <h3 class="featured-film-title">Where the Stars Align</h3>
-          <div class="featured-film-desc">
-            A woman walks a path of ancient trials — not battles to win, but
-            layers to shed. The studio's first fully structured AI short film,
-            built scene by scene: sacred geometry, celestial symbolism, and the
-            quiet return that feels less like arrival and more like remembering.
-          </div>
-          <div class="featured-film-tags">
-            <span class="featured-film-tag">Narrative Fantasy</span>
-            <span class="featured-film-tag">Heroine's Journey</span>
-            <span class="featured-film-tag">Mythic Cinema</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="gallery-section" id="work">
-      <div class="gallery-header">
-        <div class="gallery-eyebrow">Selected Work</div>
-        <h2 class="gallery-headline">A growing body of work</h2>
-        <div class="gallery-rule"></div>
-        <div class="gallery-filters">
-          <button class="filter-btn active" data-filter="all" aria-pressed="true">All</button>
-          <button class="filter-btn" data-filter="film" aria-pressed="false">Film</button>
-          <button class="filter-btn" data-filter="commercial" aria-pressed="false">
-            Commercial
+            <!-- volume-muted icon -->
+            <svg class="ctrl-icon ctrl-icon--vol-off" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <polygon points="4,9 8,9 13,5 13,19 8,15 4,15" fill="currentColor"/>
+              <path d="M16 9l5 6M21 9l-5 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+            </svg>
           </button>
-          <button class="filter-btn" data-filter="story" aria-pressed="false">Story</button>
+          <input class="cinema-modal__vol-slider" id="cinema-modal-vol-slider" type="range" min="0" max="100" value="100" step="1" aria-label="Volume">
         </div>
-      </div>
-
-      <div class="masonry-grid">
-        <div
-          class="masonry-item"
-          role="button"
-          tabindex="0"
-          data-cat="film"
-          data-title="Feline Oracles"
-          data-category="Film · AI Cinematic / World-Building"
-          data-tags="Fantasy World-Building,Sacred Architecture,Scale Study"
-          data-desc="Born from a childhood obsession with the ancient oracle statues in The NeverEnding Story. A technical study in scale through prompting — wide-angle optics, compositional framing, and deliberate size contrast. Two monumental feline statues in blue light. A tiny woman standing between worlds."
-          data-file="https://res.cloudinary.com/dbet91fsr/video/upload/f_auto,q_auto:good,w_1280/v1776296099/oracle_ylasna.mp4"
-          data-type="video"
-        >
-          <img class="masonry-thumb" src="thumbnails/thumb_oracles.webp" alt="Feline Oracles">
-          <div class="masonry-overlay">
-            <div class="masonry-cat">Film</div>
-            <h3 class="masonry-title">Feline Oracles</h3>
-          </div>
-        </div>
-
-        <div
-          class="masonry-item"
-          role="button"
-          tabindex="0"
-          data-cat="story"
-          data-title="Mucha Inspired — Magical Being Series"
-          data-category="Story · AI Visual Art / Art Nouveau"
-          data-tags="Art Nouveau,Botanical Mythology,Ukiyo-e Fusion"
-          data-desc="At the intersection of Mucha's Art Nouveau golden halos, Japanese ukiyo-e botanical woodblock, and oversized blooming flowers as spiritual presence. She emerged from a late-night creative drift — not designed so much as discovered. Part of an ongoing series of magical, mythological feminine archetypes."
-          data-file="https://res.cloudinary.com/dbet91fsr/video/upload/f_auto,q_auto:good,w_1280/v1776297344/Zodiac_hhgo4k.mp4"
-          data-type="video"
-        >
-          <img class="masonry-thumb masonry-thumb--medium" src="thumbnails/thumb_zodiac_mucha_inspired.webp" alt="Mucha Inspired">
-          <div class="masonry-overlay">
-            <div class="masonry-cat">Story</div>
-            <h3 class="masonry-title">Mucha Inspired</h3>
-          </div>
-        </div>
-
-        <div
-          class="masonry-item"
-          role="button"
-          tabindex="0"
-          data-cat="commercial"
-          data-title="The Worst Commercial"
-          data-category="Commercial · AI Experimental / Comedic"
-          data-tags="Experimental,Parody,Retro Camp"
-          data-desc="Born from a GenHQ challenge — make an ad so bad it's genius. Washed-out colour grading, awkward pacing, crystal healing claims delivered with complete sincerity. You can only make something this precisely bad if you know exactly what good looks like. Part parody, part love letter to terrible television."
-          data-file="https://res.cloudinary.com/dbet91fsr/video/upload/f_auto,q_auto:good,w_1280/v1776297123/the-worst_commercial_sutx72.mov"
-          data-type="video"
-        >
-          <img class="masonry-thumb" src="thumbnails/thumb_the_worst_commercial.webp" alt="The Worst Commercial">
-          <div class="masonry-overlay">
-            <div class="masonry-cat">Commercial</div>
-            <h3 class="masonry-title">The Worst Commercial</h3>
-          </div>
-        </div>
-
-        <div
-          class="masonry-item"
-          role="button"
-          tabindex="0"
-          data-cat="film"
-          data-title="Lyran-Draco Confrontation"
-          data-category="Film · AI Cinematic / Speculative Fiction"
-          data-tags="Cosmic Mythology,Character Continuity,Dream Reconstruction"
-          data-desc="Practice in character continuity and speculative world-building. A recurring Lyran warrior woman, standing on the scarred terrain of a world once lush and alive. Dream-reconstructed Lyran civilisation versus Draco forces. Cosmic mythology meets battlefield cinema — not fantasy, but memory-cinema."
-          data-file="https://res.cloudinary.com/dbet91fsr/video/upload/f_auto,q_auto:good,w_1280/v1776295726/Lyran_draco_confrontation_war_nldzr8.mp4"
-          data-type="video"
-        >
-          <img class="masonry-thumb" src="thumbnails/thumb_lyra_draco.webp" alt="Lyran-Draco Confrontation">
-          <div class="masonry-overlay">
-            <div class="masonry-cat">Film</div>
-            <h3 class="masonry-title">Lyran-Draco Confrontation</h3>
-          </div>
-        </div>
-
-        <div
-          class="masonry-item"
-          role="button"
-          tabindex="0"
-          data-cat="story"
-          data-title="The Stag — Ethereal Beings Series"
-          data-category="Story · AI Visual Art / Sacred Mythology"
-          data-tags="Sacred Mythology,Art Nouveau,Symbolic Visual Poetry"
-          data-desc="A porcelain stag in a bioluminescent forest, antlers branching like living star maps and root systems. Mucha-inspired golden halos, sacred geometry, fireflies and moss. The stag as threshold guardian — moving between the seen and unseen, antlers cycling through growth, fall, and return like the seasons themselves."
-          data-file="https://res.cloudinary.com/dbet91fsr/video/upload/f_auto,q_auto:good,w_1280/v1776297347/stag_ethereal_zxjpek.mov"
-          data-type="video"
-        >
-          <img class="masonry-thumb" src="thumbnails/thumb_stag_ethereal.webp" alt="The Stag">
-          <div class="masonry-overlay">
-            <div class="masonry-cat">Story</div>
-            <h3 class="masonry-title">The Stag — Ethereal Beings Series</h3>
-          </div>
-        </div>
-
-        <div
-          class="masonry-item"
-          role="button"
-          tabindex="0"
-          data-cat="film"
-          data-title="Grime &amp; Glow"
-          data-category="Film · AI Fashion Film / Conceptual"
-          data-tags="Fashion Film,Decay Aesthetic,Haute Couture"
-          data-desc="Grime and glow. Two words that shouldn't sit together, but do. A forgotten gas station at golden hour — rust, cracked asphalt, peeling paint — framed like haute couture. Where worn things catch the light, beauty finds its way back in."
-          data-file="https://res.cloudinary.com/dbet91fsr/video/upload/f_auto,q_auto:good,w_1280/v1776295388/grime_glow_v1_njp63i.mp4"
-          data-type="video"
-        >
-          <img class="masonry-thumb" src="thumbnails/thumb.._grime_glow.webp" alt="Grime &amp; Glow">
-          <div class="masonry-overlay">
-            <div class="masonry-cat">Film</div>
-            <h3 class="masonry-title">Grime &amp; Glow</h3>
-          </div>
-        </div>
-
-        <div
-          class="masonry-item"
-          role="button"
-          tabindex="0"
-          data-cat="commercial"
-          data-title="Syntropya"
-          data-category="Commercial · AI Concept Film / Wellness"
-          data-tags="Wellness Commercial,Concept Film,Visionary Architecture"
-          data-desc="A wellness commercial concept for a retreat space in the lush heart of Bahia, Brazil. Syntropy — the opposite of entropy — the force that moves toward life, coherence, and flowering. A place where creativity and healing are not separate, where technology serves stillness, and where the land itself is the medicine."
-          data-file="https://res.cloudinary.com/dbet91fsr/video/upload/f_auto,q_auto:good,w_1280/v1776296879/syntropya_oyxnjo.mp4"
-          data-type="video"
-        >
-          <img class="masonry-thumb" src="thumbnails/thumb_syntropia.webp" alt="Syntropya">
-          <div class="masonry-overlay">
-            <div class="masonry-cat">Commercial</div>
-            <h3 class="masonry-title">Syntropya</h3>
-          </div>
-        </div>
-
-        <div
-          class="masonry-item"
-          role="button"
-          tabindex="0"
-          data-cat="film"
-          data-title="Grime &amp; Glow: Vactiancy"
-          data-category="Film · AI Fashion Film / Conceptual"
-          data-tags="Fashion Film,Vacancy,Intimate Decay"
-          data-desc="Vactiancy — a word that doesn't exist, for a feeling that does. The strange intimacy of vacancy. An abandoned motel corridor, peeling walls, neon fading into nothing. The quiet emotional space inside empty places, where beauty and presence still show up uninvited."
-          data-file="https://res.cloudinary.com/dbet91fsr/video/upload/f_auto,q_auto:good,w_1280/v1776295337/grime_glow_v2_feqfqh.mp4"
-          data-type="video"
-        >
-          <img class="masonry-thumb" src="thumbnails/thumb_grim_glow_2.webp" alt="Grime &amp; Glow: Vactiancy">
-          <div class="masonry-overlay">
-            <div class="masonry-cat">Film</div>
-            <h3 class="masonry-title">Grime &amp; Glow: Vactiancy</h3>
-          </div>
-        </div>
-
-        <div
-          class="masonry-item"
-          role="button"
-          tabindex="0"
-          data-cat="story"
-          data-title="Red Panda Daemon"
-          data-category="Story · AI Visual Art / Symbolic Portrait"
-          data-tags="Symbolic Portrait,Spirit Animal,Literary Inspiration"
-          data-desc="Inspired by Philip Pullman's concept of the daemon — the animal soul-companion that walks beside you, reflecting your innermost nature. The red panda as spirit animal: curious, quietly fierce, gentle but untameable. An experiment in translating interior worlds into visual form."
-          data-file="https://res.cloudinary.com/dbet91fsr/video/upload/f_auto,q_auto:good,w_1280/v1776295411/animal_spirit_rp6rlo.mp4"
-          data-type="video"
-        >
-          <img class="masonry-thumb" src="thumbnails/thumb_animal_spirit.webp" alt="Red Panda Daemon">
-          <div class="masonry-overlay">
-            <div class="masonry-cat">Story</div>
-            <h3 class="masonry-title">Red Panda Daemon</h3>
-          </div>
-        </div>
-
-        <div
-          class="masonry-item"
-          role="button"
-          tabindex="0"
-          data-cat="film"
-          data-title="Grime &amp; Glow: Echovogue"
-          data-category="Film · AI Fashion Film / Conceptual"
-          data-tags="Fashion Film,Temporal Remix,Neon Future"
-          data-desc="Echovogue — style as reverberation. A designer in the future watches the original and makes it theirs. Fashion is cyclical: grime gets stolen, remixed, made neon. A copy-paste across eras where beauty was never about the object — only the eye that finds it, again and again."
-          data-file="https://res.cloudinary.com/dbet91fsr/video/upload/f_auto,q_auto:good,w_1280/v1776296712/grime_glow_v3_u122qu.mp4"
-          data-type="video"
-        >
-          <img class="masonry-thumb" src="thumbnails/thumb_grime_glow_futuristic.webp" alt="Grime &amp; Glow: Echovogue">
-          <div class="masonry-overlay">
-            <div class="masonry-cat">Film</div>
-            <h3 class="masonry-title">Grime &amp; Glow: Echovogue</h3>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-labelledby="lightboxTitle" aria-hidden="true">
-      <div class="lightbox-inner">
-        <button class="lightbox-close" id="lightboxClose">✕ Close</button>
-        <div class="lightbox-media" id="lightboxMedia"></div>
-        <div class="lightbox-info">
-          <div class="lightbox-cat" id="lightboxCat"></div>
-          <div class="lightbox-title" id="lightboxTitle"></div>
-          <div class="lightbox-desc" id="lightboxDesc"></div>
-          <div class="lightbox-tags" id="lightboxTags"></div>
-        </div>
+        <!-- Fullscreen -->
+        <button class="cinema-modal__ctrl-btn" id="cinema-modal-fs-btn" aria-label="Fullscreen">
+          <svg class="ctrl-icon ctrl-icon--fs" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
       </div>
     </div>
+    <p class="cinema-modal__title" id="cinema-modal-title"></p>
+  </div>
 
-    <section class="about-section" id="about" aria-labelledby="aboutHeadline">
-      <div class="about-inner">
-        <div class="about-eyebrow">About</div>
-        <div class="about-rule"></div>
-        <h2 class="about-headline" id="aboutHeadline">The stories were always there.<br>Living inside — waiting.</h2>
-        <div class="about-body">Spectralmoon Studio was born from the belief that imagination is the most powerful technology we have.</div>
-        <div class="about-body">AI didn't give us the vision. It gave us the tools to finally reach it.</div>
-        <div class="about-divider"></div>
-        <div class="about-body">We craft films, visual stories and experiences for the conscious digital age — where <em>ancient wisdom is the code the future runs on.</em></div>
-      </div>
-    </section>
-    </main>
+  <!-- Fullscreen image lightbox -->
+  <div class="img-lightbox" id="img-lightbox" aria-modal="true" role="dialog" aria-label="Image viewer">
+    <button class="img-lightbox__close" id="img-lightbox-close" aria-label="Close">✕</button>
+    <div class="img-lightbox__zone img-lightbox__zone--prev" id="img-lightbox-prev" role="button" aria-label="Previous image">
+      <span class="img-lightbox__arrow"><svg width="20" height="36" viewBox="0 0 20 36" fill="none"><path d="M16 4L4 18L16 32" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+    </div>
+    <div class="img-lightbox__stage" id="img-lightbox-stage">
+      <img class="img-lightbox__img" id="img-lightbox-img" src="" alt="" />
+      <span class="img-lightbox__zoom-hint">expand</span>
+    </div>
+    <div class="img-lightbox__zone img-lightbox__zone--next" id="img-lightbox-next" role="button" aria-label="Next image">
+      <span class="img-lightbox__arrow"><svg width="20" height="36" viewBox="0 0 20 36" fill="none"><path d="M4 4L16 18L4 32" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+    </div>
+    <div class="img-lightbox__footer">
+      <p class="img-lightbox__caption" id="img-lightbox-caption"></p>
+      <div class="img-lightbox__dots" id="img-lightbox-dots"></div>
+    </div>
+  </div>
 
-    <footer class="contact-section" id="contact">
-      <div class="contact-inner">
-        <div class="contact-eyebrow">Contact</div>
-        <div class="contact-rule"></div>
-        <h2 class="contact-headline">Let's tell a story together</h2>
-        <div class="contact-sub">For commissions, collaborations, or conversations about the work.</div>
-        <div class="contact-links">
-          <a class="contact-link" href="mailto:muluc33@gmail.com">muluc33@gmail.com</a>
-          <a class="contact-link" href="https://instagram.com/spectralmoon.creates" target="_blank" rel="noopener">Instagram</a>
-        </div>
-      </div>
-    </footer>
+  <!-- ========== SCRIPTS ========== -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
+  <!-- Continue hint — appears when last horizontal panel is fully in view -->
+  <div class="continue-hint" id="continue-hint" aria-hidden="true">
+    <span class="continue-hint__text">continue</span>
+    <span class="continue-hint__line"></span>
+  </div>
 
-    <script src="script.js"></script>
-  </body>
+  <script src="script.js?v=1786001200"></script>
+</body>
 </html>

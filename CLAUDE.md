@@ -1,85 +1,130 @@
-# Spectralmoon Studio — Claude Code Workspace
+# Spectralmoon Studio V3 — Project Context
+
+**Last updated:** May 2026
+**Status:** Active learning project. Portfolio proof. Not yet a service offering.
 
 ---
 
-## Identity
+## What this project is
 
-You are helping **Susana Barrero** build and maintain the **Spectralmoon Studio website** — a static HTML/CSS/JS site hosted on GitHub Pages.
+This is Susana's **practice site** — she is learning web design and front-end development by building her own studio portfolio. It is not a client project. It is proof of capability: "I can build this."
 
-- QA background — explain code changes clearly before making them, flag edge cases
-- Code-literate but not a daily coder — plain English first, then the code
-- Design eye — visual decisions must follow the Atlas V2 direction (see References)
-- Deploy is simple: `git push` → live in ~2 minutes. No build step, no CI.
+The v3 prototype lives at: https://spectralmoonstudio.netlify.app  
+The live production site (old version) is at: https://spectralmoonstudio.com  
+The v3 replaces the old site once QA passes.
 
-**Rules:**
-- Never use pure black — `--espresso #2A201A` for all outlines and shadows
-- Never add a framework — stay static HTML/CSS/vanilla JS
-- Preserve WCAG AA accessibility from the current build
-- Always check the palette tokens before writing any CSS colour value
-- Before any DNS or domain change: read the Technical & Hosting Reference in Obsidian
+**Do not treat this like a client deadline project.** This is a learning environment. Explain bugs, patterns, and decisions as you fix them. The goal is understanding, not just shipping.
 
 ---
 
-## Context
+## Current offering context
 
-### Active — V2 re-skin (Atlas direction)
+Susana currently offers:
+- AI video production (primary income stream)
+- Branding / conscious brand strategy
 
-Re-skinning the existing site to the Atlas aesthetic. NOT a rebuild. Same files, same structure — visual layer changes only unless a feature requires new code.
+Web building is a **future service** she is working toward. She does not feel ready to offer it yet. The v3 site is her proof of concept — when it's solid, she'll know she's ready.
 
-**What's changing:** colours → Atlas palette tokens, typography → Fraunces + Inter Tight, hero imagery → Atlas risograph illustrations, overall feel → chic + commercial (away from poetic/mystical).
+---
 
-**What stays:** static structure, GitHub Pages hosting, accessibility, mobile responsiveness, performance.
+## Tech stack
 
-**Open decisions — resolve before coding these sections:**
-- Hero copy (3 options — ask Susana)
-- Pillar names (3 options — ask Susana)
-- Featured work — placeholder or Sepal commercial
-- Hero scene — which Atlas world leads
-- Atlas map — interactive or static
+| Tool | Purpose |
+|------|---------|
+| HTML / CSS / JS | Vanilla — no framework |
+| GSAP + ScrollTrigger | Horizontal pin reel, scroll reveals |
+| Lenis | Smooth scroll driver |
+| Netlify | Hosting + deployment |
+| Cloudinary | Video delivery (CDN optimized) |
 
-### Atlas palette tokens — use these everywhere
+---
 
-```css
---cream:      #F2EBDC;
---rose-pink:  #E68FA8;
---rose-deep:  #C76A89;
---cochineal:  #A8302C;
---indigo:     #26415C;
---teal:       #1F4E5C;
---ochre:      #9B6B3D;
---sage-teal:  #6B8E7E;  /* Tara only */
---espresso:   #2A201A;  /* NO pure black */
---sun-gold:   #F2C94C;  /* jewellery/accent only */
+## File map
+
+| File | What it does |
+|------|-------------|
+| `index.html` | Main portfolio page — all sections |
+| `insights.html` | Manuals / field guides page |
+| `style.css` | All styles including mobile breakpoints |
+| `script.js` | All scroll, animation, carousel, modal logic |
+| `MANUALS.md` | Index of all 5 manuals — live URLs + vault paths |
+| `horizontal-scroll-logic.md` | Documented scroll system — v2 pure scrub approach + lessons from wonjyou.studio |
+| `assets/` | Images, SVGs, local assets |
+| `manuals/` | Local copies of the 5 published manuals |
+
+---
+
+## Scroll system (v2 — pure scrub)
+
+The horizontal pin section uses GSAP `scrub: true` — zero lag, 1:1 with scroll position. No wheel interceptors, no locks. Documented in full in `horizontal-scroll-logic.md`.
+
+Key principles:
+- `scrub: true` not `scrub: 0.1` — eliminates visual bleed
+- `end = track.scrollWidth - (window.innerWidth - sidebarW)` — exact distance, no padding
+- `onLeave` → explicit `lenis.scrollTo` to first section below (prevents Lenis momentum overshoot)
+- `isSnapping` flag checked BEFORE `e.preventDefault()` in vertical interceptor
+
+**Mobile:** GSAP pin is completely bypassed on mobile (`window.innerWidth > 768`). Panels stack vertically via CSS.
+
+---
+
+## Known issues (as of May 2026)
+
+All previously logged issues resolved. Awaiting mobile QA pass on live site.
+
+| # | Status | Issue |
+|---|--------|-------|
+| 1 | ✅ | `doSnap` mobile guard added (line 268 + 300 in script.js) |
+| 2 | ✅ | Reveals ScrollTrigger wrapped in desktop-only `else` block |
+| 3 | ✅ | Lenis `smoothWheel: !isMobile` |
+| 4 | ✅ | `doSnap` has `onComplete` callback + fallback setTimeout |
+
+---
+
+## Design philosophy
+
+Inspired by [wonjyou.studio](https://wonjyou.studio/) — a motion director portfolio studied for scroll interaction patterns. Core lessons:
+- Pure scrub over discrete jumps
+- Pin duration = content duration (trust GSAP, no artificial buffers)
+- Typography over decoration
+- Horizontal reel used once, purposefully — not stacked
+
+---
+
+## Local testing
+
+Test changes locally before deploying — serves the project folder exactly as it is,
+including any uncommitted edits.
+
+```bash
+cd "/Users/spectralmoon/Developer/spectral-moon-studio-v3-proto"
+python3 -m http.server 8000
+# then open http://localhost:8000  (hard-refresh with Cmd+Shift+R to bypass cache)
+# Ctrl+C in the terminal to stop the server
 ```
 
-### Typography
-
-- **Fraunces** — display/hero: italic 800, ~200px hero, 96px statement, 48px pillars
-- **Inter Tight** — UI/body: 12–14px, uppercase, 0.22–0.32em letter-spacing
-- **Caveat** — handwrite accent, optional
+Note: localhost has no CDN, so videos load at their slowest here — that's expected,
+not a bug. Claude can start/stop this server via Desktop Commander on request.
 
 ---
 
-## References
+## Deployment
 
-**Repo:** `git@github.com:Spectralmoon/spectral-moon-studio.git`
-**Live site:** https://spectralmoonstudio.com
-**Deploy:** `git push` to main → auto-publishes via GitHub Pages (~2 min)
-**Stack:** Static HTML / CSS / vanilla JS. No build step.
+```bash
+# Deploy to Netlify (production)
+cd /Users/spectralmoon/Developer/spectral-moon-studio-v3-proto
+netlify deploy --dir . --prod --site a8f14c41-afa4-403c-88d4-25168a148c15
+```
 
-**Files in this repo:**
-- `index.html` — main page
-- `style.css` — all styles
-- `script.js` — interactions
-- `thumbnails/` — portfolio thumbnails
-- `videos/` — video assets
+**Rule:** Only deploy when Susana explicitly asks. Do not deploy after every small change.
 
-**Atlas assets (in Obsidian vault, commit to repo when ready):**
-- Rendered PNGs live at: `Spectralmoon Studio/Studio mode/Worlds/Atlas/Cast/`
-- Naming convention: `NN-world-subject-vN.png`
-- Commit to: `assets/atlas/` in this repo
+---
 
-**Full brand context in Obsidian vault:**
-- V2 Master Brief: `Spectralmoon Studio/Studio mode/Worlds/Atlas/Atlas — Master Brief V2.md`
-- Style Guide: `Spectralmoon Studio/Studio mode/Worlds/Atlas/Atlas — Style Guide.md`
-- Technical Reference: `Spectralmoon Studio/Spectralmoon Studio — Technical & Hosting Reference.md`
+## Obsidian vault references
+
+| Topic | Vault path |
+|-------|-----------|
+| Manuals index | `Spectralmoon OS/Manuals/` |
+| Scroll system docs | `spectral-moon-studio-v3-proto/horizontal-scroll-logic.md` |
+| Studio engineering learning path | `Spectralmoon OS/Learning/Studio Engineering — Learning Path & Methodology.md` |
+| Teaching modules | `Spectralmoon OS/Learning/Studio/AI Automation Foundations/` |

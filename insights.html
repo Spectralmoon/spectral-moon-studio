@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Insights — Spectralmoon Studio</title>
+  <meta name="description" content="Field guides, thinking tools, and prompt systems from the studio." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,700;1,6..96,400;1,6..96,700&family=Caprasimo&family=Caveat:wght@500;600&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Inter+Tight:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="style.css?v=1779540000" />
+  <style>
+    /* ── Insights page overrides ── */
+    body { background: var(--paper-warm); }
+
+    .insights-page { min-height: 100vh; }
+
+    /* Topbar — same shell, back link added */
+    .insights-topbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: 52px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 clamp(24px, 4vw, 64px);
+      background: var(--paper-warm);
+      border-bottom: 1px solid rgba(42,32,26,0.08);
+      z-index: 100;
+    }
+    .insights-topbar__brand {
+      display: flex; flex-direction: column;
+      line-height: 1.1; gap: 1px;
+      color: var(--espresso); text-decoration: none;
+    }
+    .insights-topbar__brand-name {
+      font-family: "Inter Tight", sans-serif;
+      font-weight: 600; font-size: 12px;
+      letter-spacing: 0.06em; text-transform: uppercase;
+    }
+    .insights-topbar__brand-sub {
+      font-family: "Inter Tight", sans-serif;
+      font-weight: 400; font-size: 9px;
+      letter-spacing: 0.38em; text-transform: uppercase;
+      opacity: 0.5;
+    }
+    .insights-topbar__back {
+      font-family: "Inter Tight", sans-serif;
+      font-size: 11px; font-weight: 500;
+      letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--espresso); opacity: 0.55;
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+    .insights-topbar__back:hover { opacity: 1; }
+
+    /* ── Hero ── */
+    .insights-hero {
+      padding-top: 120px;
+      padding-bottom: clamp(48px, 6vh, 80px);
+      padding-left: clamp(40px, 7vw, 140px);
+      padding-right: clamp(40px, 7vw, 140px);
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: clamp(32px, 5vw, 80px);
+      border-bottom: 1px solid rgba(42,32,26,0.08);
+    }
+    .insights-hero__left { flex: 0 0 auto; }
+    .insights-hero__num {
+      display: block;
+      font-family: "Inter Tight", sans-serif;
+      font-size: 11px; font-weight: 500;
+      letter-spacing: 0.32em; text-transform: uppercase;
+      color: var(--espresso); opacity: 0.4;
+      margin-bottom: 16px;
+    }
+    .insights-hero__title {
+      margin: 0;
+      font-family: "Anton", Impact, sans-serif;
+      font-size: clamp(80px, 11vw, 180px);
+      line-height: 0.9;
+      text-transform: uppercase;
+      color: var(--espresso);
+    }
+    .insights-hero__right {
+      flex: 1; max-width: 480px;
+      padding-bottom: 12px;
+    }
+    .insights-hero__story {
+      margin: 0;
+      font-family: "Fraunces", Georgia, serif;
+      font-style: italic;
+      font-size: clamp(16px, 1.3vw, 21px);
+      line-height: 1.65;
+      color: var(--espresso); opacity: 0.7;
+    }
+
+    /* ── Grid ── */
+    .insights-grid {
+      padding: clamp(48px, 6vh, 80px) clamp(40px, 7vw, 140px) clamp(80px, 10vh, 130px);
+    }
+    .insights-grid__inner {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: clamp(16px, 2vw, 28px);
+      max-width: 1200px;
+    }
+
+    /* ── Mobile — ≤ 768px ── */
+    @media (max-width: 768px) {
+      body { overflow-x: hidden; } /* prevent horizontal scroll */
+
+      .insights-topbar {
+        padding: 0 20px;
+      }
+
+      /* Hero stacks vertically on mobile */
+      .insights-hero {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 80px 24px 40px;
+        gap: 20px;
+        border-bottom: 1px solid rgba(42,32,26,0.08);
+      }
+      .insights-hero__right {
+        max-width: 100%;
+        padding-bottom: 0;
+      }
+      .insights-hero__title {
+        font-size: clamp(72px, 20vw, 110px);
+        line-height: 0.88;
+      }
+      .insights-hero__story {
+        font-size: 15px;
+        line-height: 1.6;
+      }
+
+      /* Grid — 2 columns on mobile */
+      .insights-grid {
+        padding: 32px 20px 60px;
+      }
+      .insights-grid__inner {
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+        max-width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="insights-page">
+
+    <!-- Topbar -->
+    <header class="insights-topbar">
+      <a href="index.html" class="insights-topbar__brand">
+        <span class="insights-topbar__brand-name">Spectralmoon</span>
+        <span class="insights-topbar__brand-sub">S T U D I O</span>
+      </a>
+      <a href="index.html" class="insights-topbar__back">← Back to Studio</a>
+    </header>
+
+    <!-- Hero -->
+    <div class="insights-hero">
+      <div class="insights-hero__left">
+        <span class="insights-hero__num">IV.</span>
+        <h1 class="insights-hero__title">Insights</h1>
+      </div>
+      <div class="insights-hero__right">
+        <p class="insights-hero__story">
+          The lab. Field guides, thinking tools, and prompt systems built through real projects, refined through daily use. Manuals I made for myself, now shared.
+        </p>
+      </div>
+    </div>
+
+    <!-- Library grid -->
+    <section class="insights-grid">
+      <div class="insights-grid__inner">
+
+        <article class="insight-card">
+          <a href="https://howtoclaude.netlify.app/" class="insight-card__link" target="_blank" rel="noopener">
+            <div class="insight-card__cover" style="--cover-color: #26415C;">
+              <span class="insight-card__cover-num">01</span>
+              <span class="insight-card__cover-title">How to<br>Claude</span>
+            </div>
+            <div class="insight-card__body">
+              <p class="insight-card__desc">The one that started it all. How I began documenting AI workflows for real creative work.</p>
+              <span class="insight-card__read">Read →</span>
+            </div>
+          </a>
+        </article>
+
+        <article class="insight-card">
+          <a href="https://thinkingtoolkitclaude.netlify.app/" class="insight-card__link" target="_blank" rel="noopener">
+            <div class="insight-card__cover" style="--cover-color: #9B6B3D;">
+              <span class="insight-card__cover-num">02</span>
+              <span class="insight-card__cover-title">Thinking<br>Toolkit</span>
+            </div>
+            <div class="insight-card__body">
+              <p class="insight-card__desc">Five thinking modes for better decisions. Pre-mortem, Steelman, Red Team, First Principles, ELI5.</p>
+              <span class="insight-card__read">Read →</span>
+            </div>
+          </a>
+        </article>
+
+        <article class="insight-card">
+          <a href="https://givingclaudememory.netlify.app/" class="insight-card__link" target="_blank" rel="noopener">
+            <div class="insight-card__cover" style="--cover-color: #6B8E7E;">
+              <span class="insight-card__cover-num">03</span>
+              <span class="insight-card__cover-title">Giving Claude<br>Memory</span>
+            </div>
+            <div class="insight-card__body">
+              <p class="insight-card__desc">How to set up persistent memory across Claude sessions. Context that survives the sleep gap.</p>
+              <span class="insight-card__read">Read →</span>
+            </div>
+          </a>
+        </article>
+
+        <article class="insight-card">
+          <a href="https://spectralmoonvideostackenhancer.netlify.app/" class="insight-card__link" target="_blank" rel="noopener">
+            <div class="insight-card__cover" style="--cover-color: #8B5E52;">
+              <span class="insight-card__cover-num">04</span>
+              <span class="insight-card__cover-title">Video<br>Stack</span>
+            </div>
+            <div class="insight-card__body">
+              <p class="insight-card__desc">The Spectralmoon prompt stack for AI cinematic video. Shot by shot, tool by tool.</p>
+              <span class="insight-card__read">Read →</span>
+            </div>
+          </a>
+        </article>
+
+        <article class="insight-card">
+          <a href="https://prompttechnicalities.netlify.app/" class="insight-card__link" target="_blank" rel="noopener">
+            <div class="insight-card__cover" style="--cover-color: #A67B5B;">
+              <span class="insight-card__cover-num">05</span>
+              <span class="insight-card__cover-title">Notes on<br>Prompting</span>
+            </div>
+            <div class="insight-card__body">
+              <p class="insight-card__desc">What I know about prompting image and video models. Eight slots, no guessing.</p>
+              <span class="insight-card__read">Read →</span>
+            </div>
+          </a>
+        </article>
+
+      </div>
+    </section>
+
+  </div>
+
+</body>
+</html>

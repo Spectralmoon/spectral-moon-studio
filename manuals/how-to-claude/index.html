@@ -1,0 +1,2395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Claude for People Who Have Never Used It — A short, honest manual by Spectralmoon · The Lab</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,400;1,9..144,600;1,9..144,700;1,9..144,800&family=Inter+Tight:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  /* =========================================================
+     RESET + TOKENS — Fresh peach + editorial typography
+     ========================================================= */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    /* base */
+    --white: #FFFFFF;
+    --paper: #FDFAF6;
+    --ink: #14110F;
+    --ink-2: #2B2622;
+    --body: #4A4340;
+    --muted: #8C7F77;
+    --line: #F0E6DD;
+    --line-strong: #E5D5C5;
+
+    /* fresh peach */
+    --peach-light: #FFD3AC;
+    --peach-soft: #FFB5AB;
+    --peach: #E39A7B;
+    --peach-deep: #C97A5A;
+    --gold: #DBB06B;
+    --gold-deep: #B88E48;
+
+    /* semantic */
+    --accent: var(--peach);
+    --accent-deep: var(--peach-deep);
+    --highlight: var(--peach-soft);
+    --gold-accent: var(--gold);
+
+    /* type families */
+    --serif: 'Fraunces', 'Iowan Old Style', Georgia, serif;
+    --sans: 'Inter Tight', -apple-system, BlinkMacSystemFont, sans-serif;
+    --mono: 'SFMono-Regular', Menlo, Consolas, monospace;
+
+    /* effects */
+    --shadow-sm: 0 1px 3px rgba(20,17,15,.06);
+    --shadow-md: 0 8px 28px rgba(201,122,90,.12);
+    --shadow-lift: 0 14px 40px rgba(201,122,90,.18);
+
+    /* motion */
+    --ease: cubic-bezier(.4, 0, .2, 1);
+    --ease-out: cubic-bezier(.2, .8, .2, 1);
+    --t-fast: .18s;
+    --t-med: .28s;
+    --t-slow: .55s;
+  }
+
+  html { scroll-behavior: smooth; scroll-padding-top: 32px; }
+
+  body {
+    background: var(--white);
+    color: var(--body);
+    font-family: var(--sans);
+    font-size: 18px;
+    line-height: 1.7;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    counter-reset: chapter;
+  }
+
+  ::selection { background: var(--peach-light); color: var(--ink); }
+
+  /* =========================================================
+     READING PROGRESS BAR
+     ========================================================= */
+  .progress {
+    position: fixed; top: 0; left: 0;
+    height: 3px; width: 0%;
+    background: linear-gradient(90deg, var(--peach), var(--gold));
+    z-index: 1000;
+    transition: width .12s linear;
+  }
+
+  /* =========================================================
+     LAYOUT
+     ========================================================= */
+  .layout {
+    display: grid;
+    grid-template-columns: 280px minmax(0, 1fr);
+    max-width: 1380px;
+    margin: 0 auto;
+    gap: 72px;
+    padding: 64px 56px 96px;
+  }
+
+  /* =========================================================
+     TOC — sticky sidebar with animated underline
+     ========================================================= */
+  .toc {
+    position: sticky;
+    top: 32px;
+    align-self: start;
+    height: calc(100vh - 64px);
+    overflow-y: auto;
+    padding: 4px 12px 24px 0;
+    font-size: 15px;
+    scrollbar-width: thin;
+    scrollbar-color: var(--line-strong) transparent;
+  }
+  .toc::-webkit-scrollbar { width: 4px; }
+  .toc::-webkit-scrollbar-thumb { background: var(--line-strong); border-radius: 2px; }
+
+  .toc-mark {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 800;
+    font-size: 22px;
+    color: var(--ink);
+    letter-spacing: -.025em;
+    margin-bottom: 4px;
+    line-height: 1.05;
+  }
+  .toc-mark span { color: var(--peach); font-style: normal; padding: 0 2px; }
+  .toc-sub {
+    font-family: var(--sans);
+    font-size: 10px; font-weight: 600;
+    letter-spacing: .22em; text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 36px;
+  }
+
+  .toc h4 {
+    font-family: var(--sans);
+    font-size: 11.5px; font-weight: 700;
+    letter-spacing: .16em; text-transform: uppercase;
+    color: var(--peach-deep);
+    margin: 30px 0 12px;
+  }
+  .toc h4:first-of-type { margin-top: 0; }
+  .toc ul { list-style: none; }
+  .toc li { margin: 0; }
+
+  .toc a {
+    position: relative;
+    display: block;
+    padding: 9px 14px 9px 20px;
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 15px;
+    line-height: 1.4;
+    border-radius: 4px;
+    /* Wipe fill via background-size animation */
+    background-image: linear-gradient(90deg, var(--peach-light), rgba(255,211,172,.4));
+    background-repeat: no-repeat;
+    background-position: left center;
+    background-size: 0% 100%;
+    transition: color var(--t-med) var(--ease),
+                padding-left var(--t-med) var(--ease-out),
+                background-size .42s cubic-bezier(.2,.8,.2,1);
+  }
+  /* Indicator line (left side) */
+  .toc a::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 50%;
+    transform: translateY(-50%);
+    width: 0;
+    height: 1px;
+    background: var(--peach);
+    transition: width var(--t-med) var(--ease-out),
+                height var(--t-med) var(--ease-out),
+                background var(--t-med) var(--ease);
+  }
+  /* Arrow (right side) */
+  .toc a::after {
+    content: '→';
+    position: absolute;
+    right: 8px; top: 50%;
+    transform: translate(8px, -50%);
+    color: var(--peach-deep);
+    opacity: 0;
+    font-weight: 600;
+    font-size: 13px;
+    transition: opacity var(--t-med) var(--ease),
+                transform var(--t-med) var(--ease-out);
+  }
+  .toc a:hover {
+    color: var(--peach-deep);
+    padding-left: 22px;
+    background-size: 100% 100%;
+  }
+  .toc a:hover::before {
+    width: 12px;
+    height: 2px;
+    background: var(--peach-deep);
+  }
+  .toc a:hover::after {
+    opacity: 1;
+    transform: translate(0, -50%);
+  }
+  .toc a.active {
+    color: var(--ink);
+    font-weight: 600;
+    padding-left: 22px;
+  }
+  .toc a.active::before {
+    width: 14px;
+    height: 2px;
+    background: var(--peach-deep);
+  }
+
+  /* =========================================================
+     COVER MARKS — decorative scale-bars
+     ========================================================= */
+  .cover-marks {
+    display: flex;
+    align-items: flex-end;
+    gap: 5px;
+    height: 24px;
+    margin-bottom: 28px;
+  }
+  .cover-marks span {
+    display: block;
+    width: 2px;
+    background: var(--peach-deep);
+    transform: scaleY(0);
+    transform-origin: bottom center;
+    animation: barRise .9s cubic-bezier(.2,.8,.2,1) forwards;
+  }
+  .cover-marks span:nth-child(1) { height: 50%; animation-delay: .15s; }
+  .cover-marks span:nth-child(2) { height: 100%; animation-delay: .25s; }
+  .cover-marks span:nth-child(3) { height: 70%; animation-delay: .35s; }
+  .cover-marks span:nth-child(4) { height: 85%; animation-delay: .45s; background: var(--peach); }
+  .cover-marks span:nth-child(5) { height: 35%; animation-delay: .55s; background: var(--gold); }
+
+  @keyframes barRise {
+    to { transform: scaleY(1); }
+  }
+
+  /* =========================================================
+     MAIN
+     ========================================================= */
+  main { min-width: 0; max-width: 800px; }
+
+  /* =========================================================
+     REVEAL ON SCROLL
+     ========================================================= */
+  .reveal {
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity var(--t-slow) var(--ease-out),
+                transform var(--t-slow) var(--ease-out);
+  }
+  .reveal.in {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .reveal.delay-1 { transition-delay: .06s; }
+  .reveal.delay-2 { transition-delay: .12s; }
+  .reveal.delay-3 { transition-delay: .18s; }
+
+  /* =========================================================
+     COVER — editorial hero
+     ========================================================= */
+  .cover {
+    padding: 56px 0 120px;
+    border-bottom: 1px solid var(--line);
+    margin-bottom: 96px;
+    position: relative;
+  }
+  .eyebrow {
+    display: inline-block;
+    font-family: var(--sans);
+    font-size: 11px; font-weight: 700;
+    letter-spacing: .24em; text-transform: uppercase;
+    color: var(--peach-deep);
+    margin-bottom: 36px;
+    padding: 7px 14px;
+    background: var(--peach-light);
+    border-radius: 999px;
+  }
+  .cover h1 {
+    font-family: var(--serif);
+    font-weight: 800;
+    font-size: clamp(44px, 7.2vw, 92px);
+    line-height: 1.04;
+    letter-spacing: -.035em;
+    color: var(--ink);
+    margin-bottom: 40px;
+    max-width: 14ch;
+    will-change: transform;
+  }
+  .cover h1 .accent {
+    font-style: italic;
+    font-weight: 800;
+    color: var(--peach-deep);
+    background: linear-gradient(180deg, transparent 72%, var(--peach-light) 72%, var(--peach-light) 96%, transparent 96%);
+    padding: 0 6px;
+    margin-left: -2px;
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
+  }
+  .cover .lede {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 400;
+    font-size: clamp(22px, 2.6vw, 32px);
+    line-height: 1.35;
+    color: var(--ink-2);
+    margin-bottom: 56px;
+    max-width: 700px;
+    letter-spacing: -.005em;
+  }
+  .by {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    font-family: var(--sans);
+    font-size: 11px; font-weight: 600;
+    letter-spacing: .22em; text-transform: uppercase;
+    color: var(--muted);
+  }
+  .by-mark {
+    color: var(--ink);
+    font-weight: 800;
+    letter-spacing: -.01em;
+    text-transform: none;
+    font-size: 14px;
+  }
+  .by-mark .dot { color: var(--peach); }
+
+  .cover-body { margin-top: 88px; }
+  .cover-body p { margin-bottom: 22px; font-size: 18px; line-height: 1.7; }
+
+  /* drop cap on first paragraph of cover body */
+  .cover-body p:first-child::first-letter {
+    font-family: var(--serif);
+    font-weight: 800;
+    font-style: italic;
+    font-size: 96px;
+    line-height: .82;
+    float: left;
+    color: var(--peach-deep);
+    padding: 8px 14px 0 0;
+    margin-top: 4px;
+  }
+
+  .cover-body ul { margin: 26px 0 30px 0; list-style: none; }
+  .cover-body li {
+    padding: 12px 0 12px 32px;
+    position: relative;
+    border-bottom: 1px solid var(--line);
+    font-size: 17px;
+  }
+  .cover-body li::before {
+    content: '→';
+    position: absolute;
+    left: 0; top: 12px;
+    color: var(--peach);
+    font-weight: 700;
+    font-size: 16px;
+    transition: transform var(--t-fast) var(--ease-out);
+  }
+  .cover-body li:hover::before { transform: translateX(6px); }
+  .cover-body li:last-child { border-bottom: none; }
+
+  /* =========================================================
+     PARTS — oversized editorial dividers
+     ========================================================= */
+  .part {
+    padding-top: 128px;
+    margin-top: 32px;
+    position: relative;
+  }
+  .part:first-of-type { padding-top: 48px; }
+
+  /* Numbered parts get a massive italic numeral as anchor */
+  .part[data-num] {
+    display: grid;
+    grid-template-columns: minmax(140px, 200px) 1fr;
+    column-gap: 40px;
+    align-items: start;
+  }
+  .part[data-num]::before {
+    content: attr(data-num);
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 800;
+    font-size: clamp(120px, 16vw, 220px);
+    line-height: .82;
+    color: var(--peach);
+    letter-spacing: -.06em;
+    grid-column: 1;
+    grid-row: 1 / span 3;
+    align-self: start;
+    pointer-events: none;
+  }
+  .part[data-num] > *:not(.chapter):not(article):not(section) {
+    grid-column: 2;
+  }
+  .part[data-num] > .chapter,
+  .part[data-num] > article,
+  .part[data-num] > section {
+    grid-column: 1 / -1;
+  }
+
+  .part-num {
+    display: inline-block;
+    font-family: var(--sans);
+    font-size: 11px; font-weight: 700;
+    letter-spacing: .22em; text-transform: uppercase;
+    color: var(--gold-deep);
+    margin-bottom: 18px;
+    padding: 6px 13px;
+    background: rgba(219, 176, 107, .15);
+    border-radius: 999px;
+  }
+  .part-title {
+    font-family: var(--serif);
+    font-weight: 700;
+    font-size: clamp(48px, 6.5vw, 88px);
+    line-height: 1.02;
+    letter-spacing: -.03em;
+    color: var(--ink);
+    margin-bottom: 26px;
+  }
+  .part-desc {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: clamp(20px, 2vw, 24px);
+    color: var(--muted);
+    margin-bottom: 88px;
+    padding-bottom: 44px;
+    border-bottom: 1px solid var(--line);
+    line-height: 1.45;
+    max-width: 640px;
+  }
+
+  /* =========================================================
+     CHAPTERS — editorial openers
+     ========================================================= */
+  .chapter {
+    padding-top: 96px;
+    margin-bottom: 0;
+    counter-increment: chapter;
+    position: relative;
+  }
+  .chapter-num {
+    font-family: var(--sans);
+    font-size: 11px; font-weight: 700;
+    letter-spacing: .22em; text-transform: uppercase;
+    color: var(--peach-deep);
+    margin-bottom: 18px;
+    display: flex;
+    align-items: baseline;
+    gap: 18px;
+  }
+  .chapter-num::before {
+    content: counter(chapter, decimal-leading-zero);
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 800;
+    font-size: 64px;
+    letter-spacing: -.04em;
+    color: var(--peach);
+    line-height: 1;
+    text-transform: none;
+  }
+  .chapter h2 {
+    font-family: var(--serif);
+    font-weight: 700;
+    font-size: clamp(36px, 4.5vw, 54px);
+    line-height: 1.08;
+    letter-spacing: -.025em;
+    color: var(--ink);
+    margin-bottom: 36px;
+  }
+  .chapter h2 em {
+    font-style: italic;
+    color: var(--peach-deep);
+    font-weight: 700;
+  }
+
+  /* drop cap on first paragraph of each chapter */
+  .chapter > p:first-of-type::first-letter {
+    font-family: var(--serif);
+    font-weight: 800;
+    font-style: italic;
+    font-size: 84px;
+    line-height: .82;
+    float: left;
+    color: var(--peach-deep);
+    padding: 6px 14px 0 0;
+    margin-top: 6px;
+  }
+
+  .chapter p {
+    margin-bottom: 22px;
+    color: var(--body);
+    font-size: 18px;
+    line-height: 1.7;
+  }
+  .chapter strong { color: var(--ink); font-weight: 600; }
+  .chapter em { font-style: italic; color: var(--ink-2); }
+
+  .chapter ul, .chapter ol {
+    margin: 18px 0 28px 0;
+    padding-left: 0;
+    list-style: none;
+  }
+  .chapter ul li, .chapter ol li {
+    position: relative;
+    padding-left: 28px;
+    margin-bottom: 12px;
+    color: var(--body);
+    font-size: 17.5px;
+  }
+  .chapter ul li::before {
+    content: '';
+    position: absolute;
+    left: 4px; top: 13px;
+    width: 7px; height: 7px;
+    background: var(--peach);
+    border-radius: 50%;
+  }
+  .chapter ol { counter-reset: ol; }
+  .chapter ol li {
+    counter-increment: ol;
+    padding-left: 38px;
+  }
+  .chapter ol li::before {
+    content: counter(ol, decimal-leading-zero);
+    position: absolute;
+    left: 0; top: -2px;
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 700;
+    color: var(--peach-deep);
+    font-variant-numeric: tabular-nums;
+    font-size: 19px;
+    letter-spacing: -.02em;
+  }
+
+  .chapter h3 {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: 28px;
+    color: var(--ink);
+    margin: 44px 0 18px;
+    line-height: 1.25;
+    letter-spacing: -.015em;
+  }
+  .chapter h3 em {
+    font-style: italic;
+    color: var(--peach-deep);
+  }
+  .chapter h4 {
+    font-family: var(--sans);
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--peach-deep);
+    margin: 32px 0 14px;
+  }
+
+  /* =========================================================
+     CODE
+     ========================================================= */
+  .code-block {
+    position: relative;
+    margin: 24px 0;
+  }
+  .code-block pre {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 24px 26px;
+    overflow-x: auto;
+    font-family: 'SFMono-Regular', Menlo, Consolas, monospace;
+    font-size: 13.5px;
+    line-height: 1.75;
+    color: var(--ink-2);
+    transition: border-color var(--t-fast) var(--ease);
+  }
+  .code-block:hover pre { border-color: var(--peach-light); }
+
+  .copy-btn {
+    position: absolute;
+    top: 12px; right: 12px;
+    background: var(--white);
+    border: 1px solid var(--line-strong);
+    border-radius: 8px;
+    padding: 6px 11px;
+    font-family: inherit;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    cursor: pointer;
+    opacity: 0;
+    transform: translateY(-2px);
+    transition: all var(--t-med) var(--ease-out);
+  }
+  .code-block:hover .copy-btn { opacity: 1; transform: translateY(0); }
+  .copy-btn:hover {
+    color: var(--peach-deep);
+    border-color: var(--peach);
+    background: var(--peach-light);
+  }
+  .copy-btn.copied {
+    color: #2d7a4f;
+    border-color: #c4e5cc;
+    background: #ecf7ef;
+    opacity: 1;
+  }
+
+  code:not(pre code) {
+    background: var(--peach-light);
+    color: var(--peach-deep);
+    padding: 2px 7px;
+    border-radius: 5px;
+    font-family: 'SFMono-Regular', Menlo, Consolas, monospace;
+    font-size: 13.5px;
+    font-weight: 500;
+  }
+
+  /* =========================================================
+     "TRY THIS NOW" CALLOUT — soft peach
+     ========================================================= */
+  .try {
+    background: linear-gradient(135deg, #FFE8DA 0%, #FFD3AC 100%);
+    border-radius: 16px;
+    padding: 26px 30px;
+    margin: 44px 0 16px;
+    font-size: 17px;
+    line-height: 1.6;
+    color: var(--ink-2);
+    position: relative;
+    overflow: hidden;
+    transition: transform var(--t-med) var(--ease-out),
+                box-shadow var(--t-med) var(--ease-out);
+  }
+  .try::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; bottom: 0;
+    width: 4px;
+    background: var(--peach-deep);
+  }
+  .try:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+  }
+  .try-label {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 600;
+    font-size: 15px;
+    letter-spacing: -.005em;
+    color: var(--peach-deep);
+    display: block;
+    margin-bottom: 8px;
+    text-transform: none;
+  }
+
+  /* =========================================================
+     PULL QUOTE — editorial centerpiece
+     ========================================================= */
+  .pull {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 400;
+    font-size: clamp(28px, 3.6vw, 44px);
+    line-height: 1.2;
+    color: var(--ink);
+    letter-spacing: -.022em;
+    border-left: 3px solid var(--peach);
+    padding: 8px 0 8px 28px;
+    margin: 52px 0;
+    max-width: 760px;
+  }
+  .pull::first-letter { color: var(--peach-deep); }
+
+  /* =========================================================
+     TABLES
+     ========================================================= */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 24px 0;
+    font-size: 14.5px;
+  }
+  th {
+    text-align: left;
+    background: var(--paper);
+    color: var(--ink);
+    padding: 14px 16px;
+    border-bottom: 2px solid var(--line-strong);
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: .02em;
+  }
+  td {
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+    color: var(--body);
+    transition: background var(--t-fast) var(--ease);
+  }
+  tr:hover td { background: rgba(255, 211, 172, .15); }
+  tr:last-child td { border-bottom: none; }
+
+  /* =========================================================
+     PERSONAS — accordion cards
+     ========================================================= */
+  .personas {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 32px 0;
+  }
+  .persona {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: border-color var(--t-med) var(--ease),
+                box-shadow var(--t-med) var(--ease);
+  }
+  .persona:hover { border-color: var(--peach-light); }
+  .persona.open {
+    border-color: var(--peach);
+    box-shadow: var(--shadow-md);
+  }
+
+  .persona-head {
+    display: grid;
+    grid-template-columns: 60px 1fr auto;
+    align-items: center;
+    gap: 20px;
+    padding: 22px 26px;
+    cursor: pointer;
+    user-select: none;
+    background: none;
+    border: none;
+    width: 100%;
+    text-align: left;
+    font-family: inherit;
+    color: inherit;
+  }
+  .persona-num {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 38px;
+    font-weight: 700;
+    color: var(--peach-deep);
+    font-variant-numeric: tabular-nums;
+    width: 60px;
+    line-height: 1;
+    letter-spacing: -.04em;
+    display: flex; align-items: center; justify-content: flex-start;
+  }
+  .persona-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-width: 0;
+  }
+  .persona-name {
+    font-family: var(--serif);
+    font-size: 24px; font-weight: 700;
+    color: var(--ink);
+    letter-spacing: -.018em;
+    line-height: 1.1;
+  }
+  .persona-role {
+    font-family: var(--sans);
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.4;
+  }
+  .persona-toggle {
+    width: 28px; height: 28px;
+    position: relative;
+    flex-shrink: 0;
+  }
+  .persona-toggle::before,
+  .persona-toggle::after {
+    content: '';
+    position: absolute;
+    background: var(--peach-deep);
+    border-radius: 1px;
+    transition: transform var(--t-med) var(--ease-out),
+                opacity var(--t-fast) var(--ease);
+  }
+  .persona-toggle::before {
+    /* horizontal */
+    top: 50%; left: 50%;
+    width: 14px; height: 2px;
+    transform: translate(-50%, -50%);
+  }
+  .persona-toggle::after {
+    /* vertical */
+    top: 50%; left: 50%;
+    width: 2px; height: 14px;
+    transform: translate(-50%, -50%);
+  }
+  .persona.open .persona-toggle::after { transform: translate(-50%, -50%) rotate(90deg); opacity: 0; }
+  .persona.open .persona-toggle::before { background: var(--ink); }
+
+  .persona-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height var(--t-med) var(--ease-out);
+  }
+  .persona.open .persona-body { max-height: 600px; }
+  .persona-body-inner {
+    padding: 0 26px 26px 106px;
+    color: var(--body);
+    font-size: 16px;
+    line-height: 1.6;
+  }
+  .persona-prompt {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 18px 22px;
+    margin-top: 8px;
+    font-family: var(--serif);
+    font-style: italic;
+    color: var(--ink-2);
+    position: relative;
+    font-size: 16.5px;
+    line-height: 1.55;
+  }
+  .persona-prompt-label {
+    font-family: var(--sans);
+    font-size: 10px; font-weight: 700;
+    letter-spacing: .18em; text-transform: uppercase;
+    color: var(--muted);
+    font-style: normal;
+    display: block;
+    margin-bottom: 8px;
+  }
+
+  /* =========================================================
+     APPENDIX
+     ========================================================= */
+  .appendix-block {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 32px 36px;
+    margin: 28px 0;
+    transition: border-color var(--t-med) var(--ease),
+                box-shadow var(--t-med) var(--ease),
+                transform var(--t-med) var(--ease-out);
+  }
+  .appendix-block:hover {
+    border-color: var(--peach-light);
+    box-shadow: var(--shadow-sm);
+  }
+  .appendix-block h3 {
+    margin-top: 0;
+    font-family: var(--serif);
+    font-weight: 700;
+    font-size: 30px;
+    color: var(--ink);
+    margin-bottom: 18px;
+    letter-spacing: -.02em;
+    line-height: 1.15;
+  }
+  .appendix-block h4 {
+    font-family: var(--sans);
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--peach-deep);
+    margin: 26px 0 12px;
+  }
+  .appendix-block p {
+    margin-bottom: 16px;
+  }
+
+  .glossary dt {
+    font-family: var(--serif);
+    font-weight: 700;
+    font-style: italic;
+    color: var(--ink);
+    margin-top: 20px;
+    font-size: 19px;
+    letter-spacing: -.012em;
+  }
+  .glossary dt:first-child { margin-top: 0; }
+  .glossary dd {
+    color: var(--body);
+    margin-left: 0;
+    font-size: 15.5px;
+    margin-bottom: 4px;
+  }
+
+  /* checklist */
+  .checklist .code-block pre {
+    color: var(--ink-2);
+    font-size: 14px;
+  }
+
+  /* =========================================================
+     DATA TIER PILLS (for safety chapter)
+     ========================================================= */
+  .tier {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 3px 10px;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: -.005em;
+  }
+  .tier.green { background: #E5F4E9; color: #1F6D3D; }
+  .tier.yellow { background: #FFF4D6; color: #92711F; }
+  .tier.red { background: #FBE0DC; color: #B83A2B; }
+
+  /* =========================================================
+     CLOSING / FOOTER
+     ========================================================= */
+  footer {
+    margin-top: 128px;
+    padding: 56px 0 16px;
+    border-top: 1px solid var(--line);
+    text-align: center;
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+  .footer-by {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 800;
+    font-size: 38px;
+    color: var(--ink);
+    display: block;
+    margin-top: 20px;
+    letter-spacing: -.03em;
+  }
+  .footer-by .dot { color: var(--peach); font-style: normal; padding: 0 4px; }
+
+  /* =========================================================
+     LINKS
+     ========================================================= */
+  a { color: var(--peach-deep); text-decoration: none; transition: color var(--t-fast) var(--ease); }
+  a:hover { color: var(--ink); }
+
+  /* =========================================================
+     RESPONSIVE
+     ========================================================= */
+  @media (max-width: 980px) {
+    .layout {
+      grid-template-columns: 1fr;
+      gap: 0;
+      padding: 32px 24px 64px;
+    }
+    .toc {
+      position: static;
+      height: auto;
+      max-height: none;
+      overflow: visible;
+      margin-bottom: 56px;
+      padding-bottom: 32px;
+      border-bottom: 1px solid var(--line);
+    }
+    .part[data-num] {
+      grid-template-columns: 1fr;
+    }
+    .part[data-num]::before {
+      grid-row: auto;
+      font-size: 120px;
+      margin-bottom: 16px;
+    }
+    .part[data-num] > *:not(.chapter):not(article):not(section) {
+      grid-column: 1;
+    }
+    .chapter > p:first-of-type::first-letter,
+    .cover-body p:first-child::first-letter { font-size: 64px; padding: 4px 12px 0 0; }
+    main { max-width: 100%; }
+    .persona-body-inner { padding-left: 26px; }
+  }
+
+  @media (max-width: 600px) {
+    body { font-size: 17px; }
+    .layout { padding: 24px 18px 48px; }
+    .part[data-num]::before { font-size: 88px; }
+    .pull { font-size: 24px; padding-left: 18px; }
+    .code-block pre { font-size: 12px; padding: 18px; }
+    .copy-btn { opacity: 1; }
+    .persona-head { padding: 18px; gap: 14px; grid-template-columns: 44px 1fr auto; }
+    .persona-num { font-size: 28px; width: 44px; }
+    .persona-name { font-size: 19px; }
+    .persona-body-inner { padding: 0 18px 22px 18px; }
+    .chapter-num::before { font-size: 48px; }
+    .chapter > p:first-of-type::first-letter,
+    .cover-body p:first-child::first-letter { font-size: 56px; }
+    .footer-by { font-size: 28px; }
+  }
+
+  /* Reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: .01ms !important;
+      transition-duration: .01ms !important;
+    }
+    .reveal { opacity: 1; transform: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="progress" id="progress"></div>
+
+<div class="layout">
+
+  <!-- ===== TOC ===== -->
+  <aside class="toc">
+    <div class="toc-mark">Spectralmoon <span>·</span> The Lab</div>
+    <div class="toc-sub">Manual / Beginner</div>
+
+    <h4>Cover</h4>
+    <ul><li><a href="#cover">Begin here</a></li></ul>
+
+    <h4>Part 1 — Before you type</h4>
+    <ul>
+      <li><a href="#ch1">1 · What Claude is</a></li>
+      <li><a href="#ch2">2 · Why AI feels unreliable</a></li>
+      <li><a href="#ch3">3 · The folder is the brain</a></li>
+      <li><a href="#ch4">4 · The three-file workspace</a></li>
+    </ul>
+
+    <h4>Part 2 — How to talk</h4>
+    <ul>
+      <li><a href="#ch5">5 · A prompt is a form</a></li>
+      <li><a href="#ch6">6 · The five-part prompt</a></li>
+      <li><a href="#ch7">7 · 13 personas to invoke</a></li>
+      <li><a href="#ch8">8 · Two kinds of constraints</a></li>
+      <li><a href="#ch9">9 · Why prompts hallucinate</a></li>
+    </ul>
+
+    <h4>Part 3 — Build something</h4>
+    <ul>
+      <li><a href="#ch10">10 · Why one big prompt fails</a></li>
+      <li><a href="#ch11">11 · The five-folder pattern</a></li>
+      <li><a href="#ch12">12 · Building the conductor</a></li>
+    </ul>
+
+    <h4>Part 4 — Safety</h4>
+    <ul>
+      <li><a href="#ch13">13 · Test on a copy first</a></li>
+      <li><a href="#ch14">14 · Confidence ≠ accuracy</a></li>
+      <li><a href="#ch15">15 · What never to share</a></li>
+      <li><a href="#ch16">16 · Keep a record</a></li>
+      <li><a href="#ch17">17 · Backups & boundaries</a></li>
+    </ul>
+
+    <h4>Closing &amp; appendix</h4>
+    <ul>
+      <li><a href="#closing">Tomorrow morning</a></li>
+      <li><a href="#appendix">Templates &amp; reference</a></li>
+    </ul>
+  </aside>
+
+  <!-- ===== Main ===== -->
+  <main>
+
+    <!-- ===== COVER ===== -->
+    <section class="cover" id="cover">
+      <div class="cover-marks" aria-hidden="true">
+        <span></span><span></span><span></span><span></span><span></span>
+      </div>
+      <div class="reveal in"><span class="eyebrow">A short, honest manual</span></div>
+      <h1 class="reveal in delay-1">Claude for people who have <span class="accent">never used it</span></h1>
+      <p class="lede reveal in delay-2">From "I don't really get it" to "I use this every day, on purpose." In about an hour.</p>
+      <div class="by reveal in delay-3">
+        By <span class="by-mark">Spectralmoon <span class="dot">·</span> The Lab</span>
+      </div>
+
+      <div class="cover-body">
+        <p class="reveal">You have probably heard a lot about AI. Most of it has been either too excited or too worried to actually help you.</p>
+        <p class="reveal">This manual is neither.</p>
+        <p class="reveal">It will not promise that AI will change your life. It will not tell you that you are going to be replaced. It will not show off, and it will not assume you already know what any of this is.</p>
+        <p class="reveal">What it will do is walk you through how to use one specific tool — Claude — with intention. Not magic. Not fear. Just a tool that works, when you set it up well.</p>
+        <p class="reveal">By the end of these pages, you will know:</p>
+        <ul class="reveal">
+          <li>What Claude actually is, and what it isn't</li>
+          <li>Why your prompts sometimes work and sometimes don't</li>
+          <li>How to give Claude memory so it stops "forgetting" things</li>
+          <li>How to write a prompt that gets a useful answer the first time</li>
+          <li>Thirteen ready-to-use personas you can invoke any time</li>
+          <li>How to build something genuinely useful — not just a clever demo</li>
+          <li>Where to be careful, what to never share, and how to keep a record</li>
+        </ul>
+        <p class="reveal">The whole manual reads in under an hour. Each chapter is short. Each one ends with one small thing you can try now. The appendix is full of copy-paste templates so you do not have to start anything from scratch.</p>
+        <p class="reveal">You don't have to read it in order — but the order is gentler than skipping around.</p>
+        <p class="reveal">Take your time. There is no version of this that you are behind on.</p>
+      </div>
+    </section>
+
+    <!-- ===== PART 1 ===== -->
+    <section class="part" data-num="01">
+      <div class="reveal"><span class="part-num">Part one</span></div>
+      <h2 class="part-title reveal">Before you type anything</h2>
+      <p class="part-desc reveal">The setup. Before the first prompt, before any clever trick, this is what changes everything.</p>
+
+      <article class="chapter reveal" id="ch1">
+        <div class="chapter-num">Chapter</div>
+        <h2>What Claude actually is (and what it isn't)</h2>
+        <p>Claude is a large language model. That phrase will appear a lot, so it is worth defining once, slowly.</p>
+        <p>A <strong>large language model</strong> is a piece of software trained to predict what words tend to follow other words, across a very large amount of text. It is not a search engine. It is not a database. It does not "know" things the way a person knows things. It produces language that fits the pattern of what you gave it.</p>
+        <p>That sounds underwhelming. It is actually the entire point.</p>
+        <p>Because Claude works on patterns of language, it can do a wide range of things that look very different from each other — write a message, summarize a document, explain a concept, draft a plan, organize a list — using the same underlying skill. It is not a calculator that does one thing. It is a writer that can adapt.</p>
+        <h4>What Claude is not</h4>
+        <ul>
+          <li>It is not always right. It produces fluent, confident-sounding text whether or not the content is accurate. Confidence in its tone tells you nothing about correctness.</li>
+          <li>It is not connected to the live internet by default. Unless you give it information, it works from what it was trained on — which has a cutoff date in the past.</li>
+          <li>It does not remember you between conversations unless you set it up to. By default, every new chat is a stranger.</li>
+          <li>It is not sentient and it is not your friend. It is a very capable text tool.</li>
+        </ul>
+        <h4>What Claude is, when used well</h4>
+        <ul>
+          <li>A patient first-draft writer</li>
+          <li>A reliable summarizer when you give it the source</li>
+          <li>A second pair of eyes on a document, an idea, a plan</li>
+          <li>A teacher that never gets impatient with you</li>
+          <li>An assistant that does the boring parts so you can do the interesting parts</li>
+        </ul>
+        <p>The chapters that follow are about how to set it up so this is what you actually get.</p>
+        <div class="try">
+          <span class="try-label">Try this now</span>
+          Open Claude. Ask it: <em>"In one paragraph, explain what you are not."</em> Read the answer. Notice that it is honest about its limits. That honesty is what you will be working with.
+        </div>
+      </article>
+
+      <article class="chapter reveal" id="ch2">
+        <div class="chapter-num">Chapter</div>
+        <h2>Why AI feels unreliable (and why that's a setup problem)</h2>
+        <p>Most people's first experience with AI goes like this. They open it. They type a question. The answer is either surprisingly good or surprisingly off. They do not know why. They try a few more times. They get inconsistent results. They conclude that AI is "not there yet."</p>
+        <p>This is a reasonable conclusion based on the experience. It is also the wrong conclusion.</p>
+        <p>Every layer of computing in history has started this way. Punch cards in the 1800s were unreliable — they jammed, tore, misread. Early electronic computers in the 1940s were so error-prone that engineers had to invent something called <em>error correcting code</em> just to make memory trustworthy. Each new layer was rolled out, called unreliable, and then made reliable through engineering — not through waiting.</p>
+        <p>AI is the newest layer. It is being treated the same way. The instinct to say "I will use it once it is reliable" is the same instinct people had about every new computing layer for two hundred years. None of those layers became reliable on their own. They became reliable because people built the structure around them that made them reliable.</p>
+        <p>That structure is what this manual teaches.</p>
+        <p>When AI feels unreliable, the cause is almost always one of these:</p>
+        <ul>
+          <li>The setup is missing — you did not give it the information it needed</li>
+          <li>The prompt is unclear — you asked it to do too many things at once, or did not say what "good" looks like</li>
+          <li>The check is missing — you did not verify before acting on the answer</li>
+        </ul>
+        <p>None of these are problems with AI. They are problems with how AI is being used. The good news: all three are fixable, and you can learn to fix them in an afternoon.</p>
+        <div class="try">
+          <span class="try-label">Try this now</span>
+          Think of one time AI gave you a bad answer. Do not blame the tool yet. Ask: was the question clear? Did the tool have what it needed? Was there a way to check the answer? Hold this question — the next chapters answer it.
+        </div>
+      </article>
+
+      <article class="chapter reveal" id="ch3">
+        <div class="chapter-num">Chapter</div>
+        <h2>The folder is the brain — how to give Claude memory</h2>
+        <p>Here is the single most important idea in this entire manual.</p>
+        <p class="pull">Claude has no memory of you between conversations unless you give it one.</p>
+        <p>By default, every chat starts blank. It does not remember your name, your work, your preferences, the project you were on yesterday, the rules you set up last week. This is the default behavior and it is a feature, not a bug — but it means that if you want Claude to actually be useful for ongoing work, you have to build its memory yourself.</p>
+        <p>The way you do this is with a folder. A plain folder, on your computer or in a tool that supports it, with a few text files inside.</p>
+        <p>Those files are the memory.</p>
+        <p>When you start a new conversation, you point Claude at the folder. It reads the files. Now it "remembers" — not because it has memory in the human sense, but because it has documents that tell it what it needs to know. Same effect.</p>
+        <p>This sounds almost too simple. It is genuinely the foundation. Everyone who uses Claude well does some version of this. People who don't, fight the same tool every day.</p>
+        <p>The folder structure looks like this in its simplest form:</p>
+        <div class="code-block">
+          <button class="copy-btn" data-copy>Copy</button>
+<pre>your-project/
+  CLAUDE.md         ← who you are, how you work, the rules
+  CONTEXT.md        ← what you're working on right now
+  REFERENCES.md     ← background info — people, links, definitions</pre>
+        </div>
+        <p>Three files. Plain text. They will become Claude's brain for that project.</p>
+        <p>Chapter 4 walks through what goes in each one. The Appendix has copy-paste templates for all three.</p>
+        <div class="try">
+          <span class="try-label">Try this now</span>
+          Pick one project you do regularly. Make a folder for it. Add three empty files: <code>CLAUDE.md</code>, <code>CONTEXT.md</code>, <code>REFERENCES.md</code>. That is the entire setup. You are not done — but you have started.
+        </div>
+      </article>
+
+      <article class="chapter reveal" id="ch4">
+        <div class="chapter-num">Chapter</div>
+        <h2>The three-file workspace</h2>
+        <p>Here is what goes inside each file. Keep them short. They are working documents, not novels. Full templates with example content are in the Appendix.</p>
+
+        <h3>CLAUDE.md — the identity file</h3>
+        <p>This is the always-on file. It tells Claude who you are, what you do, how you want to work, and any rules that should hold across every session.</p>
+        <p>It answers:</p>
+        <ul>
+          <li>Who am I? (your role, your background, your context)</li>
+          <li>What is this project? (one or two sentences)</li>
+          <li>How should Claude work with me? (preferred tone, response length, conventions)</li>
+          <li>What should it never do? (rules, boundaries, things to flag instead of guess)</li>
+        </ul>
+        <p>A good CLAUDE.md is between half a page and two pages. Anything longer and Claude will start ignoring parts of it.</p>
+
+        <h3>CONTEXT.md — the current state file</h3>
+        <p>This file changes often. It tracks what you are actually doing right now.</p>
+        <p>It answers:</p>
+        <ul>
+          <li>What am I working on this week?</li>
+          <li>Where am I in the project?</li>
+          <li>What decisions are open?</li>
+          <li>What are the current open questions?</li>
+        </ul>
+        <p>When you start a new session, you read this file too. It is the bridge between yesterday's work and today's.</p>
+
+        <h3>REFERENCES.md — the background file</h3>
+        <p>This file holds the things you do not want to retype every session.</p>
+        <ul>
+          <li>Names and roles of the people involved</li>
+          <li>Definitions of terms specific to your work</li>
+          <li>Links to source documents</li>
+          <li>Standards or templates you reference often</li>
+        </ul>
+        <p>This is the file Claude pulls from when something specific comes up.</p>
+
+        <p class="pull">Every session, point Claude at the folder. It reads the three files. You are now starting from a place where Claude actually knows enough to help.</p>
+
+        <div class="try">
+          <span class="try-label">Try this now</span>
+          Open the <code>CLAUDE.md</code> file you made in Chapter 3. Use the template in the Appendix to fill it in. Five minutes is enough.
+        </div>
+      </article>
+    </section>
+
+    <!-- ===== PART 2 ===== -->
+    <section class="part" data-num="02">
+      <div class="reveal"><span class="part-num">Part two</span></div>
+      <h2 class="part-title reveal">How to talk to Claude</h2>
+      <p class="part-desc reveal">The prompt. Most of the difference between a useful answer and a useless one happens here.</p>
+
+      <article class="chapter reveal" id="ch5">
+        <div class="chapter-num">Chapter</div>
+        <h2>A prompt is a form, not a question</h2>
+        <p>Most people approach a prompt like a search engine query. They type a question and hope for an answer.</p>
+        <p>This is the wrong shape.</p>
+        <p>A prompt is not a question. A prompt is a <strong>form</strong>. It has fields. The fields have names. When you fill the fields well, you get a useful answer. When you leave fields blank, the model fills them in for you — and what it fills them with is often not what you would have chosen.</p>
+        <p>This idea has a long history in software. Every layer of computing — from the earliest programs in the 1800s to modern code — has worked the same way. You fill typed slots in a template. The slot has a name. The slot expects a certain kind of input. The output depends on what you put in.</p>
+        <p>A prompt to an AI works the same way. The slots are not visible by default — but they are there, and the model is filling them in regardless. Your job is to take control of what goes in each one.</p>
+        <p>The five slots are:</p>
+        <ol>
+          <li><strong>Identity</strong> — who Claude should be answering as</li>
+          <li><strong>Task</strong> — what you want done</li>
+          <li><strong>Context</strong> — what Claude needs to know to do it</li>
+          <li><strong>Constraints</strong> — the rules and limits</li>
+          <li><strong>Output Format</strong> — what the answer should look like</li>
+        </ol>
+        <p>Chapter 6 explains each one. For now, the only thing to absorb is this: when your prompts feel inconsistent, it is almost never because the model is broken. It is because some of the slots are empty, and the model is guessing.</p>
+        <div class="try">
+          <span class="try-label">Try this now</span>
+          Look at a prompt you typed recently. Find which of the five slots above were missing. There will be at least two. That gap is what you are about to learn to close.
+        </div>
+      </article>
+
+      <article class="chapter reveal" id="ch6">
+        <div class="chapter-num">Chapter</div>
+        <h2>The five-part prompt</h2>
+        <p>Here is the full shape, in order, with what each slot is for.</p>
+
+        <h3>1. Identity — <em>who Claude should be</em></h3>
+        <p>You are giving Claude a role. The role shapes the answer.</p>
+        <p class="pull">"You are a senior copy editor reviewing a marketing email for clarity and tone."</p>
+        <p>This is not a personality trick. The role narrows what kind of language Claude pulls from. Asking the same question to "an editor" and to "a marketer" produces genuinely different answers. Pick the role that matches the work. Chapter 7 gives you 13 ready-made roles you can paste in.</p>
+
+        <h3>2. Task — <em>what you want done</em></h3>
+        <p>One verb, one outcome. Not three things. One.</p>
+        <p class="pull">"Review this draft and list every sentence that is unclear, in the order they appear."</p>
+        <p>If you find yourself writing "and also" — stop. Save the second task for the second prompt.</p>
+
+        <h3>3. Context — <em>what Claude needs to know</em></h3>
+        <p>Everything Claude needs that it does not already have. The actual draft. The audience. The constraints of the situation. The deadline if it matters.</p>
+        <p>Without context, Claude makes plausible-sounding guesses. With context, it makes grounded recommendations.</p>
+
+        <h3>4. Constraints — <em>the rules</em></h3>
+        <p>What Claude must do, and what it must not do. Length. Tone. What to skip. What to flag instead of fix.</p>
+        <p class="pull">"Do not rewrite. Only flag. Keep flags under fifteen words each."</p>
+        <p>Constraints are the fence around the answer. Without them, the answer wanders.</p>
+
+        <h3>5. Output Format — <em>what the answer should look like</em></h3>
+        <p>Not what to say — how to lay it out.</p>
+        <p class="pull">"Return a numbered list. Each item: the sentence, then the issue. No introduction, no closing summary."</p>
+        <p>Output format is what makes the answer usable. A great answer in the wrong shape is hard to use.</p>
+
+        <p style="margin-top: 32px;"><strong>The rule of thumb:</strong> if your prompt is one sentence, you are probably missing four of the five slots. Two or three sentences is usually closer to right.</p>
+
+        <p>The Appendix has a copy-paste template for the full five-part prompt, plus six ready-to-use prompts for common tasks.</p>
+
+        <div class="try">
+          <span class="try-label">Try this now</span>
+          Take a prompt that did not work. Rewrite it with all five slots filled — even briefly. Run it again. Notice how much closer the answer is to what you actually wanted.
+        </div>
+      </article>
+
+      <article class="chapter reveal" id="ch7">
+        <div class="chapter-num">Chapter</div>
+        <h2>Thirteen personas to invoke</h2>
+        <p>The Identity slot — the first one in the five-part prompt — is where you tell Claude <em>who</em> it should be answering as. Picking the right role narrows what kind of language Claude pulls from, and it changes the answer more than any other single move.</p>
+        <p>You do not have to invent a role from scratch every time. Below are thirteen personas that cover most of the work people actually do. Each one has a name, a one-line role, and a ready-to-paste Identity sentence. <strong>Click any persona to expand it.</strong></p>
+
+        <div class="personas">
+
+          <div class="persona">
+            <button class="persona-head" type="button">
+              <span class="persona-num">1</span>
+              <span class="persona-meta">
+                <span class="persona-name">The Editor</span>
+                <span class="persona-role">Reviews writing for clarity, tone, errors, and flow.</span>
+              </span>
+              <span class="persona-toggle"></span>
+            </button>
+            <div class="persona-body">
+              <div class="persona-body-inner">
+                <p>Use when you want Claude to <em>flag, not rewrite</em>. The Editor is conservative — it surfaces the issues and lets you decide.</p>
+                <div class="persona-prompt">
+                  <span class="persona-prompt-label">Identity prompt</span>
+                  You are a senior copy editor who reviews professional writing for clarity, tone, and consistency. You flag issues; you do not rewrite unless asked.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="persona">
+            <button class="persona-head" type="button">
+              <span class="persona-num">2</span>
+              <span class="persona-meta">
+                <span class="persona-name">The Summarizer</span>
+                <span class="persona-role">Distills long documents into the key points.</span>
+              </span>
+              <span class="persona-toggle"></span>
+            </button>
+            <div class="persona-body">
+              <div class="persona-body-inner">
+                <p>Use for long reports, transcripts, or any document where you need the gist without losing accuracy.</p>
+                <div class="persona-prompt">
+                  <span class="persona-prompt-label">Identity prompt</span>
+                  You are an analyst who reads long documents and produces faithful, structured summaries. You preserve the source's meaning. You do not add interpretation.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="persona">
+            <button class="persona-head" type="button">
+              <span class="persona-num">3</span>
+              <span class="persona-meta">
+                <span class="persona-name">The Brainstormer</span>
+                <span class="persona-role">Generates options when you can only see one or two.</span>
+              </span>
+              <span class="persona-toggle"></span>
+            </button>
+            <div class="persona-body">
+              <div class="persona-body-inner">
+                <p>Use when you are stuck. The Brainstormer pushes for breadth, not depth — including options you would not have picked yourself.</p>
+                <div class="persona-prompt">
+                  <span class="persona-prompt-label">Identity prompt</span>
+                  You are a brainstorming partner. You generate a wide range of options, including unconventional ones. You do not recommend; you spread the field.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="persona">
+            <button class="persona-head" type="button">
+              <span class="persona-num">4</span>
+              <span class="persona-meta">
+                <span class="persona-name">The Explainer</span>
+                <span class="persona-role">Breaks down a complex concept in plain language.</span>
+              </span>
+              <span class="persona-toggle"></span>
+            </button>
+            <div class="persona-body">
+              <div class="persona-body-inner">
+                <p>Use when you need to understand something new — or when you need to explain something to someone else.</p>
+                <div class="persona-prompt">
+                  <span class="persona-prompt-label">Identity prompt</span>
+                  You are a teacher who explains complex topics in plain language for someone with no background in the field. You define every term the first time you use it.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="persona">
+            <button class="persona-head" type="button">
+              <span class="persona-num">5</span>
+              <span class="persona-meta">
+                <span class="persona-name">The Coach</span>
+                <span class="persona-role">Talks through a decision by asking clarifying questions.</span>
+              </span>
+              <span class="persona-toggle"></span>
+            </button>
+            <div class="persona-body">
+              <div class="persona-body-inner">
+                <p>Use when you are unsure what to do. The Coach asks one question at a time and helps you think — it does not tell you the answer.</p>
+                <div class="persona-prompt">
+                  <span class="persona-prompt-label">Identity prompt</span>
+                  You are a thoughtful coach. You help me think through decisions by asking one clarifying question at a time. You do not give advice unless asked directly.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="persona">
+            <button class="persona-head" type="button">
+              <span class="persona-num">6</span>
+              <span class="persona-meta">
+                <span class="persona-name">The Researcher</span>
+                <span class="persona-role">Synthesizes information from sources you provide.</span>
+              </span>
+              <span class="persona-toggle"></span>
+            </button>
+            <div class="persona-body">
+              <div class="persona-body-inner">
+                <p>Use when you have multiple sources and want them combined into one clear synthesis. The key constraint: <em>only the sources you provide</em>.</p>
+                <div class="persona-prompt">
+                  <span class="persona-prompt-label">Identity prompt</span>
+                  You are a research assistant. You read the sources I provide and synthesize them. You only use the information given. If something is missing, you say so.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="persona">
+            <button class="persona-head" type="button">
+              <span class="persona-num">7</span>
+              <span class="persona-meta">
+                <span class="persona-name">The Translator</span>
+                <span class="persona-role">Converts text between languages or registers.</span>
+              </span>
+              <span class="persona-toggle"></span>
+            </button>
+            <div class="persona-body">
+              <div class="persona-body-inner">
+                <p>Use for languages, but also for register shifts — formal to casual, technical to plain, internal to public.</p>
+                <div class="persona-prompt">
+                  <span class="persona-prompt-label">Identity prompt</span>
+                  You are a professional translator. You convert text between languages or between registers. You preserve meaning, tone, and nuance. If something does not translate cleanly, you flag it.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="persona">
+            <button class="persona-head" type="button">
+              <span class="persona-num">8</span>
+              <span class="persona-meta">
+                <span class="persona-name">The Drafter</span>
+                <span class="persona-role">Produces a first draft from a brief.</span>
+              </span>
+              <span class="persona-toggle"></span>
+            </button>
+            <div class="persona-body">
+              <div class="persona-body-inner">
+                <p>Use when the blank page is the problem. The Drafter gets you something to react to. It is supposed to be edited.</p>
+                <div class="persona-prompt">
+                  <span class="persona-prompt-label">Identity prompt</span>
+                  You are a writer who produces first drafts from briefs. You hit the brief; you do not over-polish. The draft is meant to be edited.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="persona">
+            <button class="persona-head" type="button">
+              <span class="persona-num">9</span>
+              <span class="persona-meta">
+                <span class="persona-name">The Organizer</span>
+                <span class="persona-role">Turns messy notes into structured lists or outlines.</span>
+              </span>
+              <span class="persona-toggle"></span>
+            </button>
+            <div class="persona-body">
+              <div class="persona-body-inner">
+                <p>Use after a brain-dump, a long meeting, or a folder of half-formed thoughts. The Organizer keeps every item — it does not summarize.</p>
+                <div class="persona-prompt">
+                  <span class="persona-prompt-label">Identity prompt</span>
+                  You are an organizer who takes messy input and structures it into clean lists, outlines, or tables. You preserve every item. You do not paraphrase or drop anything.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="persona">
+            <button class="persona-head" type="button">
+              <span class="persona-num">10</span>
+              <span class="persona-meta">
+                <span class="persona-name">The Critic</span>
+                <span class="persona-role">Finds weaknesses in an argument or a plan.</span>
+              </span>
+              <span class="persona-toggle"></span>
+            </button>
+            <div class="persona-body">
+              <div class="persona-body-inner">
+                <p>Use before you commit. The Critic stress-tests the work, surfaces gaps, and names the risks — without being mean about it.</p>
+                <div class="persona-prompt">
+                  <span class="persona-prompt-label">Identity prompt</span>
+                  You are a constructive critic. You read the work I share and identify the weaknesses, gaps, and risks. You are honest but not harsh.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="persona">
+            <button class="persona-head" type="button">
+              <span class="persona-num">11</span>
+              <span class="persona-meta">
+                <span class="persona-name">The Devil's Advocate</span>
+                <span class="persona-role">Argues the opposite to test your thinking.</span>
+              </span>
+              <span class="persona-toggle"></span>
+            </button>
+            <div class="persona-body">
+              <div class="persona-body-inner">
+                <p>Use when everyone in the room agrees with you. The Devil's Advocate is supposed to be wrong — but make you defend why you are right.</p>
+                <div class="persona-prompt">
+                  <span class="persona-prompt-label">Identity prompt</span>
+                  You are a devil's advocate. You take the opposing position to whatever I argue. Your job is to make me defend my reasoning, not to be right.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="persona">
+            <button class="persona-head" type="button">
+              <span class="persona-num">12</span>
+              <span class="persona-meta">
+                <span class="persona-name">The Tutor</span>
+                <span class="persona-role">Teaches you something step-by-step.</span>
+              </span>
+              <span class="persona-toggle"></span>
+            </button>
+            <div class="persona-body">
+              <div class="persona-body-inner">
+                <p>Use when you want to actually learn something, not just get the answer. The Tutor checks your understanding before moving on.</p>
+                <div class="persona-prompt">
+                  <span class="persona-prompt-label">Identity prompt</span>
+                  You are a patient tutor. You teach me a concept step by step, checking my understanding before moving on. You assume I know nothing and you do not skip steps.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="persona">
+            <button class="persona-head" type="button">
+              <span class="persona-num">13</span>
+              <span class="persona-meta">
+                <span class="persona-name">The Planner</span>
+                <span class="persona-role">Breaks a goal into a sequence of steps.</span>
+              </span>
+              <span class="persona-toggle"></span>
+            </button>
+            <div class="persona-body">
+              <div class="persona-body-inner">
+                <p>Use when the goal is clear but the path isn't. The Planner gives you a sequence — specific, named, in order.</p>
+                <div class="persona-prompt">
+                  <span class="persona-prompt-label">Identity prompt</span>
+                  You are a planner. You take a goal and break it into a clear, sequenced set of specific, named steps.
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <h4>Using personas well</h4>
+        <ul>
+          <li><strong>Use one persona per prompt.</strong> Mixing roles muddies the answer.</li>
+          <li><strong>Combine the persona with the other four slots.</strong> Identity alone is not enough.</li>
+          <li><strong>Adapt freely.</strong> These are starting points, not rules.</li>
+          <li><strong>Save the ones you use a lot.</strong> Paste them into your <code>CLAUDE.md</code> so they are always available.</li>
+        </ul>
+
+        <div class="try">
+          <span class="try-label">Try this now</span>
+          Pick one persona above. Click to expand it. Copy the Identity prompt. Use it as the first slot of your next prompt. Notice how much sharper the answer is.
+        </div>
+      </article>
+
+      <article class="chapter reveal" id="ch8">
+        <div class="chapter-num">Chapter</div>
+        <h2>The two kinds of constraints</h2>
+        <p>The fourth slot — constraints — has more nuance than the others. It is worth a chapter on its own because most people only use one kind of constraint, and the other kind is where the real leverage is.</p>
+
+        <h3>Format constraints</h3>
+        <p>These are the obvious ones. They tell Claude what shape the answer should take.</p>
+        <ul>
+          <li>"Keep it under 100 words."</li>
+          <li>"Use bullet points."</li>
+          <li>"No greeting, no sign-off."</li>
+          <li>"Respond in plain English, no headings."</li>
+        </ul>
+        <p>Format constraints fix surface problems. They make the answer the right size and shape. They are necessary but not sufficient.</p>
+
+        <h3>Strategic constraints</h3>
+        <p>These are the quieter ones. They tell Claude how to think, not just how to write.</p>
+        <ul>
+          <li>"Do not invent any information that is not in the source below."</li>
+          <li>"If something is unclear, ask before proceeding instead of guessing."</li>
+          <li>"Flag anything that contradicts the brief — do not silently smooth it over."</li>
+          <li>"Use only the information provided. If a fact is missing, say 'not specified.'"</li>
+        </ul>
+        <p>Strategic constraints fix the deeper problems — hallucination, drift, overconfidence, made-up details. They are the difference between an answer that looks good and an answer that is actually trustworthy.</p>
+
+        <p class="pull">Format constraints make the answer usable. Strategic constraints make the answer reliable. You need both.</p>
+
+        <p>Most people add three format constraints and zero strategic ones. Then they wonder why the answer looks great but contains things that are not true.</p>
+
+        <div class="try">
+          <span class="try-label">Try this now</span>
+          Add one strategic constraint to your next prompt. The simplest version: <em>"Use only what I have given you. If anything is missing, say so."</em> Notice the difference.
+        </div>
+      </article>
+
+      <article class="chapter reveal" id="ch9">
+        <div class="chapter-num">Chapter</div>
+        <h2>Why your prompts hallucinate</h2>
+        <p>A <strong>hallucination</strong> is when an AI confidently produces something that is not true. It might invent a quote, fabricate a fact, cite a source that does not exist, or describe a feature that the software never had.</p>
+        <p>For a long time hallucination was treated like a mystery — something inherent to AI that no one could fully control. That story has stopped being accurate. Hallucinations are now well understood, and almost all of them trace back to four specific prompting mistakes.</p>
+        <p>If you fix the four mistakes, hallucinations drop dramatically.</p>
+
+        <h4>Mistake 1 — The vague prompt</h4>
+        <p>No boundary, no source, no output format. The model fills the gaps with whatever seems plausible. <em>Fix: define the role, the task, the source, and the format explicitly.</em></p>
+
+        <h4>Mistake 2 — No source constraint</h4>
+        <p>You ask Claude to "use expert knowledge" or you do not tell it where to draw from. It draws from training data, which may be outdated or wrong. <em>Fix: give it a source, then say "use only the information below. If something is not specified, say 'not specified.'"</em></p>
+
+        <h4>Mistake 3 — Too many tasks at once</h4>
+        <p>You stack five instructions in one prompt. Research shows this makes inconsistent output far more likely — sometimes by an order of magnitude. <em>Fix: one prompt, one task. Chain them sequentially.</em></p>
+
+        <h4>Mistake 4 — Conflicting instructions</h4>
+        <p>You ask for "concise but thorough" or "casual but professional." The model has to invent a middle ground that often contains neither. <em>Fix: instructions should reinforce each other, not pull in opposite directions.</em></p>
+
+        <p style="margin-top: 28px;">There is one more idea here that is worth holding onto:</p>
+        <p class="pull">Heavy AI users hallucinate more often than light users — because they build more complex prompts. Sophistication in prompting does not look like length. It looks like constraints.</p>
+        <p>A short, well-constrained prompt outperforms a long, loose one almost every time.</p>
+
+        <p>And one final warning: <strong>confidence is not accuracy.</strong> Current AI models are trained in a way that rewards confident-sounding answers. The model's tone tells you nothing about whether the content is correct. Always verify outputs that matter, through a human checkpoint or a second source. (Chapter 14 is dedicated to this.)</p>
+
+        <div class="try">
+          <span class="try-label">Try this now</span>
+          Find a prompt you wrote that produced a hallucination. Run it through the four mistakes above. You will find at least one of them. Rewrite the prompt to fix it.
+        </div>
+      </article>
+    </section>
+
+    <!-- ===== PART 3 ===== -->
+    <section class="part" data-num="03">
+      <div class="reveal"><span class="part-num">Part three</span></div>
+      <h2 class="part-title reveal">How to build something useful</h2>
+      <p class="part-desc reveal">Not just a clever demo. Something you actually use every day.</p>
+
+      <article class="chapter reveal" id="ch10">
+        <div class="chapter-num">Chapter</div>
+        <h2>Why "one big prompt" never works</h2>
+        <p>The first instinct most people have, once they get the hang of prompting, is to write longer prompts. If a five-line prompt works well, a thirty-line one should work better. Right?</p>
+        <p>Wrong, and the reason is structural.</p>
+        <p>Each task you add to a prompt multiplies the chance of inconsistent output. One task is reliable. Two tasks is mostly reliable. Five tasks is unreliable. The model is doing more things at once than it can keep coherent.</p>
+        <p>The fix is not "write a better one big prompt." The fix is to split the work into stages.</p>
+        <p>Each stage has:</p>
+        <ul>
+          <li>One clear job</li>
+          <li>Its own short prompt</li>
+          <li>A clear input and a clear output</li>
+          <li>A check, before the next stage runs</li>
+        </ul>
+        <p>This pattern is called a <strong>pipeline</strong>. It is the same pattern factories use, the same pattern software has used for fifty years, and the same pattern that makes AI workflows actually trustworthy.</p>
+        <p>A pipeline is slower to set up than one big prompt. It is much faster to run, much more reliable, and far easier to debug when something goes wrong. If the third stage produces a bad output, you know exactly which stage to fix.</p>
+        <p>The next chapter shows the simplest pipeline shape that works for almost any use case.</p>
+        <div class="try">
+          <span class="try-label">Try this now</span>
+          Look at the most complex prompt you have written. Find the moment where you said "and also." Cut the prompt there. That second half is a separate stage.
+        </div>
+      </article>
+
+      <article class="chapter reveal" id="ch11">
+        <div class="chapter-num">Chapter</div>
+        <h2>The five-folder pattern</h2>
+        <p>The simplest pipeline shape that works for a wide range of work is five stages. Each stage gets its own folder. The folder name tells you what stage it is. Items move from one folder to the next as the work progresses.</p>
+        <div class="code-block">
+          <button class="copy-btn" data-copy>Copy</button>
+<pre>01-receive/    ← raw input arrives here
+02-filter/     ← AI sorts, scores, or triages it
+03-process/    ← the main work happens — drafts, summaries, decisions
+04-review/     ← a human checks the output
+05-act/        ← the approved output is sent, posted, or saved</pre>
+        </div>
+        <p>Why this works:</p>
+        <ul>
+          <li>Each stage has a single job. You can prompt it precisely.</li>
+          <li>You can see, at a glance, how much work is in each stage. If <code>02-filter</code> has 200 items and <code>03-process</code> has none, you know where the bottleneck is.</li>
+          <li>You can change one stage without breaking the others.</li>
+          <li>A new person joining the work can understand the whole system in five minutes.</li>
+          <li>When something goes wrong, you know exactly where.</li>
+        </ul>
+        <p>You can adapt the names. A writer might use <code>01-ideas / 02-drafts / 03-edits / 04-review / 05-published</code>. A small business might use <code>01-leads / 02-qualified / 03-proposed / 04-approved / 05-invoiced</code>. The shape is what matters. Stages, with one job each, in order.</p>
+        <p>Most people who try to "use AI in their workflow" without this structure end up with one giant folder full of half-done things. The folders are not bureaucracy. They are how you stay sane.</p>
+        <div class="try">
+          <span class="try-label">Try this now</span>
+          Pick one workflow you do regularly. Sketch its five stages on paper. Do not build the folders yet. Just see if the shape fits. It almost always does.
+        </div>
+      </article>
+
+      <article class="chapter reveal" id="ch12">
+        <div class="chapter-num">Chapter</div>
+        <h2>You're not building AI — you're building the conductor</h2>
+        <p>There is one last reframe to absorb before Part 3 ends, and it is the one that changes how you think about the whole project.</p>
+        <p>When you build a useful AI workflow, the AI itself is a small part of it. Most of the work is structure around the AI — folders, files, rules, checkpoints, the order in which things happen. People who study real production AI systems found that the breakdown looks roughly like this:</p>
+        <table>
+          <thead>
+            <tr><th>Layer</th><th>Roughly</th><th>What it means in practice</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Traditional structure</td><td>60%</td><td>Folders, files, the order things happen, the way information moves.</td></tr>
+            <tr><td>Rules</td><td>30%</td><td>Decisions about what gets routed where, what is allowed, what must be checked.</td></tr>
+            <tr><td>Actual AI</td><td>10%</td><td>The prompt that goes to the model, the answer that comes back.</td></tr>
+          </tbody>
+        </table>
+        <p>This is genuinely good news. It means you do not need to be a developer or a researcher to build something useful. The 90% of the work that matters is process design — and process design is something an organized, careful person can do without writing any code.</p>
+
+        <p class="pull">You are not building AI. You are building the conductor. The AI is one of the musicians. Your folders, your prompts, your rules — those are the score. The score works regardless of which orchestra plays it.</p>
+
+        <p>This also means your work is durable. Models change. New ones come out every few months. Tools come and go. But the structure you build — the folders, the staged pipeline, the rules about what gets checked — keeps working. You can swap one model for another underneath, and the system still runs.</p>
+        <p>You are building something that lasts longer than the tool you started with.</p>
+        <div class="try">
+          <span class="try-label">Try this now</span>
+          Write down one part of a workflow that does not need AI at all. Maybe most of it doesn't. The clearer you are about which 10% needs AI, the better the whole thing will work.
+        </div>
+      </article>
+    </section>
+
+    <!-- ===== PART 4 ===== -->
+    <section class="part" data-num="04">
+      <div class="reveal"><span class="part-num">Part four</span></div>
+      <h2 class="part-title reveal">Safety and good habits</h2>
+      <p class="part-desc reveal">The boring chapters that save you from the bad day. Read all five — none of them are skippable.</p>
+
+      <article class="chapter reveal" id="ch13">
+        <div class="chapter-num">Chapter</div>
+        <h2>Always test on a copy first</h2>
+        <p>This rule is short. It is also the rule that, when ignored, causes the most regret.</p>
+        <p class="pull">Whenever you are about to give Claude access to something real — a folder of files, a spreadsheet, a database, anything — make a copy first. Have Claude work on the copy. Verify the output. Only then touch the original.</p>
+        <p>People who skip this step almost always learn the lesson the hard way. A renamed folder that loses connections to other tools. A "cleaned up" spreadsheet that overwrote columns the team needed. A summary that replaced a master document instead of being saved separately.</p>
+        <p>These are not stories about AI being malicious. They are stories about AI being <em>literal</em>. You said "organize this." It organized it — its way. The original is gone.</p>
+        <p>The protocol is simple and worth treating as a rule, not a suggestion:</p>
+        <ol>
+          <li>Make a copy of whatever you are working with.</li>
+          <li>Point Claude at the copy.</li>
+          <li>Verify the result is what you wanted.</li>
+          <li>Only then apply it to the real thing.</li>
+        </ol>
+        <p>This adds one minute to your work. It saves you the day you lose three hours.</p>
+        <div class="try">
+          <span class="try-label">Try this now</span>
+          The next time you are about to ask Claude to modify a real file, stop. Duplicate the file first. Add <code>_copy</code> to the name. Then proceed. Make this a habit.
+        </div>
+      </article>
+
+      <article class="chapter reveal" id="ch14">
+        <div class="chapter-num">Chapter</div>
+        <h2>Confidence is not accuracy</h2>
+        <p>This is the single most important habit you will build.</p>
+        <p>Claude — and every current AI model — is trained in a way that rewards confident-sounding answers. The model produces fluent, assured language whether the content is correct or not. There is no internal signal in the answer that tells you "I am unsure about this part."</p>
+        <p>This means: <strong>the tone of an answer is not a signal of its correctness.</strong> A confident wrong answer reads exactly like a confident right one.</p>
+        <p>Three habits protect you from this:</p>
+        <ol>
+          <li><strong>Always check anything that matters.</strong> If a decision will be acted on, the source must be verified. Not by Claude — by you, or by a second source that is not the same model.</li>
+          <li><strong>Ask Claude to flag its own uncertainty.</strong> A simple line in your prompt — <em>"If you are not sure, say so. Do not invent details."</em> — produces noticeably more honest answers.</li>
+          <li><strong>Build a checkpoint into your pipeline.</strong> Somewhere between Claude's output and the action being taken, a person looks at the result. Not to micromanage — to catch the things confidence hides.</li>
+        </ol>
+        <p>The Appendix has a four-question verification checklist you can apply to any answer before you act on it.</p>
+        <p>You are not being paranoid. You are being grown-up about a tool that has a known weakness.</p>
+        <div class="try">
+          <span class="try-label">Try this now</span>
+          Look at one Claude output you acted on recently. Check it. If anything is wrong, that's the lesson. If everything is right, that's also the lesson — verify is fast and almost always worth it.
+        </div>
+      </article>
+
+      <article class="chapter reveal" id="ch15">
+        <div class="chapter-num">Chapter</div>
+        <h2>What you should never share with AI</h2>
+        <p>This is the chapter no one talks about until something goes wrong.</p>
+        <p>When you paste text into an AI tool, you are sending that text out of your computer and into someone else's system. Depending on the tool and the plan, your input may be stored, logged, used to train future models, or visible to the company's staff under certain conditions. Not all tools handle this the same way. <strong>Read the terms of any AI tool before you put anything sensitive into it.</strong></p>
+        <p>Below is a simple three-tier classification. Use it before every prompt.</p>
+
+        <h4><span class="tier green">●&nbsp; Green</span>&nbsp; Safe to paste freely</h4>
+        <ul>
+          <li>Public information you would be willing to share with a stranger</li>
+          <li>Drafts, ideas, or content where the topic is general</li>
+          <li>Test data you have made up</li>
+          <li>Documents where every detail is fictional or already public</li>
+        </ul>
+
+        <h4><span class="tier yellow">●&nbsp; Yellow</span>&nbsp; Use care, redact when possible</h4>
+        <ul>
+          <li>Internal team information that is not public but is not sensitive</li>
+          <li>Names of colleagues (consider initials or roles instead, if their identity is not relevant)</li>
+          <li>Project details that are not confidential but are not for outside eyes</li>
+          <li>Process documentation</li>
+          <li>Drafts of work that has not yet been published</li>
+        </ul>
+        <p>For yellow material: ask yourself whether you actually need to include the sensitive parts. Most of the time you can do the task with the names redacted, the numbers fuzzed, or the source paraphrased.</p>
+
+        <h4><span class="tier red">●&nbsp; Red</span>&nbsp; Never put in a prompt unless explicitly approved</h4>
+        <ul>
+          <li>Personal data of others — full names with contact info, ID numbers, dates of birth, addresses</li>
+          <li>Financial details — account numbers, card numbers, balances, salary information</li>
+          <li>Health information — diagnoses, medical records, prescriptions</li>
+          <li>Passwords, API keys, login credentials, security tokens</li>
+          <li>Anything covered by an NDA, a contract, or a regulation (GDPR, HIPAA, financial compliance, professional confidentiality)</li>
+          <li>Client confidential material</li>
+          <li>Proprietary code, trade secrets, or unreleased product information</li>
+          <li>Anything you would not want to read on a public forum tomorrow</li>
+        </ul>
+
+        <p class="pull">If you would not paste it into a public web search, do not paste it into an AI prompt — unless you have verified the tool's data handling and your organization has approved it for that level.</p>
+
+        <p>A few extra habits worth building:</p>
+        <ul>
+          <li><strong>Use a separate "scratch" account or workspace</strong> for personal exploration, separate from any work account.</li>
+          <li><strong>When you must use real data, anonymize first.</strong> Replace names with letters, dates with placeholders, numbers with something obviously fake. Run the prompt on the anonymized version. Substitute the real data into the answer afterward yourself.</li>
+          <li><strong>Watch for screenshots.</strong> A screenshot can leak data even if you would never type that data. Crop carefully.</li>
+        </ul>
+
+        <div class="try">
+          <span class="try-label">Try this now</span>
+          Look at the last five things you pasted into an AI tool. Mark each one green, yellow, or red. If any are red, go check that tool's data handling policy. Now you know.
+        </div>
+      </article>
+
+      <article class="chapter reveal" id="ch16">
+        <div class="chapter-num">Chapter</div>
+        <h2>Keep a record</h2>
+        <p>The single habit that saves you when something goes wrong is keeping a record of what Claude did.</p>
+        <p>This sounds bureaucratic. It is not. It is forty-five seconds of typing per session that means future-you can retrace what was done, prove what was changed, and hand the work off to someone else without re-explaining.</p>
+
+        <h4>Why a record matters</h4>
+        <ul>
+          <li>You can retrace what was modified — and roll it back if needed</li>
+          <li>You can prove what was done if asked (by a colleague, a manager, an auditor)</li>
+          <li>You can spot patterns in your own mistakes over time</li>
+          <li>You can hand work off to someone else without re-explaining the history</li>
+          <li>You can catch a problem early, before it propagates</li>
+        </ul>
+
+        <h4>What to log, every session</h4>
+        <ul>
+          <li>The date</li>
+          <li>What you asked Claude to do (a sentence is enough)</li>
+          <li>What it produced (a copy, a snapshot, or a summary)</li>
+          <li>What you decided to keep, change, or discard</li>
+          <li>Anything you flagged as wrong, surprising, or worth checking later</li>
+        </ul>
+
+        <h4>Three lightweight ways to keep a record</h4>
+        <ol>
+          <li><strong>A <code>LOG.md</code> file in each project folder.</strong> Append a few lines after each session. Date, prompt, decision. That is enough.</li>
+          <li><strong>A spreadsheet with one row per session.</strong> Useful if you want to see patterns across many sessions.</li>
+          <li><strong>A folder structure that timestamps the work.</strong> For example, <code>02-filter/2026-05-03_inputs/</code> and <code>02-filter/2026-05-03_outputs/</code>. The folders themselves are the log.</li>
+        </ol>
+
+        <p>You do not need formal documentation. You need enough breadcrumbs that future-you can retrace today's work.</p>
+
+        <p class="pull">Never let Claude take an action that you cannot retrace. If you would not be able to explain afterward what was done and why, you should not be doing it yet.</p>
+
+        <div class="try">
+          <span class="try-label">Try this now</span>
+          Make a <code>LOG.md</code> file in your project folder. Add three lines about the most recent thing you did with Claude. That is the start of your record.
+        </div>
+      </article>
+
+      <article class="chapter reveal" id="ch17">
+        <div class="chapter-num">Chapter</div>
+        <h2>Backups, boundaries, things you don't let Claude touch yet</h2>
+        <p>A short list of habits that keep you out of trouble. None of them are advanced. All of them get skipped.</p>
+
+        <h4>Back up before you let Claude do anything significant</h4>
+        <p>The first time Claude reorganizes a folder, runs a script, or modifies multiple files, the original state should be saved somewhere safe and easy to restore. This is not paranoia. It is normal hygiene for any tool that takes action.</p>
+
+        <h4>Do not put sensitive data into a tool that does not promise to protect it</h4>
+        <p>Read the terms of the AI tool you are using. Know whether your inputs are stored, whether they are used to train future models, and whether other users could ever see them. (See Chapter 15 for the full classification.)</p>
+
+        <h4>Decide in advance what Claude is not allowed to touch</h4>
+        <p>Make this a clear list and put it in your <code>CLAUDE.md</code> so the rule is always loaded. Examples that work for most people starting out:</p>
+        <ul>
+          <li>Anything that sends a message externally without you reading the final text first</li>
+          <li>Anything that deletes files</li>
+          <li>Anything that modifies access permissions or sharing settings</li>
+          <li>Anything that posts publicly (social media, forums, public documents)</li>
+          <li>Anything that triggers a payment or a transaction</li>
+          <li>Anything that renames files or folders that other tools depend on</li>
+          <li>Database operations that change or remove data</li>
+          <li>Anything that contacts a third person on your behalf</li>
+          <li>Anything you cannot undo with one click</li>
+        </ul>
+
+        <h4>Keep a human in the loop for anything irreversible</h4>
+        <p>"Irreversible" is the key word. If a step cannot be undone, a human approves it. No exceptions, no shortcuts, no "it will be fine." This is not about distrusting AI. It is about respecting that some actions cannot be taken back.</p>
+
+        <h4>Review your setup every few months</h4>
+        <p>What you trusted Claude to do six months ago and what you trust it to do now should not be the same list. The tool changes. Your judgment about it should too. Put a recurring reminder in your calendar.</p>
+
+        <p style="margin-top: 24px;">These habits feel slow when nothing has gone wrong. They are the reason nothing has gone wrong.</p>
+
+        <div class="try">
+          <span class="try-label">Try this now</span>
+          Make a short list — three to five items — of things you will not let Claude do without your explicit approval. Write it down. Put it in your <code>CLAUDE.md</code> file. That list is your fence.
+        </div>
+      </article>
+    </section>
+
+    <!-- ===== CLOSING ===== -->
+    <section class="part" id="closing">
+      <div class="reveal"><span class="part-num">Closing</span></div>
+      <h2 class="part-title reveal">What to do tomorrow morning</h2>
+      <p class="part-desc reveal">One small thing. Then come back.</p>
+
+      <article class="chapter reveal" style="padding-top: 0;">
+        <p>You do not have to do all of this. You should not even try.</p>
+        <p>The mistake almost everyone makes after reading something like this is trying to apply all of it on Monday. They build the folder, write the CLAUDE.md, design the pipeline, draft every safety procedure, and burn out by Wednesday.</p>
+        <p>Here is the only thing you have to do tomorrow:</p>
+
+        <p class="pull">Pick one task you do every week. Make a folder for it. Add a <code>CLAUDE.md</code> file using the template in the Appendix. Open Claude. Point it at the folder. Try one prompt — with all five slots filled, and one of the thirteen personas as the Identity — to do part of that task.</p>
+
+        <p>That is the entire assignment. Nothing else.</p>
+        <p>If it works, do it again the next day with the same task. Refine the prompt. Add a second file if you need it. Notice what changes.</p>
+        <p>If it does not work, look at the four hallucination mistakes from Chapter 9. One of them will apply. Fix it. Try again.</p>
+        <p>After two weeks of doing this with one task, you will have built more usable AI infrastructure than most people have in production right now. Without ever calling it that. Without writing a line of code. Without anything that looks like a project.</p>
+        <p>This is how it actually happens.</p>
+
+        <p style="margin-top: 28px;">The folder is the brain. The prompt is a form. The persona is the role. The pipeline is the conductor. The check is what keeps you safe. The record is what keeps you accountable.</p>
+        <p>You have everything you need.</p>
+        <p>The Appendix below is a kit. Use the templates. Skip what you don't need yet. Come back when you do.</p>
+      </article>
+    </section>
+
+    <!-- ===== APPENDIX ===== -->
+    <section class="part" id="appendix">
+      <div class="reveal"><span class="part-num">Appendix</span></div>
+      <h2 class="part-title reveal">Templates &amp; reference</h2>
+      <p class="part-desc reveal">The kit. Hover any block to copy.</p>
+
+      <div class="appendix-block reveal">
+        <h3>A. Glossary</h3>
+        <dl class="glossary">
+          <dt>AI / Artificial Intelligence</dt>
+          <dd>Software that produces results that look like human intelligence. In this manual it means specifically large language models like Claude.</dd>
+          <dt>Large language model (LLM)</dt>
+          <dd>A piece of software trained on a very large amount of text, which produces new text that fits the patterns of what it was trained on. Claude, GPT, Gemini, and Mistral are all LLMs.</dd>
+          <dt>Prompt</dt>
+          <dd>The text you send to an AI model. Not a question — a form with five slots (Identity, Task, Context, Constraints, Output Format).</dd>
+          <dt>Persona</dt>
+          <dd>A role you give Claude in the Identity slot of a prompt. Chapter 7 has 13 ready to use.</dd>
+          <dt>Hallucination</dt>
+          <dd>When an AI produces text that sounds confident but is not true. Caused by the four prompting mistakes in Chapter 9.</dd>
+          <dt>Context window</dt>
+          <dd>The working memory of a model in a single session. Everything you give it has to fit. When sessions get very long, the oldest content starts getting ignored.</dd>
+          <dt>Pipeline</dt>
+          <dd>A sequence of stages, each with one job, that the work moves through in order.</dd>
+          <dt>Format constraint</dt>
+          <dd>A rule about the shape of the answer (length, layout, tone).</dd>
+          <dt>Strategic constraint</dt>
+          <dd>A rule about the thinking behind the answer (use only this source, ask before guessing, flag uncertainty).</dd>
+          <dt>Verification</dt>
+          <dd>Checking an answer before acting on it. The Appendix has a four-question checklist.</dd>
+        </dl>
+      </div>
+
+      <div class="appendix-block reveal">
+        <h3>B. CLAUDE.md template</h3>
+        <p>Copy into the <code>CLAUDE.md</code> file at the root of your project. Replace the bracketed parts.</p>
+        <div class="code-block">
+          <button class="copy-btn" data-copy>Copy</button>
+<pre># Project: [Project Name]
+
+## Who I am
+I am [your role / context]. I work on [what kind of work].
+My background is in [relevant background].
+
+## What this project is
+[One or two sentences. What it produces, who it's for, what stage it's in.]
+
+## How I want to work
+- Keep responses short unless I ask for detail
+- Ask before launching into long plans — I want to steer
+- Flag things you're unsure about — never guess silently
+- Use plain language; define jargon when you use it
+- "We" means us, not the royal we
+
+## Rules
+- Never modify a file without showing me the change first
+- Always test on a copy before touching the original
+- If you find an open question, name it; don't fill it in for me
+- [Add your own — see Chapter 17 for the full fence list]
+
+## My preferred personas
+[Optional. List the 2 or 3 personas from Chapter 7 you use most often.]</pre>
+        </div>
+      </div>
+
+      <div class="appendix-block reveal">
+        <h3>C. CONTEXT.md template</h3>
+        <p>This file changes weekly. Update it when something material shifts.</p>
+        <div class="code-block">
+          <button class="copy-btn" data-copy>Copy</button>
+<pre># Current State — Updated [date]
+
+## What I'm working on this week
+- [Active item 1]
+- [Active item 2]
+- [Active item 3]
+
+## Where I am in the project
+[One or two sentences. What stage, what's next, what's blocking.]
+
+## Open decisions
+- [Decision 1] — [what's blocking it]
+- [Decision 2] — [what's blocking it]
+
+## Open questions
+- [Question 1]
+- [Question 2]
+
+## Recent changes worth knowing about
+- [Change 1]
+- [Change 2]</pre>
+        </div>
+      </div>
+
+      <div class="appendix-block reveal">
+        <h3>D. REFERENCES.md template</h3>
+        <p>The slow-changing reference layer. Add to it as you go.</p>
+        <div class="code-block">
+          <button class="copy-btn" data-copy>Copy</button>
+<pre># Reference Material
+
+## People
+- **[Name]** — [role, relationship to the project, anything relevant]
+- **[Name]** — [role, relationship to the project, anything relevant]
+
+## Key terms / definitions
+- **[Term]** — [definition specific to this project]
+- **[Term]** — [definition specific to this project]
+
+## Source documents
+- [[Link or reference to source 1]]
+- [[Link or reference to source 2]]
+
+## Standards / templates I follow
+- [Standard 1] — [where it lives]
+- [Standard 2] — [where it lives]</pre>
+        </div>
+      </div>
+
+      <div class="appendix-block reveal">
+        <h3>E. The five-part prompt template</h3>
+        <p>Copy and adapt for any prompt:</p>
+        <div class="code-block">
+          <button class="copy-btn" data-copy>Copy</button>
+<pre>Identity:    You are a [role] who [relevant background or expertise].
+             [Pick from the 13 personas in Chapter 7, or write your own.]
+
+Task:        [One verb. One outcome. No "and also."]
+
+Context:     [Everything Claude needs to know to do this well —
+              the source material, the audience, the situation,
+              the constraints of the moment.]
+
+Constraints: - [Format constraint — e.g. length, layout, tone]
+             - [Strategic constraint — usually about what to use,
+                what to avoid, when to flag instead of guess]
+
+Output:      [What the answer should look like — list, paragraph,
+              table, draft, etc. Be specific.]</pre>
+        </div>
+      </div>
+
+      <div class="appendix-block reveal">
+        <h3>F. Starter prompt library — six ready-to-use prompts</h3>
+        <p>Six common tasks, each as a complete copy-paste prompt. Adapt the bracketed parts.</p>
+
+        <h4>1. Summarize a document</h4>
+        <div class="code-block">
+          <button class="copy-btn" data-copy>Copy</button>
+<pre>Identity:    You are an analyst who produces faithful summaries.
+Task:        Summarize the document below in 5 bullet points.
+Context:     [Paste the document here.]
+Constraints: Use only what is in the document. Each bullet under 20 words.
+             No interpretation. If something important is missing, say so.
+Output:      A bulleted list. No introduction, no closing summary.</pre>
+        </div>
+
+        <h4>2. Draft an email</h4>
+        <div class="code-block">
+          <button class="copy-btn" data-copy>Copy</button>
+<pre>Identity:    You are a professional communicator writing for someone busy.
+Task:        Draft a [type] email to [recipient] saying [main point].
+Context:     [Background, prior history, tone they expect, length they prefer.]
+Constraints: Under 100 words. Warm but direct. No corporate filler.
+             No apologies for length. No "I hope this finds you well."
+Output:      Subject line on the first line. Then the body. No signature.</pre>
+        </div>
+
+        <h4>3. Review a spreadsheet or data set</h4>
+        <div class="code-block">
+          <button class="copy-btn" data-copy>Copy</button>
+<pre>Identity:    You are a data analyst.
+Task:        Review the data below and identify any rows that look wrong,
+             missing, or inconsistent.
+Context:     [Paste the data. Explain what each column should contain
+              and what "valid" looks like.]
+Constraints: Flag only — do not edit. Use the row number, the issue,
+             and one sentence on why it is an issue. Do not guess at fixes.
+Output:      A numbered list. Each item: row number + issue + reason.</pre>
+        </div>
+
+        <h4>4. Brainstorm options</h4>
+        <div class="code-block">
+          <button class="copy-btn" data-copy>Copy</button>
+<pre>Identity:    You are a brainstorming partner who generates a wide range of options.
+Task:        Generate 10 options for [the problem].
+Context:     [The situation. The constraints. What's already been tried.]
+Constraints: Include unconventional options. Do not recommend.
+             Do not stop at 5 — push to 10.
+Output:      Numbered list. Each option in one sentence. No commentary.</pre>
+        </div>
+
+        <h4>5. Organize messy notes</h4>
+        <div class="code-block">
+          <button class="copy-btn" data-copy>Copy</button>
+<pre>Identity:    You are an organizer who structures messy input.
+Task:        Take the notes below and group them into clear sections.
+Context:     [Paste your notes — bullets, fragments, voice memos transcribed,
+              whatever it is.]
+Constraints: Preserve every item — do not paraphrase, drop, or summarize.
+             Use my exact words where possible. Flag anything unclear.
+Output:      Sections with short headings. Bullets under each.
+             A final "unclear / needs decision" section if relevant.</pre>
+        </div>
+
+        <h4>6. Prep for a meeting</h4>
+        <div class="code-block">
+          <button class="copy-btn" data-copy>Copy</button>
+<pre>Identity:    You are a meeting prep assistant.
+Task:        Read the materials below and produce a one-page brief for the meeting.
+Context:     [Paste the materials. Name the meeting, the attendees, and
+              what each attendee cares most about.]
+Constraints: One page maximum. Lead with decisions to be made,
+             then open questions, then background. No filler.
+Output:      Three sections — Decisions, Open Questions, Background.
+             Each under 5 bullets.</pre>
+        </div>
+      </div>
+
+      <div class="appendix-block reveal">
+        <h3>G. Your first hour with Claude</h3>
+        <p>Do these six things in order. The whole thing fits in 60 minutes.</p>
+        <div class="code-block">
+          <button class="copy-btn" data-copy>Copy</button>
+<pre>☐  (5 min)   Open Claude. Say hi. Ask: "In one paragraph, explain
+             what you are not."
+
+☐  (10 min)  Pick one task you do every week. Write it on paper.
+             This is your first project.
+
+☐  (10 min)  Make a folder for that task. Add three empty files:
+             CLAUDE.md, CONTEXT.md, REFERENCES.md.
+
+☐  (15 min)  Fill in CLAUDE.md using the template in section B.
+             Skip CONTEXT and REFERENCES for now.
+
+☐  (10 min)  Write your first prompt with all five slots filled.
+             Pick a persona from Chapter 7 for the Identity slot.
+
+☐  (10 min)  Run it. Read the answer. Notice what's good,
+             what's off. Make one note for the next prompt.</pre>
+        </div>
+        <p>That is hour one. You are already ahead of most people.</p>
+      </div>
+
+      <div class="appendix-block reveal">
+        <h3>H. Verification checklist — before you act</h3>
+        <p>Four questions. Run them on any answer that will be used for a real decision or a real action.</p>
+        <div class="code-block">
+          <button class="copy-btn" data-copy>Copy</button>
+<pre>1. Is every fact in this answer something I can check
+   against the source I gave Claude?
+
+2. Did Claude flag any uncertainty, or did everything come out
+   in the same confident tone?
+
+3. Are there any "facts" in here that sound right but I have
+   not actually confirmed?
+
+4. If this answer is wrong, what is the worst thing that happens?
+   How would I find out?</pre>
+        </div>
+        <p>If you cannot answer all four, do not act on the answer yet.</p>
+      </div>
+
+      <div class="appendix-block reveal">
+        <h3>I. The five-folder pipeline pattern</h3>
+        <p>The simplest pipeline shape that works for almost any kind of work:</p>
+        <div class="code-block">
+          <button class="copy-btn" data-copy>Copy</button>
+<pre>01-receive/    raw input arrives here
+02-filter/     AI sorts, scores, or triages
+03-process/    the main work — drafts, summaries, decisions
+04-review/     a human checks the output
+05-act/        the approved output is sent, posted, or saved</pre>
+        </div>
+        <p>Adapt the names to your work. Keep the shape.</p>
+      </div>
+
+      <div class="appendix-block reveal">
+        <h3>J. Three questions to ask about any AI tool</h3>
+        <ol>
+          <li><strong>Where is the intelligence?</strong> Is the intelligence inside this product, or is the product calling someone else's model behind the scenes?</li>
+          <li><strong>Where is the value?</strong> Is the value in the AI itself, or in the structure and routing built around it?</li>
+          <li><strong>What gets commoditized next?</strong> Value always moves above whatever just became free. What is the layer above this?</li>
+        </ol>
+      </div>
+
+      <div class="appendix-block reveal">
+        <h3>K. The four hallucination mistakes — one-page reference</h3>
+        <table>
+          <thead>
+            <tr>
+              <th style="width: 26%;">Mistake</th>
+              <th style="width: 34%;">What it sounds like</th>
+              <th style="width: 40%;">Fix</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Vague prompt</strong></td>
+              <td>"Write me something about X"</td>
+              <td>Define role, task, source, format. Fill all five slots.</td>
+            </tr>
+            <tr>
+              <td><strong>No source constraint</strong></td>
+              <td>"Use your expertise to..."</td>
+              <td>"Use only the information below. If something is not specified, say 'not specified.'"</td>
+            </tr>
+            <tr>
+              <td><strong>Too many tasks</strong></td>
+              <td>"Do A, then B, then also C and D..."</td>
+              <td>One prompt, one task. Chain stages.</td>
+            </tr>
+            <tr>
+              <td><strong>Conflicting instructions</strong></td>
+              <td>"Concise but thorough"</td>
+              <td>Make instructions reinforce each other, not pull opposite ways.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="appendix-block reveal">
+        <h3>L. Data classification — at a glance</h3>
+        <table>
+          <thead>
+            <tr><th>Tier</th><th>What it includes</th><th>What to do</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="tier green">●&nbsp; Green</span></td>
+              <td>Public info, fictional data, general drafts</td>
+              <td>Paste freely</td>
+            </tr>
+            <tr>
+              <td><span class="tier yellow">●&nbsp; Yellow</span></td>
+              <td>Internal but not sensitive, names of colleagues, project details</td>
+              <td>Use care, redact when possible</td>
+            </tr>
+            <tr>
+              <td><span class="tier red">●&nbsp; Red</span></td>
+              <td>Personal data of others, financial, health, passwords, NDA-covered, client confidential</td>
+              <td>Never share unless tool is approved</td>
+            </tr>
+          </tbody>
+        </table>
+        <p style="margin-top: 16px;"><em>Rule of thumb: if you would not paste it into a public web search, do not paste it into an AI prompt.</em></p>
+      </div>
+    </section>
+
+    <footer>
+      <div>This manual is LLM-agnostic — every principle works with Claude, GPT, Gemini, Mistral, or any other large language model. The tool may change. The structure does not.</div>
+      <div style="margin-top: 14px;">First draft &middot; May 3, 2026</div>
+      <span class="footer-by">Spectralmoon <span class="dot">·</span> The Lab</span>
+    </footer>
+
+  </main>
+</div>
+
+<script>
+  /* ===== Reading progress bar ===== */
+  const progress = document.getElementById('progress');
+  function updateProgress() {
+    const h = document.documentElement;
+    const total = h.scrollHeight - h.clientHeight;
+    const pct = total > 0 ? (h.scrollTop / total) * 100 : 0;
+    progress.style.width = pct + '%';
+  }
+  window.addEventListener('scroll', updateProgress, { passive: true });
+  updateProgress();
+
+  /* ===== Reveal on scroll ===== */
+  const revealables = document.querySelectorAll('.reveal:not(.in)');
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('in');
+          io.unobserve(e.target);
+        }
+      });
+    }, { rootMargin: '0px 0px -10% 0px', threshold: 0.05 });
+    revealables.forEach(el => io.observe(el));
+  } else {
+    revealables.forEach(el => el.classList.add('in'));
+  }
+
+  /* ===== TOC active state ===== */
+  const tocLinks = document.querySelectorAll('.toc a');
+  const sections = Array.from(tocLinks)
+    .map(a => document.querySelector(a.getAttribute('href')))
+    .filter(Boolean);
+
+  function setActive() {
+    const y = window.scrollY + 140;
+    let active = sections[0];
+    for (const s of sections) {
+      if (s.offsetTop <= y) active = s;
+    }
+    tocLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + active.id));
+  }
+  window.addEventListener('scroll', setActive, { passive: true });
+  setActive();
+
+  /* ===== Persona accordion ===== */
+  document.querySelectorAll('.persona').forEach(p => {
+    const head = p.querySelector('.persona-head');
+    head.addEventListener('click', () => {
+      p.classList.toggle('open');
+    });
+  });
+
+  /* ===== Copy buttons ===== */
+  document.querySelectorAll('.copy-btn').forEach(btn => {
+    btn.addEventListener('click', async () => {
+      const pre = btn.parentElement.querySelector('pre');
+      if (!pre) return;
+      try {
+        await navigator.clipboard.writeText(pre.innerText);
+        btn.textContent = 'Copied';
+        btn.classList.add('copied');
+        setTimeout(() => {
+          btn.textContent = 'Copy';
+          btn.classList.remove('copied');
+        }, 1600);
+      } catch (e) {
+        btn.textContent = 'Press ⌘C';
+        setTimeout(() => { btn.textContent = 'Copy'; }, 1800);
+      }
+    });
+  });
+
+  /* ===== Subtle parallax on cover heading ===== */
+  const hero = document.querySelector('.cover h1');
+  if (hero) {
+    window.addEventListener('scroll', () => {
+      const y = window.scrollY;
+      if (y < 600) {
+        hero.style.transform = `translateY(${y * 0.06}px)`;
+      }
+    }, { passive: true });
+  }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Notes on prompting — what I&rsquo;ve been working with</title>
+<meta name="description" content="A short, tool-agnostic set of notes on prompt structures I've found useful for image and video. Shared, not taught." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&family=Inter+Tight:wght@300;400;500&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --tan:        #D6B588;
+    --grey:       #C6C0B9;
+    --brown:      #705E46;
+    --espresso:   #422701;
+
+    --paper:      #F7F1E6;
+    --paper-2:    #EFE6D4;
+    --ink:        #422701;
+    --ink-soft:   #705E46;
+    --rule:       #DDD3C0;
+
+    --serif:      'Fraunces', Georgia, serif;
+    --sans:       'Inter Tight', system-ui, sans-serif;
+    --mono:       'JetBrains Mono', 'SF Mono', Menlo, monospace;
+  }
+
+  *,*::before,*::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body{
+    margin:0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.7;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  .wrap { max-width: 780px; margin: 0 auto; padding: 0 32px; }
+  @media (max-width: 700px){ .wrap { padding: 0 24px; } }
+
+  /* Top */
+  .topbar{
+    padding: 32px 0;
+    font-size: 11px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    font-weight: 400;
+  }
+
+  /* Hero */
+  .hero{ padding: 100px 0 160px; }
+  .hero .eyebrow{
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-bottom: 48px;
+  }
+  .hero h1{
+    font-family: var(--serif);
+    font-weight: 300;
+    font-style: italic;
+    font-size: clamp(44px, 6.4vw, 76px);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin: 0 0 56px;
+    color: var(--espresso);
+    max-width: 14ch;
+  }
+  .hero .lede{
+    font-family: var(--sans);
+    font-size: 17px;
+    line-height: 1.7;
+    color: var(--ink-soft);
+    max-width: 52ch;
+    margin: 0;
+    font-weight: 400;
+  }
+
+  /* Sections */
+  section{
+    padding: 140px 0;
+  }
+  section + section{ border-top: 1px solid var(--rule); }
+
+  @media (max-width: 700px){
+    .hero { padding: 60px 0 100px; }
+    section { padding: 90px 0; }
+  }
+
+  .num{
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.24em;
+    color: var(--brown);
+    margin-bottom: 32px;
+    text-transform: uppercase;
+  }
+
+  h2{
+    font-family: var(--serif);
+    font-weight: 300;
+    font-style: italic;
+    font-size: clamp(28px, 4vw, 40px);
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    margin: 0 0 48px;
+    color: var(--espresso);
+    max-width: 22ch;
+  }
+
+  .intro{
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.75;
+    color: var(--ink-soft);
+    max-width: 52ch;
+    margin: 0 0 64px;
+  }
+  .intro:last-child{ margin-bottom: 0; }
+
+  /* Two questions block */
+  .two-q{
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 8px;
+    margin: 64px 0;
+    max-width: 52ch;
+  }
+  .two-q .q{
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 300;
+    font-size: 22px;
+    color: var(--espresso);
+  }
+  .rule-line{
+    border-left: 1px solid var(--brown);
+    padding: 6px 0 6px 24px;
+    margin: 56px 0;
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 300;
+    font-size: 19px;
+    line-height: 1.5;
+    color: var(--espresso);
+    max-width: 50ch;
+  }
+
+  /* Slot list — minimal */
+  .slots{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .slots li{
+    display: grid;
+    grid-template-columns: 60px 1fr;
+    gap: 32px;
+    padding: 28px 0;
+    border-top: 1px solid var(--rule);
+    align-items: baseline;
+  }
+  .slots li:last-child{ border-bottom: 1px solid var(--rule); }
+  .slots .slot-num{
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    color: var(--brown);
+  }
+  .slots .slot-name{
+    font-family: var(--serif);
+    font-size: 22px;
+    font-weight: 400;
+    color: var(--espresso);
+    letter-spacing: -0.01em;
+    margin-bottom: 4px;
+  }
+  .slots .slot-note{
+    font-size: 14px;
+    color: var(--ink-soft);
+    line-height: 1.6;
+  }
+
+  @media (max-width: 700px){
+    .slots li{ grid-template-columns: 40px 1fr; gap: 20px; }
+  }
+
+  /* Camera moves */
+  .moves{
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+  .moves .move{
+    padding: 48px 0;
+    border-top: 1px solid var(--rule);
+  }
+  .moves .move:last-child{ border-bottom: 1px solid var(--rule); }
+  .moves .move-name{
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 26px;
+    color: var(--espresso);
+    font-weight: 300;
+    margin-bottom: 8px;
+  }
+  .moves .move-rule{
+    font-size: 15px;
+    color: var(--ink-soft);
+    margin: 0;
+    max-width: 48ch;
+  }
+
+  /* Pair (good/bad) */
+  .pair{
+    margin: 48px 0;
+    padding: 32px 0;
+    border-top: 1px solid var(--rule);
+  }
+  .pair:last-child{ border-bottom: 1px solid var(--rule); }
+  .pair .label{
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.24em;
+    color: var(--brown);
+    margin-bottom: 8px;
+    text-transform: uppercase;
+  }
+  .pair .vague{
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 17px;
+    color: var(--ink-soft);
+    margin: 0 0 24px;
+    font-weight: 300;
+    max-width: 52ch;
+  }
+  .pair .directed{
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 19px;
+    color: var(--espresso);
+    margin: 0;
+    font-weight: 300;
+    max-width: 52ch;
+    line-height: 1.45;
+  }
+
+  /* Vocab list */
+  .vocab{
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 80px;
+    margin-top: 32px;
+  }
+  .vocab-group{
+    border-top: 1px solid var(--rule);
+    padding-top: 32px;
+  }
+  .vocab-head{
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.24em;
+    color: var(--brown);
+    margin-bottom: 28px;
+    text-transform: uppercase;
+  }
+  .vocab-list{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .vocab-list li{
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 24px;
+    padding: 14px 0;
+    align-items: baseline;
+  }
+  .vocab-list li + li{
+    border-top: 1px solid var(--rule);
+  }
+  .vocab-list .t{
+    font-family: var(--serif);
+    font-size: 17px;
+    color: var(--espresso);
+    font-weight: 400;
+    letter-spacing: -0.01em;
+  }
+  .vocab-list .d{
+    font-size: 14px;
+    color: var(--ink-soft);
+    line-height: 1.55;
+  }
+  @media (max-width: 700px){
+    .vocab-list li{ grid-template-columns: 1fr; gap: 4px; padding: 12px 0; }
+  }
+
+  /* Negatives code */
+  .code{
+    font-family: var(--mono);
+    font-size: 13px;
+    background: var(--espresso);
+    color: var(--paper);
+    padding: 28px 32px;
+    line-height: 1.9;
+    margin: 48px 0;
+    border-radius: 2px;
+    max-width: 52ch;
+  }
+  .code .no{ color: var(--tan); }
+
+  /* Closing */
+  .closing{
+    padding: 160px 0 120px;
+    border-top: 1px solid var(--rule);
+  }
+  .closing p{
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 300;
+    font-size: 22px;
+    line-height: 1.5;
+    color: var(--ink-soft);
+    margin: 0;
+    max-width: 44ch;
+  }
+  .closing p em{
+    font-style: normal;
+    color: var(--espresso);
+  }
+  .signoff{
+    margin-top: 80px;
+    padding-top: 32px;
+    border-top: 1px solid var(--rule);
+    font-size: 11px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <div class="topbar">Notes &middot; on prompting</div>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="eyebrow">A few things that worked for me</div>
+    <h1>Notes on <em style="font-style:normal;font-weight:500;">prompting.</em></h1>
+    <p class="lede">Sharing the structures I keep coming back to. You probably already use most of these — this is just how they fit together in my head.</p>
+  </section>
+
+  <!-- I -->
+  <section>
+    <div class="num">I &middot; The motion question</div>
+    <h2>Before any video prompt &mdash; two questions.</h2>
+    <div class="two-q">
+      <div class="q">Who is moving?</div>
+      <div class="q">Who is watching?</div>
+    </div>
+    <div class="rule-line">If the subject is still, the camera moves. If the camera is still, the subject moves. Never both static.</div>
+  </section>
+
+  <!-- II -->
+  <section>
+    <div class="num">II &middot; Eight slots &middot; Video</div>
+    <h2>The shape I run a video prompt through.</h2>
+    <ol class="slots">
+      <li>
+        <div class="slot-num">01</div>
+        <div>
+          <div class="slot-name">Medium</div>
+          <div class="slot-note">Live-action, animated, 3D, VHS, anime, documentary.</div>
+        </div>
+      </li>
+      <li>
+        <div class="slot-num">02</div>
+        <div>
+          <div class="slot-name">Shot</div>
+          <div class="slot-note">Close-up to extreme wide. How close to the subject.</div>
+        </div>
+      </li>
+      <li>
+        <div class="slot-num">03</div>
+        <div>
+          <div class="slot-name">Angle</div>
+          <div class="slot-note">Low, high, eye level, overhead, Dutch tilt.</div>
+        </div>
+      </li>
+      <li>
+        <div class="slot-num">04</div>
+        <div>
+          <div class="slot-name">Movement</div>
+          <div class="slot-note">Static, handheld, tracking, orbit, dolly, crane, drone.</div>
+        </div>
+      </li>
+      <li>
+        <div class="slot-num">05</div>
+        <div>
+          <div class="slot-name">Focus</div>
+          <div class="slot-note">Shallow, deep, rack, soft. Where the eye lands.</div>
+        </div>
+      </li>
+      <li>
+        <div class="slot-num">06</div>
+        <div>
+          <div class="slot-name">Subject</div>
+          <div class="slot-note">One physical beat per prompt. The subject is acting.</div>
+        </div>
+      </li>
+      <li>
+        <div class="slot-num">07</div>
+        <div>
+          <div class="slot-name">Lighting</div>
+          <div class="slot-note">Mood, not visibility. The biggest lever on tone.</div>
+        </div>
+      </li>
+      <li>
+        <div class="slot-num">08</div>
+        <div>
+          <div class="slot-name">Color palette</div>
+          <div class="slot-note">Mono, complementary, analogous, desaturated, neon.</div>
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  <!-- III -->
+  <section>
+    <div class="num">III &middot; Six parts &middot; Image</div>
+    <h2>For stills, a different shape.</h2>
+    <ol class="slots">
+      <li>
+        <div class="slot-num">01</div>
+        <div>
+          <div class="slot-name">Medium</div>
+          <div class="slot-note">Photograph, render, painting, anime, illustration.</div>
+        </div>
+      </li>
+      <li>
+        <div class="slot-num">02</div>
+        <div>
+          <div class="slot-name">Subject</div>
+          <div class="slot-note">Main focus, plus the details that make it specific.</div>
+        </div>
+      </li>
+      <li>
+        <div class="slot-num">03</div>
+        <div>
+          <div class="slot-name">Action / pose</div>
+          <div class="slot-note">What they&rsquo;re doing &mdash; body language and emotion.</div>
+        </div>
+      </li>
+      <li>
+        <div class="slot-num">04</div>
+        <div>
+          <div class="slot-name">Environment</div>
+          <div class="slot-note">Setting, time, weather, atmosphere.</div>
+        </div>
+      </li>
+      <li>
+        <div class="slot-num">05</div>
+        <div>
+          <div class="slot-name">Style &amp; vibe</div>
+          <div class="slot-note">Aesthetic, palette, references, art direction.</div>
+        </div>
+      </li>
+      <li>
+        <div class="slot-num">06</div>
+        <div>
+          <div class="slot-name">Technical</div>
+          <div class="slot-note">Lens, aperture, film stock, grain, lighting setup.</div>
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  <!-- IV -->
+  <section>
+    <div class="num">IV &middot; Three camera moves</div>
+    <h2>The three I keep naming.</h2>
+    <div class="moves">
+      <div class="move">
+        <div class="move-name">Observer</div>
+        <p class="move-rule">Camera still. Subject moves through the frame.</p>
+      </div>
+      <div class="move">
+        <div class="move-name">Tracking</div>
+        <p class="move-rule">Camera moves with the subject, keeping pace.</p>
+      </div>
+      <div class="move">
+        <div class="move-name">Reveal</div>
+        <p class="move-rule">Camera orbits a still subject, environment unfolds.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- V -->
+  <section>
+    <div class="num">V &middot; Technical vocabulary</div>
+    <h2>The terms film school still gives you.</h2>
+    <p class="intro">A reference list. The vocabulary that survives across tools &mdash; useful when you want to direct the model the way a DP would direct a crew.</p>
+
+    <div class="vocab">
+
+      <div class="vocab-group">
+        <div class="vocab-head">Shot sizes</div>
+        <ul class="vocab-list">
+          <li><span class="t">Extreme close-up</span><span class="d">A detail &mdash; eye, mouth, texture.</span></li>
+          <li><span class="t">Close-up</span><span class="d">Head and shoulders. Emotional register.</span></li>
+          <li><span class="t">Medium</span><span class="d">Waist up. Conversational distance.</span></li>
+          <li><span class="t">Cowboy</span><span class="d">Mid-thigh up. Western convention.</span></li>
+          <li><span class="t">Wide / long</span><span class="d">Full figure in environment.</span></li>
+          <li><span class="t">Extreme wide</span><span class="d">Subject is small in the landscape.</span></li>
+        </ul>
+      </div>
+
+      <div class="vocab-group">
+        <div class="vocab-head">Angles</div>
+        <ul class="vocab-list">
+          <li><span class="t">Eye level</span><span class="d">Neutral. Equal footing.</span></li>
+          <li><span class="t">Low angle</span><span class="d">Looking up. Power, scale.</span></li>
+          <li><span class="t">High angle</span><span class="d">Looking down. Smallness, vulnerability.</span></li>
+          <li><span class="t">Overhead / top-down</span><span class="d">Straight down. Pattern, geometry.</span></li>
+          <li><span class="t">Bird&rsquo;s-eye</span><span class="d">Far above. Map-like.</span></li>
+          <li><span class="t">Worm&rsquo;s-eye</span><span class="d">Ground level looking up. Monumental.</span></li>
+          <li><span class="t">Dutch tilt</span><span class="d">Canted horizon. Unease.</span></li>
+          <li><span class="t">Over-the-shoulder</span><span class="d">Through a second figure into the first.</span></li>
+        </ul>
+      </div>
+
+      <div class="vocab-group">
+        <div class="vocab-head">Camera moves</div>
+        <ul class="vocab-list">
+          <li><span class="t">Pan</span><span class="d">Horizontal pivot on a fixed axis.</span></li>
+          <li><span class="t">Tilt</span><span class="d">Vertical pivot on a fixed axis.</span></li>
+          <li><span class="t">Dolly in / out</span><span class="d">Camera body moves toward or away.</span></li>
+          <li><span class="t">Truck</span><span class="d">Lateral physical move, side to side.</span></li>
+          <li><span class="t">Pedestal</span><span class="d">Vertical physical move, up or down.</span></li>
+          <li><span class="t">Crane / jib</span><span class="d">Sweeping arc on a long arm.</span></li>
+          <li><span class="t">Steadicam</span><span class="d">Stabilised handheld, gliding.</span></li>
+          <li><span class="t">Whip pan</span><span class="d">Fast pivot, motion-blurred.</span></li>
+          <li><span class="t">Push-in / pull-out</span><span class="d">Dolly in, dolly back. Intensifying or releasing.</span></li>
+          <li><span class="t">Dolly zoom</span><span class="d">Vertigo effect &mdash; dolly one way, zoom the other.</span></li>
+        </ul>
+      </div>
+
+      <div class="vocab-group">
+        <div class="vocab-head">Lens &amp; focus</div>
+        <ul class="vocab-list">
+          <li><span class="t">Wide-angle (14&ndash;35mm)</span><span class="d">Expansive, distorted at edges.</span></li>
+          <li><span class="t">Standard (35&ndash;50mm)</span><span class="d">Closest to the eye&rsquo;s field.</span></li>
+          <li><span class="t">Portrait (85mm)</span><span class="d">Flattering compression, soft background.</span></li>
+          <li><span class="t">Telephoto (135mm+)</span><span class="d">Heavy compression, isolated subject.</span></li>
+          <li><span class="t">Anamorphic</span><span class="d">Widescreen, oval bokeh, horizontal flares.</span></li>
+          <li><span class="t">Rack focus</span><span class="d">Focus shifts between subjects during the shot.</span></li>
+        </ul>
+      </div>
+
+      <div class="vocab-group">
+        <div class="vocab-head">Lighting</div>
+        <ul class="vocab-list">
+          <li><span class="t">Key</span><span class="d">The main light. Direction sets the mood.</span></li>
+          <li><span class="t">Fill</span><span class="d">Softens the shadow side of the key.</span></li>
+          <li><span class="t">Rim / back</span><span class="d">Edge light separating subject from ground.</span></li>
+          <li><span class="t">Practical</span><span class="d">Light visible in the frame &mdash; lamp, neon, window.</span></li>
+          <li><span class="t">High-key</span><span class="d">Bright, low contrast. Commercial, optimistic.</span></li>
+          <li><span class="t">Low-key</span><span class="d">Dark, high contrast. Noir, dramatic.</span></li>
+          <li><span class="t">Rembrandt</span><span class="d">Triangle of light on the shadow-side cheek.</span></li>
+          <li><span class="t">Chiaroscuro</span><span class="d">Strong contrast between light and dark.</span></li>
+        </ul>
+      </div>
+
+      <div class="vocab-group">
+        <div class="vocab-head">Composition</div>
+        <ul class="vocab-list">
+          <li><span class="t">Rule of thirds</span><span class="d">Subject on a third-line intersection.</span></li>
+          <li><span class="t">Leading lines</span><span class="d">Geometry that guides the eye.</span></li>
+          <li><span class="t">Negative space</span><span class="d">Empty room around the subject. Breath.</span></li>
+          <li><span class="t">Frame within a frame</span><span class="d">A doorway, mirror, window holding the subject.</span></li>
+          <li><span class="t">Lead room</span><span class="d">Space ahead of a moving or looking subject.</span></li>
+          <li><span class="t">180-degree rule</span><span class="d">Stay on one side of the action line across cuts.</span></li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- VI -->
+  <section>
+    <div class="num">VI &middot; Negatives</div>
+    <h2>What you forbid is half the prompt.</h2>
+    <p class="intro">Prefix every item with <em>&ldquo;no&rdquo;</em> &mdash; even inside a tool&rsquo;s native negative field. Bare comma-separated tokens lose meaning. &ldquo;no X, no Y&rdquo; is the form that gets enforced.</p>
+    <div class="code">
+      <span class="no">no</span> warped anatomy, <span class="no">no</span> extra limbs,<br/>
+      <span class="no">no</span> stray text, <span class="no">no</span> floating objects,<br/>
+      <span class="no">no</span> warm golden hour, <span class="no">no</span> plastic finish,<br/>
+      <span class="no">no</span> CGI render look, <span class="no">no</span> flat midday light
+    </div>
+    <div class="rule-line">Never name a subject in the positive body if you don&rsquo;t want them in the frame. Even possessively &mdash; &ldquo;from a child&rsquo;s POV&rdquo; will summon a child. Use spatial language instead.</div>
+  </section>
+
+  <!-- Closing -->
+  <section class="closing">
+    <p>If you&rsquo;ve got a structure that works better for you &mdash; <em>send it back.</em></p>
+    <div class="signoff">Susana &middot; Spectralmoon</div>
+  </section>
+
+</div>
+
+</body>
+</html>
