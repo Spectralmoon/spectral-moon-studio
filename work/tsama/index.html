@@ -4,51 +4,70 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Tsama · Kayumari — Spectralmoon Studio</title>
-<meta name="description" content="Kayumari — a film for Yogi, by Spectralmoon Studio.">
+<meta name="description" content="Kayumari — a music film for Yogi, by Spectralmoon Studio.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&family=Inter+Tight:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400;1,9..144,500&family=Inter+Tight:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-  :root{--espresso:#2A201A;--cream:#F1EAE0;--rose:#C76A89}
+  :root{--paper:#FAF8F4;--ink:#2A201A;--muted:#6B5B4E;--rose:#B85C7A;--line:rgba(42,32,26,.12)}
   *{box-sizing:border-box;margin:0;padding:0}
-  body{background:var(--espresso);color:var(--cream);font-family:'Inter Tight',system-ui,sans-serif;-webkit-font-smoothing:antialiased;min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:18px 18px 30px}
-  .wrap{width:100%;max-width:860px;display:flex;flex-direction:column;align-items:center;text-align:center}
-  .brand{font-family:'Fraunces',serif;font-style:italic;font-weight:500;font-size:20px;letter-spacing:-.01em;opacity:.85}
-  .brand small{display:block;font-family:'Inter Tight';font-style:normal;font-size:9px;letter-spacing:.36em;text-transform:uppercase;opacity:.7;margin-top:3px}
-  .eyebrow{font-size:11px;letter-spacing:.34em;text-transform:uppercase;color:var(--rose);margin:18px 0 6px}
-  h1{font-family:'Fraunces',serif;font-weight:400;font-size:clamp(30px,6vw,52px);line-height:1.02;letter-spacing:-.01em}
-  h1 em{font-style:italic}
-  .note{max-width:520px;font-size:14px;line-height:1.6;color:var(--cream);opacity:.82;margin:12px 0 20px}
-  .note .sign{display:block;margin-top:14px;font-family:'Fraunces',serif;font-style:italic;opacity:.9}
-  .player{max-width:100%;border-radius:16px;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.5);background:#000;line-height:0}
-  .player video{display:block;width:auto;height:auto;max-width:100%;max-height:66vh}
-  .foot{margin-top:34px;font-size:12px;letter-spacing:.04em;opacity:.6;line-height:1.7}
-  .foot a{color:var(--cream);text-decoration:none;border-bottom:1px solid rgba(241,234,224,.35)}
+  html,body{height:100%}
+  body{background:var(--paper);color:var(--ink);font-family:'Inter Tight',system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow:hidden}
+  .split{height:100vh;height:100dvh;display:flex}
+  /* LEFT — editorial text, ~30% */
+  .txt{flex:0 0 31%;max-width:500px;min-width:270px;display:flex;flex-direction:column;justify-content:space-between;padding:clamp(28px,3.2vw,54px);border-right:1px solid var(--line)}
+  .brand{font-family:'Fraunces',serif;font-style:italic;font-weight:500;font-size:20px;letter-spacing:-.01em;color:var(--ink);text-decoration:none}
+  .brand small{display:block;font-family:'Inter Tight';font-style:normal;font-size:9px;letter-spacing:.36em;text-transform:uppercase;color:var(--muted);margin-top:3px}
+  .mid{padding:24px 0}
+  .eyebrow{font-size:11px;letter-spacing:.34em;text-transform:uppercase;color:var(--rose);margin-bottom:14px}
+  h1{font-family:'Fraunces',serif;font-weight:400;font-size:clamp(46px,5vw,92px);line-height:.98;letter-spacing:-.015em;margin-bottom:22px}
+  .note{font-size:15px;line-height:1.72;color:var(--muted);max-width:38ch}
+  .note .sign{display:block;margin-top:16px;font-family:'Fraunces',serif;font-style:italic;color:var(--ink)}
+  .foot{font-size:11.5px;letter-spacing:.03em;color:var(--muted);line-height:1.7}
+  .foot a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--line)}
+  /* RIGHT — the film, as tall as the page allows */
+  .stage{flex:1;display:flex;align-items:center;justify-content:center;padding:clamp(14px,1.8vw,30px)}
+  .player{max-width:100%;max-height:100%;border-radius:12px;overflow:hidden;background:#000;line-height:0;box-shadow:0 30px 70px rgba(42,32,26,.20),0 0 0 1px var(--line)}
+  .player video{display:block;width:auto;height:auto;max-width:100%;max-height:94vh;max-height:94dvh}
+  /* MOBILE — stack: compact text, then the film big */
+  @media (max-width:820px){
+    body{overflow:auto}
+    .split{flex-direction:column;height:auto;min-height:100dvh}
+    .txt{flex:none;max-width:none;border-right:none;border-bottom:1px solid var(--line);padding:24px 22px 18px}
+    .mid{padding:14px 0}
+    h1{font-size:clamp(40px,13vw,64px);margin-bottom:14px}
+    .note{font-size:14px}
+    .foot{margin-top:18px}
+    .stage{padding:16px 16px 30px}
+    .player video{max-height:72vh;max-height:72dvh}
+  }
 </style>
 </head>
 <body>
-  <div class="wrap">
-    <a href="https://spectralmoonstudio.com" class="brand" style="text-decoration:none;color:inherit">Spectralmoon<small>Studio</small></a>
-
-    <div class="eyebrow">Tsama · Music Film</div>
-    <h1>Kayumari</h1>
-
-    <p class="note">
-      Dear Yogi — here is the finished <em>Kayumari</em> film. Thank you for trusting us to give your music a world of its own. It was a joy to make.
-      <span class="sign">— Susana, Spectralmoon Studio</span>
-    </p>
-
-    <div class="player">
-      <video controls playsinline preload="metadata" poster="kayumari_music_poster.jpg">
-        <source src="Kayumari_music.mp4" type="video/mp4" />
-        Your browser does not support the video tag.
-      </video>
-    </div>
-
-    <div class="foot">
-      Directed &amp; produced by <a href="https://spectralmoonstudio.com">Spectralmoon Studio</a><br>
-      © Spectralmoon Studio · for Yogi
-    </div>
-  </div>
+  <main class="split">
+    <section class="txt">
+      <a class="brand" href="https://spectralmoonstudio.com">Spectralmoon<small>Studio</small></a>
+      <div class="mid">
+        <div class="eyebrow">Tsama · Music Film</div>
+        <h1>Kayumari</h1>
+        <p class="note">
+          Dear Yogi — here is the finished <span style="font-style:italic">Kayumari</span> film. Thank you for trusting us to give your music a world of its own. It was a joy to make.
+          <span class="sign">— Susana, Spectralmoon Studio</span>
+        </p>
+      </div>
+      <div class="foot">
+        Directed &amp; produced by <a href="https://spectralmoonstudio.com">Spectralmoon Studio</a><br>
+        © Spectralmoon Studio · for Yogi
+      </div>
+    </section>
+    <section class="stage">
+      <div class="player">
+        <video controls playsinline preload="metadata" poster="kayumari_music_poster.jpg">
+          <source src="Kayumari_music.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+      </div>
+    </section>
+  </main>
 </body>
 </html>
