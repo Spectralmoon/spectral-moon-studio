@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Spectralmoon Studio · Susana Barrero</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo+Black&family=Fraunces:ital,opsz,wght@1,9..144,500&family=Inter+Tight:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{--espresso:#2A201A;--cream:#F1EAE0}
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{background:var(--espresso);font-family:'Inter Tight',system-ui,sans-serif;position:fixed;inset:0;overflow:hidden;overscroll-behavior:none}
+  .hero{position:absolute;inset:0;overflow:hidden;background:var(--espresso)}
+  .hero__video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1}
+  .hero__mask-svg{position:absolute;inset:0;width:100%;height:100%;z-index:2;transform-origin:center center;animation:heroIn 1.3s cubic-bezier(0.16,1,0.3,1) .2s both}
+  @keyframes heroIn{from{opacity:0;transform:scale(1.04)}to{opacity:1;transform:scale(1)}}
+  .hero__svg-text{font-family:'Archivo Black','Anton',sans-serif;font-weight:900;letter-spacing:-0.08em;fill:black}
+  .hero__mask-svg--mobile{display:none}
+  @media (max-width:768px){
+    .hero__mask-svg--desktop{display:none}
+    .hero__mask-svg--mobile{display:block}
+  }
+  .brand{position:absolute;top:0;left:0;z-index:3;padding:20px 26px;display:flex;flex-direction:column;align-items:flex-start;line-height:1;color:var(--cream);animation:fade 1s ease .5s both;text-shadow:0 1px 8px rgba(20,14,10,.35)}
+  .brand .n{font-family:'Fraunces',serif;font-style:italic;font-weight:500;font-size:24px;letter-spacing:-.015em}
+  @keyframes fade{from{opacity:0}to{opacity:1}}
+  .cta{position:absolute;left:0;right:0;bottom:0;z-index:3;display:flex;flex-direction:column;align-items:center;gap:9px;padding:64px 20px min(4vh,22px);animation:fade 1s ease .7s both;background:linear-gradient(180deg,transparent,rgba(42,32,26,.55) 52%,rgba(42,32,26,.9))}
+  .cta .inner{width:100%;max-width:420px;display:flex;flex-direction:column;align-items:center;gap:9px}
+  .pill{position:relative;overflow:hidden;isolation:isolate;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;border-radius:20px;text-decoration:none;color:var(--cream);font-family:'Inter Tight',sans-serif;background:linear-gradient(180deg,rgba(255,255,255,.24),rgba(255,255,255,.07));-webkit-backdrop-filter:blur(16px) saturate(170%);backdrop-filter:blur(16px) saturate(170%);border:1px solid rgba(255,255,255,.42);box-shadow:inset 0 1px 0 rgba(255,255,255,.6),0 8px 22px rgba(0,0,0,.34)}
+  .pill .l{font-size:14px;font-weight:500;letter-spacing:.01em;position:relative;z-index:2}
+  .pill .s{font-size:10px;font-weight:400;opacity:.68;letter-spacing:.05em;position:relative;z-index:2}
+  .pill.top{align-self:center;padding:9px 26px}
+  .pill.top .l{font-size:12.5px;letter-spacing:.05em;text-transform:uppercase}
+  .row{display:flex;gap:8px;width:100%}
+  .row .pill{flex:1;padding:11px 8px}
+  .pill.top::before{content:"";position:absolute;top:-40%;left:0;width:45%;height:180%;background:linear-gradient(105deg,rgba(255,255,255,0),rgba(255,255,255,.5) 50%,rgba(255,255,255,0));mix-blend-mode:screen;transform:translateX(-160%) skewX(-14deg);pointer-events:none;z-index:1;animation:sheen 6.5s ease-in-out infinite}
+  @keyframes sheen{0%{transform:translateX(-160%) skewX(-14deg)}42%{transform:translateX(360%) skewX(-14deg)}100%{transform:translateX(360%) skewX(-14deg)}}
+  .igmenu{width:100%;display:flex;flex-direction:column;gap:8px;max-height:0;opacity:0;overflow:hidden;transition:max-height .45s cubic-bezier(0.16,1,0.3,1),opacity .35s ease,margin-top .3s ease}
+  .igmenu.open{max-height:230px;opacity:1;margin-top:1px}
+  .pill.sub{flex-direction:row;justify-content:space-between;padding:12px 16px;background:linear-gradient(180deg,rgba(255,255,255,.17),rgba(255,255,255,.05))}
+  .pill.sub .l{font-size:13px}
+  .pill.sub .s{font-size:11px;opacity:.6}
+  .igbtn .arrow{display:inline-block;transition:transform .35s ease}
+  .igbtn.open .arrow{transform:rotate(180deg)}
+</style>
+</head>
+<body>
+  <div class="hero">
+    <video class="hero__video" src="../assets/lyra_hero_animation.mp4" autoplay muted loop playsinline></video>
+
+    <svg class="hero__mask-svg hero__mask-svg--desktop" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <defs>
+        <mask id="hero-text-mask" maskUnits="userSpaceOnUse">
+          <rect width="1600" height="900" fill="white"/>
+          <circle cx="360" cy="450" r="360" fill="black"/>
+          <circle cx="510" cy="450" r="305" fill="white"/>
+          <text class="hero__svg-text" x="520" y="265" font-size="590" text-anchor="start" dominant-baseline="central">STU<animate attributeName="x" from="220" to="520" begin="0.1s" dur="5s" fill="freeze" calcMode="spline" keyTimes="0;1" keySplines="0.25 0.46 0.45 0.94"/></text>
+          <text class="hero__svg-text" x="520" y="635" font-size="590" text-anchor="start" dominant-baseline="central">DIO<animate attributeName="x" from="820" to="520" begin="0.2s" dur="5s" fill="freeze" calcMode="spline" keyTimes="0;1" keySplines="0.25 0.46 0.45 0.94"/></text>
+        </mask>
+      </defs>
+      <rect width="1600" height="900" fill="#2A201A" mask="url(#hero-text-mask)"/>
+    </svg>
+
+    <svg class="hero__mask-svg hero__mask-svg--mobile" viewBox="0 0 430 932" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <defs>
+        <mask id="hero-text-mask-mobile" maskUnits="userSpaceOnUse">
+          <rect width="430" height="932" fill="white"/>
+          <text style="font-family:'Anton',sans-serif;letter-spacing:-0.02em;" x="225" y="340" font-size="380" text-anchor="middle" dominant-baseline="central" fill="black" textLength="415" lengthAdjust="spacing">STU<animate attributeName="x" from="45" to="225" begin="0.1s" dur="5s" fill="freeze" calcMode="spline" keyTimes="0;1" keySplines="0.25 0.46 0.45 0.94"/></text>
+          <text style="font-family:'Anton',sans-serif;letter-spacing:-0.02em;" x="200" y="640" font-size="380" text-anchor="middle" dominant-baseline="central" fill="black" textLength="415" lengthAdjust="spacing">DIO<animate attributeName="x" from="380" to="200" begin="0.2s" dur="5s" fill="freeze" calcMode="spline" keyTimes="0;1" keySplines="0.25 0.46 0.45 0.94"/></text>
+        </mask>
+      </defs>
+      <rect width="430" height="932" fill="#2A201A" mask="url(#hero-text-mask-mobile)"/>
+    </svg>
+
+    <div class="brand"><span class="n">Spectralmoon</span></div>
+
+    <div class="cta">
+      <div class="inner">
+        <a class="pill top" href="https://spectralmoonstudio.com" rel="noopener"><span class="l">See my work</span></a>
+        <div class="row">
+          <a class="pill" href="https://wa.me/351937724969" rel="noopener"><span class="l">Contact me</span><span class="s">WhatsApp</span></a>
+          <button class="pill igbtn" type="button" id="igbtn" onclick="toggleIG()"><span class="l">Instagram</span><span class="s">3 accounts <span class="arrow">&#9662;</span></span></button>
+        </div>
+        <div class="igmenu" id="igmenu">
+          <a class="pill sub" href="https://www.instagram.com/" rel="noopener"><span class="l">Personal</span><span class="s">@your-personal</span></a>
+          <a class="pill sub" href="https://www.instagram.com/spectralmoon.creates/" rel="noopener"><span class="l">Spectralmoon Creates</span><span class="s">@spectralmoon.creates</span></a>
+          <a class="pill sub" href="https://www.instagram.com/spectralmoon.studio/" rel="noopener"><span class="l">Spectralmoon Studio</span><span class="s">@spectralmoon.studio</span></a>
+        </div>
+      </div>
+    </div>
+  </div>
+<script>
+  function toggleIG(){document.getElementById('igmenu').classList.toggle('open');document.getElementById('igbtn').classList.toggle('open');}
+</script>
+</body>
+</html>
