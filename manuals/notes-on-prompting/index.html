@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Notes on prompting — what I&rsquo;ve been working with</title>
+<title>Notes on prompting: what I&rsquo;ve been working with</title>
 <meta name="description" content="A short, tool-agnostic set of notes on prompt structures I've found useful for image and video. Shared, not taught." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -359,13 +359,13 @@
   <section class="hero">
     <div class="eyebrow">A few things that worked for me</div>
     <h1>Notes on <em style="font-style:normal;font-weight:500;">prompting.</em></h1>
-    <p class="lede">Sharing the structures I keep coming back to. You probably already use most of these — this is just how they fit together in my head.</p>
+    <p class="lede">Sharing the structures I keep coming back to. You probably already use most of these. This is just how they fit together in my head.</p>
   </section>
 
   <!-- I -->
   <section>
     <div class="num">I &middot; The motion question</div>
-    <h2>Before any video prompt &mdash; two questions.</h2>
+    <h2>Before any video prompt, two questions.</h2>
     <div class="two-q">
       <div class="q">Who is moving?</div>
       <div class="q">Who is watching?</div>
@@ -424,7 +424,7 @@
         <div class="slot-num">07</div>
         <div>
           <div class="slot-name">Lighting</div>
-          <div class="slot-note">Mood, not visibility. The biggest lever on tone.</div>
+          <div class="slot-note">Mood, not visibility. For me, the strongest lever on tone.</div>
         </div>
       </li>
       <li>
@@ -460,7 +460,7 @@
         <div class="slot-num">03</div>
         <div>
           <div class="slot-name">Action / pose</div>
-          <div class="slot-note">What they&rsquo;re doing &mdash; body language and emotion.</div>
+          <div class="slot-note">What they&rsquo;re doing: body language and emotion.</div>
         </div>
       </li>
       <li>
@@ -511,14 +511,14 @@
   <section>
     <div class="num">V &middot; Technical vocabulary</div>
     <h2>The terms film school still gives you.</h2>
-    <p class="intro">A reference list. The vocabulary that survives across tools &mdash; useful when you want to direct the model the way a DP would direct a crew.</p>
+    <p class="intro">A reference list. This vocabulary carries across tools, useful when you want to direct the model the way a DP directs a crew.</p>
 
     <div class="vocab">
 
       <div class="vocab-group">
         <div class="vocab-head">Shot sizes</div>
         <ul class="vocab-list">
-          <li><span class="t">Extreme close-up</span><span class="d">A detail &mdash; eye, mouth, texture.</span></li>
+          <li><span class="t">Extreme close-up</span><span class="d">A detail: eye, mouth, texture.</span></li>
           <li><span class="t">Close-up</span><span class="d">Head and shoulders. Emotional register.</span></li>
           <li><span class="t">Medium</span><span class="d">Waist up. Conversational distance.</span></li>
           <li><span class="t">Cowboy</span><span class="d">Mid-thigh up. Western convention.</span></li>
@@ -553,15 +553,15 @@
           <li><span class="t">Steadicam</span><span class="d">Stabilised handheld, gliding.</span></li>
           <li><span class="t">Whip pan</span><span class="d">Fast pivot, motion-blurred.</span></li>
           <li><span class="t">Push-in / pull-out</span><span class="d">Dolly in, dolly back. Intensifying or releasing.</span></li>
-          <li><span class="t">Dolly zoom</span><span class="d">Vertigo effect &mdash; dolly one way, zoom the other.</span></li>
+          <li><span class="t">Dolly zoom</span><span class="d">Vertigo effect: dolly one way, zoom the other.</span></li>
         </ul>
       </div>
 
       <div class="vocab-group">
         <div class="vocab-head">Lens &amp; focus</div>
         <ul class="vocab-list">
-          <li><span class="t">Wide-angle (14&ndash;35mm)</span><span class="d">Expansive, distorted at edges.</span></li>
-          <li><span class="t">Standard (35&ndash;50mm)</span><span class="d">Closest to the eye&rsquo;s field.</span></li>
+          <li><span class="t">Wide-angle (14-35mm)</span><span class="d">Expansive, distorted at edges.</span></li>
+          <li><span class="t">Standard (35-50mm)</span><span class="d">Closest to the eye&rsquo;s field.</span></li>
           <li><span class="t">Portrait (85mm)</span><span class="d">Flattering compression, soft background.</span></li>
           <li><span class="t">Telephoto (135mm+)</span><span class="d">Heavy compression, isolated subject.</span></li>
           <li><span class="t">Anamorphic</span><span class="d">Widescreen, oval bokeh, horizontal flares.</span></li>
@@ -575,7 +575,7 @@
           <li><span class="t">Key</span><span class="d">The main light. Direction sets the mood.</span></li>
           <li><span class="t">Fill</span><span class="d">Softens the shadow side of the key.</span></li>
           <li><span class="t">Rim / back</span><span class="d">Edge light separating subject from ground.</span></li>
-          <li><span class="t">Practical</span><span class="d">Light visible in the frame &mdash; lamp, neon, window.</span></li>
+          <li><span class="t">Practical</span><span class="d">Light visible in the frame: lamp, neon, window.</span></li>
           <li><span class="t">High-key</span><span class="d">Bright, low contrast. Commercial, optimistic.</span></li>
           <li><span class="t">Low-key</span><span class="d">Dark, high contrast. Noir, dramatic.</span></li>
           <li><span class="t">Rembrandt</span><span class="d">Triangle of light on the shadow-side cheek.</span></li>
@@ -602,19 +602,19 @@
   <section>
     <div class="num">VI &middot; Negatives</div>
     <h2>What you forbid is half the prompt.</h2>
-    <p class="intro">Prefix every item with <em>&ldquo;no&rdquo;</em> &mdash; even inside a tool&rsquo;s native negative field. Bare comma-separated tokens lose meaning. &ldquo;no X, no Y&rdquo; is the form that gets enforced.</p>
+    <p class="intro">Prefix every item with <em>&ldquo;no&rdquo;</em>, even inside a tool&rsquo;s native negative field. Bare comma-separated tokens tend to lose meaning. In my runs, &ldquo;no X, no Y&rdquo; is the form that sticks.</p>
     <div class="code">
       <span class="no">no</span> warped anatomy, <span class="no">no</span> extra limbs,<br/>
       <span class="no">no</span> stray text, <span class="no">no</span> floating objects,<br/>
       <span class="no">no</span> warm golden hour, <span class="no">no</span> plastic finish,<br/>
       <span class="no">no</span> CGI render look, <span class="no">no</span> flat midday light
     </div>
-    <div class="rule-line">Never name a subject in the positive body if you don&rsquo;t want them in the frame. Even possessively &mdash; &ldquo;from a child&rsquo;s POV&rdquo; will summon a child. Use spatial language instead.</div>
+    <div class="rule-line">Never name a subject in the positive body if you don&rsquo;t want them in the frame. Even possessively: &ldquo;from a child&rsquo;s POV&rdquo; will summon a child. Use spatial language instead.</div>
   </section>
 
   <!-- Closing -->
   <section class="closing">
-    <p>If you&rsquo;ve got a structure that works better for you &mdash; <em>send it back.</em></p>
+    <p>If you&rsquo;ve got a structure that works better for you, <em>send it back.</em></p>
     <div class="signoff">Susana &middot; Spectralmoon</div>
   </section>
 

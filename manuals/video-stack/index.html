@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>The Video Stack — A Setup Manual · Spectralmoon · The Lab</title>
-<meta name="description" content="Turn your Mac into a Claude-powered batch processor for AI-gen video work — so your editor stays for the cuts. Free except $20/month. 30-minute install." />
-<meta property="og:title" content="The Video Stack — A Setup Manual" />
+<title>The Video Stack: A Setup Manual · Spectralmoon · The Lab</title>
+<meta name="description" content="Turn your Mac into a Claude-powered batch processor for AI-gen video work, so your editor stays for the cuts. Free except $20/month. 30-minute install." />
+<meta property="og:title" content="The Video Stack: A Setup Manual" />
 <meta property="og:description" content="Claude + Desktop Commander + FFmpeg. The batch layer beneath your edit." />
 <meta property="og:type" content="article" />
 
@@ -400,10 +400,11 @@
   <div class="container">
     <div class="eyebrow">Spectralmoon · The Lab · Setup Manual № 04</div>
     <h1>The Video Stack</h1>
-    <p class="subtitle">Turn your Mac into a Claude-powered batch processor for everything your AI gens spit out — so your editor stays for the cuts.</p>
+    <p class="subtitle">Turn your Mac into a Claude-powered batch processor for everything your AI gens spit out, so your editor stays for the cuts.</p>
     <div class="stats">
       <div class="stat"><div class="num">30 min</div><div class="lbl">Install time</div></div>
       <div class="stat"><div class="num">$20 / mo</div><div class="lbl">Total cost</div></div>
+      <!-- CLAIM FLAG: "~10x batch speedup" is an unverified estimate; keep only if you can back it. -->
       <div class="stat"><div class="num">~10×</div><div class="lbl">Batch speedup</div></div>
       <div class="stat"><div class="num">0</div><div class="lbl">Lines of code you write</div></div>
     </div>
@@ -416,19 +417,19 @@
     <section id="why">
       <h2><span class="num">01</span>Why this exists</h2>
 
-      <p>Every AI-video workflow has the same hidden tax: the <strong>mechanical glue</strong> between generation and edit. Re-encoding WebMs into ProRes-friendly MP4s. Watermarking a folder. Cutting fifteen-second teasers from a one-minute master. Generating thumbnails. Stitching frames. Pulling audio out. None of it is creative. All of it eats hours.</p>
+      <p>Every AI-video workflow has the same hidden tax: the <strong>mechanical glue</strong> between generation and edit. Re-encoding WebMs into ProRes-friendly MP4s. Watermarking a folder. Cutting teasers from a master, pulling audio, stitching frames. None of it is creative, and it eats hours.</p>
 
-      <p>If you already work with Claude, you already have the brain. What you're missing is the hands. This manual installs the hands — two free tools that let Claude actually <em>do</em> video work on your Mac instead of just talking about it:</p>
+      <p>If you already work with Claude, you already have the brain. What you're missing is the hands. This manual installs the hands: two free tools that let Claude actually <em>do</em> video work on your Mac instead of just talking about it.</p>
 
       <ul>
-        <li><strong>Claude Code</strong> — the command-line surface of Claude. Same Claude, just sitting in your Terminal where it can run things.</li>
-        <li><strong>Desktop Commander</strong> — the MCP that gives Claude permission to execute commands on your Mac.</li>
-        <li><strong>FFmpeg</strong> — the open-source video engine behind Chrome, YouTube, Netflix, and most editors' internals.</li>
+        <li><strong>Claude Code</strong>: the command-line surface of Claude. Same Claude, sitting in your Terminal where it can run things.</li>
+        <li><strong>Desktop Commander</strong>: the MCP that lets Claude execute commands on your Mac.</li>
+        <li><strong>FFmpeg</strong>: the open-source video engine a lot of the software you already use is built on.</li>
       </ul>
 
-      <p>You type a sentence. Claude figures out the FFmpeg command. Desktop Commander runs it. FFmpeg does the work — fast, lossless, the actual engine YouTube uses. Output lands in a folder you choose. The whole thing <strong>collapses the distance</strong> between describing a task and the file being done.</p>
+      <p>You type a sentence. Claude figures out the FFmpeg command. Desktop Commander runs it. FFmpeg does the work, fast and lossless. Output lands in a folder you choose. The whole thing <strong>collapses the distance</strong> between describing a task and the file being done.</p>
 
-      <p>It's not a replacement for DaVinci, Premiere, FCP, CapCut, or your taste. It's the batch processor that <strong>frees those tools to do the work that needs taste</strong>. Mechanical work → Claude + FFmpeg. Creative work → you.</p>
+      <p>It won't replace DaVinci, Premiere, FCP, CapCut, or your taste. Think of it as the batch processor that <strong>frees those tools for the work that needs taste</strong>. Mechanical work goes to Claude and FFmpeg; creative work stays with you.</p>
 
       <div class="callout info">
         <div class="label">About FFmpeg</div>
@@ -437,7 +438,7 @@
 
       <blockquote>
         The hard work isn't the AI. It's the spec. Once you can describe what you want with precision, the rest is just plumbing.
-        <cite>— Lab Module 8, May 2026</cite>
+        <cite>Lab Module 8, May 2026</cite>
       </blockquote>
     </section>
 
@@ -453,16 +454,16 @@
         <tbody>
           <tr><td>01</td><td><strong>Batch watermark</strong></td><td>Drop a logo on every clip in a folder. One sentence, thirty videos done.</td></tr>
           <tr><td>02</td><td><strong>Format convert</strong></td><td>WebM / MOV / ProRes / AVI / whatever → whatever your editor needs. Batched.</td></tr>
-          <tr><td>03</td><td><strong>Trim + concatenate</strong></td><td>Cut intro/outro, splice clips, restitch a sequence — without opening an editor.</td></tr>
-          <tr><td>04</td><td><strong>Compress for platform</strong></td><td>WhatsApp / IG Stories / YouTube / client preview — all from one source, one pass.</td></tr>
+          <tr><td>03</td><td><strong>Trim + concatenate</strong></td><td>Cut intro/outro, splice clips, restitch a sequence, no editor needed.</td></tr>
+          <tr><td>04</td><td><strong>Compress for platform</strong></td><td>WhatsApp / IG Stories / YouTube / client preview, all from one source, one pass.</td></tr>
           <tr><td>05</td><td><strong>Thumbnails</strong></td><td>Pull a frame at any timestamp from a folder of videos. Batch for listings or grids.</td></tr>
           <tr><td>06</td><td><strong>Color filters / LUTs</strong></td><td>Apply a consistent look across a batch via FFmpeg filter chains.</td></tr>
-          <tr><td>07</td><td><strong>Speed manipulation</strong></td><td>2×, 0.5×, reverse, time-lapse — no timeline required.</td></tr>
+          <tr><td>07</td><td><strong>Speed manipulation</strong></td><td>2×, 0.5×, reverse, time-lapse, no timeline required.</td></tr>
           <tr><td>08</td><td><strong>Audio</strong></td><td>Replace track, mix multiple sources, normalize volume across a batch.</td></tr>
         </tbody>
       </table>
 
-      <p>Non-exhaustive. <strong>Everything FFmpeg can do, you can now ask Claude to do</strong> — in plain English.</p>
+      <p>Non-exhaustive. <strong>If FFmpeg can do it, you can ask Claude to do it</strong>, in plain English.</p>
     </section>
 
     <hr />
@@ -471,27 +472,27 @@
       <h2><span class="num">03</span>The pipeline at a glance</h2>
 
 <pre class="pipeline">┌─────────────────────────┐    ┌──────────────────────────────┐
-│  Stage 01 — Source      │ →  │  Stage 02 — Batch            │
+│  Stage 01 · Source      │ →  │  Stage 02 · Batch            │
 │  iPhone, Lovart,        │    │  (Claude + FFmpeg)           │
 │  Higgsfield, Kling,     │    │  Mechanical work             │
 │  Nano Banana, Runway    │    │                              │
 └─────────────────────────┘    └──────────────────────────────┘
                                           ↓
 ┌─────────────────────────────┐    ┌──────────────────────────────┐
-│  Stage 03 — Creative        │ →  │  Stage 04 — Distribute       │
+│  Stage 03 · Creative        │ →  │  Stage 04 · Distribute       │
 │  (you + your editor)        │    │  (Claude + FFmpeg)           │
 │  Taste, color, the cut      │    │  Format variants per channel │
 └─────────────────────────────┘    └──────────────────────────────┘</pre>
 
-      <p><strong>Stage 02</strong> is what this manual installs — the catch-net for everything your AI gens, your iPhone, your screen recordings, and your downloads produce. Mechanical processing, no editor needed.</p>
+      <p><strong>Stage 02</strong> is what this manual installs: the catch-net for whatever your AI gens, your iPhone, your screen recordings, and your downloads produce. Mechanical processing, no editor needed.</p>
 
-      <p><strong>Stage 03</strong> stays yours. The cut, the color, the rhythm. DaVinci, Premiere, FCP, CapCut — whichever your hands already know.</p>
+      <p><strong>Stage 03</strong> stays yours. The cut, the color, the rhythm. DaVinci, Premiere, FCP, CapCut, whichever your hands already know.</p>
 
-      <p><strong>Stage 04</strong> is the distribution pass — three sizes, three formats, one source, one command.</p>
+      <p><strong>Stage 04</strong> is the distribution pass: three sizes, three formats, one source, one command.</p>
 
       <div class="callout note">
         <div class="label">The pattern matters more than the tools</div>
-        <p>The point isn't that FFmpeg is magical. It's that any time-eating mechanical work in a creative pipeline can be lifted out and given to a system. Other domains have other tools. The pattern — <strong>automate the mechanical, protect the creative</strong> — is universal.</p>
+        <p>FFmpeg isn't the magic here. Any time-eating mechanical work in a creative pipeline can be lifted out and handed to a system. Other domains have other tools. The pattern (<strong>automate the mechanical, protect the creative</strong>) carries over.</p>
       </div>
     </section>
 
@@ -502,23 +503,23 @@
 
       <p>Open Terminal (Spotlight: Cmd+Space, "Terminal") and run each step in order.</p>
 
-      <h3>Step 01 — Homebrew</h3>
+      <h3>Step 01 · Homebrew</h3>
 <pre><code>/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"</code></pre>
-      <p>It'll ask for your Mac password (characters don't display — normal). Wait a few minutes. Verify with <code>brew --version</code>.</p>
+      <p>It'll ask for your Mac password (characters don't display, that's normal). Wait a few minutes. Verify with <code>brew --version</code>.</p>
 
-      <h3>Step 02 — FFmpeg</h3>
+      <h3>Step 02 · FFmpeg</h3>
 <pre><code>brew install ffmpeg</code></pre>
-      <p>Verify with <code>ffmpeg -version</code> — should report 6.x or later.</p>
+      <p>Verify with <code>ffmpeg -version</code>. Should report 6.x or later.</p>
 
-      <h3>Step 03 — Node.js</h3>
+      <h3>Step 03 · Node.js</h3>
 <pre><code>brew install node</code></pre>
       <p>Verify: <code>node --version</code> and <code>npm --version</code>.</p>
 
-      <h3>Step 04 — Claude Code</h3>
+      <h3>Step 04 · Claude Code</h3>
 <pre><code>npm install -g @anthropic-ai/claude-code</code></pre>
-      <p>Run <code>claude</code> for first launch. Walks you through Anthropic sign-in. <strong>Pro plan ($20/mo) is plenty for this work</strong> — only go Max ($100/mo) if you start running multi-hour sessions or batch-processing huge volumes daily.</p>
+      <p>Run <code>claude</code> for first launch. Walks you through Anthropic sign-in. <strong>Pro plan ($20/mo) is plenty for this work.</strong> Only go Max ($100/mo) if you start running multi-hour sessions or batch-processing large volumes daily.</p>
 
-      <h3>Step 05 — Desktop Commander</h3>
+      <h3>Step 05 · Desktop Commander</h3>
 
       <p>Inside Claude Code:</p>
 <pre><code>claude mcp add desktop-commander -- npx -y @wonderwhy-er/desktop-commander</code></pre>
@@ -532,17 +533,17 @@
 
       <p>In Claude Code, type each prompt in plain English:</p>
 
-      <h3>Test 01 — Desktop Commander is alive</h3>
+      <h3>Test 01 · Desktop Commander is alive</h3>
       <div class="workflow-prompt">"What's my Node version? Use Desktop Commander to check."</div>
       <p>Should report your Node version.</p>
 
-      <h3>Test 02 — File system access</h3>
+      <h3>Test 02 · File system access</h3>
       <div class="workflow-prompt">"Make a folder at ~/Desktop/ffmpeg-test/ and put a file called hello.txt inside that says 'FFmpeg setup works'."</div>
       <p>Open Finder. Check Desktop.</p>
 
-      <h3>Test 03 — FFmpeg is reachable</h3>
+      <h3>Test 03 · FFmpeg is reachable</h3>
       <div class="workflow-prompt">"Run ffmpeg -version using Desktop Commander and tell me what version is installed."</div>
-      <p>If Claude reports a version — <strong>full stack confirmed.</strong> Move to real work.</p>
+      <p>If Claude reports a version, the <strong>full stack's confirmed.</strong> Move to real work.</p>
     </section>
 
     <hr />
@@ -552,19 +553,19 @@
 
       <p>Each is one sentence to Claude. Adapt the file paths to your own projects.</p>
 
-      <h3>Workflow 01 — Batch watermark a folder</h3>
+      <h3>Workflow 01 · Batch watermark a folder</h3>
       <div class="workflow-prompt">"Take all the .mp4 files in ~/Desktop/Project/ and overlay the watermark from ~/Desktop/watermark.png on the bottom-right at 70% opacity. Save the watermarked versions to ~/Desktop/Project_watermarked/."</div>
-      <p class="workflow-result"><strong>Time saved:</strong> 5 min per video × 10 videos = ~50 min → ~30 seconds.</p>
+      <p class="workflow-result"><strong>Rough time saved:</strong> around 50 minutes of manual work, done in about 30 seconds.</p>
 
-      <h3>Workflow 02 — Convert AI-gen output to editor-friendly format</h3>
+      <h3>Workflow 02 · Convert AI-gen output to editor-friendly format</h3>
       <div class="workflow-prompt">"Convert all WebM files in ~/Desktop/AI_outputs/ to MP4 with H.264 codec, 30fps, ProRes-friendly, and save them to ~/Desktop/for_editor/."</div>
-      <p class="workflow-result"><strong>Use case:</strong> Lovart, Higgsfield, Kling, Veo, Runway, Nano Banana — they each export differently. This normalizes the whole batch before you import.</p>
+      <p class="workflow-result"><strong>Use case:</strong> Lovart, Higgsfield, Kling, Veo, Runway, Nano Banana. They each export differently, so this normalizes the whole batch before you import.</p>
 
-      <h3>Workflow 03 — Three distribution variants from one master</h3>
-      <div class="workflow-prompt">"Take ~/Desktop/master.mp4 and make three versions — one for WhatsApp (under 16MB, max 1280×720), one for Instagram Stories (1080×1920 vertical), and one full-quality for YouTube. Save them all to ~/Desktop/distribution/."</div>
+      <h3>Workflow 03 · Three distribution variants from one master</h3>
+      <div class="workflow-prompt">"Take ~/Desktop/master.mp4 and make three versions: one for WhatsApp (under 16MB, max 1280×720), one for Instagram Stories (1080×1920 vertical), and one full-quality for YouTube. Save them all to ~/Desktop/distribution/."</div>
       <p class="workflow-result">Three variants, one source, seconds.</p>
 
-      <h3>Workflow 04 — Batch thumbnails</h3>
+      <h3>Workflow 04 · Batch thumbnails</h3>
       <div class="workflow-prompt">"Pull a thumbnail at the 5-second mark from every video in ~/Desktop/listings/ and save them as JPGs to ~/Desktop/thumbnails/."</div>
       <p class="workflow-result">Every video gets a matching thumb. Listings, social posts, web grids.</p>
     </section>
@@ -574,7 +575,7 @@
     <section id="under-hood">
       <h2><span class="num">07</span>Under the hood</h2>
 
-      <p>The whole stack is <strong>local to your Mac</strong>. Video files never leave your machine. Anthropic doesn't see your footage. What goes to Claude's servers: the <em>text of your request</em> and what files exist in the folders you point it at — folder listings, not file contents.</p>
+      <p>The whole stack is <strong>local to your Mac</strong>. Video files never leave your machine. Anthropic doesn't see your footage. What goes to Claude's servers: the <em>text of your request</em> and what files exist in the folders you point it at: folder listings, not file contents.</p>
 
       <p>The chain:</p>
 
@@ -582,15 +583,15 @@
         <li>You type a request in plain English.</li>
         <li>Claude figures out which FFmpeg command(s) to run.</li>
         <li>Desktop Commander runs them on your Mac, with your permission.</li>
-        <li>FFmpeg does the actual work — fast, lossless, the same engine powering YouTube and Netflix encode pipelines.</li>
+        <li>FFmpeg does the actual work, fast and lossless.</li>
         <li>Claude reports back: what happened, where the files landed, what's next.</li>
       </ol>
 
-      <p>It's a conversation, not a script. If a command fails, Claude reads the error and tries again — same as a human collaborator would.</p>
+      <p>It's a conversation, not a script. If a command fails, Claude reads the error and tries again, the way a collaborator would.</p>
 
       <div class="callout warning">
         <div class="label">On safety</div>
-        <p>Desktop Commander can run any command on your Mac with your permission. First time Claude proposes something, it'll ask. Get familiar with the prompt. If a command looks unclear — <em>"why this command? what does it do?"</em> — Claude will explain before you approve.</p>
+        <p>Desktop Commander can run any command on your Mac with your permission. First time Claude proposes something, it'll ask. Get familiar with the prompt. If a command looks unclear, ask why it's being run and what it does, and Claude will explain before you approve.</p>
       </div>
     </section>
 
@@ -611,7 +612,7 @@
         </tbody>
       </table>
 
-      <p>The first watermark batch pays for the month.</p>
+      <p>The first watermark batch can pay for the month.</p>
     </section>
 
   </div>
@@ -620,9 +621,9 @@
 <section class="closing">
   <div class="container">
     <h2>Closing</h2>
-    <p>Once the stack is live, you stop thinking about the mechanical layer. You stop opening apps for things that should take seconds. Your creative attention goes back to where it belongs — the cut, the moment, the taste — and the system handles the rest.</p>
-    <p>The leverage isn't from any single tool here. <strong>It's from the separation</strong> — knowing which work belongs to FFmpeg, which to your editor, which to you. Once that line is clear, every project moves faster, every output is cleaner, and your time goes back where it should be.</p>
-    <p class="tagline">Build it once. Use it forever. The first project pays for the install.</p>
+    <p>Once the stack is live, you stop thinking about the mechanical layer. You stop opening apps for things that should take seconds. Your creative attention goes back where it belongs, the cut and the color, while the system handles the rest.</p>
+    <p>The gain here isn't any single tool. <strong>It's the separation</strong>: knowing which work belongs to FFmpeg, which to your editor, which to you. Once that line is clear, projects move faster and your time goes back where it should be.</p>
+    <p class="tagline">Build it once. Keep using it. The first project can pay for the install.</p>
   </div>
 </section>
 

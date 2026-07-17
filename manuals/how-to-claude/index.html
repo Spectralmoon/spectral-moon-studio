@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Claude for People Who Have Never Used It — A short, honest manual by Spectralmoon · The Lab</title>
+<title>Claude for People Who Have Never Used It: a short, honest manual by Spectralmoon · The Lab</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,400;1,9..144,600;1,9..144,700;1,9..144,800&family=Inter+Tight:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -1034,7 +1034,7 @@
     <h4>Cover</h4>
     <ul><li><a href="#cover">Begin here</a></li></ul>
 
-    <h4>Part 1 — Before you type</h4>
+    <h4>Part 1 · Before you type</h4>
     <ul>
       <li><a href="#ch1">1 · What Claude is</a></li>
       <li><a href="#ch2">2 · Why AI feels unreliable</a></li>
@@ -1042,7 +1042,7 @@
       <li><a href="#ch4">4 · The three-file workspace</a></li>
     </ul>
 
-    <h4>Part 2 — How to talk</h4>
+    <h4>Part 2 · How to talk</h4>
     <ul>
       <li><a href="#ch5">5 · A prompt is a form</a></li>
       <li><a href="#ch6">6 · The five-part prompt</a></li>
@@ -1051,14 +1051,14 @@
       <li><a href="#ch9">9 · Why prompts hallucinate</a></li>
     </ul>
 
-    <h4>Part 3 — Build something</h4>
+    <h4>Part 3 · Build something</h4>
     <ul>
       <li><a href="#ch10">10 · Why one big prompt fails</a></li>
       <li><a href="#ch11">11 · The five-folder pattern</a></li>
       <li><a href="#ch12">12 · Building the conductor</a></li>
     </ul>
 
-    <h4>Part 4 — Safety</h4>
+    <h4>Part 4 · Safety</h4>
     <ul>
       <li><a href="#ch13">13 · Test on a copy first</a></li>
       <li><a href="#ch14">14 · Confidence ≠ accuracy</a></li>
@@ -1093,7 +1093,7 @@
         <p class="reveal">You have probably heard a lot about AI. Most of it has been either too excited or too worried to actually help you.</p>
         <p class="reveal">This manual is neither.</p>
         <p class="reveal">It will not promise that AI will change your life. It will not tell you that you are going to be replaced. It will not show off, and it will not assume you already know what any of this is.</p>
-        <p class="reveal">What it will do is walk you through how to use one specific tool — Claude — with intention. Not magic. Not fear. Just a tool that works, when you set it up well.</p>
+        <p class="reveal">What it will do is walk you through how to use one specific tool (Claude) with intention. Not magic, not fear. Just a tool that works when you set it up well.</p>
         <p class="reveal">By the end of these pages, you will know:</p>
         <ul class="reveal">
           <li>What Claude actually is, and what it isn't</li>
@@ -1101,11 +1101,11 @@
           <li>How to give Claude memory so it stops "forgetting" things</li>
           <li>How to write a prompt that gets a useful answer the first time</li>
           <li>Thirteen ready-to-use personas you can invoke any time</li>
-          <li>How to build something genuinely useful — not just a clever demo</li>
+          <li>How to build something genuinely useful, not just a clever demo</li>
           <li>Where to be careful, what to never share, and how to keep a record</li>
         </ul>
-        <p class="reveal">The whole manual reads in under an hour. Each chapter is short. Each one ends with one small thing you can try now. The appendix is full of copy-paste templates so you do not have to start anything from scratch.</p>
-        <p class="reveal">You don't have to read it in order — but the order is gentler than skipping around.</p>
+        <p class="reveal">The whole manual reads in under an hour. Each chapter is short and ends with one small thing you can try now. The appendix is full of copy-paste templates so you don't have to start from scratch.</p>
+        <p class="reveal">You don't have to read it in order, but the order is gentler than skipping around.</p>
         <p class="reveal">Take your time. There is no version of this that you are behind on.</p>
       </div>
     </section>
@@ -1119,14 +1119,14 @@
       <article class="chapter reveal" id="ch1">
         <div class="chapter-num">Chapter</div>
         <h2>What Claude actually is (and what it isn't)</h2>
-        <p>Claude is a large language model. That phrase will appear a lot, so it is worth defining once, slowly.</p>
-        <p>A <strong>large language model</strong> is a piece of software trained to predict what words tend to follow other words, across a very large amount of text. It is not a search engine. It is not a database. It does not "know" things the way a person knows things. It produces language that fits the pattern of what you gave it.</p>
+        <p>Claude is a large language model. That phrase will come up a lot, so it's worth defining once.</p>
+        <p>A <strong>large language model</strong> is a piece of software trained to predict what words tend to follow other words, across a very large amount of text. It isn't a search engine or a database, and it doesn't "know" things the way a person does. It produces language that fits the pattern of what you gave it.</p>
         <p>That sounds underwhelming. It is actually the entire point.</p>
-        <p>Because Claude works on patterns of language, it can do a wide range of things that look very different from each other — write a message, summarize a document, explain a concept, draft a plan, organize a list — using the same underlying skill. It is not a calculator that does one thing. It is a writer that can adapt.</p>
+        <p>Because Claude works on patterns of language, it can do many things that look very different from each other (write a message, summarize a document, explain a concept, draft a plan, organize a list) using the same underlying skill. It's not a calculator that does one thing. It's a writer that can adapt.</p>
         <h4>What Claude is not</h4>
         <ul>
           <li>It is not always right. It produces fluent, confident-sounding text whether or not the content is accurate. Confidence in its tone tells you nothing about correctness.</li>
-          <li>It is not connected to the live internet by default. Unless you give it information, it works from what it was trained on — which has a cutoff date in the past.</li>
+          <li>It is not connected to the live internet by default. Unless you give it information, it works from what it was trained on, which has a cutoff date in the past.</li>
           <li>It does not remember you between conversations unless you set it up to. By default, every new chat is a stranger.</li>
           <li>It is not sentient and it is not your friend. It is a very capable text tool.</li>
         </ul>
@@ -1148,47 +1148,47 @@
       <article class="chapter reveal" id="ch2">
         <div class="chapter-num">Chapter</div>
         <h2>Why AI feels unreliable (and why that's a setup problem)</h2>
-        <p>Most people's first experience with AI goes like this. They open it. They type a question. The answer is either surprisingly good or surprisingly off. They do not know why. They try a few more times. They get inconsistent results. They conclude that AI is "not there yet."</p>
+        <p>Most people's first experience with AI goes like this. They open it, type a question, and the answer is either surprisingly good or surprisingly off. They don't know why. A few more tries give inconsistent results, and they conclude AI is "not there yet."</p>
         <p>This is a reasonable conclusion based on the experience. It is also the wrong conclusion.</p>
-        <p>Every layer of computing in history has started this way. Punch cards in the 1800s were unreliable — they jammed, tore, misread. Early electronic computers in the 1940s were so error-prone that engineers had to invent something called <em>error correcting code</em> just to make memory trustworthy. Each new layer was rolled out, called unreliable, and then made reliable through engineering — not through waiting.</p>
-        <p>AI is the newest layer. It is being treated the same way. The instinct to say "I will use it once it is reliable" is the same instinct people had about every new computing layer for two hundred years. None of those layers became reliable on their own. They became reliable because people built the structure around them that made them reliable.</p>
+        <p>Every layer of computing has started this way. Early punch cards jammed, tore, and misread. Early electronic computers were so error-prone that engineers had to invent something called <em>error correcting code</em> just to make memory trustworthy. Each layer was rolled out, called unreliable, then made reliable through engineering, not through waiting.</p>
+        <p>AI is the newest layer, and it's being treated the same way. "I'll use it once it's reliable" is the instinct people had about earlier computing layers too. None of them became reliable on their own. They became reliable because people built the structure around them.</p>
         <p>That structure is what this manual teaches.</p>
         <p>When AI feels unreliable, the cause is almost always one of these:</p>
         <ul>
-          <li>The setup is missing — you did not give it the information it needed</li>
-          <li>The prompt is unclear — you asked it to do too many things at once, or did not say what "good" looks like</li>
-          <li>The check is missing — you did not verify before acting on the answer</li>
+          <li>The setup is missing: you didn't give it the information it needed</li>
+          <li>The prompt is unclear: you asked it to do too many things at once, or didn't say what "good" looks like</li>
+          <li>The check is missing: you didn't verify before acting on the answer</li>
         </ul>
         <p>None of these are problems with AI. They are problems with how AI is being used. The good news: all three are fixable, and you can learn to fix them in an afternoon.</p>
         <div class="try">
           <span class="try-label">Try this now</span>
-          Think of one time AI gave you a bad answer. Do not blame the tool yet. Ask: was the question clear? Did the tool have what it needed? Was there a way to check the answer? Hold this question — the next chapters answer it.
+          Think of one time AI gave you a bad answer. Don't blame the tool yet. Ask: was the question clear? Did the tool have what it needed? Was there a way to check the answer? Hold that question. The next chapters answer it.
         </div>
       </article>
 
       <article class="chapter reveal" id="ch3">
         <div class="chapter-num">Chapter</div>
-        <h2>The folder is the brain — how to give Claude memory</h2>
+        <h2>The folder is the brain: how to give Claude memory</h2>
         <p>Here is the single most important idea in this entire manual.</p>
         <p class="pull">Claude has no memory of you between conversations unless you give it one.</p>
-        <p>By default, every chat starts blank. It does not remember your name, your work, your preferences, the project you were on yesterday, the rules you set up last week. This is the default behavior and it is a feature, not a bug — but it means that if you want Claude to actually be useful for ongoing work, you have to build its memory yourself.</p>
+        <p>By default, every chat starts blank. It doesn't remember your name, your work, your preferences, the project you were on yesterday, or the rules you set up last week. That's how it's designed. It also means that if you want Claude to be useful for ongoing work, you have to build its memory yourself.</p>
         <p>The way you do this is with a folder. A plain folder, on your computer or in a tool that supports it, with a few text files inside.</p>
         <p>Those files are the memory.</p>
-        <p>When you start a new conversation, you point Claude at the folder. It reads the files. Now it "remembers" — not because it has memory in the human sense, but because it has documents that tell it what it needs to know. Same effect.</p>
-        <p>This sounds almost too simple. It is genuinely the foundation. Everyone who uses Claude well does some version of this. People who don't, fight the same tool every day.</p>
+        <p>When you start a new conversation, you point Claude at the folder. It reads the files. Now it "remembers," not because it has memory in the human sense, but because it has documents that tell it what it needs to know. Same effect.</p>
+        <p>This sounds almost too simple. It's the foundation. Most people who use Claude well do some version of this. People who don't fight the same tool every day.</p>
         <p>The folder structure looks like this in its simplest form:</p>
         <div class="code-block">
           <button class="copy-btn" data-copy>Copy</button>
 <pre>your-project/
   CLAUDE.md         ← who you are, how you work, the rules
   CONTEXT.md        ← what you're working on right now
-  REFERENCES.md     ← background info — people, links, definitions</pre>
+  REFERENCES.md     ← background info: people, links, definitions</pre>
         </div>
         <p>Three files. Plain text. They will become Claude's brain for that project.</p>
         <p>Chapter 4 walks through what goes in each one. The Appendix has copy-paste templates for all three.</p>
         <div class="try">
           <span class="try-label">Try this now</span>
-          Pick one project you do regularly. Make a folder for it. Add three empty files: <code>CLAUDE.md</code>, <code>CONTEXT.md</code>, <code>REFERENCES.md</code>. That is the entire setup. You are not done — but you have started.
+          Pick one project you do regularly. Make a folder for it. Add three empty files: <code>CLAUDE.md</code>, <code>CONTEXT.md</code>, <code>REFERENCES.md</code>. That's the entire setup. You're not done, but you've started.
         </div>
       </article>
 
@@ -1197,7 +1197,7 @@
         <h2>The three-file workspace</h2>
         <p>Here is what goes inside each file. Keep them short. They are working documents, not novels. Full templates with example content are in the Appendix.</p>
 
-        <h3>CLAUDE.md — the identity file</h3>
+        <h3>CLAUDE.md · the identity file</h3>
         <p>This is the always-on file. It tells Claude who you are, what you do, how you want to work, and any rules that should hold across every session.</p>
         <p>It answers:</p>
         <ul>
@@ -1208,7 +1208,7 @@
         </ul>
         <p>A good CLAUDE.md is between half a page and two pages. Anything longer and Claude will start ignoring parts of it.</p>
 
-        <h3>CONTEXT.md — the current state file</h3>
+        <h3>CONTEXT.md · the current state file</h3>
         <p>This file changes often. It tracks what you are actually doing right now.</p>
         <p>It answers:</p>
         <ul>
@@ -1219,7 +1219,7 @@
         </ul>
         <p>When you start a new session, you read this file too. It is the bridge between yesterday's work and today's.</p>
 
-        <h3>REFERENCES.md — the background file</h3>
+        <h3>REFERENCES.md · the background file</h3>
         <p>This file holds the things you do not want to retype every session.</p>
         <ul>
           <li>Names and roles of the people involved</li>
@@ -1249,16 +1249,16 @@
         <h2>A prompt is a form, not a question</h2>
         <p>Most people approach a prompt like a search engine query. They type a question and hope for an answer.</p>
         <p>This is the wrong shape.</p>
-        <p>A prompt is not a question. A prompt is a <strong>form</strong>. It has fields. The fields have names. When you fill the fields well, you get a useful answer. When you leave fields blank, the model fills them in for you — and what it fills them with is often not what you would have chosen.</p>
-        <p>This idea has a long history in software. Every layer of computing — from the earliest programs in the 1800s to modern code — has worked the same way. You fill typed slots in a template. The slot has a name. The slot expects a certain kind of input. The output depends on what you put in.</p>
-        <p>A prompt to an AI works the same way. The slots are not visible by default — but they are there, and the model is filling them in regardless. Your job is to take control of what goes in each one.</p>
+        <p>A prompt is not a question. A prompt is a <strong>form</strong>. It has fields. The fields have names. When you fill the fields well, you get a useful answer. When you leave fields blank, the model fills them in for you, and what it fills them with is often not what you would have chosen.</p>
+        <p>This has a long history in software. You fill typed slots in a template: each slot has a name and expects a certain kind of input, and the output depends on what you put in.</p>
+        <p>A prompt to an AI works the same way. The slots aren't visible by default, but they're there, and the model fills them in regardless. Your job is to control what goes in each one.</p>
         <p>The five slots are:</p>
         <ol>
-          <li><strong>Identity</strong> — who Claude should be answering as</li>
-          <li><strong>Task</strong> — what you want done</li>
-          <li><strong>Context</strong> — what Claude needs to know to do it</li>
-          <li><strong>Constraints</strong> — the rules and limits</li>
-          <li><strong>Output Format</strong> — what the answer should look like</li>
+          <li><strong>Identity</strong>: who Claude should be answering as</li>
+          <li><strong>Task</strong>: what you want done</li>
+          <li><strong>Context</strong>: what Claude needs to know to do it</li>
+          <li><strong>Constraints</strong>: the rules and limits</li>
+          <li><strong>Output Format</strong>: what the answer should look like</li>
         </ol>
         <p>Chapter 6 explains each one. For now, the only thing to absorb is this: when your prompts feel inconsistent, it is almost never because the model is broken. It is because some of the slots are empty, and the model is guessing.</p>
         <div class="try">
@@ -1272,27 +1272,27 @@
         <h2>The five-part prompt</h2>
         <p>Here is the full shape, in order, with what each slot is for.</p>
 
-        <h3>1. Identity — <em>who Claude should be</em></h3>
+        <h3>1. Identity: <em>who Claude should be</em></h3>
         <p>You are giving Claude a role. The role shapes the answer.</p>
         <p class="pull">"You are a senior copy editor reviewing a marketing email for clarity and tone."</p>
         <p>This is not a personality trick. The role narrows what kind of language Claude pulls from. Asking the same question to "an editor" and to "a marketer" produces genuinely different answers. Pick the role that matches the work. Chapter 7 gives you 13 ready-made roles you can paste in.</p>
 
-        <h3>2. Task — <em>what you want done</em></h3>
+        <h3>2. Task: <em>what you want done</em></h3>
         <p>One verb, one outcome. Not three things. One.</p>
         <p class="pull">"Review this draft and list every sentence that is unclear, in the order they appear."</p>
-        <p>If you find yourself writing "and also" — stop. Save the second task for the second prompt.</p>
+        <p>If you find yourself writing "and also," stop. Save the second task for the second prompt.</p>
 
-        <h3>3. Context — <em>what Claude needs to know</em></h3>
+        <h3>3. Context: <em>what Claude needs to know</em></h3>
         <p>Everything Claude needs that it does not already have. The actual draft. The audience. The constraints of the situation. The deadline if it matters.</p>
         <p>Without context, Claude makes plausible-sounding guesses. With context, it makes grounded recommendations.</p>
 
-        <h3>4. Constraints — <em>the rules</em></h3>
+        <h3>4. Constraints: <em>the rules</em></h3>
         <p>What Claude must do, and what it must not do. Length. Tone. What to skip. What to flag instead of fix.</p>
         <p class="pull">"Do not rewrite. Only flag. Keep flags under fifteen words each."</p>
         <p>Constraints are the fence around the answer. Without them, the answer wanders.</p>
 
-        <h3>5. Output Format — <em>what the answer should look like</em></h3>
-        <p>Not what to say — how to lay it out.</p>
+        <h3>5. Output Format: <em>what the answer should look like</em></h3>
+        <p>Not what to say. How to lay it out.</p>
         <p class="pull">"Return a numbered list. Each item: the sentence, then the issue. No introduction, no closing summary."</p>
         <p>Output format is what makes the answer usable. A great answer in the wrong shape is hard to use.</p>
 
@@ -1302,15 +1302,15 @@
 
         <div class="try">
           <span class="try-label">Try this now</span>
-          Take a prompt that did not work. Rewrite it with all five slots filled — even briefly. Run it again. Notice how much closer the answer is to what you actually wanted.
+          Take a prompt that did not work. Rewrite it with all five slots filled, even briefly. Run it again. Notice how much closer the answer is to what you actually wanted.
         </div>
       </article>
 
       <article class="chapter reveal" id="ch7">
         <div class="chapter-num">Chapter</div>
         <h2>Thirteen personas to invoke</h2>
-        <p>The Identity slot — the first one in the five-part prompt — is where you tell Claude <em>who</em> it should be answering as. Picking the right role narrows what kind of language Claude pulls from, and it changes the answer more than any other single move.</p>
-        <p>You do not have to invent a role from scratch every time. Below are thirteen personas that cover most of the work people actually do. Each one has a name, a one-line role, and a ready-to-paste Identity sentence. <strong>Click any persona to expand it.</strong></p>
+        <p>The Identity slot (the first one in the five-part prompt) is where you tell Claude <em>who</em> it should be answering as. Picking the right role narrows what kind of language Claude pulls from, and it changes the answer more than any other single move.</p>
+        <p>You don't have to invent a role from scratch every time. Below are thirteen personas that cover most of the work people actually do. Each one has a name, a one-line role, and a ready-to-paste Identity sentence. <strong>Click any persona to expand it.</strong></p>
 
         <div class="personas">
 
@@ -1325,7 +1325,7 @@
             </button>
             <div class="persona-body">
               <div class="persona-body-inner">
-                <p>Use when you want Claude to <em>flag, not rewrite</em>. The Editor is conservative — it surfaces the issues and lets you decide.</p>
+                <p>Use when you want Claude to <em>flag, not rewrite</em>. The Editor is conservative: it surfaces the issues and lets you decide.</p>
                 <div class="persona-prompt">
                   <span class="persona-prompt-label">Identity prompt</span>
                   You are a senior copy editor who reviews professional writing for clarity, tone, and consistency. You flag issues; you do not rewrite unless asked.
@@ -1365,7 +1365,7 @@
             </button>
             <div class="persona-body">
               <div class="persona-body-inner">
-                <p>Use when you are stuck. The Brainstormer pushes for breadth, not depth — including options you would not have picked yourself.</p>
+                <p>Use when you are stuck. The Brainstormer pushes for breadth, not depth, including options you would not have picked yourself.</p>
                 <div class="persona-prompt">
                   <span class="persona-prompt-label">Identity prompt</span>
                   You are a brainstorming partner. You generate a wide range of options, including unconventional ones. You do not recommend; you spread the field.
@@ -1385,7 +1385,7 @@
             </button>
             <div class="persona-body">
               <div class="persona-body-inner">
-                <p>Use when you need to understand something new — or when you need to explain something to someone else.</p>
+                <p>Use when you need to understand something new, or when you need to explain something to someone else.</p>
                 <div class="persona-prompt">
                   <span class="persona-prompt-label">Identity prompt</span>
                   You are a teacher who explains complex topics in plain language for someone with no background in the field. You define every term the first time you use it.
@@ -1405,7 +1405,7 @@
             </button>
             <div class="persona-body">
               <div class="persona-body-inner">
-                <p>Use when you are unsure what to do. The Coach asks one question at a time and helps you think — it does not tell you the answer.</p>
+                <p>Use when you are unsure what to do. The Coach asks one question at a time and helps you think. It does not tell you the answer.</p>
                 <div class="persona-prompt">
                   <span class="persona-prompt-label">Identity prompt</span>
                   You are a thoughtful coach. You help me think through decisions by asking one clarifying question at a time. You do not give advice unless asked directly.
@@ -1445,7 +1445,7 @@
             </button>
             <div class="persona-body">
               <div class="persona-body-inner">
-                <p>Use for languages, but also for register shifts — formal to casual, technical to plain, internal to public.</p>
+                <p>Use for languages, but also for register shifts: formal to casual, technical to plain, internal to public.</p>
                 <div class="persona-prompt">
                   <span class="persona-prompt-label">Identity prompt</span>
                   You are a professional translator. You convert text between languages or between registers. You preserve meaning, tone, and nuance. If something does not translate cleanly, you flag it.
@@ -1485,7 +1485,7 @@
             </button>
             <div class="persona-body">
               <div class="persona-body-inner">
-                <p>Use after a brain-dump, a long meeting, or a folder of half-formed thoughts. The Organizer keeps every item — it does not summarize.</p>
+                <p>Use after a brain-dump, a long meeting, or a folder of half-formed thoughts. The Organizer keeps every item. It does not summarize.</p>
                 <div class="persona-prompt">
                   <span class="persona-prompt-label">Identity prompt</span>
                   You are an organizer who takes messy input and structures it into clean lists, outlines, or tables. You preserve every item. You do not paraphrase or drop anything.
@@ -1505,7 +1505,7 @@
             </button>
             <div class="persona-body">
               <div class="persona-body-inner">
-                <p>Use before you commit. The Critic stress-tests the work, surfaces gaps, and names the risks — without being mean about it.</p>
+                <p>Use before you commit. The Critic stress-tests the work, surfaces gaps, and names the risks, without being mean about it.</p>
                 <div class="persona-prompt">
                   <span class="persona-prompt-label">Identity prompt</span>
                   You are a constructive critic. You read the work I share and identify the weaknesses, gaps, and risks. You are honest but not harsh.
@@ -1525,7 +1525,7 @@
             </button>
             <div class="persona-body">
               <div class="persona-body-inner">
-                <p>Use when everyone in the room agrees with you. The Devil's Advocate is supposed to be wrong — but make you defend why you are right.</p>
+                <p>Use when everyone in the room agrees with you. The Devil's Advocate is supposed to be wrong, but makes you defend why you are right.</p>
                 <div class="persona-prompt">
                   <span class="persona-prompt-label">Identity prompt</span>
                   You are a devil's advocate. You take the opposing position to whatever I argue. Your job is to make me defend my reasoning, not to be right.
@@ -1565,7 +1565,7 @@
             </button>
             <div class="persona-body">
               <div class="persona-body-inner">
-                <p>Use when the goal is clear but the path isn't. The Planner gives you a sequence — specific, named, in order.</p>
+                <p>Use when the goal is clear but the path isn't. The Planner gives you a sequence: specific, named, in order.</p>
                 <div class="persona-prompt">
                   <span class="persona-prompt-label">Identity prompt</span>
                   You are a planner. You take a goal and break it into a clear, sequenced set of specific, named steps.
@@ -1593,7 +1593,7 @@
       <article class="chapter reveal" id="ch8">
         <div class="chapter-num">Chapter</div>
         <h2>The two kinds of constraints</h2>
-        <p>The fourth slot — constraints — has more nuance than the others. It is worth a chapter on its own because most people only use one kind of constraint, and the other kind is where the real leverage is.</p>
+        <p>The fourth slot, constraints, has more nuance than the others. It's worth a chapter on its own because most people use only one kind of constraint, and the other kind is where the real gains are.</p>
 
         <h3>Format constraints</h3>
         <p>These are the obvious ones. They tell Claude what shape the answer should take.</p>
@@ -1610,10 +1610,10 @@
         <ul>
           <li>"Do not invent any information that is not in the source below."</li>
           <li>"If something is unclear, ask before proceeding instead of guessing."</li>
-          <li>"Flag anything that contradicts the brief — do not silently smooth it over."</li>
+          <li>"Flag anything that contradicts the brief: do not silently smooth it over."</li>
           <li>"Use only the information provided. If a fact is missing, say 'not specified.'"</li>
         </ul>
-        <p>Strategic constraints fix the deeper problems — hallucination, drift, overconfidence, made-up details. They are the difference between an answer that looks good and an answer that is actually trustworthy.</p>
+        <p>Strategic constraints fix the deeper problems: hallucination, drift, overconfidence, made-up details. They're the difference between an answer that looks good and an answer that's actually trustworthy.</p>
 
         <p class="pull">Format constraints make the answer usable. Strategic constraints make the answer reliable. You need both.</p>
 
@@ -1629,23 +1629,23 @@
         <div class="chapter-num">Chapter</div>
         <h2>Why your prompts hallucinate</h2>
         <p>A <strong>hallucination</strong> is when an AI confidently produces something that is not true. It might invent a quote, fabricate a fact, cite a source that does not exist, or describe a feature that the software never had.</p>
-        <p>For a long time hallucination was treated like a mystery — something inherent to AI that no one could fully control. That story has stopped being accurate. Hallucinations are now well understood, and almost all of them trace back to four specific prompting mistakes.</p>
-        <p>If you fix the four mistakes, hallucinations drop dramatically.</p>
+        <p>For a long time hallucination was treated like a mystery, something inherent to AI that no one could fully control. That's less true now. Most hallucinations trace back to four specific prompting mistakes.</p>
+        <p>If you fix the four mistakes, hallucinations drop a lot.</p>
 
-        <h4>Mistake 1 — The vague prompt</h4>
+        <h4>Mistake 1: the vague prompt</h4>
         <p>No boundary, no source, no output format. The model fills the gaps with whatever seems plausible. <em>Fix: define the role, the task, the source, and the format explicitly.</em></p>
 
-        <h4>Mistake 2 — No source constraint</h4>
+        <h4>Mistake 2: no source constraint</h4>
         <p>You ask Claude to "use expert knowledge" or you do not tell it where to draw from. It draws from training data, which may be outdated or wrong. <em>Fix: give it a source, then say "use only the information below. If something is not specified, say 'not specified.'"</em></p>
 
-        <h4>Mistake 3 — Too many tasks at once</h4>
-        <p>You stack five instructions in one prompt. Research shows this makes inconsistent output far more likely — sometimes by an order of magnitude. <em>Fix: one prompt, one task. Chain them sequentially.</em></p>
+        <h4>Mistake 3: too many tasks at once</h4>
+        <p>You stack five instructions in one prompt. Stacking tasks tends to make output less consistent. <em>Fix: one prompt, one task. Chain them sequentially.</em></p>
 
-        <h4>Mistake 4 — Conflicting instructions</h4>
+        <h4>Mistake 4: conflicting instructions</h4>
         <p>You ask for "concise but thorough" or "casual but professional." The model has to invent a middle ground that often contains neither. <em>Fix: instructions should reinforce each other, not pull in opposite directions.</em></p>
 
         <p style="margin-top: 28px;">There is one more idea here that is worth holding onto:</p>
-        <p class="pull">Heavy AI users hallucinate more often than light users — because they build more complex prompts. Sophistication in prompting does not look like length. It looks like constraints.</p>
+        <p class="pull">Heavy AI users often hallucinate more than light users, because they build more complex prompts. Sophistication in prompting isn't length. It's constraints.</p>
         <p>A short, well-constrained prompt outperforms a long, loose one almost every time.</p>
 
         <p>And one final warning: <strong>confidence is not accuracy.</strong> Current AI models are trained in a way that rewards confident-sounding answers. The model's tone tells you nothing about whether the content is correct. Always verify outputs that matter, through a human checkpoint or a second source. (Chapter 14 is dedicated to this.)</p>
@@ -1666,9 +1666,8 @@
       <article class="chapter reveal" id="ch10">
         <div class="chapter-num">Chapter</div>
         <h2>Why "one big prompt" never works</h2>
-        <p>The first instinct most people have, once they get the hang of prompting, is to write longer prompts. If a five-line prompt works well, a thirty-line one should work better. Right?</p>
-        <p>Wrong, and the reason is structural.</p>
-        <p>Each task you add to a prompt multiplies the chance of inconsistent output. One task is reliable. Two tasks is mostly reliable. Five tasks is unreliable. The model is doing more things at once than it can keep coherent.</p>
+        <p>The first instinct most people have, once they get the hang of prompting, is to write longer prompts. If a five-line prompt works well, surely a thirty-line one works better. It doesn't, and the reason is structural.</p>
+        <p>Each task you add to a prompt multiplies the chance of inconsistent output. One task is reliable; five is not. The model is doing more at once than it can keep coherent.</p>
         <p>The fix is not "write a better one big prompt." The fix is to split the work into stages.</p>
         <p>Each stage has:</p>
         <ul>
@@ -1677,8 +1676,8 @@
           <li>A clear input and a clear output</li>
           <li>A check, before the next stage runs</li>
         </ul>
-        <p>This pattern is called a <strong>pipeline</strong>. It is the same pattern factories use, the same pattern software has used for fifty years, and the same pattern that makes AI workflows actually trustworthy.</p>
-        <p>A pipeline is slower to set up than one big prompt. It is much faster to run, much more reliable, and far easier to debug when something goes wrong. If the third stage produces a bad output, you know exactly which stage to fix.</p>
+        <p>This pattern is called a <strong>pipeline</strong>. Factories use it, software has used it for decades, and it's what makes AI workflows trustworthy.</p>
+        <p>A pipeline is slower to set up than one big prompt, but faster to run, more reliable, and easier to debug. If the third stage produces a bad output, you know exactly which stage to fix.</p>
         <p>The next chapter shows the simplest pipeline shape that works for almost any use case.</p>
         <div class="try">
           <span class="try-label">Try this now</span>
@@ -1694,7 +1693,7 @@
           <button class="copy-btn" data-copy>Copy</button>
 <pre>01-receive/    ← raw input arrives here
 02-filter/     ← AI sorts, scores, or triages it
-03-process/    ← the main work happens — drafts, summaries, decisions
+03-process/    ← the main work happens: drafts, summaries, decisions
 04-review/     ← a human checks the output
 05-act/        ← the approved output is sent, posted, or saved</pre>
         </div>
@@ -1716,9 +1715,9 @@
 
       <article class="chapter reveal" id="ch12">
         <div class="chapter-num">Chapter</div>
-        <h2>You're not building AI — you're building the conductor</h2>
-        <p>There is one last reframe to absorb before Part 3 ends, and it is the one that changes how you think about the whole project.</p>
-        <p>When you build a useful AI workflow, the AI itself is a small part of it. Most of the work is structure around the AI — folders, files, rules, checkpoints, the order in which things happen. People who study real production AI systems found that the breakdown looks roughly like this:</p>
+        <h2>You're not building AI, you're building the conductor</h2>
+        <p>There is one last reframe before Part 3 ends, and it changes how you think about the whole project.</p>
+        <p>When you build a useful AI workflow, the AI itself is a small part of it. Most of the work is structure around the AI: folders, files, rules, checkpoints, the order in which things happen. In real production AI systems, the breakdown tends to look roughly like this:</p>
         <table>
           <thead>
             <tr><th>Layer</th><th>Roughly</th><th>What it means in practice</th></tr>
@@ -1729,11 +1728,11 @@
             <tr><td>Actual AI</td><td>10%</td><td>The prompt that goes to the model, the answer that comes back.</td></tr>
           </tbody>
         </table>
-        <p>This is genuinely good news. It means you do not need to be a developer or a researcher to build something useful. The 90% of the work that matters is process design — and process design is something an organized, careful person can do without writing any code.</p>
+        <p>This is good news. It means you don't need to be a developer or a researcher to build something useful. The 90% that matters is process design, and process design is something an organized, careful person can do without writing any code.</p>
 
-        <p class="pull">You are not building AI. You are building the conductor. The AI is one of the musicians. Your folders, your prompts, your rules — those are the score. The score works regardless of which orchestra plays it.</p>
+        <p class="pull">You are not building AI. You are building the conductor. The AI is one of the musicians. Your folders, your prompts, your rules: those are the score. The score works regardless of which orchestra plays it.</p>
 
-        <p>This also means your work is durable. Models change. New ones come out every few months. Tools come and go. But the structure you build — the folders, the staged pipeline, the rules about what gets checked — keeps working. You can swap one model for another underneath, and the system still runs.</p>
+        <p>This also means your work is durable. Models change. New ones come out every few months, and tools come and go. But the structure you build (the folders, the staged pipeline, the rules about what gets checked) keeps working. You can swap one model for another underneath, and the system still runs.</p>
         <p>You are building something that lasts longer than the tool you started with.</p>
         <div class="try">
           <span class="try-label">Try this now</span>
@@ -1746,15 +1745,15 @@
     <section class="part" data-num="04">
       <div class="reveal"><span class="part-num">Part four</span></div>
       <h2 class="part-title reveal">Safety and good habits</h2>
-      <p class="part-desc reveal">The boring chapters that save you from the bad day. Read all five — none of them are skippable.</p>
+      <p class="part-desc reveal">The boring chapters that save you from the bad day. Read all five. None of them are skippable.</p>
 
       <article class="chapter reveal" id="ch13">
         <div class="chapter-num">Chapter</div>
         <h2>Always test on a copy first</h2>
         <p>This rule is short. It is also the rule that, when ignored, causes the most regret.</p>
-        <p class="pull">Whenever you are about to give Claude access to something real — a folder of files, a spreadsheet, a database, anything — make a copy first. Have Claude work on the copy. Verify the output. Only then touch the original.</p>
+        <p class="pull">Whenever you are about to give Claude access to something real (a folder of files, a spreadsheet, a database, anything) make a copy first. Have Claude work on the copy. Verify the output. Only then touch the original.</p>
         <p>People who skip this step almost always learn the lesson the hard way. A renamed folder that loses connections to other tools. A "cleaned up" spreadsheet that overwrote columns the team needed. A summary that replaced a master document instead of being saved separately.</p>
-        <p>These are not stories about AI being malicious. They are stories about AI being <em>literal</em>. You said "organize this." It organized it — its way. The original is gone.</p>
+        <p>These are not stories about AI being malicious. They are stories about AI being <em>literal</em>. You said "organize this." It organized it, its way. The original is gone.</p>
         <p>The protocol is simple and worth treating as a rule, not a suggestion:</p>
         <ol>
           <li>Make a copy of whatever you are working with.</li>
@@ -1773,19 +1772,19 @@
         <div class="chapter-num">Chapter</div>
         <h2>Confidence is not accuracy</h2>
         <p>This is the single most important habit you will build.</p>
-        <p>Claude — and every current AI model — is trained in a way that rewards confident-sounding answers. The model produces fluent, assured language whether the content is correct or not. There is no internal signal in the answer that tells you "I am unsure about this part."</p>
+        <p>Claude, like every current AI model, is trained in a way that rewards confident-sounding answers. The model produces fluent, assured language whether the content is correct or not. There is no internal signal in the answer that tells you "I am unsure about this part."</p>
         <p>This means: <strong>the tone of an answer is not a signal of its correctness.</strong> A confident wrong answer reads exactly like a confident right one.</p>
         <p>Three habits protect you from this:</p>
         <ol>
-          <li><strong>Always check anything that matters.</strong> If a decision will be acted on, the source must be verified. Not by Claude — by you, or by a second source that is not the same model.</li>
-          <li><strong>Ask Claude to flag its own uncertainty.</strong> A simple line in your prompt — <em>"If you are not sure, say so. Do not invent details."</em> — produces noticeably more honest answers.</li>
-          <li><strong>Build a checkpoint into your pipeline.</strong> Somewhere between Claude's output and the action being taken, a person looks at the result. Not to micromanage — to catch the things confidence hides.</li>
+          <li><strong>Always check anything that matters.</strong> If a decision will be acted on, the source must be verified. Not by Claude, but by you, or by a second source that isn't the same model.</li>
+          <li><strong>Ask Claude to flag its own uncertainty.</strong> A simple line in your prompt, <em>"If you are not sure, say so. Do not invent details,"</em> produces noticeably more honest answers.</li>
+          <li><strong>Build a checkpoint into your pipeline.</strong> Somewhere between Claude's output and the action being taken, a person looks at the result. Not to micromanage, but to catch the things confidence hides.</li>
         </ol>
         <p>The Appendix has a four-question verification checklist you can apply to any answer before you act on it.</p>
         <p>You are not being paranoid. You are being grown-up about a tool that has a known weakness.</p>
         <div class="try">
           <span class="try-label">Try this now</span>
-          Look at one Claude output you acted on recently. Check it. If anything is wrong, that's the lesson. If everything is right, that's also the lesson — verify is fast and almost always worth it.
+          Look at one Claude output you acted on recently. Check it. If anything is wrong, that's the lesson. If everything is right, that's also the lesson. Verifying is fast and almost always worth it.
         </div>
       </article>
 
@@ -1816,9 +1815,9 @@
 
         <h4><span class="tier red">●&nbsp; Red</span>&nbsp; Never put in a prompt unless explicitly approved</h4>
         <ul>
-          <li>Personal data of others — full names with contact info, ID numbers, dates of birth, addresses</li>
-          <li>Financial details — account numbers, card numbers, balances, salary information</li>
-          <li>Health information — diagnoses, medical records, prescriptions</li>
+          <li>Personal data of others: full names with contact info, ID numbers, dates of birth, addresses</li>
+          <li>Financial details: account numbers, card numbers, balances, salary information</li>
+          <li>Health information: diagnoses, medical records, prescriptions</li>
           <li>Passwords, API keys, login credentials, security tokens</li>
           <li>Anything covered by an NDA, a contract, or a regulation (GDPR, HIPAA, financial compliance, professional confidentiality)</li>
           <li>Client confidential material</li>
@@ -1826,7 +1825,7 @@
           <li>Anything you would not want to read on a public forum tomorrow</li>
         </ul>
 
-        <p class="pull">If you would not paste it into a public web search, do not paste it into an AI prompt — unless you have verified the tool's data handling and your organization has approved it for that level.</p>
+        <p class="pull">If you would not paste it into a public web search, do not paste it into an AI prompt, unless you have verified the tool's data handling and your organization has approved it for that level.</p>
 
         <p>A few extra habits worth building:</p>
         <ul>
@@ -1849,7 +1848,7 @@
 
         <h4>Why a record matters</h4>
         <ul>
-          <li>You can retrace what was modified — and roll it back if needed</li>
+          <li>You can retrace what was modified, and roll it back if needed</li>
           <li>You can prove what was done if asked (by a colleague, a manager, an auditor)</li>
           <li>You can spot patterns in your own mistakes over time</li>
           <li>You can hand work off to someone else without re-explaining the history</li>
@@ -1891,7 +1890,7 @@
         <p>The first time Claude reorganizes a folder, runs a script, or modifies multiple files, the original state should be saved somewhere safe and easy to restore. This is not paranoia. It is normal hygiene for any tool that takes action.</p>
 
         <h4>Do not put sensitive data into a tool that does not promise to protect it</h4>
-        <p>Read the terms of the AI tool you are using. Know whether your inputs are stored, whether they are used to train future models, and whether other users could ever see them. (See Chapter 15 for the full classification.)</p>
+        <p>Read the terms of the AI tool you're using: know whether your inputs are stored, used to train future models, or ever visible to other users. (See Chapter 15 for the full classification.)</p>
 
         <h4>Decide in advance what Claude is not allowed to touch</h4>
         <p>Make this a clear list and put it in your <code>CLAUDE.md</code> so the rule is always loaded. Examples that work for most people starting out:</p>
@@ -1917,7 +1916,7 @@
 
         <div class="try">
           <span class="try-label">Try this now</span>
-          Make a short list — three to five items — of things you will not let Claude do without your explicit approval. Write it down. Put it in your <code>CLAUDE.md</code> file. That list is your fence.
+          Make a short list (three to five items) of things you will not let Claude do without your explicit approval. Write it down. Put it in your <code>CLAUDE.md</code> file. That list is your fence.
         </div>
       </article>
     </section>
@@ -1933,12 +1932,12 @@
         <p>The mistake almost everyone makes after reading something like this is trying to apply all of it on Monday. They build the folder, write the CLAUDE.md, design the pipeline, draft every safety procedure, and burn out by Wednesday.</p>
         <p>Here is the only thing you have to do tomorrow:</p>
 
-        <p class="pull">Pick one task you do every week. Make a folder for it. Add a <code>CLAUDE.md</code> file using the template in the Appendix. Open Claude. Point it at the folder. Try one prompt — with all five slots filled, and one of the thirteen personas as the Identity — to do part of that task.</p>
+        <p class="pull">Pick one task you do every week. Make a folder for it. Add a <code>CLAUDE.md</code> file using the template in the Appendix. Open Claude. Point it at the folder. Try one prompt (all five slots filled, one of the thirteen personas as the Identity) to do part of that task.</p>
 
         <p>That is the entire assignment. Nothing else.</p>
         <p>If it works, do it again the next day with the same task. Refine the prompt. Add a second file if you need it. Notice what changes.</p>
         <p>If it does not work, look at the four hallucination mistakes from Chapter 9. One of them will apply. Fix it. Try again.</p>
-        <p>After two weeks of doing this with one task, you will have built more usable AI infrastructure than most people have in production right now. Without ever calling it that. Without writing a line of code. Without anything that looks like a project.</p>
+        <p>After two weeks of doing this with one task, you'll have built something genuinely useful, without writing a line of code, and without anything that looks like a project.</p>
         <p>This is how it actually happens.</p>
 
         <p style="margin-top: 28px;">The folder is the brain. The prompt is a form. The persona is the role. The pipeline is the conductor. The check is what keeps you safe. The record is what keeps you accountable.</p>
@@ -1961,7 +1960,7 @@
           <dt>Large language model (LLM)</dt>
           <dd>A piece of software trained on a very large amount of text, which produces new text that fits the patterns of what it was trained on. Claude, GPT, Gemini, and Mistral are all LLMs.</dd>
           <dt>Prompt</dt>
-          <dd>The text you send to an AI model. Not a question — a form with five slots (Identity, Task, Context, Constraints, Output Format).</dd>
+          <dd>The text you send to an AI model. Not a question but a form with five slots (Identity, Task, Context, Constraints, Output Format).</dd>
           <dt>Persona</dt>
           <dd>A role you give Claude in the Identity slot of a prompt. Chapter 7 has 13 ready to use.</dd>
           <dt>Hallucination</dt>
@@ -1995,8 +1994,8 @@ My background is in [relevant background].
 
 ## How I want to work
 - Keep responses short unless I ask for detail
-- Ask before launching into long plans — I want to steer
-- Flag things you're unsure about — never guess silently
+- Ask before launching into long plans; I want to steer
+- Flag things you're unsure about; never guess silently
 - Use plain language; define jargon when you use it
 - "We" means us, not the royal we
 
@@ -2004,7 +2003,7 @@ My background is in [relevant background].
 - Never modify a file without showing me the change first
 - Always test on a copy before touching the original
 - If you find an open question, name it; don't fill it in for me
-- [Add your own — see Chapter 17 for the full fence list]
+- [Add your own; see Chapter 17 for the full fence list]
 
 ## My preferred personas
 [Optional. List the 2 or 3 personas from Chapter 7 you use most often.]</pre>
@@ -2016,7 +2015,7 @@ My background is in [relevant background].
         <p>This file changes weekly. Update it when something material shifts.</p>
         <div class="code-block">
           <button class="copy-btn" data-copy>Copy</button>
-<pre># Current State — Updated [date]
+<pre># Current State · Updated [date]
 
 ## What I'm working on this week
 - [Active item 1]
@@ -2027,8 +2026,8 @@ My background is in [relevant background].
 [One or two sentences. What stage, what's next, what's blocking.]
 
 ## Open decisions
-- [Decision 1] — [what's blocking it]
-- [Decision 2] — [what's blocking it]
+- [Decision 1]: [what's blocking it]
+- [Decision 2]: [what's blocking it]
 
 ## Open questions
 - [Question 1]
@@ -2048,20 +2047,20 @@ My background is in [relevant background].
 <pre># Reference Material
 
 ## People
-- **[Name]** — [role, relationship to the project, anything relevant]
-- **[Name]** — [role, relationship to the project, anything relevant]
+- **[Name]**: [role, relationship to the project, anything relevant]
+- **[Name]**: [role, relationship to the project, anything relevant]
 
 ## Key terms / definitions
-- **[Term]** — [definition specific to this project]
-- **[Term]** — [definition specific to this project]
+- **[Term]**: [definition specific to this project]
+- **[Term]**: [definition specific to this project]
 
 ## Source documents
 - [[Link or reference to source 1]]
 - [[Link or reference to source 2]]
 
 ## Standards / templates I follow
-- [Standard 1] — [where it lives]
-- [Standard 2] — [where it lives]</pre>
+- [Standard 1]: [where it lives]
+- [Standard 2]: [where it lives]</pre>
         </div>
       </div>
 
@@ -2075,21 +2074,21 @@ My background is in [relevant background].
 
 Task:        [One verb. One outcome. No "and also."]
 
-Context:     [Everything Claude needs to know to do this well —
+Context:     [Everything Claude needs to know to do this well:
               the source material, the audience, the situation,
               the constraints of the moment.]
 
-Constraints: - [Format constraint — e.g. length, layout, tone]
-             - [Strategic constraint — usually about what to use,
+Constraints: - [Format constraint: e.g. length, layout, tone]
+             - [Strategic constraint: usually about what to use,
                 what to avoid, when to flag instead of guess]
 
-Output:      [What the answer should look like — list, paragraph,
+Output:      [What the answer should look like: list, paragraph,
               table, draft, etc. Be specific.]</pre>
         </div>
       </div>
 
       <div class="appendix-block reveal">
-        <h3>F. Starter prompt library — six ready-to-use prompts</h3>
+        <h3>F. Starter prompt library: six ready-to-use prompts</h3>
         <p>Six common tasks, each as a complete copy-paste prompt. Adapt the bracketed parts.</p>
 
         <h4>1. Summarize a document</h4>
@@ -2122,7 +2121,7 @@ Task:        Review the data below and identify any rows that look wrong,
              missing, or inconsistent.
 Context:     [Paste the data. Explain what each column should contain
               and what "valid" looks like.]
-Constraints: Flag only — do not edit. Use the row number, the issue,
+Constraints: Flag only, do not edit. Use the row number, the issue,
              and one sentence on why it is an issue. Do not guess at fixes.
 Output:      A numbered list. Each item: row number + issue + reason.</pre>
         </div>
@@ -2134,7 +2133,7 @@ Output:      A numbered list. Each item: row number + issue + reason.</pre>
 Task:        Generate 10 options for [the problem].
 Context:     [The situation. The constraints. What's already been tried.]
 Constraints: Include unconventional options. Do not recommend.
-             Do not stop at 5 — push to 10.
+             Do not stop at 5; push to 10.
 Output:      Numbered list. Each option in one sentence. No commentary.</pre>
         </div>
 
@@ -2143,9 +2142,9 @@ Output:      Numbered list. Each option in one sentence. No commentary.</pre>
           <button class="copy-btn" data-copy>Copy</button>
 <pre>Identity:    You are an organizer who structures messy input.
 Task:        Take the notes below and group them into clear sections.
-Context:     [Paste your notes — bullets, fragments, voice memos transcribed,
+Context:     [Paste your notes: bullets, fragments, voice memos transcribed,
               whatever it is.]
-Constraints: Preserve every item — do not paraphrase, drop, or summarize.
+Constraints: Preserve every item; do not paraphrase, drop, or summarize.
              Use my exact words where possible. Flag anything unclear.
 Output:      Sections with short headings. Bullets under each.
              A final "unclear / needs decision" section if relevant.</pre>
@@ -2160,7 +2159,7 @@ Context:     [Paste the materials. Name the meeting, the attendees, and
               what each attendee cares most about.]
 Constraints: One page maximum. Lead with decisions to be made,
              then open questions, then background. No filler.
-Output:      Three sections — Decisions, Open Questions, Background.
+Output:      Three sections: Decisions, Open Questions, Background.
              Each under 5 bullets.</pre>
         </div>
       </div>
@@ -2192,7 +2191,7 @@ Output:      Three sections — Decisions, Open Questions, Background.
       </div>
 
       <div class="appendix-block reveal">
-        <h3>H. Verification checklist — before you act</h3>
+        <h3>H. Verification checklist: before you act</h3>
         <p>Four questions. Run them on any answer that will be used for a real decision or a real action.</p>
         <div class="code-block">
           <button class="copy-btn" data-copy>Copy</button>
@@ -2218,7 +2217,7 @@ Output:      Three sections — Decisions, Open Questions, Background.
           <button class="copy-btn" data-copy>Copy</button>
 <pre>01-receive/    raw input arrives here
 02-filter/     AI sorts, scores, or triages
-03-process/    the main work — drafts, summaries, decisions
+03-process/    the main work: drafts, summaries, decisions
 04-review/     a human checks the output
 05-act/        the approved output is sent, posted, or saved</pre>
         </div>
@@ -2235,7 +2234,7 @@ Output:      Three sections — Decisions, Open Questions, Background.
       </div>
 
       <div class="appendix-block reveal">
-        <h3>K. The four hallucination mistakes — one-page reference</h3>
+        <h3>K. The four hallucination mistakes: one-page reference</h3>
         <table>
           <thead>
             <tr>
@@ -2270,7 +2269,7 @@ Output:      Three sections — Decisions, Open Questions, Background.
       </div>
 
       <div class="appendix-block reveal">
-        <h3>L. Data classification — at a glance</h3>
+        <h3>L. Data classification: at a glance</h3>
         <table>
           <thead>
             <tr><th>Tier</th><th>What it includes</th><th>What to do</th></tr>
@@ -2298,7 +2297,7 @@ Output:      Three sections — Decisions, Open Questions, Background.
     </section>
 
     <footer>
-      <div>This manual is LLM-agnostic — every principle works with Claude, GPT, Gemini, Mistral, or any other large language model. The tool may change. The structure does not.</div>
+      <div>This manual is LLM-agnostic: every principle works with Claude, GPT, Gemini, Mistral, or any other large language model. The tool may change. The structure does not.</div>
       <div style="margin-top: 14px;">First draft &middot; May 3, 2026</div>
       <span class="footer-by">Spectralmoon <span class="dot">·</span> The Lab</span>
     </footer>
