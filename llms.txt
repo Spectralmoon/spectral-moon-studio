@@ -1,0 +1,28 @@
+# Spectralmoon Studio
+
+> AI-forward creative studio by Susana Barrero. Cinematic brand films, art-led websites, and living digital presentation cards. Tagline: Imagination is the technology.
+
+## What the studio does
+
+- Brand worlds: cinematic AI video production for brands (films, campaign visuals, product stories)
+- Art-led websites: handmade, zero-framework sites where original art leads the design
+- The Argonaut card: a living digital presentation card, original moving art with your name typeset inside, every icon a working door (https://argonaut-tech.netlify.app/)
+- Brand identity: visual direction, palettes, typography, and motion built as one world
+
+## How it works
+
+- Every piece is an original, dreamed and directed at the studio: no templates, no stock
+- Reference-driven AI generation with human art direction at every step
+- Websites lead the offer; the Argonaut card is the signature add-on
+
+## Contact
+
+- Email: hello@spectralmoonstudio.com
+- Instagram (portfolio): https://www.instagram.com/spectralmoon.creates/
+- Instagram (build log): https://www.instagram.com/spectralmoon.studio/
+- LinkedIn: https://www.linkedin.com/in/susanabarrero/
+
+## Pages
+
+- https://spectralmoonstudio.com/ : the studio portfolio (worlds, cinema, brand identity, commissions)
+- https://spectralmoonstudio.com/insights.html : free field guides on working with AI (How to Claude, Giving Claude Memory, Notes on Prompting, The Video Stack)

@@ -771,20 +771,21 @@ html.lenis, html.lenis body { height: auto; }
 
 .hero__scroll-cue {
   position: absolute;
-  bottom: clamp(32px, 5vh, 60px);
-  left: calc(var(--sidebar-w) + 20px);   /* clears sidebar on desktop */
+  bottom: 20px;
+  left: 22px;                            /* tucked into the corner, off the art's heart */
   right: auto;
   display: flex;
   flex-direction: column-reverse;        /* line at bottom, text stacks above */
   align-items: center;
-  gap: 16px;
+  gap: 12px;
   font-family: var(--font-ui);
-  font-size: 10px;
+  font-size: 9px;
   font-weight: 500;
-  letter-spacing: 0.32em;
+  letter-spacing: 0.3em;
   text-transform: uppercase;
-  color: var(--paper);
-  opacity: 0.6;
+  color: #fff;
+  mix-blend-mode: difference;            /* self-inverts against any ground: dark on cream, light on ink */
+  opacity: 0.85;
   z-index: 3;
   transition: opacity 0.3s var(--ease-out);
 }
@@ -3013,4 +3014,87 @@ html.lenis, html.lenis body { height: auto; }
   .commissions{ padding: clamp(8px,2vw,24px) 20px 32px; }
   .commission__player video,
   .commission__player--portrait video{ max-height:62vh; }
+}
+
+/* ============================================================
+   FOOTER LEDGER — what this site is built to be
+   Paper ground, espresso hairlines, pearl accent. The quiet
+   receipt at the end of the page: standards, not decoration.
+   ============================================================ */
+.ledger {
+  background: var(--paper);
+  padding: 72px 6vw 52px;
+  border-top: 1.5px solid rgba(42, 32, 26, .14);
+}
+.ledger__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+.ledger__item {
+  padding: 0 28px;
+  border-left: 1px solid rgba(42, 32, 26, .12);
+}
+.ledger__item:first-child { border-left: none; padding-left: 0; }
+.ledger__label {
+  font-family: var(--font-ui);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .26em;
+  text-transform: uppercase;
+  color: var(--espresso);
+  margin: 0 0 10px;
+}
+.ledger__label::before {
+  content: "";
+  display: inline-block;
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--pearl);
+  border: 1px solid rgba(155, 107, 61, .45);
+  margin-right: 9px;
+  vertical-align: 1px;
+}
+.ledger__text {
+  font-family: var(--font-ui);
+  font-size: 13px;
+  line-height: 1.7;
+  color: rgba(42, 32, 26, .72);
+  margin: 0;
+}
+.ledger__credit {
+  font-family: var(--font-ui);
+  margin: 46px 0 0;
+  padding-top: 20px;
+  border-top: 1px solid rgba(42, 32, 26, .12);
+  font-size: 11.5px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: rgba(42, 32, 26, .7);   /* 5.2:1 on paper, AA-true for small text */
+}
+.ledger__credit a { color: var(--ochre); text-decoration: none; }
+.ledger__credit a:hover { color: var(--espresso); }
+@media (max-width: 768px) {
+  .ledger { padding: 48px 20px 40px; }
+  .ledger__grid { grid-template-columns: 1fr; }
+  .ledger__item {
+    border-left: none;
+    border-top: 1px solid rgba(42, 32, 26, .12);
+    padding: 18px 0;
+  }
+  .ledger__item:first-child { border-top: none; padding-top: 0; }
+  .ledger__credit { letter-spacing: .14em; }
+}
+
+/* Accessibility baseline for the v2 skin */
+:focus-visible {
+  outline: 2px solid var(--ochre);
+  outline-offset: 3px;
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

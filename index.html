@@ -6,6 +6,34 @@
   <title>Spectralmoon Studio</title>
   <meta name="description" content="Imagination is the technology. Brand worlds made cinematic." />
 
+  <!-- Open Graph: how the site presents itself when shared -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Spectralmoon Studio" />
+  <meta property="og:title" content="Spectralmoon Studio" />
+  <meta property="og:description" content="Imagination is the technology. Brand worlds made cinematic." />
+  <meta property="og:url" content="https://spectralmoonstudio.com/" />
+  <meta property="og:image" content="https://spectralmoonstudio.com/assets/fish.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <!-- Structured data: the studio, machine-readable -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Spectralmoon Studio",
+    "url": "https://spectralmoonstudio.com/",
+    "email": "hello@spectralmoonstudio.com",
+    "slogan": "Imagination is the technology.",
+    "description": "AI-forward creative studio: cinematic brand films, art-led websites, and living digital presentation cards.",
+    "founder": { "@type": "Person", "name": "Susana Barrero" },
+    "sameAs": [
+      "https://www.instagram.com/spectralmoon.creates/",
+      "https://www.instagram.com/spectralmoon.studio/",
+      "https://www.linkedin.com/in/susanabarrero/"
+    ]
+  }
+  </script>
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <!-- Display fonts: block = brief invisible rather than flash of wrong font -->
@@ -499,12 +527,35 @@
     <div class="contact-reveal__info">
       <span class="contact-reveal__num">VI.</span>
       <address class="contact-reveal__address">
-        <a href="mailto:muluc33@gmail.com" class="contact-reveal__email">muluc33@gmail.com</a>
+        <a href="mailto:hello@spectralmoonstudio.com" class="contact-reveal__email">hello@spectralmoonstudio.com</a>
         <span class="contact-reveal__tagline">Let's build a world together.</span>
       </address>
     </div>
 
   </section>
+
+  <!-- Footer ledger: what this site is built to be -->
+  <footer class="ledger" aria-label="Site standards">
+    <div class="ledger__grid">
+      <div class="ledger__item">
+        <h3 class="ledger__label">Agent-optimized</h3>
+        <p class="ledger__text">llms.txt and structured data: when an AI assistant reads this site, it understands the studio.</p>
+      </div>
+      <div class="ledger__item">
+        <h3 class="ledger__label">SEO-ready</h3>
+        <p class="ledger__text">semantic landmarks, Open Graph, indexable and previewable.</p>
+      </div>
+      <div class="ledger__item">
+        <h3 class="ledger__label">Accessible</h3>
+        <p class="ledger__text">keyboard operable, reduced-motion aware, contrast checked.</p>
+      </div>
+      <div class="ledger__item">
+        <h3 class="ledger__label">Handmade</h3>
+        <p class="ledger__text">zero frameworks, built by hand, made to change with us.</p>
+      </div>
+    </div>
+    <p class="ledger__credit">Spectralmoon Studio · <a href="mailto:hello@spectralmoonstudio.com">hello@spectralmoonstudio.com</a> · Imagination is the technology.</p>
+  </footer>
 
   <!-- Fullscreen cinema modal -->
   <div class="cinema-modal" id="cinema-modal" aria-modal="true" role="dialog" aria-label="Film player">
