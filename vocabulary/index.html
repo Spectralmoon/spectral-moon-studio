@@ -1,0 +1,450 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Vocabulary · Spectralmoon Studio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=Inter+Tight:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --paper:#F3F5ED; --paper-deep:#EAEDE0;
+    --ink:#282E17; --sage-ink:#565F3A;
+    --sage-deep:#7B8A50; --sage:#98A869; --sage-light:#B0BC8C;
+    --rule:rgba(40,46,23,.16);
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{margin:0;background:var(--paper);color:var(--ink);
+    font-family:'Inter Tight',system-ui,sans-serif;font-weight:300;
+    font-size:15.5px;line-height:1.62;letter-spacing:.004em}
+
+  /* riso grain + the registration line at the paper edge */
+  body::before{content:'';position:fixed;inset:0;z-index:99;pointer-events:none;opacity:.42;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='.32'/%3E%3C/svg%3E");
+    mix-blend-mode:multiply}
+  .sheet{max-width:820px;margin:0 auto;padding:0 26px 110px;position:relative}
+  .sheet::before,.sheet::after{content:'';position:fixed;top:0;bottom:0;width:1px;
+    background:var(--sage-deep);opacity:.32;z-index:2}
+  .sheet::before{left:max(10px,calc(50% - 448px))}
+  .sheet::after{right:max(10px,calc(50% - 448px))}
+
+  h1,h2,h3,.disp{font-family:Fraunces,Georgia,serif;font-weight:400;letter-spacing:-.012em}
+  .kicker{font-size:10.5px;letter-spacing:.3em;text-transform:uppercase;font-weight:500;
+    color:var(--sage-ink);margin:0 0 14px}
+
+  /* cover */
+  .cover{padding:96px 0 60px;border-bottom:1px solid var(--rule)}
+  .cover h1{font-size:clamp(46px,10vw,88px);line-height:.94;margin:0 0 22px;font-weight:300}
+  .cover h1 i{font-style:italic;color:var(--sage-deep);
+    text-shadow:1.5px 1.5px 0 rgba(176,188,140,.75)} /* registration offset */
+  .lede{font-size:clamp(17px,2.3vw,20px);line-height:1.5;max-width:34em;
+    font-family:Fraunces,serif;font-weight:300;font-style:italic}
+  .byline{margin-top:34px;font-size:11px;letter-spacing:.2em;text-transform:uppercase;
+    color:var(--sage-ink);line-height:1.9}
+
+  section{padding:52px 0;border-bottom:1px solid var(--rule)}
+  section:last-of-type{border-bottom:0}
+  .num{font-family:Fraunces,serif;font-size:12px;letter-spacing:.24em;color:var(--sage-ink);
+    display:block;margin-bottom:9px}
+  h2{font-size:clamp(27px,4.6vw,40px);line-height:1.06;margin:0 0 16px;font-weight:300}
+  h2 i{font-style:italic;color:var(--sage-deep)}
+  h3{font-size:15px;margin:32px 0 9px;letter-spacing:.05em;text-transform:uppercase;
+    font-weight:500;font-family:'Inter Tight',sans-serif;color:var(--sage-ink)}
+  p{margin:0 0 15px;max-width:40em}
+  strong{font-weight:600}
+  em{font-style:italic}
+
+  .pull{font-family:Fraunces,serif;font-style:italic;font-size:clamp(20px,3.2vw,27px);
+    line-height:1.32;color:var(--sage-deep);margin:30px 0;padding-left:20px;
+    border-left:2px solid var(--sage);max-width:24em}
+
+  table{width:100%;border-collapse:collapse;margin:16px 0 8px;font-size:13.5px}
+  th{text-align:left;font-weight:500;font-size:10px;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--sage-ink);border-bottom:1px solid var(--rule);padding:0 12px 7px 0;vertical-align:bottom}
+  td{padding:8px 12px 8px 0;border-bottom:1px solid rgba(40,46,23,.09);vertical-align:top}
+  td:first-child{font-weight:500;white-space:nowrap;color:var(--sage-ink)}
+  .wrap td:first-child{white-space:normal}
+  .scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+
+  ol,ul{margin:0 0 15px;padding-left:20px;max-width:40em}
+  li{margin-bottom:7px}
+  ol.layers{list-style:none;padding:0;counter-reset:l}
+  ol.layers li{counter-increment:l;padding-left:40px;position:relative;margin-bottom:12px}
+  ol.layers li::before{content:counter(l,decimal-leading-zero);position:absolute;left:0;top:1px;
+    font-family:Fraunces,serif;font-size:12px;color:var(--sage-ink);letter-spacing:.1em}
+  .lab{font-weight:600;letter-spacing:.04em}
+
+  .chips{display:flex;flex-wrap:wrap;gap:0;margin:18px 0 10px;border:1px solid var(--rule)}
+  .chip{flex:1 1 68px;height:52px;display:flex;align-items:flex-end;justify-content:center;
+    padding-bottom:5px;font-size:8.5px;letter-spacing:.09em;color:rgba(243,245,237,.96);font-weight:500}
+  .chip.dark{color:rgba(40,46,23,.78)}
+
+  .note{background:rgba(123,138,80,.10);border-left:2px solid var(--sage-ink);
+    padding:15px 18px;margin:22px 0;font-size:14px;max-width:40em}
+  .note .t{font-weight:600;letter-spacing:.03em;display:block;margin-bottom:5px;color:var(--sage-ink)}
+
+  .rule-box{border:1px solid var(--rule);padding:20px 22px;margin:24px 0;max-width:40em}
+  .rule-box p:last-child{margin-bottom:0}
+
+  footer{padding:48px 0 0;font-size:12px;color:rgba(40,46,23,.62);line-height:1.8;
+    border-top:1px solid var(--rule);margin-top:20px}
+  footer .mark{font-family:Fraunces,serif;font-style:italic;font-size:19px;color:var(--ink);
+    display:block;margin-bottom:10px}
+
+  @media(max-width:640px){
+    .sheet::before,.sheet::after{display:none}
+    .cover{padding:64px 0 44px}
+    section{padding:40px 0}
+    td:first-child{white-space:normal}
+  }
+  @media print{
+    body{background:#fff}
+    body::before,.sheet::before,.sheet::after{display:none}
+    section{page-break-inside:avoid;border-bottom:1px solid #ddd}
+  }
+
+  /* studio mark, standard on every document */
+  .sigil{width:34px;height:34px;flex:none;color:var(--ink)}
+  .studioline{display:flex;align-items:center;gap:11px;margin-bottom:12px;text-decoration:none;color:var(--ink)}
+  .studioline span{font-family:Fraunces,serif;font-style:italic;font-size:19px;line-height:1}
+  footer a{color:var(--sage-ink);text-decoration:none;border-bottom:1px solid rgba(86,95,58,.4)}
+  footer a:hover{border-bottom-color:var(--sage-ink)}
+  footer .studioline:hover span{text-decoration:none}
+</style>
+
+<div class="sheet">
+
+  <header class="cover">
+    <p class="kicker">Spectralmoon Studio · Method Note</p>
+    <h1>The <i>Vocabulary</i><br>of a Directed Image</h1>
+    <p class="lede">How we talk to image and video models so they stop guessing. Two systems, kept
+      deliberately separate, and the order of operations that keeps the bill survivable.</p>
+    <p class="byline">
+      For Mark, AI Builders ×10<br>
+      Susana Barrero · Spectralmoon Studio<br>
+      Imagination is the technology
+    </p>
+  </header>
+
+  <section>
+    <span class="num">01</span>
+    <h2>One principle, and <i>everything</i> follows</h2>
+    <p>A model does not feel. It executes statistical associations. So the entire craft reduces to a
+      single move: <strong>translate every feeling into named physics.</strong></p>
+    <p class="pull">The AI never makes a mistake. An under specified brief does.</p>
+    <p>"Make it cinematic" is not an instruction, it is a wish. Lens, f-stop, angle, light direction,
+      Kelvin, material, palette: those are instructions.</p>
+    <div class="scroll"><table class="wrap">
+      <tr><th>Vague</th><th>Directed</th></tr>
+      <tr><td>Good lighting</td><td>Key from a large softbox 45° camera right, silver fill camera left at quarter power, rim behind for edge separation</td></tr>
+      <tr><td>Beautiful sunset</td><td>Golden hour 6:30 PM, 200mm compression, backlit rim, warm 2800K, anamorphic flare</td></tr>
+      <tr><td>Luxury watch</td><td>Brushed steel case with micro scratches, macro, hard side light revealing texture</td></tr>
+      <tr><td>Make it cinematic</td><td>Deakins in Blade Runner 2049: amber and teal, atmospheric haze, strong directional light, geometric shadow</td></tr>
+    </table></div>
+    <p style="margin-top:14px"><strong>Specificity creates consistency. Vagueness creates chaos.</strong></p>
+  </section>
+
+  <section>
+    <span class="num">02</span>
+    <h2>Two systems, kept <i>separate</i></h2>
+    <p>We run two complete methods. They are not rivals and they are not interchangeable. One is the
+      container, the other is what goes inside it. The rule that matters: <strong>never blend their
+      vocabulary or structure inside a single prompt.</strong> Pick the gate, stay in it.</p>
+    <div class="scroll"><table class="wrap">
+      <tr><th></th><th>GenHQ</th><th>Ohneis, the Visual Director method</th></tr>
+      <tr><td>What it is</td><td>A production system</td><td>An art director's method</td></tr>
+      <tr><td>Question it answers</td><td>Did I specify everything?</td><td>Is this any good, and what exactly do I say to fix it?</td></tr>
+      <tr><td>What it gives you</td><td>Eight slots, the Motion Rule, character sheets, a fixed output format, the campaign steps</td><td>The technical language library, the layered prose order, visual diagnosis, the repair formula</td></tr>
+      <tr><td>Shape</td><td>A checklist</td><td>A vocabulary and an eye</td></tr>
+      <tr><td>Reach for it when</td><td>You need completeness and repeatability</td><td>You need execution detail, judgement, or recovery</td></tr>
+    </table></div>
+    <h3>The routing rule</h3>
+    <p>This is the piece most people never learn, and it is invisible when you get it wrong. The same
+      knowledge is written two different ways depending on which model reads it.</p>
+    <div class="scroll"><table class="wrap">
+      <tr><th>Write it as</th><th>Send it to</th><th>Because</th></tr>
+      <tr><td>A terse slot table, comma separated</td><td>Midjourney and still models</td><td>Terseness reads as control</td></tr>
+      <tr><td>Natural technical prose, full sentences</td><td>Kling, Seedance, Veo, Runway, Nano Banana Pro</td><td>Video models parse sentences. Comma soup reads to them as noise</td></tr>
+    </table></div>
+  </section>
+
+  <section>
+    <span class="num">03</span>
+    <h2>GenHQ: the <i>completeness</i> system</h2>
+    <p>Eight slots. Every image prompt, every video prompt, no exceptions and no silent drops. If a slot
+      is left empty the model fills it for you, and it will not choose what you wanted. That is the
+      whole argument for the checklist.</p>
+    <div class="scroll"><table>
+      <tr><th>Slot</th><th>What it decides</th><th>If you leave it blank</th></tr>
+      <tr><td>1 · Medium</td><td>Photograph, film still, illustration, 3D render</td><td>The model picks a physics engine at random</td></tr>
+      <tr><td>2 · Shot</td><td>Macro, close, medium, wide, establishing</td><td>You get a mid shot of everything</td></tr>
+      <tr><td>3 · Angle</td><td>Eye level, low, high, worm, bird, Dutch</td><td>Default eye level, all power drained</td></tr>
+      <tr><td>4 · Movement</td><td>Camera and subject motion. For stills write "static, locked off"</td><td>Video goes limp or drifts arbitrarily</td></tr>
+      <tr><td>5 · Focus</td><td>Shallow, deep, soft, rack. Always name what is sharp</td><td>The model chooses the hero, and it chooses wrong</td></tr>
+      <tr><td>6 · Subject</td><td>The specific who and what, doing what</td><td>Generic stock human</td></tr>
+      <tr><td>7 · Lighting</td><td>Source, direction, quality, Kelvin</td><td>Flat ambient, the look of nothing</td></tr>
+      <tr><td>8 · Colour palette</td><td>The named grade, and the strip image that locks it</td><td>Every frame drifts to its own world</td></tr>
+    </table></div>
+    <div class="note"><span class="t">The Motion Rule</span>
+      Never leave both the subject and the camera static in a video prompt. One of them must move or
+      the scene dies on screen.</div>
+    <h3>The output format is part of the system</h3>
+    <p>Every prompt is delivered in the same four parts, in this order, so it can be audited and pasted
+      without editing: the <strong>eight slot table</strong>, the <strong>prose prompt</strong>, the
+      <strong>negatives</strong>, and a <strong>specs block</strong> naming tool, model, duration,
+      aspect ratio, resolution and reference images.</p>
+    <p>Negatives are written as "no X", never "avoid X". Bare tokens enforce weakly. This holds inside
+      tool native fields too, including Midjourney's own negative parameter.</p>
+  </section>
+
+  <section>
+    <span class="num">04</span>
+    <h2>Ohneis: the <i>execution</i> order</h2>
+    <p>Where GenHQ guarantees nothing is missing, Ohneis governs how it is actually said. This is the
+      prose dialect: flowing sentences that still name every specification. Never keyword soup, never
+      vague description. Written in a fixed order, because the order is what prevents hallucination.</p>
+    <ol class="layers">
+      <li><span class="lab">Camera.</span> Sensor, lens in mm with its character, aperture with the reason for it, ISO, the overall look.</li>
+      <li><span class="lab">POV and coordinates.</span> Camera height and what it faces, then every element placed by thirds: left, centre or right third, lower, middle or upper band. State what sits behind camera, frame left, frame right, foreground. Name the leading lines and the depth layers from foreground through midground to background.</li>
+      <li><span class="lab">Lighting.</span> Source, direction, quality, time of day, and the Kelvin value spoken aloud.</li>
+      <li><span class="lab">Mood and palette.</span> A named palette, plus the clichés you are explicitly forbidding.</li>
+      <li><span class="lab">Subject.</span> The specific hero. This is the one swappable line in the whole prompt.</li>
+      <li><span class="lab">Material reality.</span> True surfaces and true textures.</li>
+      <li><span class="lab">Style and post.</span> An art director or photographic reference, the grade, the grain.</li>
+    </ol>
+    <div class="note"><span class="t">Coordinates are the anti hallucination layer</span>
+      If a door, a wall or a building appears where it should not, the coordinate layer was incomplete.
+      The model holds no map of your scene. It knows only the frame. So never write route language
+      like "walking in from the pool", which is meaningless to it. Write pure frame geometry: what sits
+      in which third, at what angle, and what is off frame right.</div>
+    <p>Negatives are baked in as positives, woven where they belong, never dumped in a block at the end.
+      Write "carefully avoiding golden or orange grading", not a list of banned words.</p>
+  </section>
+
+  <section>
+    <span class="num">05</span>
+    <h2>The camera <i>vocabulary</i></h2>
+    <p>Four tables carry most of the control. Pick one value per dimension, deliberately, and know why.</p>
+    <h3>Focal length, which is perspective</h3>
+    <div class="scroll"><table>
+      <tr><th>Range</th><th>Character</th><th>Reach for it when</th></tr>
+      <tr><td>8 to 16mm</td><td>Extreme distortion, drama</td><td>Interiors, edgy and experimental</td></tr>
+      <tr><td>16 to 35mm</td><td>Environmental context</td><td>Street, real estate, scene setting</td></tr>
+      <tr><td>35 to 50mm</td><td>Natural human vision</td><td>Documentary, versatile</td></tr>
+      <tr><td>50 to 85mm</td><td>Compression, isolation, flattering</td><td>Portraits</td></tr>
+      <tr><td>85 to 135mm</td><td>Beautiful bokeh</td><td>Fashion, professional portraits</td></tr>
+      <tr><td>135 to 300mm</td><td>Extreme compression</td><td>Tight candids, wildlife</td></tr>
+    </table></div>
+    <h3>Aperture, which is depth</h3>
+    <div class="scroll"><table>
+      <tr><th>f-stop</th><th>Effect</th></tr>
+      <tr><td>f/1.2 to f/1.8</td><td>Dreamlike bokeh, low light, mood</td></tr>
+      <tr><td>f/2.0 to f/2.8</td><td>Portrait sweet spot, sharp subject</td></tr>
+      <tr><td>f/4 to f/5.6</td><td>Balanced, groups, travel</td></tr>
+      <tr><td>f/8 to f/11</td><td>Landscape and architectural sharpness</td></tr>
+      <tr><td>f/16 to f/22</td><td>Everything in focus, sunstars</td></tr>
+    </table></div>
+    <h3>Angle, which is power</h3>
+    <div class="scroll"><table>
+      <tr><th>Angle</th><th>Feeling</th></tr>
+      <tr><td>Worm's eye</td><td>Maximum drama and power</td></tr>
+      <tr><td>Low</td><td>Dominance, heroic, architectural strength</td></tr>
+      <tr><td>Eye level</td><td>Neutral, documentary honesty</td></tr>
+      <tr><td>High</td><td>Vulnerability, overview</td></tr>
+      <tr><td>Bird's eye</td><td>Pattern, abstraction</td></tr>
+      <tr><td>Dutch</td><td>Tension, unease, energy</td></tr>
+    </table></div>
+    <h3>Light, which is four decisions and not one</h3>
+    <p><strong>Source:</strong> window, studio strobe, neon, candle, on camera flash, street ambient.
+      <strong>Direction:</strong> front, side, back, rim.
+      <strong>Kelvin:</strong> warm tungsten 2700 to 3200K, neutral daylight 5600K, cool LED 6500K.
+      <strong>Quality:</strong> hard for sharp shadow and texture, soft for flattering evenness,
+      directional for sculptural shape, diffused for clean commercial, backlit for silhouette and
+      separation.</p>
+  </section>
+
+  <section>
+    <span class="num">06</span>
+    <h2>Colour is an <i>image</i>, not a sentence</h2>
+    <p>This is the highest leverage habit on the list, and the one almost nobody has.</p>
+    <p>A model cannot hold colour consistent across scenes on its own. Generate six frames
+      independently and you get six slightly different worlds. The set stops reading as one film and
+      starts reading as a collection.</p>
+    <p class="pull">Hex written into a prompt is a suggestion. A palette strip passed as an image is a lock.</p>
+    <p>So we lock the palette as hex, then <strong>render those hexes into a horizontal strip PNG and
+      pass that strip into every single frame</strong> as an explicit colour reference. One shared
+      input, and the whole set grades to one world.</p>
+    <div class="chips">
+      <div class="chip dark" style="background:#F3F5ED">F3F5ED</div>
+      <div class="chip dark" style="background:#B0BC8C">B0BC8C</div>
+      <div class="chip dark" style="background:#98A869">98A869</div>
+      <div class="chip" style="background:#7B8A50">7B8A50</div>
+      <div class="chip" style="background:#565F3A">565F3A</div>
+      <div class="chip" style="background:#282E17">282E17</div>
+    </div>
+    <p style="font-size:12.5px;color:rgba(40,46,23,.66)">The strip this document is graded to, shown
+      the way it would be passed to a model: an image, not a description. One hue at 75°, one
+      saturation, six steps of lightness. Note there is no pure black. The darkest value is a deep
+      sage, which keeps prints and grades from going dead.</p>
+    <h3>The five input stack, one job each</h3>
+    <div class="scroll"><table class="wrap">
+      <tr><th>Input</th><th>Locks</th></tr>
+      <tr><td>1 · Location render</td><td>Lighting, atmosphere, overall colour feel</td></tr>
+      <tr><td>2 · Composition sketch</td><td>Framing, and where everyone stands</td></tr>
+      <tr><td>3 · Character reference</td><td>Face, hair, wardrobe</td></tr>
+      <tr><td>4 · Second character</td><td>The same, held separate so the two do not blend</td></tr>
+      <tr><td>5 · Palette strip</td><td>The exact grade, shared across every scene</td></tr>
+    </table></div>
+    <p>Separating the inputs means each one carries a single job, so nothing fights. Most drift comes
+      from asking one image to do three things at once.</p>
+  </section>
+
+  <section>
+    <span class="num">07</span>
+    <h2>Characters, and how they <i>drift</i></h2>
+    <p>Character consistency is its own discipline, and it has one artifact at the centre of it.</p>
+    <p><strong>The character sheet is a single composite turnaround: five angles in one image, generated
+      in one fire.</strong> Never five separate generations. Five separate fires give you five subtly
+      different people, which is the exact problem the sheet exists to solve.</p>
+    <p>That sheet then feeds every subsequent generation involving that character, <strong>at any scale,
+      even when the figure is tiny or far away.</strong> A distant figure described in text will drift:
+      wrong dress, wrong hair, wrong build, and you pay to discover it.</p>
+    <p>For a character who recurs across a whole body of work, promote the sheet into a
+      <strong>Soul ID</strong>, a trained character lock inside the video tool, so identity holds
+      without re-passing references every time.</p>
+    <div class="note"><span class="t">Three traps we paid to learn</span>
+      <strong>Never pass the full turnaround when placing someone into a scene.</strong> The model
+      averages the poses and keeps the dominant facing direction, ignoring your text. Crop the single
+      view whose pose and direction match the shot, flip it if needed, and pass that alone.<br><br>
+      <strong>Never reposition a character using a scene reference that already contains them.</strong>
+      The model anchors to the baked in pose, or adds a duplicate. Generate a clean empty plate first,
+      then place the cropped character into it.<br><br>
+      <strong>Never re-describe a character who is locked by reference.</strong> Say "the figure" and
+      let the image carry identity. Repeating appearance in text fights the reference, and stacking
+      body words raises the odds of a content filter trip. Spend the prompt on motion, action and
+      environment instead.</div>
+  </section>
+
+  <section>
+    <span class="num">08</span>
+    <h2>When a frame <i>rots</i></h2>
+    <p>Feed a generated image back in as a reference enough times and damage compounds: smear, plastic
+      skin, melted detail. Re-prompting the damaged frame only bakes the damage deeper.</p>
+    <p>Think of an image as two layers. <strong>Low frequency</strong> is information that does not
+      repeat: geometry, layout, the bones. <strong>High frequency</strong> is the surfaces that do
+      repeat: skin, fabric, grain, the texture. When quality degrades it is almost always the high
+      frequency layer rotting. The bones are usually still fine.</p>
+    <p>So do not re-roll. Strip the image to an outline sketch, which throws away the ruined texture and
+      keeps the structure, then render brand new surfaces onto those clean bones. You are not repairing
+      pixels, you are rebuilding skin on a good skeleton.</p>
+  </section>
+
+  <section>
+    <span class="num">09</span>
+    <h2>The human stays <i>in the loop</i></h2>
+    <p>This pipeline is agentic. There is a goal, tools get called, state is carried between steps, and
+      the next move is chosen from that state. But every generation passes a human gate before it
+      fires, and that is a deliberate design decision rather than an unfinished one.</p>
+    <p class="pull">Autonomy is not free when every action costs credits.</p>
+    <p>Generation is the one class of tool call where a wrong decision is billed immediately and cannot
+      be undone. So the machine plans, routes, holds state and prepares the exact prompt, then stops
+      and shows its work. A person says go. Silence is never approval.</p>
+    <div class="rule-box">
+      <p><strong>What the machine owns:</strong> reading the storyboard, choosing the tool, assembling
+        the prompt to spec, tracking which frame feeds which, naming and filing every output, noticing
+        when something drifted.</p>
+      <p><strong>What the person owns:</strong> the go ahead, the aesthetic verdict, and the money.</p>
+    </div>
+  </section>
+
+  <section>
+    <span class="num">10</span>
+    <h2>The order of <i>operations</i></h2>
+    <p>Compressed to its spine, this is how a piece gets made. The sequence is the cost control.</p>
+    <ol>
+      <li><strong>Storyboard the whole idea first.</strong> The entire story, never one frame at a time. Frame by frame invention is where continuity dies.</li>
+      <li><strong>Lock the palette</strong> as hex, then render it as a strip image so it can be passed, not described.</li>
+      <li><strong>Lock the characters.</strong> One composite sheet, five angles, one fire. Promote to a Soul ID if the character will recur.</li>
+      <li><strong>Build the stills in the cheap tool.</strong> Stills are where you iterate, because iteration there costs almost nothing.</li>
+      <li><strong>Validate cheap, then commit expensive.</strong> Every first pass runs in the fast or draft mode. Standard and high quality modes are only ever spent on something already approved. This applies to stills and to video alike.</li>
+      <li><strong>Approve the still</strong> before any video is considered. An unapproved still becomes an expensive unapproved video.</li>
+      <li><strong>Chain the video,</strong> each shot starting from the previous shot's true last frame, so the walk is continuous rather than a set of cuts.</li>
+      <li><strong>Enhance last.</strong> Upscaling and frame rate work happen once, at the end, on the approved take only.</li>
+      <li><strong>Never generate video in the expensive tool.</strong> We learned this at a cost of one five second clip billed at roughly forty seven times the price of a still.</li>
+    </ol>
+    <p>Reference first, always. When a reference image is available, feed it. Image to image beats text
+      to image on nearly every axis: style, lighting, identity, composition.</p>
+  </section>
+
+  <footer>
+    <a class="studioline" href="https://spectralmoonstudio.com" target="_blank" rel="noopener">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" class="sigil" aria-hidden="true">
+  <defs>
+    <clipPath id="sigclip">
+      <circle cx="100" cy="100" r="82"/>
+    </clipPath>
+  </defs>
+  <g clip-path="url(#sigclip)">
+    <g transform="translate(24.85,47.35) scale(0.45)">
+      <path d="M 202.8,137.7 L 199.0,137.5 L 196.8,135.7 L 193.6,136.1 L 190.0,134.7 L 184.0,135.9 L 180.8,133.9 L 179.4,131.7 L 174.6,130.1 L 172.3,127.0 L 176.2,126.9 L 177.1,126.0 L 172.7,123.6 L 173.1,120.4 L 175.1,116.2 L 172.0,118.5 L 170.0,118.7 L 163.6,115.7 L 162.5,113.8 L 163.3,111.8 L 157.6,108.1 L 153.0,109.7 L 149.6,109.1 L 147.7,107.8 L 147.9,105.6 L 146.5,104.0 L 146.7,102.6 L 143.7,98.6 L 144.5,96.0 L 146.1,94.8 L 146.1,89.6 L 149.2,89.1 L 152.8,92.3 L 152.8,87.1 L 154.8,89.1 L 156.3,88.8 L 156.4,86.9 L 157.1,87.6 L 157.7,89.2 L 156.1,90.4 L 157.7,89.8 L 158.3,95.8 L 161.0,99.1 L 163.1,94.2 L 166.5,92.0 L 165.5,90.0 L 166.1,88.0 L 163.5,85.2 L 163.1,82.4 L 168.5,82.4 L 165.1,80.8 L 165.7,77.2 L 161.3,74.4 L 160.9,72.4 L 161.8,69.5 L 165.2,69.1 L 165.6,68.1 L 169.4,73.5 L 173.0,70.9 L 178.6,72.7 L 178.1,70.0 L 180.1,70.2 L 179.1,68.6 L 181.9,61.8 L 183.2,61.9 L 185.6,59.1 L 187.2,59.3 L 189.0,58.1 L 191.8,58.7 L 196.3,66.0 L 200.6,68.3 L 195.1,61.8 L 196.5,61.8 L 195.1,59.6 L 195.2,58.9 L 196.5,59.2 L 195.1,57.4 L 196.4,55.9 L 204.4,59.1 L 206.3,62.0 L 207.2,66.5 L 209.7,63.6 L 208.2,61.5 L 206.3,61.4 L 206.5,57.6 L 205.5,54.6 L 206.7,52.8 L 206.9,49.8 L 214.0,47.1 L 214.3,46.4 L 212.6,44.9 L 221.2,43.5 L 225.8,45.7 L 229.4,49.5 L 237.0,51.5 L 242.9,55.2 L 239.8,58.3 L 235.0,59.1 L 228.7,62.8 L 231.2,65.9 L 236.4,67.1 L 243.2,71.1 L 243.5,72.8 L 240.4,75.1 L 236.0,75.3 L 233.2,77.3 L 229.8,78.1 L 225.0,82.9 L 217.0,82.5 L 211.2,83.5 L 208.0,81.9 L 203.4,83.3 L 198.4,82.9 L 194.1,86.8 L 197.5,89.8 L 200.9,95.4 L 198.8,96.9 L 191.4,96.1 L 188.4,100.3 L 186.8,100.3 L 184.8,102.5 L 183.7,102.2 L 184.1,99.6 L 185.9,96.4 L 183.0,96.5 L 181.1,98.2 L 182.3,103.4 L 187.9,107.8 L 191.1,112.6 L 195.9,117.2 L 196.3,124.0 L 198.0,126.1 L 197.7,122.8 L 198.9,117.6 L 201.3,115.2 L 201.7,112.4 L 203.2,110.5 L 206.6,110.1 L 208.2,108.7 L 211.6,112.5 L 212.5,112.0 L 211.3,106.8 L 211.9,106.0 L 209.5,103.2 L 211.7,102.4 L 212.6,99.1 L 214.7,98.8 L 214.3,97.0 L 216.1,95.6 L 217.6,90.9 L 220.8,92.7 L 222.4,91.7 L 226.4,94.1 L 224.3,90.4 L 224.4,88.9 L 233.0,92.7 L 236.9,96.0 L 240.2,102.7 L 246.6,105.9 L 247.8,105.3 L 249.7,103.0 L 243.8,103.3 L 241.7,98.6 L 238.1,95.0 L 238.9,92.6 L 238.1,91.2 L 238.9,89.4 L 238.5,86.6 L 240.5,80.6 L 245.2,76.5 L 248.0,76.5 L 251.0,78.3 L 250.0,75.5 L 255.2,77.5 L 257.6,77.1 L 262.8,79.7 L 266.7,87.2 L 271.4,90.1 L 272.3,92.2 L 274.1,93.2 L 273.7,95.6 L 270.2,98.1 L 261.6,100.7 L 257.5,104.4 L 260.6,107.9 L 261.2,106.1 L 263.5,108.0 L 265.9,114.6 L 271.5,119.2 L 274.1,125.4 L 273.4,126.3 L 271.2,126.3 L 268.0,124.3 L 264.4,124.1 L 263.0,124.5 L 261.2,126.9 L 257.2,128.5 L 247.0,127.1 L 244.0,129.9 L 242.2,128.5 L 238.0,129.9 L 233.2,134.3 L 230.8,134.3 L 231.2,132.7 L 228.0,132.7 L 224.0,131.1 L 221.2,132.3 L 216.2,131.9 L 209.4,134.3 L 203.6,132.1 L 202.3,129.8 L 202.3,127.4 L 199.8,126.7 L 203.7,135.2 L 203.9,136.8 L 202.8,137.7 Z" fill="currentColor" stroke="none" />
+      <path d="M 125.0,121.9 L 121.8,121.9 L 116.6,117.5 L 112.4,117.7 L 104.5,114.0 L 107.6,114.1 L 107.2,112.1 L 109.2,113.3 L 113.7,113.0 L 108.2,111.7 L 103.1,107.8 L 101.7,104.6 L 97.9,100.4 L 96.7,97.0 L 96.7,92.2 L 101.8,97.7 L 109.0,101.7 L 100.1,94.8 L 98.1,90.8 L 98.1,88.4 L 100.5,85.4 L 99.7,89.4 L 100.5,91.6 L 102.8,94.7 L 103.0,93.5 L 108.7,99.2 L 104.5,87.6 L 105.5,79.8 L 107.9,75.6 L 110.4,73.3 L 118.9,68.8 L 115.4,70.1 L 111.0,69.7 L 109.1,70.4 L 113.6,65.9 L 118.0,64.1 L 124.4,64.5 L 128.8,62.9 L 134.6,62.9 L 135.7,63.6 L 135.5,66.4 L 132.1,70.0 L 131.5,74.4 L 128.3,79.6 L 129.4,71.3 L 125.3,82.2 L 122.4,84.9 L 117.0,86.7 L 117.4,76.1 L 113.9,81.6 L 111.3,89.0 L 111.7,95.2 L 116.0,101.1 L 116.1,99.6 L 113.1,93.4 L 114.0,87.1 L 117.6,91.9 L 118.4,91.5 L 119.9,92.8 L 122.1,96.4 L 122.7,101.6 L 121.3,106.2 L 125.5,115.6 L 126.1,121.0 L 125.0,121.9 Z" fill="currentColor" stroke="none" />
+      <path d="M 158.0,220.5 L 153.2,219.7 L 150.8,220.3 L 142.8,215.5 L 139.9,212.0 L 138.1,204.8 L 136.2,203.3 L 138.3,208.2 L 138.3,212.4 L 139.7,214.4 L 137.4,213.5 L 134.7,209.6 L 133.9,203.0 L 129.3,199.0 L 127.9,194.2 L 135.8,193.3 L 142.4,194.9 L 147.4,191.3 L 151.4,190.3 L 162.8,191.5 L 156.6,194.5 L 155.3,197.0 L 153.5,197.6 L 154.0,198.5 L 147.6,198.5 L 151.6,199.7 L 159.0,197.5 L 164.6,193.7 L 168.0,192.5 L 176.0,192.1 L 182.2,193.9 L 184.0,198.3 L 180.4,194.9 L 177.2,194.5 L 174.6,195.9 L 167.0,203.1 L 160.3,205.4 L 160.3,207.6 L 165.0,212.7 L 168.9,213.8 L 168.0,215.1 L 159.8,218.1 L 153.8,215.9 L 150.1,212.4 L 153.3,217.4 L 158.8,219.7 L 158.0,220.5 Z" fill="currentColor" stroke="none" />
+      <path d="M 90.8,137.7 L 88.3,137.2 L 91.9,135.8 L 90.5,135.4 L 92.1,132.2 L 94.2,130.5 L 97.8,129.7 L 94.2,129.7 L 85.2,136.9 L 80.6,136.7 L 79.2,135.1 L 74.8,134.7 L 74.0,133.5 L 70.9,133.0 L 70.8,130.5 L 67.1,130.0 L 72.6,127.9 L 82.7,119.4 L 73.0,126.9 L 69.0,126.5 L 65.5,123.6 L 66.1,122.6 L 65.1,121.6 L 65.9,120.8 L 64.1,119.8 L 65.1,116.8 L 63.3,115.2 L 64.1,112.8 L 63.5,110.6 L 65.5,107.0 L 68.1,105.6 L 71.2,99.1 L 80.0,97.1 L 81.7,99.4 L 83.5,105.2 L 85.2,106.3 L 85.7,104.8 L 83.9,101.4 L 85.4,102.5 L 85.7,101.8 L 83.2,97.1 L 86.6,99.3 L 92.8,100.7 L 96.6,102.9 L 99.3,107.4 L 99.3,116.0 L 104.6,119.5 L 111.3,127.4 L 112.1,130.0 L 111.2,130.9 L 108.0,131.9 L 101.6,130.9 L 95.8,135.9 L 90.8,137.7 Z" fill="currentColor" stroke="none" />
+      <path d="M 128.2,211.5 L 124.8,211.1 L 121.2,208.5 L 117.4,208.5 L 113.8,207.1 L 115.8,205.9 L 118.6,205.9 L 110.2,204.7 L 106.2,200.3 L 101.6,198.7 L 96.5,194.0 L 91.9,184.2 L 91.4,185.5 L 90.7,183.8 L 90.9,179.6 L 95.0,171.7 L 99.2,169.7 L 102.0,169.7 L 105.8,171.5 L 107.7,175.2 L 107.1,178.8 L 104.2,180.7 L 102.0,180.1 L 100.3,177.6 L 101.0,175.9 L 102.8,177.7 L 104.3,176.8 L 104.7,174.4 L 103.6,173.1 L 99.8,172.5 L 96.7,175.6 L 95.5,179.6 L 95.5,187.6 L 97.1,191.2 L 97.9,191.4 L 96.3,188.4 L 96.7,187.6 L 95.9,187.8 L 96.6,187.1 L 97.9,187.8 L 97.0,183.5 L 101.2,187.5 L 100.6,186.1 L 103.7,187.0 L 102.2,185.1 L 106.2,185.1 L 108.4,183.9 L 111.6,184.9 L 114.3,187.4 L 116.1,192.6 L 118.0,194.9 L 115.7,189.0 L 116.5,187.8 L 115.3,185.2 L 116.2,185.3 L 121.7,190.4 L 123.3,193.2 L 123.7,198.8 L 126.3,202.2 L 128.7,208.4 L 129.1,210.4 L 128.2,211.5 Z" fill="currentColor" stroke="none" />
+      <path d="M 90.8,93.9 L 85.0,93.3 L 81.0,91.1 L 77.2,92.7 L 74.9,91.0 L 76.0,85.9 L 79.3,87.8 L 76.5,81.6 L 76.5,77.8 L 77.9,74.4 L 76.9,70.8 L 77.1,65.8 L 78.3,63.4 L 83.2,58.5 L 83.6,59.7 L 86.2,58.1 L 87.2,58.7 L 91.1,57.4 L 87.9,60.0 L 89.3,60.2 L 87.3,62.8 L 89.1,63.0 L 81.4,71.1 L 88.3,66.0 L 93.8,57.9 L 94.6,58.7 L 98.0,57.9 L 99.7,59.0 L 98.7,65.8 L 99.9,68.2 L 105.9,67.6 L 104.7,70.4 L 105.1,75.6 L 103.0,77.5 L 99.8,77.7 L 90.6,73.7 L 86.5,74.0 L 91.2,74.9 L 98.0,79.5 L 101.5,79.8 L 99.6,81.9 L 92.0,83.1 L 89.1,84.8 L 91.9,87.8 L 92.9,90.6 L 92.5,92.8 L 90.8,93.9 Z" fill="currentColor" stroke="none" />
+      <path d="M 111.8,156.5 L 111.4,155.7 L 108.0,155.7 L 108.3,154.4 L 105.7,152.8 L 105.9,151.0 L 104.1,148.2 L 99.7,145.8 L 101.0,144.1 L 103.7,143.0 L 101.8,142.3 L 98.6,143.7 L 98.3,143.0 L 99.3,140.4 L 103.5,137.6 L 101.1,137.2 L 104.8,135.5 L 108.8,136.5 L 115.8,140.9 L 118.2,141.3 L 119.7,140.4 L 115.5,133.0 L 118.0,131.5 L 121.6,132.1 L 123.4,133.5 L 123.5,132.6 L 120.6,129.1 L 114.4,125.7 L 113.6,122.7 L 123.1,128.2 L 124.9,132.2 L 125.2,137.3 L 126.3,135.4 L 126.1,132.8 L 123.4,127.5 L 125.5,128.8 L 127.2,131.7 L 125.5,126.0 L 127.9,127.4 L 129.7,130.8 L 129.7,134.0 L 126.7,141.4 L 125.1,148.8 L 123.0,150.7 L 120.1,151.6 L 124.1,144.0 L 122.8,144.5 L 120.3,146.8 L 117.5,153.2 L 111.8,156.5 Z" fill="currentColor" stroke="none" />
+      <path d="M 142.0,188.3 L 138.0,188.3 L 134.4,186.9 L 133.8,188.3 L 131.8,187.3 L 131.4,188.1 L 128.6,186.1 L 127.2,186.9 L 124.0,186.7 L 120.0,180.7 L 118.2,179.9 L 119.5,181.8 L 118.6,182.1 L 115.5,179.8 L 113.1,175.4 L 111.9,170.2 L 105.6,167.7 L 103.1,164.0 L 103.3,162.8 L 113.8,159.1 L 121.8,159.1 L 126.8,152.7 L 131.6,150.1 L 140.2,151.9 L 140.1,152.8 L 141.4,153.5 L 145.6,153.9 L 141.4,155.1 L 141.0,155.9 L 143.7,156.8 L 139.7,158.2 L 141.8,158.7 L 147.0,156.7 L 152.1,158.6 L 152.3,161.6 L 154.5,163.0 L 153.7,164.6 L 154.3,166.6 L 147.3,167.0 L 153.4,169.1 L 154.5,170.4 L 154.7,173.8 L 154.1,176.0 L 151.7,176.8 L 152.7,178.2 L 149.2,179.7 L 147.8,183.1 L 143.0,183.1 L 142.6,184.5 L 139.3,184.2 L 142.0,188.3 Z" fill="currentColor" stroke="none" />
+      <path d="M 202.6,208.1 L 205.3,200.8 L 204.8,196.3 L 203.9,202.6 L 202.4,205.3 L 198.6,204.1 L 196.2,204.9 L 195.2,203.7 L 192.8,203.5 L 192.8,201.9 L 191.0,201.9 L 188.5,199.8 L 189.5,198.4 L 188.5,197.8 L 188.5,194.4 L 187.3,193.0 L 187.7,191.6 L 186.5,188.8 L 187.7,187.4 L 187.3,185.6 L 188.3,183.2 L 192.2,181.9 L 197.8,184.5 L 200.0,183.5 L 200.2,182.9 L 198.2,183.5 L 195.8,182.5 L 195.6,180.5 L 191.7,180.4 L 202.0,174.1 L 207.8,175.5 L 212.8,178.9 L 220.6,176.7 L 228.2,177.1 L 228.9,178.6 L 227.7,181.8 L 223.3,185.8 L 222.9,192.0 L 221.1,197.2 L 219.9,198.2 L 220.7,195.0 L 219.5,191.6 L 220.6,186.7 L 219.1,188.8 L 218.1,198.6 L 216.1,202.8 L 213.0,202.7 L 209.0,206.5 L 208.4,205.5 L 206.2,207.7 L 204.6,206.7 L 202.6,208.1 Z" fill="currentColor" stroke="none" />
+      <path d="M 112.8,62.7 L 114.1,58.4 L 113.1,46.8 L 112.3,47.2 L 112.3,49.2 L 113.3,57.2 L 111.7,60.2 L 109.6,61.5 L 108.2,60.5 L 106.6,61.1 L 103.8,60.3 L 102.7,57.8 L 100.6,56.9 L 98.1,54.0 L 97.9,51.8 L 96.1,51.4 L 96.7,44.8 L 99.2,43.3 L 104.2,42.7 L 105.0,41.3 L 102.4,42.3 L 103.0,41.1 L 99.1,41.6 L 104.7,36.4 L 104.6,35.5 L 109.0,32.5 L 112.6,32.7 L 119.0,34.9 L 124.0,32.5 L 133.2,32.1 L 132.9,36.4 L 129.1,40.4 L 128.1,48.4 L 126.8,49.9 L 127.0,47.9 L 125.6,49.1 L 125.8,47.7 L 124.4,49.1 L 124.3,47.2 L 126.3,42.8 L 125.0,42.9 L 124.1,44.6 L 123.9,55.2 L 122.4,54.7 L 119.6,59.1 L 118.8,58.7 L 117.2,60.7 L 114.8,62.1 L 114.6,61.1 L 112.8,62.7 Z" fill="currentColor" stroke="none" />
+      <path d="M 157.2,41.7 L 153.2,41.1 L 154.2,39.9 L 149.4,40.3 L 144.7,39.0 L 150.4,36.1 L 155.6,28.9 L 150.2,35.1 L 146.2,36.7 L 144.3,35.8 L 143.7,32.8 L 142.3,32.2 L 139.9,28.4 L 142.1,24.4 L 141.5,20.8 L 143.6,19.9 L 144.8,18.1 L 150.2,18.5 L 155.8,22.7 L 160.5,24.0 L 155.2,21.1 L 152.5,18.2 L 154.2,18.3 L 154.1,17.2 L 151.4,15.5 L 157.8,15.3 L 162.4,16.7 L 165.3,19.6 L 167.8,24.7 L 173.6,27.3 L 178.9,32.6 L 176.6,34.9 L 170.6,35.1 L 165.8,39.1 L 162.0,40.1 L 164.3,38.4 L 162.6,38.1 L 157.2,41.7 Z" fill="currentColor" stroke="none" />
+      <path d="M 92.8,171.1 L 90.8,169.7 L 89.6,170.3 L 88.2,169.1 L 86.8,169.3 L 84.6,167.1 L 85.3,171.0 L 83.4,171.1 L 79.6,168.1 L 79.0,169.3 L 73.9,164.0 L 73.1,161.6 L 73.5,150.6 L 71.5,148.6 L 72.9,151.0 L 73.1,156.4 L 70.3,153.8 L 69.3,146.6 L 65.1,141.6 L 64.9,138.4 L 65.8,137.3 L 73.4,138.7 L 79.6,141.9 L 85.0,140.3 L 88.6,140.3 L 93.5,143.2 L 93.3,144.0 L 96.9,148.0 L 95.0,148.3 L 94.9,149.2 L 100.0,151.7 L 101.9,156.2 L 100.7,158.2 L 101.1,160.8 L 99.6,163.1 L 97.6,162.5 L 95.6,166.1 L 94.4,162.9 L 93.8,168.1 L 92.7,164.4 L 92.7,168.4 L 93.7,169.6 L 92.8,171.1 Z" fill="currentColor" stroke="none" />
+      <path d="M 179.2,189.3 L 175.2,189.3 L 168.4,185.7 L 165.4,185.5 L 167.3,186.8 L 166.8,187.3 L 162.4,187.3 L 159.6,186.1 L 154.6,186.7 L 152.6,185.9 L 151.7,184.2 L 156.0,179.7 L 161.2,177.3 L 165.4,173.1 L 169.6,171.7 L 174.0,171.7 L 174.6,172.5 L 171.2,173.5 L 169.8,175.7 L 166.2,177.1 L 169.0,176.7 L 175.8,173.5 L 179.0,173.7 L 186.0,176.3 L 191.3,175.8 L 183.2,182.5 L 176.6,182.5 L 170.9,180.6 L 176.2,185.1 L 184.3,186.4 L 179.2,189.3 Z" fill="currentColor" stroke="none" />
+      <path d="M 232.0,182.7 L 232.7,178.4 L 230.5,173.8 L 227.7,171.8 L 228.7,168.0 L 235.8,165.5 L 237.9,163.6 L 238.2,162.3 L 235.0,164.5 L 231.5,165.2 L 236.2,159.3 L 241.2,157.9 L 245.2,154.5 L 250.6,152.7 L 251.3,156.0 L 249.3,160.0 L 248.9,164.0 L 246.4,167.3 L 246.5,163.2 L 245.1,170.6 L 241.7,176.0 L 238.8,178.3 L 240.1,174.2 L 240.0,167.7 L 238.9,174.2 L 232.0,182.7 Z" fill="currentColor" stroke="none" />
+      <path d="M 138.6,60.5 L 139.2,51.7 L 137.9,57.0 L 135.8,59.3 L 131.6,60.3 L 125.5,58.8 L 125.8,57.3 L 129.3,55.2 L 131.3,50.6 L 136.7,47.0 L 135.8,46.5 L 133.6,47.5 L 135.0,45.7 L 132.0,47.9 L 133.3,45.8 L 135.6,43.9 L 139.2,42.7 L 143.4,43.5 L 150.0,43.1 L 153.4,44.1 L 152.9,47.2 L 149.0,49.5 L 147.9,52.0 L 145.4,54.3 L 144.5,54.4 L 146.0,50.9 L 141.5,55.6 L 138.6,60.5 Z" fill="currentColor" stroke="none" />
+      <path d="M 186.2,217.1 L 184.9,216.8 L 187.2,214.5 L 182.2,217.1 L 178.2,216.7 L 173.3,213.4 L 179.8,211.9 L 173.0,212.5 L 169.3,210.6 L 170.9,209.0 L 169.7,207.8 L 169.9,206.2 L 172.2,202.1 L 174.8,201.7 L 175.4,202.5 L 175.6,200.1 L 178.2,200.7 L 182.6,207.9 L 180.7,205.0 L 180.5,201.4 L 181.2,201.3 L 186.8,204.1 L 189.6,207.5 L 195.2,208.1 L 199.1,210.2 L 197.8,212.7 L 189.6,216.7 L 186.2,217.1 Z" fill="currentColor" stroke="none" />
+      <path d="M 197.8,34.1 L 185.6,32.9 L 189.2,31.7 L 179.8,28.7 L 175.1,24.8 L 180.2,24.3 L 177.0,22.5 L 171.8,22.1 L 169.7,19.4 L 177.0,17.5 L 184.8,22.1 L 182.0,18.7 L 188.6,20.1 L 191.5,24.2 L 196.4,27.5 L 200.1,32.0 L 199.4,33.5 L 197.8,34.1 Z" fill="currentColor" stroke="none" />
+      <path d="M 220.2,38.3 L 216.2,35.9 L 205.4,34.7 L 204.1,33.4 L 205.3,33.0 L 199.3,25.4 L 201.0,24.9 L 205.8,29.3 L 211.6,31.3 L 208.0,31.3 L 208.4,31.9 L 216.2,34.3 L 220.2,38.3 Z" fill="currentColor" stroke="none" />
+      <path d="M 119.0,30.9 L 117.0,30.9 L 117.2,30.3 L 121.0,28.9 L 128.4,22.7 L 133.8,22.5 L 134.8,23.3 L 130.8,24.1 L 137.1,24.8 L 136.0,26.9 L 127.2,26.7 L 125.8,28.9 L 123.6,28.9 L 119.0,30.9 Z" fill="currentColor" stroke="none" />
+      <path d="M 67.2,99.7 L 66.3,92.6 L 69.5,86.6 L 70.3,81.4 L 72.8,78.1 L 71.5,82.2 L 72.7,91.2 L 70.2,94.3 L 70.0,91.5 L 68.1,93.4 L 67.2,99.7 Z" fill="currentColor" stroke="none" />
+      <path d="M 232.1,131.8 L 236.3,129.2 L 230.1,124.2 L 230.9,121.8 L 228.3,119.6 L 228.9,116.8 L 222.4,116.1 L 223.1,120.6 L 227.9,123.8 L 231.1,128.4 L 232.1,131.8 Z" fill="currentColor" stroke="none" />
+      <path d="M 248.6,150.7 L 247.9,150.2 L 249.5,146.4 L 254.1,141.4 L 256.0,134.5 L 256.7,139.0 L 255.1,145.2 L 252.6,149.1 L 252.0,147.1 L 248.6,150.7 Z" fill="currentColor" stroke="none" />
+      <path d="M 90.0,187.7 L 86.1,183.6 L 83.7,176.8 L 78.8,171.9 L 84.2,173.9 L 86.5,175.8 L 87.9,179.0 L 88.1,183.6 L 90.0,187.7 Z" fill="currentColor" stroke="none" />
+      <path d="M 218.4,174.7 L 214.2,174.3 L 212.2,173.1 L 216.8,173.7 L 220.4,172.7 L 223.4,168.7 L 226.9,167.8 L 222.0,173.1 L 218.4,174.7 Z" fill="currentColor" stroke="none" />
+      <path d="M 227.2,193.1 L 226.7,190.0 L 227.7,187.8 L 230.2,185.7 L 234.2,184.3 L 237.0,181.7 L 235.1,185.8 L 230.6,188.5 L 227.2,193.1 Z" fill="currentColor" stroke="none" />
+      <path d="M 137.4,148.5 L 134.4,147.7 L 131.5,144.8 L 130.7,141.2 L 132.0,137.5 L 132.7,141.4 L 136.1,145.4 L 137.4,148.5 Z" fill="currentColor" stroke="none" />
+      <path d="M 124.2,95.9 L 123.3,89.2 L 124.5,86.8 L 127.4,84.5 L 125.3,89.2 L 125.3,94.0 L 124.2,95.9 Z" fill="currentColor" stroke="none" />
+      <path d="M 91.3,114.0 L 85.1,109.4 L 86.1,108.8 L 84.2,106.7 L 85.9,111.4 L 88.8,113.5 L 91.3,114.0 Z" fill="currentColor" stroke="none" />
+      <path d="M 163.0,170.9 L 159.0,169.5 L 157.5,166.4 L 162.4,169.1 L 165.4,169.7 L 163.0,170.9 Z" fill="currentColor" stroke="none" />
+      <path d="M 164.8,220.3 L 168.6,217.7 L 172.3,216.6 L 169.2,219.7 L 164.8,220.3 Z" fill="currentColor" stroke="none" />
+      <path d="M 201.9,185.6 L 205.9,183.8 L 200.4,185.3 L 200.2,184.5 L 198.4,184.7 L 201.9,185.6 Z" fill="currentColor" stroke="none" />
+      <path d="M 134.4,41.5 L 136.5,37.6 L 139.0,36.3 L 139.1,37.4 L 134.4,41.5 Z" fill="currentColor" stroke="none" />
+      <path d="M 84.1,162.6 L 84.8,154.7 L 84.1,162.6 Z" fill="currentColor" stroke="none" />
+      <path d="M 107.9,43.2 L 112.9,40.0 L 107.9,43.2 Z" fill="currentColor" stroke="none" />
+      <path d="M 90.5,150.6 L 85.7,148.0 L 90.5,150.6 Z" fill="currentColor" stroke="none" />
+      <path d="M 134.3,162.6 L 136.4,161.7 L 130.3,162.2 L 134.3,162.6 Z" fill="currentColor" stroke="none" />
+      <path d="M 118.1,173.0 L 116.8,170.9 L 115.5,170.6 L 118.1,173.0 Z" fill="currentColor" stroke="none" />
+      <path d="M 137.5,161.2 L 140.1,159.6 L 137.4,160.1 L 137.5,161.2 Z" fill="currentColor" stroke="none" />
+      <path d="M 99.1,190.2 L 98.2,188.3 L 97.3,188.8 L 99.1,190.2 Z" fill="currentColor" stroke="none" />
+      <path d="M 96.5,151.0 L 92.9,150.2 L 93.6,151.1 L 96.5,151.0 Z" fill="currentColor" stroke="none" />
+      <path d="M 108.9,57.6 L 109.4,54.3 L 108.9,57.6 Z" fill="currentColor" stroke="none" />
+      <path d="M 208.1,70.6 L 207.9,68.8 L 206.8,68.3 L 206.7,69.6 L 208.1,70.6 Z" fill="currentColor" stroke="none" />
+      <path d="M 230.1,59.8 L 231.7,59.0 L 230.1,59.8 Z" fill="currentColor" stroke="none" />
+      <path d="M 165.9,34.8 L 167.7,34.2 L 165.9,34.8 Z" fill="currentColor" stroke="none" />
+      <path d="M 73.1,108.8 L 71.1,107.8 L 73.1,108.8 Z" fill="currentColor" stroke="none" />
+      <path d="M 190.5,121.4 L 188.9,120.2 L 190.5,121.4 Z" fill="currentColor" stroke="none" />
+      <path d="M 106.7,43.2 L 106.4,42.3 L 104.9,43.2 L 106.7,43.2 Z" fill="currentColor" stroke="none" />
+      <path d="M 200.9,203.6 L 201.6,201.9 L 200.9,203.6 Z" fill="currentColor" stroke="none" />
+      <path d="M 180.9,81.2 L 179.7,80.2 L 180.9,81.2 Z" fill="currentColor" stroke="none" />
+      <path d="M 70.1,107.2 L 68.7,106.4 L 70.1,107.2 Z" fill="currentColor" stroke="none" />
+      <path d="M 179.1,79.6 L 177.9,78.8 L 179.1,79.6 Z" fill="currentColor" stroke="none" />
+    </g>
+  </g>
+</svg>
+      <span>Spectralmoon Studio</span>
+    </a>
+    Compiled from the GenHQ campaign system, the Ohneis Visual Director method, and the colour
+    consistency work of @zhuchkin. The mistakes documented here are our own.<br>
+    Susana Barrero · <a href="https://spectralmoonstudio.com">spectralmoonstudio.com</a> · 2026
+  </footer>
+
+</div>
