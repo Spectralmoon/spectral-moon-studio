@@ -1,0 +1,17 @@
+# Internal working files. These stay on disk and out of the public repo.
+# This repo is public and serves spectralmoonstudio.com, so anything committed
+# here is readable by anyone. Working context, handovers and session notes are
+# private by default.
+
+CLAUDE.md
+HANDOVER-*.md
+Tomorrow-*.md
+TOMORROW.md
+MANUALS.md
+horizontal-scroll-logic.md
+
+# session and tooling leftovers
+.DS_Store
+.netlify/
+*.log
+node_modules/
