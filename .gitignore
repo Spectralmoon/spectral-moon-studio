@@ -7,7 +7,8 @@ CLAUDE.md
 HANDOVER-*.md
 Tomorrow-*.md
 TOMORROW.md
-MANUALS.md          # contains local vault paths
+# MANUALS.md maps local vault paths, so it stays out
+MANUALS.md
 
 # session and tooling leftovers
 .DS_Store
