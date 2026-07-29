@@ -58,7 +58,9 @@ if (!isMobile) gsap.set('.stack-line__inner', { yPercent: 110 });
 
 const heroTL = gsap.timeline({ defaults: { ease: 'expo.out' } });
 
-heroTL.from('.hero__mask-svg', {
+// Desktop mask only — the mobile mask needs a stable own-layer (CSS translateZ) to
+// composite over the <video> on mobile Chrome, so GSAP must not touch its transform/opacity.
+heroTL.from('.hero__mask-svg--desktop', {
   opacity: 0,
   scale: 1.04,
   duration: 1.3,

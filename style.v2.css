@@ -742,6 +742,9 @@ html.lenis, html.lenis body { height: auto; }
 /* Mobile hero SVG hidden by default; desktop SVG hidden on mobile */
 .hero__mask-svg--mobile { display: none; }
 
+/* Baked mobile STU/DIO overlay image — hidden on desktop, shown on mobile */
+.hero__overlay-mobile { display: none; }
+
 /* Visually hidden — semantic h1 for screen readers */
 .sr-only {
   position: absolute;
@@ -1770,13 +1773,35 @@ html.lenis, html.lenis body { height: auto; }
   .topbar.past-hero .topbar__brand-name,
   .topbar.past-hero .topbar__brand-sub { display: none; }
 
-  /* --- Hero SVG swap — portrait version takes over --- */
+  /* --- Hero mask on mobile: LIVE SVG (portrait) — same technique as the card ---
+     Mobile Chrome fails to composite this mask over the <video> only when an
+     ancestor is layer-promoted (the scroll track's will-change: transform). We
+     drop that on mobile (below) and give the mask its OWN compositing layer via
+     translateZ so it paints over the video. Being a live vector (viewBox), it
+     auto-scales to every phone — no cropping/sizing issues. The STU/DIO slide-in
+     is driven by the existing GSAP attr tween in script.js. */
   .hero__mask-svg--desktop { display: none; }
-  .hero__mask-svg--mobile  { display: block; }
+  .hero__mask-svg--mobile {
+    display: block;
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    transform: translateZ(0);
+    opacity: 1;
+  }
+  .hero__overlay-mobile { display: none; }   /* baked image no longer used */
 
-  /* --- Screen 1: Hero — anchor video top so Lyra's figure stays visible --- */
+  /* --- Screen 1: Hero — full-bleed video under the mask --- */
+  .screen--lyra { overflow: hidden; background: #2A201A; }
   .hero__video {
-    object-position: center 20%;   /* shift crop upward — less torso, more figure */
+    top: 0;
+    left: 0;
+    transform: none;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 20%;
   }
   .hero__tagline { font-size: 13px; max-width: 240px; }
   .hero__scroll-cue { display: none; }
@@ -1811,6 +1836,8 @@ html.lenis, html.lenis body { height: auto; }
     width: 100%;
     height: auto;
     transform: none !important; /* override any GSAP transform */
+    will-change: auto;          /* desktop-only layer promotion; on mobile it BREAKS the
+                                   hero mask-over-video composite (Chrome). Off here. */
   }
   /* No CSS scroll-snap on mobile.
      Sections are 100dvh so iOS momentum naturally lands near boundaries.
