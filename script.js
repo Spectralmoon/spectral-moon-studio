@@ -876,16 +876,6 @@ document.querySelectorAll("[data-carousel]").forEach((carousel, carouselIdx) => 
     });
   });
 
-  // Middle-zone click on image card fires this event
-  document.addEventListener('lightbox:expand', (e) => {
-    const item = e.target.closest('.carousel__item');
-    if (!item || !item.dataset.lightboxSrc) return;
-    const idx = allLightboxItems.indexOf(item);
-    if (idx === -1) return;
-    currentLightboxIdx = idx;
-    openLightbox(item.dataset.lightboxSrc, item.dataset.lightboxCaption);
-  });
-
   // Middle-zone click on cinema/brand card fires this event
   document.addEventListener('cinema:expand', (e) => {
     const item = e.target.closest('.carousel__item');
@@ -969,6 +959,17 @@ document.querySelectorAll("[data-carousel]").forEach((carousel, carouselIdx) => 
   }
 
   buildDots();
+
+  // Middle-zone click on image card fires this event (must live in this IIFE —
+  // it needs allLightboxItems/openLightbox, which are scoped here)
+  document.addEventListener('lightbox:expand', (e) => {
+    const item = e.target.closest('.carousel__item');
+    if (!item || !item.dataset.lightboxSrc) return;
+    const idx = allLightboxItems.indexOf(item);
+    if (idx === -1) return;
+    currentLightboxIdx = idx;
+    openLightbox(item.dataset.lightboxSrc, item.dataset.lightboxCaption);
+  });
 
   // Wire up carousel items — hover hint + icon click to open
   allLightboxItems.forEach((item, idx) => {
